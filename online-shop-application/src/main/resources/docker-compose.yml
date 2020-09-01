@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server
+    container_name: sqlserver
+    environment:
+      - ./.env
+    ports:
+      - "1433:1433"
+    volumes:
+      - ${mountLocation}:/var/opt/mssql/data
