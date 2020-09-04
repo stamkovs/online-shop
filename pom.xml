@@ -24,6 +24,7 @@
 
   <modules>
     <module>online-shop-application</module>
+    <module>online-shop-db-migration</module>
   </modules>
 
   <dependencies>
@@ -39,6 +40,11 @@
       <dependency>
         <groupId>com.stamkovs.online.shop</groupId>
         <artifactId>online-shop-application</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.stamkovs.online.shop</groupId>
+        <artifactId>online-shop-db-migration</artifactId>
         <version>${project.version}</version>
       </dependency>
 
