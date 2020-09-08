@@ -1,6 +1,7 @@
 package com.stamkovs.online.shop.flyway.migration;
 
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,15 +15,17 @@ import javax.sql.DataSource;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+@Setter
 public class DataFlywayMigration {
 
-  private static final String DATA_FOLDER = "com/stamkovs/online/shop/flyway/migration/data/";
-  private static final String REPEATABLE_FOLDER = DATA_FOLDER + "repeatable";
-  private static final String VERSION_TABLE = "shop_migration_data_version";
+  private String dataFolder = "com/stamkovs/online/shop/flyway/migration/data/mssql";
+  private String repeatableFolder = dataFolder + "repeatable";
+  private String versionTable = "shop_migration_data_version";
 
   private final DataSource dataSource;
 
   @Value("${db.flyway.initMethod}")
+  @Setter
   private String dbFlywayInitMethod;
 
   /**
@@ -30,10 +33,10 @@ public class DataFlywayMigration {
    */
   public void migrate() {
     Flyway flyway = Flyway.configure()
-      .table(VERSION_TABLE)
+      .table(versionTable)
       .dataSource(dataSource)
       .baselineOnMigrate(true)
-      .locations(DATA_FOLDER, REPEATABLE_FOLDER)
+      .locations(dataFolder, repeatableFolder)
       .load();
     if ("clean-migrate".equals(dbFlywayInitMethod)) {
       flyway.clean();

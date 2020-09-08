@@ -1,4 +1,4 @@
-package com.stamkovs.online.shop.flyway.migration.data.repeatable;
+package com.stamkovs.online.shop.flyway.migration.data;
 
 import org.flywaydb.core.api.migration.MigrationChecksumProvider;
 import org.flywaydb.core.api.migration.spring.SpringJdbcMigration;

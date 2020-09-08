@@ -26,8 +26,10 @@ public class JdbcConnectionConfiguration {
   public DataSource dataSource(DataSourceProperties dataSourceProperties,
                                StandardPBEStringEncryptor standardPBEStringEncryptor) {
 
-    String decryptedPassword = standardPBEStringEncryptor.decrypt(dataSourceProperties.getPassword());
-    dataSourceProperties.setPassword(decryptedPassword);
+    if (!dataSourceProperties.getDriverClassName().equals("org.h2.Driver")) {
+      String decryptedPassword = standardPBEStringEncryptor.decrypt(dataSourceProperties.getPassword());
+      dataSourceProperties.setPassword(decryptedPassword);
+    }
     return dataSourceProperties.initializeDataSourceBuilder().build();
   }
 
