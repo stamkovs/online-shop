@@ -95,7 +95,7 @@ class DataFlywayMigrationTest {
 
   @SneakyThrows
   @Test
-  void testConsecutiveFlywayMigrateWithRepeatableScript() {
+  void shouldMigrateTheChangedUserDefinedInTheRepeatableScript() {
     // given
     dataFlywayMigration.setDbFlywayInitMethod(MIGRATE);
 
@@ -166,7 +166,7 @@ class DataFlywayMigrationTest {
 
   @Test
   @SneakyThrows
-  void testFlywayCleanMigrateAfterChangesToh2Db() {
+  void shouldClearTheDbToTheStateDefinedInTheVersioningScripts() {
     // given
     dataFlywayMigration.setDbFlywayInitMethod(CLEAN_MIGRATE);
 
