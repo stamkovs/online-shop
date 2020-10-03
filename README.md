@@ -3,7 +3,6 @@
 A online shop application project developed for my graduate thesis with some security implementations.
 
 #### Table of contents 📝
----
 - [Functionalities](#Functionalities)
 - [Technologies and tools](#Technologies%20and%20tools%20used) 
 - [Project setup](#Project%20setup)
