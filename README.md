@@ -34,7 +34,7 @@ This online shop is implemented
 ## 🚀 Project setup 
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;Backend
-`application-dev.properties` 
+`- application-dev.properties` 
 ```sh
 cd [path]
 docker <command>
