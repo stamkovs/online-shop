@@ -7,8 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -17,7 +17,6 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -32,7 +31,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @EnableAutoConfiguration(exclude = FlywayAutoConfiguration.class)
 @EnableConfigurationProperties
 @SpringBootTest()
-@Transactional
 @Slf4j
 class DataFlywayMigrationTest {
 
@@ -42,10 +40,8 @@ class DataFlywayMigrationTest {
   @InjectMocks
   DataFlywayMigration dataFlywayMigration;
 
-  @Mock
   private Connection connection;
 
-  @Mock
   private DataSource dataSource;
 
   @Autowired
@@ -55,6 +51,9 @@ class DataFlywayMigrationTest {
 
   private String h2UserEmail = "h2user@gmail.com";
 
+  @Value("${db.flyway.dataFolder}")
+  private String testDataFolder;
+
   @SneakyThrows
   @BeforeEach
   void setup() {
@@ -63,14 +62,9 @@ class DataFlywayMigrationTest {
       connection = dataSource.getConnection();
     }
     dataFlywayMigration = new DataFlywayMigration(dataSource);
-    dataFlywayMigration.setDataFolder("com/stamkovs/online/shop/flyway/migration/data/h2");
-    dataFlywayMigration.setRepeatableFolder("com/stamkovs/online/shop/flyway/migration/data/h2/repeatable");
+    dataFlywayMigration.setDataFolder(testDataFolder);
+    dataFlywayMigration.setRepeatableFolder(testDataFolder + "/repeatable");
     dataFlywayMigration.setVersionTable("shop_h2_migration_data_version");
-
-    Thread.sleep(2000);
-    // clear the db state before each test case
-    dataFlywayMigration.setDbFlywayInitMethod(CLEAN_MIGRATE);
-    dataFlywayMigration.migrate();
   }
 
   @Test

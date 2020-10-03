@@ -7,6 +7,7 @@ import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 /**
@@ -18,15 +19,22 @@ import javax.sql.DataSource;
 @Setter
 public class DataFlywayMigration {
 
-  private String dataFolder = "com/stamkovs/online/shop/flyway/migration/data/mssql";
-  private String repeatableFolder = dataFolder + "repeatable";
+  public static final String CLEAN_MIGRATE = "clean-migrate";
+
+  @Value("${db.flyway.dataFolder}")
+  private String dataFolder;
+  private String repeatableFolder;
   private String versionTable = "shop_migration_data_version";
 
   private final DataSource dataSource;
 
   @Value("${db.flyway.initMethod}")
-  @Setter
   private String dbFlywayInitMethod;
+
+  @PostConstruct
+  public void init() {
+    this.repeatableFolder = dataFolder + "/repeatable";
+  }
 
   /**
    * Migrate to the latest Shop initial data.
@@ -38,7 +46,7 @@ public class DataFlywayMigration {
       .baselineOnMigrate(true)
       .locations(dataFolder, repeatableFolder)
       .load();
-    if ("clean-migrate".equals(dbFlywayInitMethod)) {
+    if (CLEAN_MIGRATE.equals(dbFlywayInitMethod)) {
       flyway.clean();
     }
     flyway.migrate();
