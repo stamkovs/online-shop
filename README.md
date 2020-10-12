@@ -93,9 +93,7 @@ Note that you might need to configure the TCP/IP to enabled and the port to 1433
 
 Now we need to populate our database with the test data.
 For that I've already created a db migration tool. But if you try to run it you will see that it fails.
-Thats because we havent set up the jdbc connection yet and if you open application-dev.properties you can see everything is defined we just need to provide the values for the fields in curly 
-
-aces {}.
+Thats because we havent set up the jdbc connection yet and if you open application-dev.properties you can see everything is defined we just need to provide the values for the fields in curly braces {}.
 Now in the top bar you should see the DbMigrationApplication and click on it to edit the configuration. There we need to set up the Environment variables.
 
 >db.name=online_shop;db.username=sa;db.password=<your-encrypted-password>;encryption.key=<your-encryption-key>
