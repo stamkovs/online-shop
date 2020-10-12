@@ -81,10 +81,11 @@ That means that the connection is setup correctly with the password you specifie
 ##### Creating the database
 Assuming you have successfully created the mssql connection, next we need to create the database. For that we will open Microsoft SQL Server Management Studio and will connect to our new connection with the following properties:
 
-Server name: localhost\
+>Server name: localhost\
 Authentication: SQL Server Authentication\
 Login: sa\
 Password: <yourPassword> \
+>
 *The password is the one you entered in the .env file*
 
 After you are successfully connected, then expand the localhost, do a right click on Databases -> New database and in the window that will popup in the Database name field enter **online_shop** and click Ok. Now do a right click again on the Databases in the left sidebar and click refresh in order to see that the online_shop database is really created.
