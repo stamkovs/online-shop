@@ -84,7 +84,7 @@ Assuming you have successfully created the mssql connection, next we need to cre
 >Server name: localhost\
 Authentication: SQL Server Authentication\
 Login: sa\
-Password: <yourPassword> \
+Password: <yourPassword>
 >
 *The password is the one you entered in the .env file*
 
