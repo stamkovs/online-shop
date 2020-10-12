@@ -4,8 +4,8 @@ A online shop application project developed for my graduate thesis with some sec
 
 #### Table of contents 📝
 ---
-- [Functionalities](#Functionalities)
-- [Technologies and tools](#-Technologies-and-tools-used) 
+- [Functionalities](#-Functionalities-)
+- [Technologies and tools](#-Technologies-and-tools-used-) 
 - [Project setup](#-Project-setup)
   - [Backend](#Backend)
   - [Frontend](#Frontend)
