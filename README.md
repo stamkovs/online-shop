@@ -115,7 +115,7 @@ Process finished with exit code 0
 
 ```
 
-Now the last thing to do is to copy all those environment variables from the DbMigrationApplication to the OnlineShopApplication which is in another module and it starts the shop application.
+Now the last thing to do is to copy all those environment variables from the DbMigrationApplication to the OnlineShopApplication which is in another module, and add the dev profile to it in the edit configuration. After that verify that it starts the shop application.
 
 
 ###### &nbsp;&nbsp;&nbsp;&nbsp;Frontend
