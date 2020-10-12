@@ -36,14 +36,14 @@ A online shop application project developed for my graduate thesis with some sec
 #### 🚀 Project setup 
 ---
 
-##### &nbsp;&nbsp;&nbsp;&nbsp;Backend
+#### &nbsp;&nbsp;&nbsp;&nbsp;Backend
 After cloning, import all the dependencies and do a maven clean install.
 If for some reason clean install does not work, make sure that your IDE uses jdk 11.
 If you dont have JDK 11 installed, download it from **[Oracle](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).**
 
 If you have MSSQL Server Management Studio already installed and you have experience using it, then skip to the following section [Creating the database](#Creating-the-database).
 
-###### Installing mssql server connection with Microsoft SQL executable tools
+##### Installing mssql server connection with Microsoft SQL executable tools
 If your system has limited permissions then you can try the [docker setup](#Creating-the-mssql-server-connection-with-Docker) solution explained below and skip this section.
 
 Depending on the OS you are using you need to install the correct version of SQL Server Management Studio. For Windows 7 the latest supported version is SQL Server 2014 Management Studio. Link from the official download page [here](https://www.microsoft.com/en-us/download/details.aspx?id=42299).
@@ -51,7 +51,7 @@ Note that during installation for Sql Express, for the instance name it would be
 
 For Windows 10 you can install the latest SSMS from [here](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15)
 
-###### Creating the mssql server connection with Docker
+##### Creating the mssql server connection with Docker
 This section is in case you were restricted to create your own connection and database via mssql studio.
 If you opted for creating the database via Microsoft SQL Server Management Studio and it went successfull then skip to the next section [Creating the database](#-Creating-the-database).
 
@@ -128,7 +128,7 @@ Process finished with exit code 0
 Now the last thing to do is to copy all those environment variables from the DbMigrationApplication to the OnlineShopApplication which is in another module and it starts the shop application.
 
 
-###### &nbsp;&nbsp;&nbsp;&nbsp;Frontend
+#### &nbsp;&nbsp;&nbsp;&nbsp;Frontend
 &nbsp;
 #### 📜 License️
 ---
