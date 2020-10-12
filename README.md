@@ -51,8 +51,10 @@ For Windows 10 you can install the latest SSMS from [here](https://docs.microsof
 Once you have successfully installed the SQL Server Management Studio
 
 ###### Creating the mssql server connection with Docker
+
 This section is in case you were restricted to create your own connection and database via mssql studio.
 If you opted for creating the database via Microsoft SQL Server Management Studio and it went successfull then skip this entire section here.
+
 ---
 If you have an older computer or dont have Windows 10 its better to skip this docker setup since various complicated issues may appear during installation and rely to MSSQL server section explained above.
 
@@ -79,10 +81,10 @@ That means that the connection is setup correctly with the password you specifie
 ##### Creating the database
 Assuming you have successfully created the mssql connection, next we need to create the database. For that we will open Microsoft SQL Server Management Studio and will connect to our new connection with the following properties:
 
-Server name: localhost
-Authentication: SQL Server Authentication
-Login: sa
-Password: <yourPassword> 
+Server name: localhost\
+Authentication: SQL Server Authentication\
+Login: sa\
+Password: <yourPassword> \
 *The password is the one you entered in the .env file*
 
 After you are successfully connected, then you expand the localhost, do a right click on Databases -> New database and in the window that will popup in the Database name field enter **online_shop** and click Ok. Now do a right click again on the Databases in the left sidebar and click refresh in order to see that the online_shop database is really created.
@@ -91,7 +93,9 @@ Note that you might need to configure the TCP/IP to enabled and the port to 1433
 
 Now we need to populate our database with the test data.
 For that I've already created a db migration tool. But if you try to run it you will see that it fails.
-Thats because we havent set up the jdbc connection yet and if you open application-dev.properties you can see everything is defined we just need to provide the values for the fields in curly braces {}.
+Thats because we havent set up the jdbc connection yet and if you open application-dev.properties you can see everything is defined we just need to provide the values for the fields in curly 
+
+aces {}.
 Now in the top bar you should see the DbMigrationApplication and click on it to edit the configuration. There we need to set up the Environment variables.
 
 >db.name=online_shop;db.username=sa;db.password=<your-encrypted-password>;encryption.key=<your-encryption-key>
