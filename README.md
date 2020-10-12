@@ -48,8 +48,6 @@ Detailed Instructions are available on this [link](https://www.sqlshack.com/how-
 
 For Windows 10 you can install the latest SSMS from [here](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15)
 
-Once you have successfully installed the SQL Server Management Studio
-
 ###### Creating the mssql server connection with Docker
 
 This section is in case you were restricted to create your own connection and database via mssql studio.
