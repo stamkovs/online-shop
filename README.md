@@ -39,9 +39,9 @@ A online shop application project developed for my graduate thesis with some sec
 ##### &nbsp;&nbsp;&nbsp;&nbsp;Backend
 After cloning, import all the dependencies and do a maven clean install.
 If for some reason clean install does not work, make sure that your IDE uses jdk 11.
-If you dont have jdk 11 installed, download it from **[Oracle](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).**
+If you dont have JDK 11 installed, download it from **[Oracle](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).**
 
-If you have MSSQL Server Management Studio already installed and you have experience using it, then skip to the following section [Creating the database](#Creating-the-database).
+If you have MSSQL Server Management Studio already installed and you have experience using it, then skip to the following section [Creating the database](#-Creating-the-database).
 
 ###### Installing mssql server connection with Microsoft SQL executable tools
 If your system has limited permissions then you can try the [docker setup](#-Creating-the-mssql-server-connection-with-Docker) solution explained below and skip this section.
