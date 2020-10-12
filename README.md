@@ -16,13 +16,13 @@ A online shop application project developed for my graduate thesis with some sec
 * Database migration
 * OAuth2.0 Authentication
 * JSON Web Tokens 
-* Login via email or facebook
+* Login via email or facebook ❓ (Optional if time available)
 * Role based access control
 * View, search, add, edit various products
 * Dark mode
-* Swagger API
+* Swagger API ❓ (Optional if time available)
 * Spring Boot actuator health checks
-* 💳 Buy products ❓ 🛑 ( Stripe test payment  - only if time available) 
+* 💳 Buy products ❓  (Optional if time available - with Stripe payment gateway) 
 #### 🧰 Technologies and tools used 🔨
 ---
 * Spring Boot
