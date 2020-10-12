@@ -5,7 +5,7 @@ A online shop application project developed for my graduate thesis with some sec
 #### Table of contents 📝
 ---
 - [Functionalities](#Functionalities)
-- [Technologies and tools](#Technologies-and-tools-used) 
+- [Technologies and tools](#-Technologies-and-tools-used) 
 - [Project setup](#-Project-setup)
   - [Backend](#Backend)
   - [Frontend](#Frontend)
@@ -44,7 +44,7 @@ If you dont have jdk 11 installed, download it from **[Oracle](https://www.oracl
 If you have MSSQL Server Management Studio already installed and you have experience using it, then skip to the following section [Creating the database](#Creating-the-database).
 
 ###### Installing mssql server connection with Microsoft SQL executable tools
-If your system has limited permissions then you can try the [docker setup](#Creating-the-mssql-server-connection-with-Docker) solution explained below and skip this section.
+If your system has limited permissions then you can try the [docker setup](#-Creating-the-mssql-server-connection-with-Docker) solution explained below and skip this section.
 
 Depending on the OS you are using you need to install the correct version of SQL Server Management Studio. For Windows 7 the latest supported version is SQL Server 2014 Management Studio. Link from the official download page [here](https://www.microsoft.com/en-us/download/details.aspx?id=42299).
 Note that during installation for Sql Express, for the instance name it would be best if you enter "localhost" without the quotes, and do a mixed mode with a strong password which will be later used to connect via management studio. Detailed Instructions are available on this [link](https://www.sqlshack.com/how-to-install-sql-server-2014-management-studio/), and this link [here](https://www.eukhost.com/kb/how-to-install-microsoft-sql-server-express-2014/). 
@@ -53,12 +53,12 @@ For Windows 10 you can install the latest SSMS from [here](https://docs.microsof
 
 ###### Creating the mssql server connection with Docker
 This section is in case you were restricted to create your own connection and database via mssql studio.
-If you opted for creating the database via Microsoft SQL Server Management Studio and it went successfull then skip to the next section [Creating the database](#Creating-the-database).
+If you opted for creating the database via Microsoft SQL Server Management Studio and it went successfull then skip to the next section [Creating the database](#-Creating-the-database).
 ---
-If you have an older computer or dont have Windows 10 its better to skip this docker setup since various complicated issues may appear during installation and rely to [MSSQL instalation](#Installing-mssql-server-connection-with-Microsoft-SQL-executable-tools) without docker which is explained in the section above.
+If you have an older computer or dont have Windows 10 its better to skip this docker setup since various complicated issues may appear during installation and rely to [MSSQL instalation](#-Installing-mssql-server-connection-with-Microsoft-SQL-executable-tools) without docker which is explained in the section above.
 
 Depending on your OS you can follow the instructions to download and install Docker on this link **[here](https://hub.docker.com/editions/community/docker-ce-desktop-windows)**
-If any issues appear during installation troubleshoot them or skip to [MSSQL instalation](#Installing-mssql-server-connection-with-Microsoft-SQL-executable-tools) without docker.
+If any issues appear during installation troubleshoot them or skip to [MSSQL instalation](#-Installing-mssql-server-connection-with-Microsoft-SQL-executable-tools) without docker.
 
 Once you verified that docker is successfully installed, now we will need to setup the mssql server connection. For that you need to open the online-shop project, navigate to \online-shop-application\src\main\resources, open the .env file, and set the SA_PASSWORD.
 
