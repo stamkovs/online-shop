@@ -9,7 +9,7 @@ A online shop application project developed for my graduate thesis with some sec
 - [Project setup](#-Project-setup)
   - [Backend](#Backend)
   - [Frontend](#Frontend)
-- [License](#License) 
+- [License](#-License) 
 
 #### 🎨 Functionalities ![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
 ---
