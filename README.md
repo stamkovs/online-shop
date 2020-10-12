@@ -60,9 +60,9 @@ If you have an older computer or dont have Windows 10 its better to skip this do
 
 Depending on your OS you can follow the instructions to download and install Docker on this link **[here](https://hub.docker.com/editions/community/docker-ce-desktop-windows)**, and if any issues appear during installation troubleshoot them or skip to [MSSQL instalation](#Installing-mssql-server-connection-with-Microsoft-SQL-executable-tools) without docker.
 
-Once you verified that docker is successfully installed, now we will need to setup the mssql server connection. For that you need to open the online-shop project, navigate to \online-shop-application\src\main\resources, open the .env file, and set the SA_PASSWORD.
+Once you verify that docker is successfully installed, we will need to setup the mssql server connection. For that you need to open the online-shop project, navigate to \online-shop-application\src\main\resources, open the .env file, and set the SA_PASSWORD that we will use later to setup the jdbc connection as well.
 
-Then from the terminal inside IntelliJ also navigate to the same location \online-shop-application\src\main\resources and execute the following command:
+Then from the terminal navigate to the same location \online-shop-application\src\main\resources and execute the following command:
 ```sh
 docker-compose up
 ```
@@ -78,7 +78,7 @@ After a few moments you should see something like this in this console:
 That means that the connection is setup correctly with the password you specified in the .env file. 
 
 ##### Creating the database
-Assuming you have successfully created the mssql connection, next we need to create the database. For that we will open Microsoft SQL Server Management Studio and will connect to our new connection with the following properties:
+Assuming you have successfully created the mssql connection, next we need to create the database. For that we will open Microsoft SQL Server Management Studio and we will connect to our new connection with the following properties:
 
 >Server name: localhost\
 Authentication: SQL Server Authentication\
@@ -87,13 +87,13 @@ Password: <yourPassword>
 >
 *The password is the one you entered in the .env file*
 
-After you are successfully connected, then expand the localhost, do a right click on Databases -> New database and in the window that will popup in the Database name field enter **online_shop** and click Ok. Now do a right click again on the Databases in the left sidebar and click refresh in order to see that the online_shop database is really created.
+After you are successfully connected, expand the localhost, do a right click on Databases -> New database, and in the window that will popup, in the Database name field, enter **online_shop** and click Ok. Now do a right click again on the Databases in the left sidebar and click refresh in order to see that the online_shop database is really created.
 
 Note that if you installed the MSSQL tools without Docker, you might need to configure the TCP/IP to enabled and the port to 1433 which is explained in details [here](https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/configure-a-server-to-listen-on-a-specific-tcp-port?view=sql-server-ver15)
 
 Now we need to populate our database with the test data.
 For that I've already created a db migration tool. But if you try to run it you will see that it fails.
-Thats because we havent set up the jdbc connection yet and if you open application-dev.properties you can see everything is defined we just need to provide the values for the fields in curly braces {}.
+Thats because we havent set up the jdbc connection yet, and if you open application-dev.properties inside the online-shop-db-migration module, you can see everything is defined and we just need to provide the values for the fields in curly braces {}.
 
 >spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=${db.name}
 spring.datasource.driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver
@@ -102,16 +102,17 @@ spring.datasource.password=${db.password}
 property.encryption.key=${encryption.key}
 >
 
-Now in the top bar you should see the DbMigrationApplication and click on it to edit the configuration. There we need to set up the Environment variables and you can copy the below line but we will need to adjust it a little bit.
+Now since you tried to start the DbMigrationApplicaiton, in the top bar next to Build Project i.e the green hammer icon, you should see the DbMigrationApplication and click on it to edit the configuration. There we need to set up the Environment variables and you can copy the below line but we will need to adjust it a little bit.
 
 >db.name=online_shop;db.username=sa;db.password=<your-encrypted-password>;encryption.key=<your-encryption-key>
 >
 So online_shop is the db name we created in previous steps, sa is the default username that we created during the sql server connection installing.
 You might wonder now how to get the encrypted password. Well I have added a test in my code for this.
-Navigate to EncryptDbPasswordTest class, set the ENCRYPTION_KEY to be same as value you entered or will enter in the environment variables above, and enter your db connection password (that you set during installation of the mssql server) in the field DB_PASSWORD. Now you are set and you need to run the encryptPassword() test. With that you should receive your encrypted password in the console window in the IDE.
+Navigate to EncryptDbPasswordTest class, set the ENCRYPTION_KEY to be same as the value you entered or will enter in the environment variables above, and in the field DB_PASSWORD enter your plain db connection password (that you set during installation of the mssql server).
+Now you are set and you need to run the encryptPassword() test. With that you should receive your encrypted password in the console window in the IDE.
 Copy and paste that value in the environment variables for the field db.password and you should be completely fine to run the db migration now.
 
-You should see something like this in the console which means the migration run successfully, and if you open the database via sql management studio you should see the new tables there as well.
+You should see something like this in the console which means the migration run successfully, and if you open the database via sql management studio you should see that new tables are added to the database.
 
 ```sh
 2020-10-12 17:12:32.529  INFO 9232 --- [           main] c.s.o.s.f.service.DbMigrationService     : === Data migration - FINISH ===
