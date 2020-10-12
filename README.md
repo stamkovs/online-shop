@@ -53,7 +53,7 @@ For Windows 10 you can install the latest SSMS from [here](https://docs.microsof
 
 ##### Creating the mssql server connection with Docker
 This section is in case you were restricted to create your own connection and database via mssql studio.
-If you opted for creating the database via Microsoft SQL Server Management Studio and it went successfull then skip to the next section [Creating the database](#-Creating-the-database).
+If you opted for creating the database via Microsoft SQL Server Management Studio and it went successfull then skip to the next section [Creating the database](#Creating-the-database).
 
 ---
 If you have an older computer or dont have Windows 10 its better to skip this docker setup since various complicated issues may appear during installation and rely to [MSSQL instalation](#Installing-mssql-server-connection-with-Microsoft-SQL-executable-tools) without docker which is explained in the section above.
