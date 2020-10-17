@@ -85,7 +85,7 @@ Authentication: SQL Server Authentication\
 Login: sa\
 Password: <yourPassword>
 >
-*The password is the one you entered in the .env file*
+*The password is the one you entered during installation of the mssql tools or in the .env file*
 
 After you are successfully connected, expand the localhost, do a right click on Databases -> New database, and in the window that will popup, in the Database name field, enter **online_shop** and click Ok. Now do a right click again on the Databases in the left sidebar and click refresh in order to see that the online_shop database is really created.
 
