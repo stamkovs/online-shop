@@ -96,9 +96,9 @@ For that I've already created a db migration tool. But if you try to run it you 
 Thats because we havent set up the jdbc connection yet, and if you open application-dev.properties inside the online-shop-db-migration module, you can see everything is defined and we just need to provide the values for the fields in curly braces {}.
 
 >spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=${db.name}
-spring.datasource.driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver
-spring.datasource.username=${db.username}
-spring.datasource.password=${db.password}
+spring.datasource.driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver\
+spring.datasource.username=${db.username}\
+spring.datasource.password=${db.password}\
 property.encryption.key=${encryption.key}
 >
 
