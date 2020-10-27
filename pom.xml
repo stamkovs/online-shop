@@ -25,6 +25,7 @@
   <modules>
     <module>online-shop-application</module>
     <module>online-shop-db-migration</module>
+    <module>online-shop-frontend</module>
   </modules>
 
   <dependencies>

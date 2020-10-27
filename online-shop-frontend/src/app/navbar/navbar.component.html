@@ -1,0 +1,40 @@
+<header id="navbar">
+  <nav class="navbar-container container">
+    <a href="/" class="home-link">
+      <div class="navbar-logo"></div>
+      Online shop
+    </a>
+    <button type="button" class="navbar-toggle" aria-label="Open navigation menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <div class="navbar-menu sidebar right">
+      <ul class="navbar-links left">
+        <li (mouseenter)="mouseEnterSubMenu($event)" (mouseleave)="mouseLeaveSubmenu()"
+            [ngStyle]="{'padding-bottom': subMenuMarginSeparator + 'px'}"
+            class="navbar-item products-menu"><a class="navbar-link">Products</a>
+          <div class="submenu products-categories">
+            <ul>
+              <li class="navbar-item"><a class="navbar-link" href="/products/all">All Products</a></li>
+              <li class="navbar-item"><a class="navbar-link" href="/products/men">Men clothes</a></li>
+              <li class="navbar-item"><a class="navbar-link" href="/products/women">Women clothes</a></li>
+              <li class="navbar-item"><a class="navbar-link" href="/products/electronics">Electronics</a></li>
+              <li class="navbar-item"><a class="navbar-link" href="/products/watches">Watches</a></li>
+              <li class="navbar-item"><a class="navbar-link" href="/products/sports">Sports</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="navbar-item"><a class="navbar-link" href="/order-status">Order status</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/contact">Contact us</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/contact">Contact</a></li>
+      </ul>
+      <ul class="navbar-links right">
+        <li class="navbar-item"><a class="navbar-link" href="/search">Search product</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/wish-list">Wish list</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/cart">Cart</a></li>
+        <li class="navbar-item"><a class="navbar-link" href="/account">Account</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
