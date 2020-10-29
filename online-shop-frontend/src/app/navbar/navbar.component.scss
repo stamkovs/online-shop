@@ -75,6 +75,10 @@ main {
   width: 100%;
   padding: 0.4em 0.8em;
   border-radius: 5px;
+
+  &.has-subcategory {
+    height: 100%;
+  }
 }
 
 .navbar-link:focus,
@@ -234,6 +238,7 @@ main {
 .navbar-item {
   margin: 0.4em;
   width: auto;
+  list-style: none;
 }
 
 @media screen and (min-width: 700px) {
@@ -277,13 +282,18 @@ main {
 
 .products-menu {
   transition: all 0.4s ease-in-out 0s;
+  height: 100%;
+  margin: 0 0.4em;
+  cursor: pointer;
+
   &:hover {
     .products-categories {
-      bottom: unset;
+      transform: translateY(0);
 
       @media screen and (max-width: 768px) {
         opacity: 1;
         visibility: visible;
+        z-index: 1;
       }
 
       li {
@@ -294,11 +304,13 @@ main {
 }
 
 .products-categories {
-  padding: 24px;
+  padding: 0 1em;
   background: var(--navbar-bg-color);
   position: absolute;
-  bottom: 100%;
+  transform: translateY(-125%);
   margin: 0 0.4em;
+  transition: .4s all ease-in;
+  z-index: -1;
 
   .navbar-link {
     justify-content: flex-start;
@@ -308,5 +320,6 @@ main {
     padding: 0;
     visibility: hidden;
     opacity: 0;
+    transform: translateY(0);
   }
 }
