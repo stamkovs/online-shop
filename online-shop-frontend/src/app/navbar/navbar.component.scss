@@ -54,14 +54,34 @@ main {
   display: flex;
   font-weight: bold;
   align-items: center;
+  }
+
+.navbar-link {
+  --initialTextColor: #FFF;
+        --slideTextColor: #272838;
+
+        --initialBgColor: var(--navbar-bg-color);
+        --slideBgColor: #FFF;
+
+        color: var(--initialTextColor);
+
+        background-image: linear-gradient(90deg,
+            var(--initialBgColor) 0%,
+            var(--initialBgColor) 50%,
+            var(--slideBgColor) 50%,
+            var(--slideBgColor) 100%);
+        background-size: 200%;
+        transition: background-position .3s cubic-bezier(.47, .1, 1, .63),
+          color .2s linear;
+        transition-delay: 0.0s, 0.15s;
 
   &:hover {
-    background: linear-gradient(90deg, #ff8a00, #e52e71);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-    text-shadow: none;
+          color: var(--navbar-bg-color);
+          transition: all .3s cubic-bezier(.47, .1, 1, .63),
+                    color .2s linear;
+                  transition-delay: 0.0s, 0.15s;
+          cursor: pointer;
+          background-position: -100% 100%;
   }
 }
 
@@ -74,7 +94,7 @@ main {
   justify-content: center;
   width: 100%;
   padding: 0.4em 0.8em;
-  border-radius: 5px;
+  border-radius: 0;
 
   &.has-subcategory {
     height: 100%;
@@ -83,7 +103,6 @@ main {
 
 .navbar-link:focus,
 .navbar-link:hover {
-  color: var(--navbar-text-color-focus);
 }
 
 .navbar-logo {
@@ -183,6 +202,7 @@ main {
 
 #navbar.opened .navbar-menu.sidebar.right {
   right: 0;
+  overflow: auto;
 }
 
 .navbar-links {
