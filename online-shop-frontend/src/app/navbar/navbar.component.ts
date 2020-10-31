@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, HostListener, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, OnInit, Renderer2, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -11,17 +11,24 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   navbarToggle: HTMLElement;
   navbarMenu: HTMLElement;
   navbarLinksContainer: HTMLElement;
+  navbarItems: NodeListOf<HTMLElement>;
   subMenuMarginSeparator: number;
   screenHeight: number;
   screenWidth: number;
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.navbar = document.getElementById("navbar");
     this.navbarToggle = this.navbar.querySelector(".navbar-toggle");
     this.navbarMenu = this.navbar.querySelector(".navbar-menu");
     this.navbarLinksContainer = this.navbar.querySelector(".navbar-links");
+    this.navbarItems = document.querySelectorAll(".navbar-item");
+    // console.log(this.navbarItems);
+
+    this.navbarItems.forEach(item => {
+      item.addEventListener("click", this.toggleActiveMenu);
+    })
   }
 
   openMobileNavbar() {
@@ -30,8 +37,10 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   }
 
   closeMobileNavbar() {
-    this.navbar.classList.remove("opened");
-    this.navbarToggle.setAttribute("aria-label", "Open navigation menu.");
+    if (this.screenWidth < 769 && this.navbar.classList.contains("opened")) {
+      this.navbar.classList.remove("opened");
+      this.navbarToggle.setAttribute("aria-label", "Open navigation menu.");
+    }
   }
 
   ngAfterViewInit() {
@@ -73,6 +82,17 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   mouseLeaveSubmenu() {
     this.subMenuMarginSeparator = 0;
+  }
+
+  toggleActiveMenu(event) {
+    let navItems = document.querySelectorAll(".navbar-link");
+    navItems.forEach(item => {
+      if (item.classList.contains("active")) {
+        item.classList.remove("active");
+      }
+    });
+    console.log(event.target);
+    event.target.classList.add("active");
   }
 
 }

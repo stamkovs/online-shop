@@ -1,8 +1,9 @@
 #navbar {
-  --navbar-bg-color: hsl(0, 0%, 17%);
+  --navbar-bg-color: hsl(214, 26%, 17%);
   --navbar-text-color: hsl(0, 0%, 85%);
   --navbar-text-color-focus: white;
   --navbar-bg-contrast: hsl(0, 0%, 25%);
+  font-family: cursive;
 }
 
 * {
@@ -45,6 +46,16 @@ main {
 
 .home-link {
   margin-right: 1em;
+
+  &:before {
+    content: "";
+    display: block;
+    background: url("../../assets/icons/shopping-bag-flat.svg") no-repeat;
+    width: 48px;
+    height: 48px;
+    float: left;
+    margin-right: 1em;
+  }
 }
 
 .home-link,
@@ -54,34 +65,35 @@ main {
   display: flex;
   font-weight: bold;
   align-items: center;
-  }
+}
 
 .navbar-link {
   --initialTextColor: #FFF;
-        --slideTextColor: #272838;
+  --slideTextColor: #272838;
 
-        --initialBgColor: var(--navbar-bg-color);
-        --slideBgColor: #FFF;
+  --initialBgColor: var(--navbar-bg-color);
+  --slideBgColor: rgb(222, 58, 107);
+  //--slideBgColor: rgb(255, 115, 94);
+  font-weight: bold;
 
-        color: var(--initialTextColor);
+  color: var(--initialTextColor);
 
-        background-image: linear-gradient(90deg,
-            var(--initialBgColor) 0%,
-            var(--initialBgColor) 50%,
-            var(--slideBgColor) 50%,
-            var(--slideBgColor) 100%);
-        background-size: 200%;
-        transition: background-position .3s cubic-bezier(.47, .1, 1, .63),
-          color .2s linear;
-        transition-delay: 0.0s, 0.15s;
+  background-image: linear-gradient(90deg,
+    var(--initialBgColor) 0%,
+    var(--initialBgColor) 50%,
+    var(--slideBgColor) 50%,
+    var(--slideBgColor) 100%);
+  background-size: 200%;
+  transition: background-position .3s cubic-bezier(.47, .1, 1, .63),
+  color .2s linear;
+  transition-delay: 0.0s, 0.15s;
 
-  &:hover {
-          color: var(--navbar-bg-color);
-          transition: all .3s cubic-bezier(.47, .1, 1, .63),
-                    color .2s linear;
-                  transition-delay: 0.0s, 0.15s;
-          cursor: pointer;
-          background-position: -100% 100%;
+  &:hover, &.active {
+    transition: all .3s cubic-bezier(.47, .1, 1, .63),
+    color .2s linear;
+    transition-delay: 0.0s, 0.15s;
+    cursor: pointer;
+    background-position: -100% 100%;
   }
 }
 
@@ -99,18 +111,14 @@ main {
   &.has-subcategory {
     height: 100%;
   }
+
+  &.home-link {
+    width: auto;
+  }
 }
 
 .navbar-link:focus,
 .navbar-link:hover {
-}
-
-.navbar-logo {
-  background-color: var(--navbar-text-color-focus);
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  margin-right: 0.5em;
 }
 
 .navbar-toggle {
@@ -141,7 +149,6 @@ main {
   background-color: var(--navbar-text-color-focus);
 }
 
-
 #navbar.opened .navbar-toggle .icon-bar:first-child,
 #navbar.opened .navbar-toggle .icon-bar:last-child {
   position: absolute;
@@ -162,8 +169,6 @@ main {
 }
 
 .navbar-menu {
-  position: fixed;
-  top: var(--navbar-height);
   bottom: 0;
   transition: opacity 0.2s ease-in-out,
   visibility 0.2s ease-in-out,
@@ -171,24 +176,17 @@ main {
   right 0.2s ease-in-out;
   opacity: 0;
   visibility: hidden;
-}
 
-//.navbar-menu.sidebar,
-//.navbar-menu.sidebar.left {
-//  left: -1000px;
-//  right: 0;
-//}
+  @media screen and (max-width: 768px) {
+    position: fixed;
+    top: var(--navbar-height);
+  }
+}
 
 .navbar-menu.sidebar.right {
   right: -1000px;
   left: 0;
 }
-
-//.navbar-menu.detached,
-//.navbar-menu.attached {
-//  left: 0;
-//  right: 0;
-//}
 
 #navbar.opened .navbar-menu {
   background-color: rgba(0, 0, 0, 0.4);
@@ -217,6 +215,23 @@ main {
   @media screen and (max-width: 768px) {
     align-items: flex-start;
   }
+
+  &.right {
+    justify-content: flex-end;
+
+    @media screen and (min-width: 769px) {
+      .navbar-item {
+        &:last-child {
+          margin-right: 0;
+
+          .navbar-link {
+            margin-right: 1.2em;
+            padding: 0.8em;
+          }
+        }
+      }
+    }
+  }
 }
 
 #navbar.opened .navbar-links {
@@ -229,31 +244,11 @@ main {
   bottom: 0;
 }
 
-.left.sidebar .navbar-links {
-  left: 0;
-  right: unset;
-  box-shadow: 5px 20px 20px rgba(0, 0, 0, 0.3);
-}
-
 .right.sidebar .navbar-links {
   right: 0;
   left: unset;
   box-shadow: -5px 20px 20px rgba(0, 0, 0, 0.3);
 }
-
-//.detached .navbar-links {
-//  left: 0;
-//  right: 0;
-//  margin: 1.4rem;
-//  border-radius: 5px;
-//  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-//}
-
-//.attached .navbar-links {
-//  left: 0;
-//  right: 0;
-//  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
-//}
 
 .navbar-item {
   margin: 0.4em;
@@ -261,7 +256,7 @@ main {
   list-style: none;
 }
 
-@media screen and (min-width: 700px) {
+@media screen and (min-width: 769px) {
   .navbar-toggle {
     display: none;
   }
@@ -270,7 +265,6 @@ main {
   #navbar.opened .navbar-menu {
     visibility: visible;
     opacity: 1;
-    position: static;
     display: flex;
     flex: 1;
     height: 100%;
@@ -281,13 +275,10 @@ main {
     margin: 0;
     padding: 0;
     box-shadow: none;
-    position: static;
     flex-direction: row;
     list-style-type: none;
-    //height: 64px;
     width: 100%;
     max-height: none;
-    //height: 100%;
   }
 
   #navbar .navbar-link:last-child {

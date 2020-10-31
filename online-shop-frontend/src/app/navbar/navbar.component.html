@@ -1,9 +1,6 @@
 <header id="navbar">
   <nav class="navbar-container container">
-    <a href="/" class="home-link">
-      <div class="navbar-logo"></div>
-      Online shop
-    </a>
+    <a href="/" class="home-link navbar-link active"><span>Home</span></a>
     <button type="button" class="navbar-toggle" aria-label="Open navigation menu">
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
@@ -13,10 +10,10 @@
       <ul class="navbar-links left">
         <li (mouseenter)="mouseEnterSubMenu($event)" (mouseleave)="mouseLeaveSubmenu()"
             [ngStyle]="{'padding-bottom': subMenuMarginSeparator + 'px'}"
-            class="navbar-item products-menu"><a class="navbar-link has-subcategory">Products</a>
+            class="navbar-item products-menu"><a class="navbar-link has-subcategory"><span>Products</span></a>
           <div class="submenu products-categories">
             <ul>
-              <li class="navbar-item"><a class="navbar-link" href="javascript: void(0);/products/all">All Products</a></li>
+              <li class="navbar-item"><a class="navbar-link" href="javascript: void(0);/products/all"><span>All Products</span></a></li>
               <li class="navbar-item"><a class="navbar-link" href="javascript: void(0);/products/men">Men clothes</a></li>
               <li class="navbar-item"><a class="navbar-link" href="javascript: void(0);/products/women">Women clothes</a></li>
               <li class="navbar-item"><a class="navbar-link" href="javascript: void(0);/products/electronics">Electronics</a></li>
@@ -25,15 +22,14 @@
             </ul>
           </div>
         </li>
-        <li class="navbar-item"><a class="navbar-link" href="javascript: void(0);/order-status">Order status</a></li>
-        <li class="navbar-item"><a class="navbar-link" href="javascript: void(0);/contact">Contact us</a></li>
-        <li class="navbar-item"><a class="navbar-link" href="javascript: void(0);/contact">Contact</a></li>
+        <li class="navbar-item"><a class="navbar-link"><span>Order status</span></a></li>
+        <li class="navbar-item"><a class="navbar-link">Contact us</a></li>
       </ul>
       <ul class="navbar-links right">
-        <li class="navbar-item"><a class="navbar-link" href="javascript: void(0);/search">Search product</a></li>
-        <li class="navbar-item"><a class="navbar-link" href="javascript: void(0);/wish-list">Wish list</a></li>
-        <li class="navbar-item"><a class="navbar-link" href="javascript: void(0);/cart">Cart</a></li>
-        <li class="navbar-item"><a class="navbar-link" href="javascript: void(0);/account">Account</a></li>
+        <li class="navbar-item"><a class="navbar-link">Search</a></li>
+        <li class="navbar-item"><a class="navbar-link">Wish list</a></li>
+        <li class="navbar-item"><a class="navbar-link">Cart</a></li>
+        <li class="navbar-item"><a class="navbar-link"><span>Account</span></a></li>
       </ul>
     </div>
   </nav>
