@@ -1,0 +1,44 @@
+.banner-background {
+  background-image: url("../../assets/images/banner-smaller.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.centered {
+  text-align: center;
+  // 32px is half height of the navbar
+  top: calc(50% + 32px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.banner-text-wrapper {
+  background: rgba(222, 58, 107, 0.7);
+  padding: 1.6em 0.8em;
+  color: black;
+  font-weight: 700;
+  font-family: cursive;
+
+  h1 {
+    margin-bottom: 0.4em;
+  }
+
+  a {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 3px solid white;
+    cursor: pointer;
+  }
+}
