@@ -3,7 +3,12 @@
   --navbar-text-color: hsl(0, 0%, 85%);
   --navbar-text-color-focus: white;
   --navbar-bg-contrast: hsl(0, 0%, 25%);
-  font-family: cursive;
+  font-family: monospace;
+  z-index: 1000;
+}
+
+#navbar.opened {
+  transition: .2s all ease-in-out;
 }
 
 * {
@@ -194,10 +199,6 @@ main {
   visibility: visible;
 }
 
-#navbar.opened .navbar-menu.sidebar.left {
-  left: 0;
-}
-
 #navbar.opened .navbar-menu.sidebar.right {
   right: 0;
   overflow: auto;
@@ -205,7 +206,7 @@ main {
 
 .navbar-links {
   list-style-type: none;
-  max-height: 0;
+  padding: 1em;
   overflow: hidden;
   background-color: var(--navbar-bg-color);
   display: flex;
