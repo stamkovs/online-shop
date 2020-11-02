@@ -1,0 +1,22 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="DbMigrationApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <module name="online-shop-db-migration" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="com.stamkovs.online.shop.flyway.app.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.stamkovs.online.shop.flyway.app.DbMigrationApplication" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <envs>
+      <env name="db.name" value="" />
+      <env name="db.username" value="" />
+      <env name="db.password" value="" />
+      <env name="encryption.key" value="" />
+    </envs>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
