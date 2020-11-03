@@ -87,13 +87,13 @@ Password: <yourPassword>
 >
 *The password is the one you entered during installation of the mssql tools or in the .env file*
 
-After you are successfully connected, expand the localhost, do a right click on Databases -> New database, and in the window that will popup, in the Database name field, enter **online_shop**. Also you can change the default collation when writing queries explained here. After you successfully created the online_shop db, if it is not showing then do a right click again on the Databases in the left sidebar and click refresh in order to see that the online_shop database is really created.
+After you are successfully connected, expand the localhost, do a right click on Databases -> New database, and in the window that will popup, in the Database name field, enter **online_shop**. Also you can change the default collation when writing queries explained [here](https://docs.microsoft.com/en-us/sql/relational-databases/collations/set-or-change-the-database-collation?view=sql-server-ver15#to-set-or-change-the-database-collation). After you successfully created the online_shop db, if it is not showing then do a right click again on the Databases in the left sidebar and click refresh in order to see that the online_shop database is really created.
 
 Note that if you installed the MSSQL tools without Docker, you might need to configure the TCP/IP to enabled and the port to 1433 which is explained in details [here](https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/configure-a-server-to-listen-on-a-specific-tcp-port?view=sql-server-ver15)
 
 Now we need to populate our database with the test data.
 For that I've already created a db migration tool. But if you try to run it you will see that it fails.
-Thats because we havent set up the jdbc connection yet, and if you open application-dev.properties inside the online-shop-db-migration module, you can see everything is defined and we just need to provide the values for the fields in curly braces {}.
+Thats because we havent set up the jdbc connection yet, and if you open application-dev.properties inside the online-shop-db-migration module, you can see everything is defined and we just need to provide the values for the fields in curly braces {}, but we wont change them here in application-dev.properties, as there is a better way explained few lines below.
 
 >spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=${db.name}\
 spring.datasource.driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver\
