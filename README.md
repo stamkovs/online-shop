@@ -104,9 +104,9 @@ property.encryption.key=${encryption.key}
 
 Now in order to run the DbMigrationApplication, you should set the missing env properties values defined in the following file DbMigrationApplication.xml considering you followed everything by the instructions above, and don't worry we will get to the other missing values further below:
 ><env name="db.name" value="online_shop" />\
- <env name="db.username" value="sa" />\
- <env name="db.password" value="" />\
- <env name="encryption.key" value="" />\
+<env name="db.username" value="sa" />\
+<env name="db.password" value="" />\
+<env name="encryption.key" value="" />
 >
 
 So online_shop is the db name we created in previous steps, sa is the default username that we created during the sql server connection installing.
