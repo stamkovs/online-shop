@@ -87,7 +87,7 @@ Password: <yourPassword>
 >
 *The password is the one you entered during installation of the mssql tools or in the .env file*
 
-After you are successfully connected, expand the localhost, do a right click on Databases -> New database, and in the window that will popup, in the Database name field, enter **online_shop** and click Ok. Now do a right click again on the Databases in the left sidebar and click refresh in order to see that the online_shop database is really created.
+After you are successfully connected, expand the localhost, do a right click on Databases -> New database, and in the window that will popup, in the Database name field, enter **online_shop**. Also you can change the default collation when writing queries explained here. After you successfully created the online_shop db, if it is not showing then do a right click again on the Databases in the left sidebar and click refresh in order to see that the online_shop database is really created.
 
 Note that if you installed the MSSQL tools without Docker, you might need to configure the TCP/IP to enabled and the port to 1433 which is explained in details [here](https://docs.microsoft.com/en-us/sql/database-engine/configure-windows/configure-a-server-to-listen-on-a-specific-tcp-port?view=sql-server-ver15)
 
@@ -102,10 +102,13 @@ spring.datasource.password=${db.password}\
 property.encryption.key=${encryption.key}
 >
 
-Now since you tried to start the DbMigrationApplicaiton, in the top bar next to Build Project i.e the green hammer icon, you should see the DbMigrationApplication and click on it to edit the configuration. There we need to set up the Environment variables and you can copy the below line but we will need to adjust it a little bit.
-
->db.name=online_shop;db.username=sa;db.password=<your-encrypted-password>;encryption.key=<your-encryption-key>
+Now in order to run the DbMigrationApplication, you should set the missing env properties values defined in the following file DbMigrationApplication.xml considering you followed everything by the instructions above, and don't worry we will get to the other missing values further below:
+><env name="db.name" value="online_shop" />\
+ <env name="db.username" value="sa" />\
+ <env name="db.password" value="" />\
+ <env name="encryption.key" value="" />\
 >
+
 So online_shop is the db name we created in previous steps, sa is the default username that we created during the sql server connection installing.
 You might wonder now how to get the encrypted password. Well I have added a test in my code for this.
 Navigate to EncryptDbPasswordTest class, set the ENCRYPTION_KEY to be same as the value you entered or will enter in the environment variables above, and in the field DB_PASSWORD enter your plain db connection password (that you set during installation of the mssql server).
