@@ -114,7 +114,7 @@ Navigate to EncryptDbPasswordTest class, set the ENCRYPTION_KEY to be same as th
 Now you are set and you need to run the encryptPassword() test. With that you should receive your encrypted password in the console window in the IDE.
 Copy and paste that value in the environment variables for the field db.password and you should be completely fine to run the db migration now.
 
-You should see something like this in the console which means the migration run successfully, and if you open the database via sql management studio you should see that new tables are added to the database.
+Run the DbMigrationApplication and you should see something like this in the console which means the migration run successfully, and if you open the database via sql management studio you should see that new tables are added to the database.
 
 ```sh
 2020-10-12 17:12:32.529  INFO 9232 --- [           main] c.s.o.s.f.service.DbMigrationService     : === Data migration - FINISH ===
