@@ -23,7 +23,8 @@ A online shop application project developed for my graduate thesis with some sec
 * Swagger API ❓ (Optional if time available)
 * Spring Boot actuator health checks
 * 💳 Buy products ❓  (Optional if time available - with Stripe payment gateway) 
-* Cross Browser Support and Responsive design \
+* Cross Browser Support and Responsive design 
+
     >*Note that this is not a production ready application, so I can't test and verify it thoroughly on each environment.*
     >
     * Tested through Windows OS on the following browsers:
