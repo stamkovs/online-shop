@@ -23,6 +23,15 @@ A online shop application project developed for my graduate thesis with some sec
 * Swagger API ❓ (Optional if time available)
 * Spring Boot actuator health checks
 * 💳 Buy products ❓  (Optional if time available - with Stripe payment gateway) 
+* Cross Browser Support and Responsive design
+    * Tested through Windows OS on the following browsers:
+       * Chrome 86
+       * Firefox 82
+       * Edge 44
+       * IE 11
+     * Besides emulators, tested on real iPhone 11 Pro device on:
+       * Safari mobile browser
+       * Chrome mobile browser
 #### 🧰 Technologies and tools used 🔨
 ---
 * Spring Boot
