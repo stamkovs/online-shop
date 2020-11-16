@@ -1,5 +1,5 @@
 {
-  "name": "src",
+  "name": "online-shop",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -21,7 +21,8 @@
     "@angular/router": "~10.1.6",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "core-js": "^3.6.5"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1001.7",

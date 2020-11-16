@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "src": {
+    "online-shop": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -60,17 +60,23 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "es5": {
+              "tsConfig": "./tsconfig-es5.app.json"
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "src:build"
+            "browserTarget": "online-shop:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "src:build:production"
+              "browserTarget": "online-shop:build:production"
+            },
+            "es5": {
+              "browserTarget": "online-shop:build:es5"
             }
           }
         },
@@ -114,15 +120,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "src:serve"
+            "devServerTarget": "online-shop:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "src:serve:production"
+              "devServerTarget": "online-shop:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "src"
+  "defaultProject": "online-shop"
 }
