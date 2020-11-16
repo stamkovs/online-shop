@@ -1,11 +1,13 @@
 <header id="navbar">
   <nav class="navbar-container container">
     <a href="/" class="home-link navbar-link active"><span>Home</span></a>
-    <button type="button" class="navbar-toggle" aria-label="Open navigation menu">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
+    <div class="toggle-button-wrapper">
+      <button type="button" class="navbar-toggle" aria-label="Open navigation menu">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
     <div class="navbar-menu sidebar right">
       <ul class="navbar-links left">
         <li (mouseenter)="mouseEnterSubMenu($event)" (mouseleave)="mouseLeaveSubmenu()"
@@ -13,11 +15,16 @@
             class="navbar-item products-menu"><a class="navbar-link has-subcategory"><span>Products</span></a>
           <div class="submenu products-categories">
             <ul>
-              <li class="navbar-item"><a class="navbar-link" href="javascript: void(0);/products/all"><span>All Products</span></a></li>
-              <li class="navbar-item"><a class="navbar-link" href="javascript: void(0);/products/men">Men clothes</a></li>
-              <li class="navbar-item"><a class="navbar-link" href="javascript: void(0);/products/women">Women clothes</a></li>
-              <li class="navbar-item"><a class="navbar-link" href="javascript: void(0);/products/electronics">Electronics</a></li>
-              <li class="navbar-item"><a class="navbar-link" href="javascript: void(0);/products/watches">Watches</a></li>
+              <li class="navbar-item"><a class="navbar-link"
+                                         href="javascript: void(0);/products/all"><span>All Products</span></a></li>
+              <li class="navbar-item"><a class="navbar-link" href="javascript: void(0);/products/men">Men clothes</a>
+              </li>
+              <li class="navbar-item"><a class="navbar-link" href="javascript: void(0);/products/women">Women
+                clothes</a></li>
+              <li class="navbar-item"><a class="navbar-link" href="javascript: void(0);/products/electronics">Electronics</a>
+              </li>
+              <li class="navbar-item"><a class="navbar-link" href="javascript: void(0);/products/watches">Watches</a>
+              </li>
               <li class="navbar-item"><a class="navbar-link" href="javascript: void(0);/products/sports">Sports</a></li>
             </ul>
           </div>

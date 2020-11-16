@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     this.navbarMenu = this.navbar.querySelector(".navbar-menu");
     this.navbarLinksContainer = this.navbar.querySelector(".navbar-links");
     this.navbarItems = document.querySelectorAll(".navbar-item");
-    // console.log(this.navbarItems);
+    this.subMenuMarginSeparator = 0;
 
     this.navbarItems.forEach(item => {
       item.addEventListener("click", this.toggleActiveMenu);
@@ -57,6 +57,9 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     });
 
     this.navbarMenu.addEventListener("click", this.closeMobileNavbar);
+
+    // added for IE11 since after page refresh it doesnt fire the window load event
+    this.getScreenSizeOnLoad();
   }
 
   @HostListener('window:load', ['$event'])
@@ -73,6 +76,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   mouseEnterSubMenu(event) {
     if (this.screenWidth > 768) {
+      this.subMenuMarginSeparator = 0;
       return;
     }
     const clickedItem = event.target;
@@ -91,7 +95,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
         item.classList.remove("active");
       }
     });
-    console.log(event.target);
     event.target.classList.add("active");
   }
 
