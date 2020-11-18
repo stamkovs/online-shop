@@ -1,10 +1,14 @@
-import {AfterViewInit, Component, ElementRef, HostListener, OnInit, Renderer2, ViewEncapsulation} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  HostListener,
+  OnInit,
+} from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 export class NavbarComponent implements OnInit, AfterViewInit {
   navbar: HTMLElement;
@@ -63,13 +67,13 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   }
 
   @HostListener('window:load', ['$event'])
-  getScreenSizeOnLoad(event?) {
+  getScreenSizeOnLoad() {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
   }
 
   @HostListener('window:resize', ['$event'])
-  getScreenSizeOnResize(event?) {
+  getScreenSizeOnResize() {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
   }

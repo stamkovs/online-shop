@@ -15,16 +15,16 @@
   align-items: center;
   justify-content: flex-start;
   text-align: center;
-  padding-top: $navbar-height;
 }
 
 .banner-text-wrapper {
-  background: rgba(222, 58, 107, 0.7);
+  background: rgba($color-pink-primary, 0.7);
   width: 100%;
-  padding: 1.6em 0.8em;
+  padding: 1.6em 0em;
   color: black;
   font-weight: 700;
   font-family: $font-paragraph;
+  box-sizing: border-box;
 
   h1 {
     margin-bottom: 0.4em;

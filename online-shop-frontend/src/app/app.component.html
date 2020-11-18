@@ -1,2 +1,4 @@
 <app-navbar></app-navbar>
-<app-home></app-home>
+<div [@triggerName]="prepareRoute(outlet)" class="full-window-width full-window-height">
+  <router-outlet #outlet="outlet"></router-outlet>
+</div>
