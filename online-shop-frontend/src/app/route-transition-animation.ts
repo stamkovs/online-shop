@@ -13,11 +13,11 @@ export const routeTransitionAnimations = trigger('triggerName', [
         overflow: 'hidden'
       })
     ]),
-    query(':enter', [style({ right: '-100%' })]),
+    query(':enter', [style({ right: '-100%', opacity: 1 })]),
     query(':leave', animateChild()),
     group([
-      query(':leave', [animate('.75s ease-out', style({ right: '100%' }))]),
-      query(':enter', [animate('.75s ease-out', style({ right: '0%' }))])
+      query(':leave', [animate('.6s ease-out', style({ right: '100%', opacity: 0 }))]),
+      query(':enter', [animate('.6s ease-out', style({ right: '0%', opacity: 1 }))])
     ]),
     query(':enter', animateChild())
   ]),
@@ -33,11 +33,11 @@ export const routeTransitionAnimations = trigger('triggerName', [
         overflow: 'hidden'
       })
     ]),
-    query(':enter', [style({ left: '-100%' })]),
+    query(':enter', [style({ left: '-100%', opacity: 1 })]),
     query(':leave', animateChild()),
     group([
-      query(':leave', [animate('.75s ease-out', style({ left: '100%' }))]),
-      query(':enter', [animate('.75s ease-out', style({ left: '0%' }))])
+      query(':leave', [animate('.6s ease-out', style({ left: '100%', opacity: 0 }))]),
+      query(':enter', [animate('.6s ease-out', style({ left: '0%', opacity: 1 }))])
     ]),
     query(':enter', animateChild())
   ])

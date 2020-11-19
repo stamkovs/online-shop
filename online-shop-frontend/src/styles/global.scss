@@ -11,6 +11,26 @@
   padding: 0 1.4em;
   box-sizing: border-box;
   color: white;
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
+
+.banner-background {
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  font-family: raleway-bold, monospace;
 }
 
 .full-window-width {
@@ -20,4 +40,38 @@
 .full-window-height {
   height: calc(100% - #{$navbar-height});
   display: inline-block;
+}
+
+.text-align-left {
+  text-align: left;
+}
+
+.form-control {
+  display: flex;
+  flex: 1;
+  height: 18px;
+  min-height: 18px;
+  padding: 0.4em 0.8em;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+
+  &:focus {
+    border-color: $color-pink-primary;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba($color-pink-primary, .6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba($color-pink-primary, .6);
+  }
+
+  &.textarea {
+    min-height: 72px;
+  }
 }

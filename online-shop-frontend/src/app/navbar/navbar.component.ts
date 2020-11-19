@@ -30,9 +30,9 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     this.navbarItems = document.querySelectorAll(".navbar-item");
     this.subMenuMarginSeparator = 0;
 
-    this.navbarItems.forEach(item => {
-      item.addEventListener("click", this.toggleActiveMenu);
-    })
+    // this.navbarItems.forEach(item => {
+    //   item.addEventListener("click", this.toggleActiveMenu);
+    // })
   }
 
   openMobileNavbar() {
@@ -92,14 +92,14 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     this.subMenuMarginSeparator = 0;
   }
 
-  toggleActiveMenu(event) {
-    let navItems = document.querySelectorAll(".navbar-link");
-    navItems.forEach(item => {
-      if (item.classList.contains("active")) {
-        item.classList.remove("active");
-      }
-    });
-    event.target.classList.add("active");
-  }
+  // toggleActiveMenu(event) {
+  //   let navItems = document.querySelectorAll(".navbar-link");
+  //   navItems.forEach(item => {
+  //     if (item.classList.contains("active")) {
+  //       item.classList.remove("active");
+  //     }
+  //   });
+  //   event.target.classList.add("active");
+  // }
 
 }

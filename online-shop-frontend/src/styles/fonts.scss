@@ -29,3 +29,11 @@ src: url('../assets/fonts/raleway/WOFF/Raleway-Medium.woff') format('woff');
 src: url('../assets/fonts/raleway/TTF/Raleway-Medium.ttf')  format('truetype');
 src: url('../assets/fonts/raleway/OTF/Raleway-Medium.otf')  format('opentype');
 }
+
+@font-face {
+  font-family: 'raleway-bold';
+  src: url('../assets/fonts/raleway/WOFF2/Raleway-Bold.woff2') format('woff2');
+  src: url('../assets/fonts/raleway/WOFF/Raleway-Bold.woff') format('woff');
+  src: url('../assets/fonts/raleway/TTF/Raleway-Bold.ttf')  format('truetype');
+  src: url('../assets/fonts/raleway/OTF/Raleway-Bold.otf')  format('opentype');
+}

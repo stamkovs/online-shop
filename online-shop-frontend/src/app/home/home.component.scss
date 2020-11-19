@@ -1,26 +1,13 @@
 @import 'src/styles/variables';
 
-.banner-background {
-  background-image: url("../../assets/images/banner-smaller.jpg");
-
-  /* Full height */
-  height: 100%;
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  text-align: center;
+.home-page {
+  background-image: url("../../assets/images/home-page-bg.jpg");
 }
 
 .banner-text-wrapper {
   background: rgba($color-pink-primary, 0.7);
   width: 100%;
-  padding: 1.6em 0em;
+  padding: 1.6em 0;
   color: black;
   font-weight: 700;
   font-family: $font-paragraph;
