@@ -148,6 +148,5 @@ Now the last thing to do is to copy all those environment variables from the DbM
 #### 📜 License️
 ---
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
-- © [stamkovs](https://github.com/stamkovs)
 
 
