@@ -1,0 +1,323 @@
+@import 'src/styles/variables';
+
+.login-page-component {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  font-family: raleway-bold, monospace;
+
+  .login-header-section {
+    width: 80%;
+    max-width: calc(768px - 4em);
+    text-align: center;
+  }
+
+  h2, h1 {
+    font-weight: bold;
+    margin-bottom: 0;
+    color: white;
+
+    @media screen and (max-width: 768px) {
+      font-size: 90%;
+    }
+  }
+
+  hr {
+    margin-bottom: 2em;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  p {
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 20px;
+    letter-spacing: .5px;
+    margin: 0 0 1em;
+  }
+
+  span {
+    font-size: 12px;
+    margin-bottom: 2em;
+  }
+
+  a {
+    color: white;
+    font-size: 14px;
+    text-decoration: none;
+    border-bottom: 1px solid white;
+    margin: 2em 0 1em;
+    cursor: pointer;
+  }
+
+  .container {
+    background: transparent;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, .1), 0 10px 10px rgba(0, 0, 0, .1);
+    position: relative;
+    overflow: hidden;
+    max-width: 768px;
+    width: calc(100% - 3em);
+    min-height: 480px;
+    height: 60%;
+    padding-bottom: 2em;
+
+    @media screen and(max-width: 768px) {
+      max-width: 80%;
+    }
+  }
+
+  .form-container, .overlay-container {
+    font-family: raleway-medium, monospace;
+  }
+
+  .form-container form {
+    //background: white;
+    display: flex;
+    flex-direction: column;
+    padding: 0 50px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    @media screen and (max-width: 768px) {
+      background: transparent;
+    }
+  }
+
+  input {
+    background: transparent;
+    caret-color: white;
+    border: none;
+    border-bottom: 1px solid white;
+
+    &:active, &:focus, &:focus-within, &:visited {
+      border-bottom: 1px solid $color-pink-primary;
+      outline: $color-pink-primary;
+    }
+
+  }
+
+  /* Change Autocomplete styles in Chrome*/
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus,
+  input:-internal-autofill-previewed {
+    border: none;
+    border-bottom: 1px solid white;
+    //-webkit-text-fill-color: transparent;
+    -webkit-box-shadow: none;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  .form-container input {
+    user-select: auto;
+    color: white;
+    padding: 12px 15px;
+    margin: 0 0 0.5em;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  button {
+    border-radius: 20px;
+    border: 1px solid transparent;
+    background: $color-pink-primary;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+    cursor: pointer;
+
+    @media screen and (max-width: 768px) {
+      border: transparent;
+    }
+  }
+
+  button:active {
+    transform: scale(.95);
+  }
+
+  button:focus {
+    outline: none;
+  }
+
+  button.ghost {
+    background: transparent;
+    border-color: white;
+  }
+
+  .form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all .6s ease-in-out;
+
+    @media screen and (max-width: 768px) {
+      background: linear-gradient(to right, $navbar-bg-color, $color-pink-primary) no-repeat 0 0 / cover;
+    }
+
+  }
+
+  .sign-in-container {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+    color: white;
+
+    h2 {
+      margin-bottom: 1em;
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+  }
+
+  .signUp-mobile, .signIn-mobile {
+
+    @media screen and (min-width: 769px) {
+      visibility: hidden;
+      opacity: 0;
+      height: 0;
+      margin: 0;
+      border: transparent;
+      padding: 0;
+      width: 0;
+    }
+
+    @media screen and (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      margin-top: 2em;
+
+      a {
+        white-space: pre;
+      }
+    }
+  }
+
+  .sign-up-container {
+    left: 0;
+    width: 50%;
+    z-index: 1;
+    opacity: 0;
+    color: white;
+    transform: translate(100%, 100%);
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      transform: translate(100%, 0);
+    }
+  }
+
+  .overlay-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: transform .6s ease-in-out;
+    z-index: 100;
+
+    @media screen and (max-width: 768px) {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  .overlay {
+    background: $color-pink-primary;
+    background: linear-gradient(to right, $navbar-bg-color, $color-pink-primary) no-repeat 0 0 / cover;
+    color: white;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateY(0);
+    transition: transform .6s ease-in-out;
+  }
+
+  .overlay-panel {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+    height: 100%;
+    width: 50%;
+    text-align: center;
+    transform: translateY(0);
+    transition: transform .6s ease-in-out;
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+  }
+
+  .overlay-right {
+    right: 0;
+    transform: translateY(0);
+  }
+
+  .overlay-left {
+    transform: translateY(-20%);
+  }
+
+  /* Move signin to right */
+  .container.right-panel-active .sign-in-container {
+    transform: translateY(100%);
+
+    @media screen and (max-width: 768px) {
+      transform: translate(-100%);
+    }
+  }
+
+  /* Move overlay to left */
+  .container.right-panel-active .overlay-container {
+    transform: translateX(-100%);
+  }
+
+  /* Bring signup over signin */
+  .container.right-panel-active .sign-up-container {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+
+    @media screen and (max-width: 768px) {
+      transform: translateX(0);
+    }
+  }
+
+  /* Move overlay back to right */
+  .container.right-panel-active .overlay {
+    transform: translateX(50%);
+  }
+
+  /* Bring back the text to center */
+  .container.right-panel-active .overlay-left {
+    transform: translateY(0);
+  }
+
+  /* Same effect for right */
+  .container.right-panel-active .overlay-right {
+    transform: translateY(20%);
+  }
+}
+

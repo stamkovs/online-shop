@@ -1,3 +1,48 @@
-<div class="container">
-  <p>login component TODO!</p>
+<div class="login-page-component">
+  <section class="login-header-section">
+    <h1>Login to your Shoptastic account</h1>
+    <hr>
+  </section>
+  <div class="container" id="login-container">
+    <div class="form-container sign-up-container">
+      <form action="#" onsubmit="return false;" autocomplete="off">
+        <h2>Create Account</h2>
+        <span>Start your journey now!</span>
+        <input type="text" placeholder="Name"/>
+        <input type="email" name="email" placeholder="Email"/>
+        <input type="password" name="password" placeholder="Password" autocomplete="new-password"/>
+        <p></p>
+        <button>Sign Up</button>
+        <div class="signIn-mobile">
+          <p>Already have an account? <a id="signIn-mobile">Sign in.</a></p>
+        </div>
+      </form>
+    </div>
+    <div class="form-container sign-in-container">
+      <form action="#" onsubmit="return false;" autocomplete="off">
+        <h2>Sign in</h2>
+        <input type="email" name="email" placeholder="Email"/>
+        <input type="password" name="password" placeholder="Password" autocomplete="new-password"/>
+        <a>Forgot your password?</a>
+        <button>Sign In</button>
+        <div class="signUp-mobile">
+        <p>Don't have an account? <a id="signUp-mobile">Sign up.</a></p>
+        </div>
+      </form>
+    </div>
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-left">
+          <h2>Already have an account?</h2>
+          <p></p>
+          <button class="ghost" id="signIn">Sign In</button>
+        </div>
+        <div class="overlay-panel overlay-right">
+          <h2>New here?</h2>
+          <p>Sign up and discover great amount of new products daily!</p>
+          <button class="ghost" id="signUp">Sign Up</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
