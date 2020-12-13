@@ -10,32 +10,12 @@ create table user_account(
 id int identity(1, 1),
 email varchar(50) unique,
 password varchar(255) not null,
-user_role_id int not null,
-constraint pk_user_account primary key (id),
-constraint fk_user_account_role_to_user_role foreign key(user_role_id) references user_role(id)
-);
-
-create table basic_user_account(
-id int identity (1, 1),
-user_account_id int not null,
 first_name varchar(30) not null,
 last_name varchar(30) not null,
 age int,
-constraint pk_basic_user_account primary key (id),
-constraint fk_basic_user_to_user_account foreign key (user_account_id) references user_account(id)
-);
-
-create table company_user_account(
-company_name varchar(50),
-user_account_id int not null,
-country varchar(50) not null,
-city varchar(50) not null,
-postal_code int,
-company_website varchar(max),
-description varchar(255),
-company_phone varchar(20),
-constraint pk_company_user_account primary key (company_name),
-constraint fk_company_user_to_user_account foreign key (user_account_id) references user_account(id)
+user_role_id int not null,
+constraint pk_user_account primary key (id),
+constraint fk_user_account_role_to_user_role foreign key(user_role_id) references user_role(id)
 );
 
 create table product_category(
