@@ -25,7 +25,7 @@ A online shop application project developed for my graduate thesis with some sec
 * 💳 Buy products ❓  (Optional if time available - with Stripe payment gateway) 
 * Cross Browser Support and Responsive design 
 
-    >*Note that this is not a production ready application, so I can't test and verify it thoroughly on each environment.*
+    >*Note that this is not a production ready application, so it is not thoroughly tested and verified on each environment.*
     >
     * Tested through Windows OS on the following browsers:
        * Chrome 86
@@ -72,12 +72,30 @@ If you have an older computer or dont have Windows 10 its better to skip this do
 
 Depending on your OS you can follow the instructions to download and install Docker on this link **[here](https://hub.docker.com/editions/community/docker-ce-desktop-windows)**, and if any issues appear during installation troubleshoot them or skip to [MSSQL instalation](#Installing-mssql-server-connection-with-Microsoft-SQL-executable-tools) without docker.
 
-Once you verify that docker is successfully installed, we will need to setup the mssql server connection. For that you need to open the online-shop project, navigate to \online-shop-application\src\main\resources, open the .env file, and set the SA_PASSWORD that we will use later to setup the jdbc connection as well.
+Once you verify that docker is successfully installed, we will need to setup the mssql server connection. 
 
-Then from the terminal navigate to the same location \online-shop-application\src\main\resources and execute the following command:
-```sh
-docker-compose up
-```
+There are few ways to setup this configuration.
+
+* If you have **IntelliJ version 2020.2** or **newer**:
+   *  Open the project
+   *  In the already created Run configurations window in Intellij, open the "docker-start-mssql-db"
+   *  Add the missing values for "SA_PASSWORD" and the docker mount location that you have configured in the previous steps, click apply and OK.
+   *  Run the docker-start-mssql-db
+   ![docker-run-configuration](https://user-images.githubusercontent.com/17550473/102814498-066a8b80-43cb-11eb-9beb-d3b0646c0824.PNG)
+***
+* For **IntelliJ** versions **older** than **2020.2**
+   *  Open Docker Desktop → Settings → General: Mark the "Expose daemon on tcp://localhost:2375 without TLS" to be allowed. Apply and restart Docker Desktop.
+   *  Open the online-shop project -> open "Edit Configurations..." and on the + sign search for Docker → Docker-Compose. 
+   *  By default Docker should be added in the Server dropdown, and now click on the three dots right after that dropdown.
+   *  Under the "Connect to Docker Daemon with:", choose the TCP Socket option, and for the Engine API URL, enter "tcp://localhost:2375" without the quotes. Now wait a few seconds and below in the same window you should see the message "Connection successful". Then click OK.
+   * Run the service.
+   ![docker-run-configuration-older-IntelliJ](https://user-images.githubusercontent.com/17550473/102815019-f7380d80-43cb-11eb-9fb9-18281620c651.PNG)
+
+***
+* If none of these options are working for you, one final approach is to run the mssql-docker via command line/terminal window considering you have entered the SA_PASSWORD value and the mountLocation as mentioned previously.
+   * Open the online-shop project, and from the root directory enter the following commands in terminal:
+   * > cd \online-shop-application\src\main\resources && docker-compose up
+
 After a few moments you should see something like this in this console:
 ```sh
  Starting up database 'tempdb'.
