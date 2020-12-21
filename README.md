@@ -2,6 +2,11 @@
 ---
 A online shop application project developed for my graduate thesis with some security implementations.
 
+![Shoptastic-login-page](https://user-images.githubusercontent.com/17550473/102817389-fef9b100-43cf-11eb-9556-3f68b654b41e.PNG)
+---
+![Shoptastic-contactUs-page](https://user-images.githubusercontent.com/17550473/102817446-1769cb80-43d0-11eb-9796-ec49323c7d11.PNG)
+
+
 #### Table of contents 📝
 ---
 - [Functionalities](#-Functionalities-)
@@ -92,11 +97,14 @@ There are few ways to setup this configuration.
    ![docker-run-configuration-older-IntelliJ](https://user-images.githubusercontent.com/17550473/102815019-f7380d80-43cb-11eb-9fb9-18281620c651.PNG)
 
 ***
-* If none of these options are working for you, one final approach is to run the mssql-docker via command line/terminal window considering you have entered the SA_PASSWORD value and the mountLocation as mentioned previously.
-   * Open the online-shop project, and from the root directory enter the following commands in terminal:
-   * > cd \online-shop-application\src\main\resources && docker-compose up
+* If none of these options are working for you, one final approach is to run the mssql-docker via command line/terminal window.
+   * First find and open the file **docker-compose.yml**. Its located in the online-shop-application module under resources directory.
+   * Replace the **{SA_PASSWORD}** with the password for the SA user you setup previously.
+   * Replace the **{mountLocation}** with your prefered mount location under the C:/ drive.
+   * From terminal navigate to the location where the **docker-compose.yml** is located with the cd command and run the following command: 
+   * > docker-compose up
 
-After a few moments you should see something like this in this console:
+    After a few moments you should see something like this in this console:
 ```sh
  Starting up database 'tempdb'.
 2020-10-12 11:52:20.86 spid10s     The tempdb database has 2 data file(s).
@@ -105,7 +113,7 @@ After a few moments you should see something like this in this console:
 2020-10-12 11:52:20.89 spid28s     Service Broker manager has started.
 2020-10-12 11:52:20.90 spid8s      Recovery is complete. This is an informational message only. No user action is required.
 ```
-That means that the connection is setup correctly with the password you specified in the .env file. 
+That means that the connection is setup correctly with the password you specified in the docker-compose.yml file. 
 
 ##### Creating the database
 Assuming you have successfully created the mssql connection, next we need to create the database. For that we will open Microsoft SQL Server Management Studio and we will connect to our new connection with the following properties:
@@ -115,7 +123,7 @@ Authentication: SQL Server Authentication\
 Login: sa\
 Password: <yourPassword>
 >
-*The password is the one you entered during installation of the mssql tools or in the .env file*
+*The password is the one you entered during installation of the mssql tools or in the docker-compose.yml file*
 
 After you are successfully connected, expand the localhost, do a right click on Databases -> New database, and in the window that will popup, in the Database name field, enter **online_shop**. Also you can change the default collation when writing queries explained [here](https://docs.microsoft.com/en-us/sql/relational-databases/collations/set-or-change-the-database-collation?view=sql-server-ver15#to-set-or-change-the-database-collation). After you successfully created the online_shop db, if it is not showing then do a right click again on the Databases in the left sidebar and click refresh in order to see that the online_shop database is really created.
 
@@ -132,17 +140,25 @@ spring.datasource.password=${db.password}\
 property.encryption.key=${encryption.key}
 >
 
-Now in order to run the DbMigrationApplication, you should set the missing env properties values defined in the following file DbMigrationApplication.xml considering you followed everything by the instructions above, and don't worry we will get to the other missing values further below:
+Now in order to run the DbMigrationApplication, you should set the missing env properties values defined in the following file DbMigrationApplication.xml considering you followed everything by the instructions above, or you can add them via the edit configuration window that IntelliJ has. But don't worry we will get to the other missing values further below:
 >env name="db.name" value="online_shop"\
 env name="db.username" value="sa"\
 env name="db.password" value=""\
 env name="encryption.key" value=""
 >
+![DbMigration-idea-run-configuration](https://user-images.githubusercontent.com/17550473/102818063-32890b00-43d1-11eb-907d-6ca7d26afd2c.png)
+
 So online_shop is the db name we created in previous steps, sa is the default username that we created during the sql server connection installing.
+
 You might wonder now how to get the encrypted password. Well I have added a test in my code for this.
+
 Navigate to EncryptDbPasswordTest class, set the ENCRYPTION_KEY to be same as the value you entered or will enter in the environment variables above, and in the field DB_PASSWORD enter your plain db connection password (that you set during installation of the mssql server).
+
 Now you are set and you need to run the encryptPassword() test. With that you should receive your encrypted password in the console window in the IDE.
 Copy and paste that value in the environment variables for the field db.password and you should be completely fine to run the db migration now.
+
+![encryptDbPasswordTest](https://user-images.githubusercontent.com/17550473/102818379-c5c24080-43d1-11eb-86a1-4fc2527de653.PNG)
+
 
 Run the DbMigrationApplication and you should see something like this in the console which means the migration run successfully, and if you open the database via sql management studio you should see that new tables are added to the database.
 
@@ -166,5 +182,4 @@ Now the last thing to do is to copy all those environment variables from the DbM
 #### 📜 License️
 ---
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
-
 
