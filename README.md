@@ -1,6 +1,6 @@
 ## Online-shop [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger) ![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
 ---
-A online shop application project developed for my graduate thesis with some security implementations.
+An online shop application project developed for my graduate thesis with some security implementations.
 
 ![Shoptastic-login-page](https://user-images.githubusercontent.com/17550473/102817389-fef9b100-43cf-11eb-9556-3f68b654b41e.PNG)
 ---
