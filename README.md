@@ -178,6 +178,7 @@ Now the last thing to do is to copy all those environment variables from the DbM
 
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;Frontend
+---
 &nbsp;
 #### 📜 License️
 ---
