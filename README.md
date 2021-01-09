@@ -18,17 +18,18 @@ An online shop application project developed for my graduate thesis with some se
 
 #### 🎨 Functionalities ![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
 ---
-* Database migration
-* OAuth2.0 Authentication
-* JSON Web Tokens 
-* Login via email or facebook ❓ (Optional if time available)
+* Database migration (Flyway) :heavy_check_mark:
+* OAuth2.0 Authorization and Authentication with OpenID Connect identity layer
+   * Login with Google :heavy_check_mark:
+   * Login with Facebook :heavy_check_mark:
+* JSON Web Tokens :heavy_check_mark: 
 * Role based access control
 * View, search, add, edit various products
 * Dark mode
 * Swagger API ❓ (Optional if time available)
 * Spring Boot actuator health checks
 * 💳 Buy products ❓  (Optional if time available - with Stripe payment gateway) 
-* Cross Browser Support and Responsive design 
+* Cross Browser Support and Responsive design :heavy_check_mark:
 
     >*Note that this is not a production ready application, so it is not thoroughly tested and verified on each environment.*
     >
