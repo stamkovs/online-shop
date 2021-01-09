@@ -23,6 +23,7 @@ An online shop application project developed for my graduate thesis with some se
    * Login with Google :heavy_check_mark:
    * Login with Facebook :heavy_check_mark:
 * JSON Web Tokens :heavy_check_mark: 
+* Register, Login, Forgot password flows with email verification
 * Role based access control
 * View, search, add, edit various products
 * Dark mode
