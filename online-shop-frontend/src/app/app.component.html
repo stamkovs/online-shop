@@ -1,4 +1,4 @@
 <app-navbar></app-navbar>
 <div [@triggerName]="prepareRoute(outlet)" class="full-window-width full-window-height">
-  <router-outlet #outlet="outlet"></router-outlet>
+  <router-outlet (activate)="changeOfRoutes()" #outlet="outlet"></router-outlet>
 </div>

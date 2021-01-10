@@ -1,6 +1,7 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {RouterOutlet} from "@angular/router";
 import {routeTransitionAnimations} from "./route-transition-animation";
+import {AuthService} from "./services/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -11,11 +12,23 @@ import {routeTransitionAnimations} from "./route-transition-animation";
 
 })
 export class AppComponent {
-  title = 'src';
+  title = 'Shoptastic';
+
+  constructor(private authService: AuthService) {
+
+  }
 
   prepareRoute(outlet: RouterOutlet) {
     return outlet &&
       outlet.activatedRouteData &&
       outlet.activatedRouteData['animationState'];
+  }
+
+  changeOfRoutes() {
+    this.authService.isLoggedIn().subscribe((isLoggedIn: any) => {
+
+    }, error => {
+
+    });
   }
 }

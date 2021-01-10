@@ -6,16 +6,18 @@ import org.jasypt.salt.RandomIVGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Value;
 
+/**
+ * Tests for encrypting and decrypting the jdbc password.
+ */
 @Slf4j
 public class EncryptDbPasswordTest {
 
-  private static final String ENCRYPTION_KEY = "your-encryption-key";
+  private static final String ENCRYPTION_KEY = "ssv-encryption-key";
   // Set your plain db password here to encrypt it in the test below and the remove it from here
   private static final String DB_PASSWORD = "set-your-password";
   // Set your encrypted db password here to decrypt it in the 2nd test below and the remove it from here
-  private static final String DB_PASSWORD_ENCRYPTED ="";
+  private static final String DB_PASSWORD_ENCRYPTED ="MTcXO246qBaXmj347W4wvfpVlGB17092XRKxqibMsxNUxXpfSO+wYvwOtPWAoLEX";
   
   private StandardPBEStringEncryptor encryptor;
 

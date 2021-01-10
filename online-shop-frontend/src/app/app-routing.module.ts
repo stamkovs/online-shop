@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {HomeRoutingModule} from "./home/home-routing.module";
+import {HomeRoutingModule} from "./components/home/home-routing.module";
 
 const appRoutes: Routes = [
   {

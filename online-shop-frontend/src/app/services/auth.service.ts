@@ -1,0 +1,100 @@
+import {Injectable} from "@angular/core";
+import {WindowService} from "./window.service";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
+
+@Injectable()
+export class AuthService {
+
+  private readonly POPUP_WINDOW_HTML_CONTENT: string = '<html lang="en">' +
+    '<head>' +
+    '<title>OAuth2 Login</title>' +
+    '<style>' +
+    'p {font-weight: bold;}' +
+    '.loader {' +
+    'margin: 0 auto;' +
+    '  border: 16px solid #f3f3f3; /* Light grey */\n' +
+    '  border-top: 16px solid #3498db; /* Blue */\n' +
+    '  border-radius: 50%;\n' +
+    '  width: 120px;\n' +
+    '  height: 120px;\n' +
+    '  animation: spin 2s linear infinite;\n' +
+    '}\n' +
+    '\n' +
+    '@keyframes spin {\n' +
+    '  0% { transform: rotate(0deg); }\n' +
+    '  100% { transform: rotate(360deg); }\n' +
+    '}' +
+    '</style>' +
+    '</head>' +
+    '<body>' +
+    '<p>One moment please..</p>' +
+    '<div class="loader"></div>' +
+    '</body>';
+
+  private readonly oAuthCallbackUrl: string;
+  private windowHandle: any = window;
+  private intervalId: any = null;
+
+  constructor(private windows: WindowService, private http: HttpClient) {
+    this.oAuthCallbackUrl = "http://localhost:4400/home"
+  }
+
+  isLoggedIn(): Observable<any> {
+    return this.http.get('auth/isLoggedIn');
+  }
+
+  logout(): Observable<any> {
+    return this.http.get('auth/logout');
+  }
+
+  retrieveOauthUrls(): Observable<any> {
+    return this.http.get("/auth/login/oauthEndpoints");
+  }
+
+  public OAuthLogin(oAuthUrl) {
+    this.windowHandle = this.windows.createWindow("oAuthUrl", 'OAuth2 Login');
+
+    this.windowHandle.document.write(this.POPUP_WINDOW_HTML_CONTENT);
+    this.windowHandle.document.style = "color: red;";
+    setTimeout(() => {
+      this.windowHandle = this.windows.createWindow(oAuthUrl, 'OAuth2 Login');
+    }, 600);
+
+    this.checkForOAuthResponse();
+    window.focus();
+  }
+
+  checkForOAuthResponse() {
+    let loopCount = 600;
+    let intervalLength = 200;
+    this.intervalId = setInterval(() => {
+      if (loopCount-- < 0) {
+        clearInterval(this.intervalId);
+        this.windowHandle.close();
+      } else {
+        let href = "";
+        try {
+          href = this.windowHandle.location.href;
+        } catch (e) {
+          // console.log('Error:', e);
+        }
+        if (href != null) {
+          let re = 'home';
+          let found = href.match(re);
+          if (found) {
+            clearInterval(this.intervalId);
+            this.windowHandle.close();
+            window.location.href = href;
+          } else {
+            if (href.indexOf(this.oAuthCallbackUrl) == 0) {
+              clearInterval(this.intervalId);
+              this.windowHandle.close();
+            }
+          }
+        }
+      }
+    }, intervalLength);
+  }
+
+}

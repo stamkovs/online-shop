@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --open --port 4400",
+    "start": "ng serve --open --proxy-config proxy.conf.json --port 4400",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -22,6 +22,7 @@
     "@fortawesome/fontawesome-free": "^5.15.1",
     "core-js": "^3.6.5",
     "line-awesome": "^1.3.0",
+    "ngx-cookie": "^5.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

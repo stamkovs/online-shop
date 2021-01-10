@@ -1,7 +1,7 @@
 package com.stamkovs.online.shop.flyway.migration;
 
 import com.stamkovs.online.shop.flyway.config.JdbcConnectionConfiguration;
-import com.stamkovs.online.shop.flyway.model.UserAccount;
+import com.stamkovs.online.shop.flyway.model.UserAccountTestModel;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,6 +26,9 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+/**
+ * Integration tests for {@link DataFlywayMigration}.
+ */
 @TestPropertySource("classpath:application-test.properties")
 @ContextConfiguration(classes = {JdbcConnectionConfiguration.class})
 @EnableAutoConfiguration(exclude = FlywayAutoConfiguration.class)
@@ -42,14 +45,12 @@ class DataFlywayMigrationTest {
 
   private Connection connection;
 
-  private DataSource dataSource;
-
   @Autowired
   private JdbcTemplate jdbcTemplate;
 
-  private String selectSQL = "SELECT * FROM user_account";
+  private final String selectSQL = "SELECT * FROM user_account";
 
-  private String h2UserEmail = "h2user@gmail.com";
+  private final String h2UserEmail = "h2user@gmail.com";
 
   @Value("${db.flyway.dataFolder}")
   private String testDataFolder;
@@ -57,7 +58,7 @@ class DataFlywayMigrationTest {
   @SneakyThrows
   @BeforeEach
   void setup() {
-    dataSource = jdbcTemplate.getDataSource();
+    DataSource dataSource = jdbcTemplate.getDataSource();
     if (dataSource != null) {
       connection = dataSource.getConnection();
     }
@@ -76,7 +77,7 @@ class DataFlywayMigrationTest {
     dataFlywayMigration.migrate();
 
     // then
-    List<UserAccount> users = jdbcTemplate.query(selectSQL, new BeanPropertyRowMapper<>(UserAccount.class));
+    List<UserAccountTestModel> users = jdbcTemplate.query(selectSQL, new BeanPropertyRowMapper<>(UserAccountTestModel.class));
     assertThat(users.size(), is(1));
 
     // values should correspond to the ones defined in the h2 migration script
@@ -99,7 +100,7 @@ class DataFlywayMigrationTest {
     String updateSql = "update user_account set email='changed@gmail.com'";
     // statement is auto-closable so it wont cause a lock on the db
     statement.executeUpdate(updateSql);
-    List<UserAccount> users = jdbcTemplate.query(selectSQL, new BeanPropertyRowMapper<>(UserAccount.class));
+    List<UserAccountTestModel> users = jdbcTemplate.query(selectSQL, new BeanPropertyRowMapper<>(UserAccountTestModel.class));
     assertThat(users.size(), is(1));
     assertThat(users.get(0).getEmail(), is("changed@gmail.com"));
 
@@ -107,7 +108,7 @@ class DataFlywayMigrationTest {
     Thread.sleep(1000);
     // then
     dataFlywayMigration.migrate();
-    users = jdbcTemplate.query(selectSQL, new BeanPropertyRowMapper<>(UserAccount.class));
+    users = jdbcTemplate.query(selectSQL, new BeanPropertyRowMapper<>(UserAccountTestModel.class));
     assertThat(users.size(), is(1));
     assertThat(users.get(0).getEmail(), is(h2UserEmail));
   }
@@ -134,7 +135,7 @@ class DataFlywayMigrationTest {
     dataFlywayMigration.migrate();
 
     // then
-    List<UserAccount> users = jdbcTemplate.query(selectSQL, new BeanPropertyRowMapper<>(UserAccount.class));
+    List<UserAccountTestModel> users = jdbcTemplate.query(selectSQL, new BeanPropertyRowMapper<>(UserAccountTestModel.class));
     assertThat(users.size(), is(3));
     assertThat(users.get(0).getId(), is(1));
     assertThat(users.get(0).getEmail(), is(h2UserEmail));
@@ -153,7 +154,7 @@ class DataFlywayMigrationTest {
     dataFlywayMigration.migrate();
 
     // then
-    List<UserAccount> users = jdbcTemplate.query(selectSQL, new BeanPropertyRowMapper<>(UserAccount.class));
+    List<UserAccountTestModel> users = jdbcTemplate.query(selectSQL, new BeanPropertyRowMapper<>(UserAccountTestModel.class));
     assertThat(users.size(), is(1));
     assertThat(users.get(0).getEmail(), is(h2UserEmail));
   }
@@ -176,7 +177,7 @@ class DataFlywayMigrationTest {
     statement.executeUpdate(insertSql2);
 
     // then
-    List<UserAccount> users = jdbcTemplate.query(selectSQL, new BeanPropertyRowMapper<>(UserAccount.class));
+    List<UserAccountTestModel> users = jdbcTemplate.query(selectSQL, new BeanPropertyRowMapper<>(UserAccountTestModel.class));
     assertThat(users.size(), is(3));
     assertThat(users.get(0).getEmail(), is(h2UserEmail));
     assertThat(users.get(1).getEmail(), is("h2SecondUser@gmail.com"));
@@ -185,7 +186,7 @@ class DataFlywayMigrationTest {
     // do clean migrate on the db, it should have only the users defined in the h2 migration scripts
     dataFlywayMigration.migrate();
     // then
-    users = jdbcTemplate.query(selectSQL, new BeanPropertyRowMapper<>(UserAccount.class));
+    users = jdbcTemplate.query(selectSQL, new BeanPropertyRowMapper<>(UserAccountTestModel.class));
     assertThat(users.size(), is(1));
     assertThat(users.get(0).getId(), is(1));
     assertThat(users.get(0).getEmail(), is(h2UserEmail));
