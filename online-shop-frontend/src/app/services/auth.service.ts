@@ -53,12 +53,13 @@ export class AuthService {
   }
 
   public OAuthLogin(oAuthUrl) {
-    this.windowHandle = this.windows.createWindow("oAuthUrl", 'OAuth2 Login');
+    const windowName = oAuthUrl.includes("facebook") ? "Facebook OAuth2 Login" : "Google OAuth2 Login";
+    this.windowHandle = this.windows.createWindow("oAuthUrl", windowName);
 
     this.windowHandle.document.write(this.POPUP_WINDOW_HTML_CONTENT);
     this.windowHandle.document.style = "color: red;";
     setTimeout(() => {
-      this.windowHandle = this.windows.createWindow(oAuthUrl, 'OAuth2 Login');
+      this.windowHandle = this.windows.createWindow(oAuthUrl, windowName);
     }, 600);
 
     this.checkForOAuthResponse();
@@ -85,6 +86,9 @@ export class AuthService {
           if (found) {
             clearInterval(this.intervalId);
             this.windowHandle.close();
+            if (href.includes('#_=_')) {
+              href = href.replace('#_=_', '');
+            }
             window.location.href = href;
           } else {
             if (href.indexOf(this.oAuthCallbackUrl) == 0) {

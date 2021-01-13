@@ -18,9 +18,8 @@ export class WindowService {
     width = Math.floor(window.outerWidth * 0.30);
     height = Math.floor(window.outerHeight * 0.65);
 
-    if (url.includes("facebook")) {
+    if (name.includes("Facebook")) {
       width = Math.floor(window.outerWidth * 0.75);
-      height = Math.floor(window.outerHeight * 0.65);
     }
 
     if (window.outerWidth < 768) {

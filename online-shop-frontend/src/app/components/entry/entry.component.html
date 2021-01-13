@@ -1,9 +1,9 @@
-<div class="login-page-component">
+<div class="entry-page-component">
   <section class="login-header-section">
     <h1>Login to your Shoptastic account</h1>
     <hr>
   </section>
-  <div class="container" id="login-container">
+  <div class="container" id="entry-container">
     <div class="form-container sign-up-container">
       <form action="#" onsubmit="return false;" autocomplete="off">
         <h2>Create Account</h2>
@@ -23,9 +23,9 @@
         <h2>Sign in to Shoptastic</h2>
 
         <div class="social-login">
-          <a class="btn btn-block social-btn google" (click)="doLogin($event)">
+          <a class="btn btn-block social-btn google" (click)="loginWithGoogle()">
             <img src={{googleLogo}} alt="Google" /> Log in with Google</a>
-          <a class="btn btn-block social-btn facebook" (click)="doLogin($event)">
+          <a class="btn btn-block social-btn facebook" (click)="loginWithFacebook()">
             <img src={{fbLogo}} alt="Facebook" /> Log in with Facebook</a>
         </div>
 

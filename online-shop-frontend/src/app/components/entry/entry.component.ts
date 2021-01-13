@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-entry',
+  templateUrl: './entry.component.html',
+  styleUrls: ['./entry.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class EntryComponent implements OnInit {
 
   googleLogo: string = '';
   fbLogo: string = '';
   googleAuthUrl: string = '';
   fbAuthUrl: string = '';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+  }
 
   ngOnInit(): void {
     this.googleLogo = "../../assets/images/google-logo.png";
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
     const signUpButtonMobile = document.getElementById('signUp-mobile');
     const signInButton = document.getElementById('signIn');
     const signInButtonMobile = document.getElementById('signIn-mobile');
-    const container = document.getElementById('login-container');
+    const container = document.getElementById('entry-container');
 
     signUpButton.addEventListener('click', () =>
       container.classList.add('right-panel-active'));
@@ -44,15 +45,12 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  doLogin(e) {
-    let oAuthUrl: string;
-    if (e.target.classList.contains("facebook")) {
-      oAuthUrl = this.fbAuthUrl;
-    } else {
-      oAuthUrl = this.googleAuthUrl;
-    }
+  loginWithGoogle() {
+    this.authService.OAuthLogin(this.googleAuthUrl);
+  }
 
-    this.authService.OAuthLogin(oAuthUrl);
+  loginWithFacebook() {
+    this.authService.OAuthLogin(this.fbAuthUrl);
   }
 
 }

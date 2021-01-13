@@ -3,7 +3,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from "./home.component";
 import {ProductListComponent} from "../product-list/product-list.component";
 import {ContactComponent} from "../contact/contact.component";
-import {LoginComponent} from "../login/login.component";
+import {EntryComponent} from "../entry/entry.component";
 import {AuthGuard} from "../../core/guards/auth.guard";
 
 
@@ -30,8 +30,8 @@ const homeRoutes: Routes = [
     data: { animationState: 'Three'}
   },
   {
-    path: 'login',
-    component: LoginComponent,
+    path: 'entry',
+    component: EntryComponent,
     data: { animationState: 'Four' }
   }
 ];

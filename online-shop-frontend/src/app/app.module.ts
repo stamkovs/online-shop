@@ -5,7 +5,7 @@ import { CommonModule} from "@angular/common";
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
+import { EntryComponent } from './components/entry/entry.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ContactComponent } from './components/contact/contact.component';
 import {AppRoutingModule} from "./app-routing.module";
@@ -20,7 +20,7 @@ import {CookieModule} from "ngx-cookie";
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    LoginComponent,
+    EntryComponent,
     ProductListComponent,
     ContactComponent,
   ],

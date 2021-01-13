@@ -22,7 +22,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         catchError((error) => {
           if (error instanceof HttpErrorResponse) {
             if (error.status === 401) {
-              this.redirectToLogin();
+              this.redirectToEntryPage();
             } else if (error.status === 307) {
               this.redirectToLogout();
             } else if (error.status === 400 || error.status === 409 || error.status === 422) {
@@ -35,7 +35,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         }));
   }
 
-  redirectToLogin() {
+  redirectToEntryPage() {
     this.cookieService.put("is_user_logged_in", "");
     // this.router.navigate(['/login']);
   }

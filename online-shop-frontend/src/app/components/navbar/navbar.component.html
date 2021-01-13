@@ -44,7 +44,7 @@
         <li class="navbar-item" (click)="closeMobileNavbar()"><a class="navbar-link" routerLink="contact"
                                                                  routerLinkActive="active">
           <i class="far fa-envelope"></i>Contact us</a></li>
-        <li *ngIf="!this.isUserLoggedIn() else logout" class="navbar-item" (click)="closeMobileNavbar()"><a class="navbar-link" routerLink="login"
+        <li *ngIf="!this.isUserLoggedIn() else logout" class="navbar-item" (click)="closeMobileNavbar()"><a class="navbar-link" routerLink="entry"
                                                                  routerLinkActive="active">
           <i class="far fa-user"></i>Log in</a>
         </li>
