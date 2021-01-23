@@ -23,7 +23,9 @@ An online shop application project developed for my graduate thesis with some se
    * Login with Google :heavy_check_mark:
    * Login with Facebook :heavy_check_mark:
 * JSON Web Tokens :heavy_check_mark: 
-* Register, Login, Forgot password flows with email verification
+* Register by sending confirmation token via email
+   * Scheduled job to clear expired confirmation tokens from db
+* Login, Forgot password flows 
 * Role based access control
 * View, search, add, edit various products
 * Dark mode
@@ -176,7 +178,10 @@ Process finished with exit code 0
 
 ```
 
-Now the last thing to do is to copy all those environment variables from the DbMigrationApplication to the OnlineShopApplication which is in another module and it starts the shop application.
+Now the same thing needs to be done i.e to copy all those environment variables from the DbMigrationApplication.xml to the OnlineShopApplication.xml .
+
+
+##### Configuring the OAuth Social logins
 
 ---
 
