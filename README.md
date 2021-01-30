@@ -23,7 +23,8 @@ An online shop application project developed for my graduate thesis with some se
    * Login with Google :heavy_check_mark:
    * Login with Facebook :heavy_check_mark:
 * JSON Web Tokens :heavy_check_mark: 
-* Register by sending confirmation token via email
+* Register by sending confirmation token via email :heavy_check_mark:
+   * Password protection with BCrypt hashing and salting :heavy_check_mark:
    * Scheduled job to clear expired confirmation tokens from db
 * Login, Forgot password flows 
 * Role based access control
