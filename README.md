@@ -185,6 +185,10 @@ Now the same thing needs to be done i.e to copy all those environment variables 
 
 ---
 
+##### Configuration the spring mail sender
+
+---
+
 #### &nbsp;&nbsp;&nbsp;&nbsp;Frontend
 ---
 &nbsp;
