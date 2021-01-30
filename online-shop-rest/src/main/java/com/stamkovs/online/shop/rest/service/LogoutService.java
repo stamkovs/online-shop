@@ -2,10 +2,11 @@ package com.stamkovs.online.shop.rest.service;
 
 import com.stamkovs.online.shop.rest.auth.security.CustomUserDetailsService;
 import com.stamkovs.online.shop.rest.auth.security.TokenProvider;
+import com.stamkovs.online.shop.rest.exception.UserNotFoundException;
+import com.stamkovs.online.shop.rest.model.UserAccount;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -28,14 +29,18 @@ public class LogoutService {
   private final TokenProvider tokenProvider;
   private final CustomUserDetailsService customUserDetailsService;
 
-  public void logoutUser(HttpServletRequest request, HttpServletResponse response) {
+  public void logoutUser(HttpServletRequest request, HttpServletResponse response) throws UserNotFoundException {
     String jwt = getJwtFromRequest(request);
-    UserDetails userDetails = null;
-    Long userId = null;
+    UserAccount userAccount = null;
+    Long userId;
     if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
       userId = tokenProvider.getUserIdFromToken(jwt);
 
-      userDetails = customUserDetailsService.loadUserById(userId);
+      try {
+        userAccount = customUserDetailsService.loadUserAccountById(userId);
+      } catch (UserNotFoundException e) {
+        log.warn("User not existing. Revoking authorization bearer cookie now.", e);
+      }
     }
     Cookie revokeAuthorizationToken = new Cookie(AUTHORIZATION, EMPTY_STRING);
     revokeAuthorizationToken.setMaxAge(0);
@@ -47,9 +52,9 @@ public class LogoutService {
     logoutUser.setMaxAge(0);
     response.addCookie(revokeAuthorizationToken);
     response.addCookie(logoutUser);
-    if (userDetails != null) {
+    if (userAccount != null) {
 
-      log.info("Successfully logged out user {}.", userId);
+      log.info("Successfully logged out user {}.", userAccount.getAccountId());
     }
     SecurityContextHolder.clearContext();
   }

@@ -1,6 +1,7 @@
 package com.stamkovs.online.shop.rest.auth.security;
 
 import com.stamkovs.online.shop.rest.auth.model.AuthProvider;
+import com.stamkovs.online.shop.rest.auth.security.user.FacebookOAuth2UserInfo;
 import com.stamkovs.online.shop.rest.exception.OAuth2AuthenticationProcessingException;
 import com.stamkovs.online.shop.rest.model.UserAccount;
 import com.stamkovs.online.shop.rest.auth.security.user.OAuth2UserInfo;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Custom OAuth service needed to load and process the user.
@@ -45,16 +47,17 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
       throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
     }
 
-    Optional<UserAccount> userOptional = userRepository.findByEmail(oAuth2UserInfo.getEmail());
+    Optional<UserAccount> userOptional = userRepository.findByEmailIgnoreCase(oAuth2UserInfo.getEmail());
     UserAccount user;
     if(userOptional.isPresent()) {
       user = userOptional.get();
-      if(!user.getProvider().equals(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()))) {
-        throw new OAuth2AuthenticationProcessingException("Looks like you're signed up with " +
-          user.getProvider() + " account. Please use your " + user.getProvider() +
-          " account to login.");
+      if(user.getProvider().equals(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()))) {
+//        throw new OAuth2AuthenticationProcessingException("Looks like you're signed up with " +
+//          user.getProvider() + " account. Please use your " + user.getProvider() +
+//          " account to login.");
+//      } else {
+        user = updateExistingUser(user, oAuth2UserInfo);
       }
-      user = updateExistingUser(user, oAuth2UserInfo);
     } else {
       user = registerNewUser(oAuth2UserRequest, oAuth2UserInfo);
     }
@@ -67,11 +70,17 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     user.setProvider(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()));
     user.setProviderId(oAuth2UserInfo.getId());
-    user.setFirstName(oAuth2UserInfo.getName());
-    user.setLastName(oAuth2UserInfo.getName());
+    if (oAuth2UserInfo instanceof FacebookOAuth2UserInfo) {
+      user.setFirstName(oAuth2UserInfo.getFirstName());
+      user.setLastName(oAuth2UserInfo.getLastName());
+    } else {
+      user.setFirstName(oAuth2UserInfo.getName());
+      user.setLastName(oAuth2UserInfo.getName());
+    }
     user.setEmail(oAuth2UserInfo.getEmail());
     user.setUserRoleId(UserRole.CUSTOMER.getCode());
     user.setEmailVerified(true);
+    user.setAccountId(UUID.randomUUID().toString());
     return userRepository.save(user);
   }
 

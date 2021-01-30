@@ -13,12 +13,12 @@ import org.junit.jupiter.api.Test;
 @Slf4j
 public class EncryptDbPasswordTest {
 
-  private static final String ENCRYPTION_KEY = "ssv-encryption-key";
+  private static final String ENCRYPTION_KEY = "your-encryption-key";
   // Set your plain db password here to encrypt it in the test below and the remove it from here
   private static final String DB_PASSWORD = "set-your-password";
   // Set your encrypted db password here to decrypt it in the 2nd test below and the remove it from here
-  private static final String DB_PASSWORD_ENCRYPTED ="MTcXO246qBaXmj347W4wvfpVlGB17092XRKxqibMsxNUxXpfSO+wYvwOtPWAoLEX";
-  
+  private static final String DB_PASSWORD_ENCRYPTED ="";
+
   private StandardPBEStringEncryptor encryptor;
 
   @BeforeEach

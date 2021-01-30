@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import static com.stamkovs.online.shop.rest.auth.util.CookieUtils.getJwtFromRequest;
-import static com.stamkovs.online.shop.rest.model.ShopConstants.AUTHORIZATION;
 import static com.stamkovs.online.shop.rest.model.ShopConstants.EMPTY_STRING;
 import static com.stamkovs.online.shop.rest.model.ShopConstants.FORWARD_SLASH;
 import static com.stamkovs.online.shop.rest.model.ShopConstants.IS_USER_LOGGED_IN;
@@ -44,15 +43,15 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
     String jwt = getJwtFromRequest(request);
     if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
       Long userId = tokenProvider.getUserIdFromToken(jwt);
-
       UserDetails userDetails = customUserDetailsService.loadUserById(userId);
-      UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+      String userAccountId = customUserDetailsService.loadUserAccountById(userId).getAccountId();
+      UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null,
+        userDetails.getAuthorities());
       authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-      SecurityContextHolder.getContext().setAuthentication(authentication);
-      isUserLoggedIn.setMaxAge(86000);
+      SecurityContextHolder.getContext().setAuthentication(authentication);isUserLoggedIn.setMaxAge(86000);
       response.addCookie(isUserLoggedIn);
-      log.info("User {} is logged in and authorized.", userId);
+      log.info("User {} is logged in and authorized.", userAccountId);
     } else {
       isUserLoggedIn.setValue(EMPTY_STRING);
       isUserLoggedIn.setMaxAge(0);

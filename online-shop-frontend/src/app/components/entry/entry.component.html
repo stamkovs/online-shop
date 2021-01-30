@@ -5,14 +5,34 @@
   </section>
   <div class="container" id="entry-container">
     <div class="form-container sign-up-container">
-      <form action="#" onsubmit="return false;" autocomplete="off">
+      <form (submit)="registerUser()" autocomplete="off" novalidate>
         <h2>Create Account</h2>
         <span>Start your journey now!</span>
-        <input type="text" placeholder="Name"/>
-        <input type="email" name="email" placeholder="Email"/>
-        <input type="password" name="password" placeholder="Password" autocomplete="new-password"/>
-        <p></p>
-        <button>Sign Up</button>
+        <input type="text" name="firstName" placeholder="First name" [ngModel]="userFirstName"
+               autocomplete="new-first-name"
+               (ngModelChange)="firstNameModelChange($event)"/>
+        <input type="text" name="lastName" placeholder="Last name" [ngModel]="userLastName" autocomplete="new-last-name"
+               (ngModelChange)="lastNameModelChange($event)"/>
+        <input type="email" name="email" placeholder="Email" [ngModel]="userEmail" #email="ngModel" email required
+               (ngModelChange)="emailModelChange($event)"/>
+        <div class="error-message" *ngIf="email.value !== '' && email.invalid">
+          <p>Please provide a valid email address.</p>
+        </div>
+        <input type="password" name="password" placeholder="Password" [ngModel]="password" data-strength class=""
+               (ngModelChange)="passwordModelChange($event)" (focus)="focusPasswordField()" (blur)="onBlur()"/>
+        <div id="password-strength-wrapper" class="strength">
+          <span class="block">Password Strength: <span class="password-strength-status-text {{textColor}}">{{passwordStrengthText}}</span></span>
+          <span class="block" id="password-strength-bar"></span></div>
+        <input type="password" name="confirmPassword" placeholder="Confirm Password" [ngModel]="confirmPassword"
+               (ngModelChange)="confirmPasswordModelChange($event)"/>
+        <div class="error-message" *ngIf="passwordMismatch">
+          <p>Your password and confirmation password do not match.</p>
+        </div>
+        <div *ngIf="showVerifyEmailMessage">
+          <p>{{verifyEmailMessage}} <a class="resend" (click)="resendEmail()">Resend</a></p>
+        </div>
+        <button [disabled]="disabled" [ngClass]="{'disabled': disabled}" class="sign-up-button">Sign Up</button>
+
         <div class="signIn-mobile">
           <p>Already have an account? <a id="signIn-mobile">Sign in.</a></p>
         </div>
@@ -24,17 +44,18 @@
 
         <div class="social-login">
           <a class="btn btn-block social-btn google" (click)="loginWithGoogle()">
-            <img src={{googleLogo}} alt="Google" /> Log in with Google</a>
+            <img src={{googleLogo}} alt="Google"/> Log in with Google</a>
           <a class="btn btn-block social-btn facebook" (click)="loginWithFacebook()">
-            <img src={{fbLogo}} alt="Facebook" /> Log in with Facebook</a>
+            <img src={{fbLogo}} alt="Facebook"/> Log in with Facebook</a>
         </div>
+        <p class="gray"> or </p>
 
         <input type="email" name="email" placeholder="Email"/>
         <input type="password" name="password" placeholder="Password" autocomplete="new-password"/>
         <a>Forgot your password?</a>
         <button>Sign In</button>
         <div class="signUp-mobile">
-        <p>Don't have an account? <a id="signUp-mobile">Sign up.</a></p>
+          <p>Don't have an account? <a id="signUp-mobile">Sign up.</a></p>
         </div>
       </form>
     </div>

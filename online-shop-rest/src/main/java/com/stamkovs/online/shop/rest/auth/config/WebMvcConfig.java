@@ -30,6 +30,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(jwtInterceptor).addPathPatterns("/**")
-      .excludePathPatterns("/auth/logout", "/auth/login/oauthEndpoints");
+      .excludePathPatterns("/**/logout", "/auth/login/oauthEndpoints");
   }
 }

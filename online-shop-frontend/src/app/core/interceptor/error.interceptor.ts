@@ -5,12 +5,13 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 
 
 import { Router } from '@angular/router';
-import {CookieService} from "ngx-cookie";
+import {CookieService} from 'ngx-cookie';
+import {AuthService} from '../../services/auth.service';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
-  constructor(private injector: Injector, private cookieService: CookieService) {}
+  constructor(private injector: Injector, private cookieService: CookieService, private authService: AuthService) {}
 
   public get router(): Router {
     return this.injector.get(Router);
@@ -36,12 +37,12 @@ export class ErrorInterceptor implements HttpInterceptor {
   }
 
   redirectToEntryPage() {
-    this.cookieService.put("is_user_logged_in", "");
-    // this.router.navigate(['/login']);
+    this.cookieService.put('is_user_logged_in', '');
+    this.router.navigate(['/login']);
   }
 
   redirectToLogout() {
-    // this.logoutService.logout();
+    this.authService.logout();
   }
 
   redirectToErrorPage() {

@@ -1,6 +1,12 @@
 package com.stamkovs.online.shop.rest.auth.config;
 
-import com.stamkovs.online.shop.rest.auth.security.*;
+import com.stamkovs.online.shop.rest.auth.model.ConfirmationToken;
+import com.stamkovs.online.shop.rest.auth.security.CustomOAuth2UserService;
+import com.stamkovs.online.shop.rest.auth.security.CustomUserDetailsService;
+import com.stamkovs.online.shop.rest.auth.security.HttpCookieOAuth2AuthorizationRequestRepository;
+import com.stamkovs.online.shop.rest.auth.security.OAuth2AuthenticationFailureHandler;
+import com.stamkovs.online.shop.rest.auth.security.OAuth2AuthenticationSuccessHandler;
+import com.stamkovs.online.shop.rest.auth.security.RestAuthenticationEntryPoint;
 import com.stamkovs.online.shop.rest.model.UserAccount;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -18,6 +24,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.security.SecureRandom;
+
 /**
  *  Shoptastic security configuration.
  */
@@ -29,7 +37,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
   prePostEnabled = true
 )
 @EnableJpaRepositories("com.stamkovs.online.shop.rest.repository")
-@EntityScan(basePackageClasses = UserAccount.class)
+@EntityScan(basePackageClasses = {UserAccount.class, ConfirmationToken.class})
 @RequiredArgsConstructor
 public class ShoptasticSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
@@ -72,7 +80,7 @@ public class ShoptasticSecurityConfiguration extends WebSecurityConfigurerAdapte
 
   @Bean
   public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder();
+    return new BCryptPasswordEncoder(10, new SecureRandom());
   }
 
 

@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
   @Transactional
   public UserDetails loadUserByUsername(String email)
     throws UsernameNotFoundException {
-    UserAccount user = userRepository.findByEmail(email)
+    UserAccount user = userRepository.findByEmailIgnoreCase(email)
       .orElseThrow(() ->
         new UsernameNotFoundException("User not found with email : " + email)
       );
@@ -37,5 +37,11 @@ public class CustomUserDetailsService implements UserDetailsService {
       () -> new UserNotFoundException("User with id " + id + " cant be found."));
 
     return UserPrincipal.create(user);
+  }
+
+  @Transactional
+  public UserAccount loadUserAccountById(Long id) throws UserNotFoundException {
+    return userRepository.findById(id).orElseThrow(
+      () -> new UserNotFoundException("User with id " + id + " cant be found."));
   }
 }

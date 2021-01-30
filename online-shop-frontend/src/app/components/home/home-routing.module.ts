@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import {RouterModule, Routes} from "@angular/router";
-import {HomeComponent} from "./home.component";
-import {ProductListComponent} from "../product-list/product-list.component";
-import {ContactComponent} from "../contact/contact.component";
-import {EntryComponent} from "../entry/entry.component";
-import {AuthGuard} from "../../core/guards/auth.guard";
+import {RouterModule, Routes} from '@angular/router';
+import {HomeComponent} from './home.component';
+import {ProductListComponent} from '../product-list/product-list.component';
+import {ContactComponent} from '../contact/contact.component';
+import {EntryComponent} from '../entry/entry.component';
+import {AuthGuard} from '../../core/guards/auth.guard';
 
 
 const homeRoutes: Routes = [

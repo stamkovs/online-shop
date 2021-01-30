@@ -1,7 +1,7 @@
-import {Injectable} from "@angular/core";
-import {WindowService} from "./window.service";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Injectable} from '@angular/core';
+import {WindowService} from './window.service';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable()
 export class AuthService {
@@ -13,8 +13,8 @@ export class AuthService {
     'p {font-weight: bold;}' +
     '.loader {' +
     'margin: 0 auto;' +
-    '  border: 16px solid #f3f3f3; /* Light grey */\n' +
-    '  border-top: 16px solid #3498db; /* Blue */\n' +
+    '  border: 16px solid #f3f3f3; \n' +
+    '  border-top: 16px solid #3498db; \n' +
     '  border-radius: 50%;\n' +
     '  width: 120px;\n' +
     '  height: 120px;\n' +
@@ -37,7 +37,7 @@ export class AuthService {
   private intervalId: any = null;
 
   constructor(private windows: WindowService, private http: HttpClient) {
-    this.oAuthCallbackUrl = "http://localhost:4400/home"
+    this.oAuthCallbackUrl = 'http://localhost:4400/home'
   }
 
   isLoggedIn(): Observable<any> {
@@ -49,15 +49,15 @@ export class AuthService {
   }
 
   retrieveOauthUrls(): Observable<any> {
-    return this.http.get("/auth/login/oauthEndpoints");
+    return this.http.get('/auth/login/oauthEndpoints');
   }
 
   public OAuthLogin(oAuthUrl) {
-    const windowName = oAuthUrl.includes("facebook") ? "Facebook OAuth2 Login" : "Google OAuth2 Login";
-    this.windowHandle = this.windows.createWindow("oAuthUrl", windowName);
+    const windowName = oAuthUrl.includes('facebook') ? 'Facebook OAuth2 Login' : 'Google OAuth2 Login';
+    this.windowHandle = this.windows.createWindow('oAuthUrl', windowName);
 
     this.windowHandle.document.write(this.POPUP_WINDOW_HTML_CONTENT);
-    this.windowHandle.document.style = "color: red;";
+    this.windowHandle.document.style = 'color: red;';
     setTimeout(() => {
       this.windowHandle = this.windows.createWindow(oAuthUrl, windowName);
     }, 600);
@@ -74,7 +74,7 @@ export class AuthService {
         clearInterval(this.intervalId);
         this.windowHandle.close();
       } else {
-        let href = "";
+        let href = '';
         try {
           href = this.windowHandle.location.href;
         } catch (e) {

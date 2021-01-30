@@ -4,8 +4,8 @@ import {
   HostListener,
   OnInit,
 } from '@angular/core';
-import {CookieService} from "ngx-cookie";
-import {AuthService} from "../../services/auth.service";
+import {CookieService} from 'ngx-cookie';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -25,44 +25,41 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   constructor(private cookieService: CookieService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.navbar = document.getElementById("navbar");
-    this.navbarToggle = this.navbar.querySelector(".navbar-toggle");
-    this.navbarMenu = this.navbar.querySelector(".navbar-menu");
-    this.navbarLinksContainer = this.navbar.querySelector(".navbar-links");
-    this.navbarItems = document.querySelectorAll(".navbar-item");
+    this.navbar = document.getElementById('navbar');
+    this.navbarToggle = this.navbar.querySelector('.navbar-toggle');
+    this.navbarMenu = this.navbar.querySelector('.navbar-menu');
+    this.navbarLinksContainer = this.navbar.querySelector('.navbar-links');
+    this.navbarItems = document.querySelectorAll('.navbar-item');
     this.subMenuMarginSeparator = 0;
 
-    // this.navbarItems.forEach(item => {
-    //   item.addEventListener("click", this.toggleActiveMenu);
-    // })
   }
 
   openMobileNavbar() {
-    this.navbar.classList.add("opened");
-    this.navbarToggle.setAttribute("aria-label", "Close navigation menu.");
+    this.navbar.classList.add('opened');
+    this.navbarToggle.setAttribute('aria-label', 'Close navigation menu.');
   }
 
   closeMobileNavbar() {
-    if (this.screenWidth < 769 && this.navbar.classList.contains("opened")) {
-      this.navbar.classList.remove("opened");
-      this.navbarToggle.setAttribute("aria-label", "Open navigation menu.");
+    if (this.screenWidth < 769 && this.navbar.classList.contains('opened')) {
+      this.navbar.classList.remove('opened');
+      this.navbarToggle.setAttribute('aria-label', 'Open navigation menu.');
     }
   }
 
   ngAfterViewInit() {
-    this.navbarToggle.addEventListener("click", () => {
-      if (this.navbar.classList.contains("opened")) {
+    this.navbarToggle.addEventListener('click', () => {
+      if (this.navbar.classList.contains('opened')) {
         this.closeMobileNavbar();
       } else {
         this.openMobileNavbar();
       }
     });
 
-    this.navbarLinksContainer.addEventListener("click", (clickEvent) => {
+    this.navbarLinksContainer.addEventListener('click', (clickEvent) => {
       clickEvent.stopPropagation();
     });
 
-    this.navbarMenu.addEventListener("click", this.closeMobileNavbar);
+    this.navbarMenu.addEventListener('click', this.closeMobileNavbar);
 
     // added for IE11 since after page refresh it doesnt fire the window load event
     this.getScreenSizeOnLoad();
@@ -86,7 +83,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
       return;
     }
     const clickedItem = event.target;
-    const submenu = clickedItem.querySelector(".submenu");
+    const submenu = clickedItem.querySelector('.submenu');
     this.subMenuMarginSeparator = submenu.clientHeight;
   }
 

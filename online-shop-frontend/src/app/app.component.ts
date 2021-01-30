@@ -1,7 +1,7 @@
 import {Component, ViewEncapsulation} from '@angular/core';
-import {RouterOutlet} from "@angular/router";
-import {routeTransitionAnimations} from "./route-transition-animation";
-import {AuthService} from "./services/auth.service";
+import {RouterOutlet} from '@angular/router';
+import {routeTransitionAnimations} from './route-transition-animation';
+import {AuthService} from './services/auth.service';
 
 @Component({
   selector: 'app-root',

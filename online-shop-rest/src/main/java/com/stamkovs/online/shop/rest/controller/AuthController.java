@@ -1,10 +1,12 @@
 package com.stamkovs.online.shop.rest.controller;
 
+import com.stamkovs.online.shop.rest.model.UserLoginDto;
+import com.stamkovs.online.shop.rest.service.LoginService;
 import com.stamkovs.online.shop.rest.service.LogoutService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +29,14 @@ import static com.stamkovs.online.shop.rest.model.ShopConstants.OAUTH_REDIRECT_U
 @RequiredArgsConstructor
 public class AuthController {
 
+  private final LoginService loginService;
   private final LogoutService logoutService;
+
+  @PostMapping(value = "/login")
+  public ResponseEntity<Object> registerUser(@RequestBody UserLoginDto userLoginDto, HttpServletResponse response) {
+    loginService.loginUser(userLoginDto, response);
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
 
   @GetMapping("/login/oauthEndpoints")
   public Map<String, String> endpoints() {

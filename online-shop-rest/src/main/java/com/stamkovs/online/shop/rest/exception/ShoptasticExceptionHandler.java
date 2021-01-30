@@ -18,7 +18,7 @@ import static org.springframework.http.HttpStatus.*;
 public class ShoptasticExceptionHandler {
 
   /**
-   * Handler for all key-rotation exceptions which response status should be {@link HttpStatus#BAD_REQUEST}. Exceptions
+   * Handler for all jwt exceptions which response status should be {@link HttpStatus#UNAUTHORIZED}. Exceptions
    * covered are all {@link JwtException}
    *
    * @param e the exception object
@@ -27,8 +27,38 @@ public class ShoptasticExceptionHandler {
    */
   @ExceptionHandler(JwtException.class)
   @ResponseStatus(UNAUTHORIZED)
-  public ResponseEntity<?> handleUnauthorizedException(JwtException e) {
+  public ResponseEntity<?> handleJWTException(JwtException e) {
     log.error("{} ({})", e.getClass().getSimpleName(), e.getMessage(), e);
     return new ResponseEntity<>(UNAUTHORIZED);
+  }
+
+  /**
+   * Handler for all application exceptions which response status should be {@link HttpStatus#UNAUTHORIZED}. Exceptions
+   * covered are all {@link JwtException}
+   *
+   * @param e the exception object
+   *
+   * @return {@link ResponseEntity}.
+   */
+  @ExceptionHandler(UnauthorizedRedirectException.class)
+  @ResponseStatus(UNAUTHORIZED)
+  public ResponseEntity<?> handleUnauthorizedException(UnauthorizedRedirectException e) {
+    log.error("{} ({})", e.getClass().getSimpleName(), e.getMessage(), e);
+    return new ResponseEntity<>(UNAUTHORIZED);
+  }
+
+  /**
+   * Handler for all user not found exceptions which response status should be {@link HttpStatus#BAD_REQUEST}. Exceptions
+   * covered are all {@link UserNotFoundException}
+   *
+   * @param e the exception object
+   *
+   * @return {@link ResponseEntity}.
+   */
+  @ExceptionHandler(UserNotFoundException.class)
+  @ResponseStatus(BAD_REQUEST)
+  public ResponseEntity<?> handleBadRequestException(UserNotFoundException e) {
+    log.error("{} ({})", e.getClass().getSimpleName(), e.getMessage(), e);
+    return new ResponseEntity<>(BAD_REQUEST);
   }
 }

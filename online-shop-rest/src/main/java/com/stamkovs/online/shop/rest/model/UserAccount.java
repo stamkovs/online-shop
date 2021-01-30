@@ -18,6 +18,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * Persistence entity model for the user account.
@@ -37,6 +38,14 @@ public class UserAccount {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
   private Long id;
+
+  @GeneratedValue(generator = "UUID")
+  @GenericGenerator(
+    name ="UUID",
+    strategy = "org.hibernate.id.UUIDGenerator"
+  )
+  @Column(name = "account_id", updatable = false, nullable = false)
+  private String accountId;
 
   @Column(nullable = false)
   @NonNull
@@ -60,9 +69,6 @@ public class UserAccount {
 
   @Column
   private String lastName;
-
-  @Column
-  private int age;
 
   @Column
   private int userRoleId;

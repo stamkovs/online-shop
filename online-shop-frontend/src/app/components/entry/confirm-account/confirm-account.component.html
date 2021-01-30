@@ -1,0 +1,14 @@
+<div class="confirm-account-component">
+  <div class="container">
+    <div *ngIf="this.isConfirmed; else notConfirmed">
+      <h1>Welcome {{userRegister.email}}</h1>
+      <p>Your account is being confirmed and you will be redirected in few moments.</p>
+      <br>
+    </div>
+    <ng-template #notConfirmed>
+      <div>
+        <p>Invalid Url. You will be redirected to our login page in few moments.</p>
+      </div>
+    </ng-template>
+  </div>
+</div>
