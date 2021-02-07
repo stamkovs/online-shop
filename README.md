@@ -39,13 +39,13 @@ An online shop application project developed for my graduate thesis with some se
     >*Note that this is not a production ready application, so it is not thoroughly tested and verified on each environment.*
     >
     * Tested through Windows OS on the following browsers:
-       * Chrome 86
-       * Firefox 82
-       * Edge 44
-       * IE 11
+       * Chrome 86 :heavy_check_mark:
+       * Firefox 82 :heavy_check_mark:
+       * Edge 44 :heavy_check_mark:
+       * IE 11 :heavy_check_mark:
      * Besides emulators, tested on real iPhone 11 Pro device on:
-       * Safari mobile browser
-       * Chrome mobile browser
+       * Safari mobile browser :heavy_check_mark:
+       * Chrome mobile browser :heavy_check_mark:
 #### 🧰 Technologies and tools used 🔨
 ---
 * Spring Boot
