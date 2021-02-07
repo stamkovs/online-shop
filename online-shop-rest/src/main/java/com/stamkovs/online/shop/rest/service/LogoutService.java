@@ -33,7 +33,7 @@ public class LogoutService {
     String jwt = getJwtFromRequest(request);
     UserAccount userAccount = null;
     Long userId;
-    if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
+    if (StringUtils.hasText(jwt) && tokenProvider.validateToken(request, response, jwt)) {
       userId = tokenProvider.getUserIdFromToken(jwt);
 
       try {

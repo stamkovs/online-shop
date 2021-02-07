@@ -65,13 +65,34 @@
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 
   &:focus {
-    border-color: $color-pink-primary;
+    border-color: $color-magenta-primary;
     outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba($color-pink-primary, .6);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba($color-pink-primary, .6);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba($color-magenta-primary, .6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba($color-magenta-primary, .6);
   }
 
   &.textarea {
     min-height: 72px;
   }
+}
+
+.error-message {
+  color: white;
+  background: rgba(155, 43, 47, 0.75);
+  border-radius: 5px;
+  vertical-align: middle;
+  text-align: center;
+  margin-bottom: 1em;
+  width: 100%;
+  border: 1px solid rgba($color-magenta-primary, 0.4);
+
+  p {
+    font-size: 12px;
+    margin: 0;
+    padding: .6em;
+  }
+}
+
+.mat-form-field.mat-accent .mat-input-element {
+  height: 100%;
 }

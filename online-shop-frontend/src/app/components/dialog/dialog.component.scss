@@ -1,0 +1,85 @@
+@import 'src/styles/variables';
+
+.mat-dialog-container {
+  overflow: hidden;
+  background-color: #252525;
+  .mat-dialog-title {
+    margin: 0;
+  }
+  hr {
+    border: 0;
+    border-bottom: 1px solid grey;
+  }
+  .fa-user-lock {
+    display: flex;
+    justify-content: center;
+    color: $color-magenta-primary;
+    margin-bottom: 2em;
+
+    &:before {
+      font-size: 64px;
+    }
+  }
+
+  .mat-dialog-actions {
+    margin-bottom: -12px;
+  }
+
+  .mat-form-field {
+    width: 50%;
+  }
+
+  .dialog-component-wrapper {
+    position: relative;
+    white-space: pre-wrap;
+    font-size: 14px;
+    font-family: raleway-medium, monospace;
+
+    .error-message {
+      text-align: left;
+      width: 50%;
+      background-color: transparent;
+      color: $color-magenta-primary;
+      border: none;
+      margin-top: -1em;
+
+      p {
+        padding: 0;
+      }
+    }
+
+    .close-icon-wrapper {
+      position: absolute;
+      right: 0;
+      top: -13px;
+    }
+
+    .close-button {
+      float: right;
+      top: -24px;
+      right: -24px;
+    }
+
+    .close-icon {
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .close-icon:hover {
+      transform: rotate(180deg);
+    }
+
+    ::ng-deep .icon-outside .close-button {
+      float: right;
+      top: -52px;
+      right: -52px;
+    }
+
+    ::ng-deep .icon-outside .mat-dialog-container {
+      overflow: unset;
+    }
+
+    ::ng-deep .mat-button-focus-overlay {
+      display: none;
+    }
+  }
+}

@@ -73,6 +73,12 @@
     @media screen and(max-width: 768px) {
       max-width: 80%;
     }
+
+    .disabled {
+      background-color: darkgray;
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
   }
 
   .form-container, .overlay-container {
@@ -101,8 +107,8 @@
     border-bottom: 1px solid white;
 
     &:active, &:focus, &:focus-within, &:visited {
-      border-bottom: 1px solid $color-pink-primary;
-      outline: $color-pink-primary;
+      border-bottom: 1px solid $color-magenta-primary;
+      outline: $color-magenta-primary;
     }
 
   }
@@ -137,7 +143,7 @@
   button {
     border-radius: 20px;
     border: 1px solid transparent;
-    background: $color-pink-primary;
+    background: $color-magenta-primary;
     color: white;
     font-size: 12px;
     font-weight: bold;
@@ -172,7 +178,7 @@
     transition: all .6s ease-in-out;
 
     @media screen and (max-width: 768px) {
-      background: linear-gradient(to right, $navbar-bg-color, $color-pink-primary) no-repeat 0 0 / cover;
+      background: linear-gradient(to right, $navbar-bg-color, $color-magenta-primary) no-repeat 0 0 / cover;
     }
 
   }
@@ -217,6 +223,11 @@
       margin-top: 0;
     }
 
+    .text-warning {
+      color: $color-magenta-primary;
+      font-size: 12px;
+    }
+
   }
 
   .signUp-mobile, .signIn-mobile {
@@ -252,12 +263,6 @@
 
     h2 {
       margin-top: -.4em;
-    }
-
-    .disabled {
-      background-color: darkgray;
-      opacity: 0.6;
-      cursor: not-allowed;
     }
 
     .strength {
@@ -304,23 +309,6 @@
       }
     }
 
-    .error-message {
-      color: white;
-      background: rgba(155, 43, 47, 0.75);
-      border-radius: 5px;
-      vertical-align: middle;
-      text-align: center;
-      margin-bottom: 1em;
-      width: 100%;
-      border: 1px solid rgba($color-pink-primary, 0.4);
-
-      p {
-        font-size: 12px;
-        margin: 0;
-        padding: .6em;
-      }
-    }
-
     .block {
       display: block;
     }
@@ -352,8 +340,8 @@
   }
 
   .overlay {
-    background: $color-pink-primary;
-    background: linear-gradient(to right, $navbar-bg-color, $color-pink-primary) no-repeat 0 0 / cover;
+    background: $color-magenta-primary;
+    background: linear-gradient(to right, $navbar-bg-color, $color-magenta-primary) no-repeat 0 0 / cover;
     color: white;
     position: relative;
     left: -100%;

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ConfirmAccountService} from '../../../services/confirm-account.service';
 import {UserRegisterDto} from '../../../models/UserRegisterDto';
 import {ActivatedRoute, Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'confirm-account',
@@ -14,8 +15,8 @@ export class ConfirmAccountComponent implements OnInit {
   userRegister: UserRegisterDto = new UserRegisterDto();
   token: string;
 
-  constructor(private completeAccountService: ConfirmAccountService, private route: ActivatedRoute,
-              private router: Router) {
+  constructor(private confirmAccountService: ConfirmAccountService, private route: ActivatedRoute,
+              private router: Router, private _snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -23,17 +24,25 @@ export class ConfirmAccountComponent implements OnInit {
       this.token = params['token'];
     });
 
-    this.completeAccountService.getUserDetailsByTokenId(this.token).subscribe((user: UserRegisterDto) => {
-      this.userRegister.firstName = user.firstName;
-      this.userRegister.lastName = user.lastName;
+    this.confirmAccountService.getUserDetailsByTokenId(this.token).subscribe((user: UserRegisterDto) => {
       this.userRegister.email = user.email;
       this.isConfirmed = true;
       setTimeout(() => {
+        this.openSnackBar();
         this.router.navigate(['/home']);
       }, 1000);
+
     }, error => {
       this.isConfirmed = false;
       this.router.navigate(['/login']);
+    });
+  }
+
+  openSnackBar() {
+    this._snackBar.open('Your account is verified. You are now logged in.', 'Close', {
+      duration: 5000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
     });
   }
 

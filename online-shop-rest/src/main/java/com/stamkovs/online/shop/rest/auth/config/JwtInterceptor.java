@@ -41,7 +41,7 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
     isUserLoggedIn.setPath(FORWARD_SLASH);
 
     String jwt = getJwtFromRequest(request);
-    if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
+    if (StringUtils.hasText(jwt) && tokenProvider.validateToken(request, response, jwt)) {
       Long userId = tokenProvider.getUserIdFromToken(jwt);
       UserDetails userDetails = customUserDetailsService.loadUserById(userId);
       String userAccountId = customUserDetailsService.loadUserAccountById(userId).getAccountId();
@@ -49,7 +49,8 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
         userDetails.getAuthorities());
       authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-      SecurityContextHolder.getContext().setAuthentication(authentication);isUserLoggedIn.setMaxAge(86000);
+      SecurityContextHolder.getContext().setAuthentication(authentication);
+      isUserLoggedIn.setMaxAge(86000);
       response.addCookie(isUserLoggedIn);
       log.info("User {} is logged in and authorized.", userAccountId);
     } else {

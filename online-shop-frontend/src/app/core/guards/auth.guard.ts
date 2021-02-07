@@ -15,6 +15,11 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     // ToDO: reminder to utilize guards in further development to improve flows if user is logged in or not
+    const authCookie = this.cookieService.get("is_user_logged_in");
+    if (authCookie) {
+      this.router.navigate(['/home']);
+      return false;
+    }
     return true;
   }
 }

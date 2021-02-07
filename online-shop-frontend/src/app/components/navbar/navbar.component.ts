@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import {CookieService} from 'ngx-cookie';
 import {AuthService} from '../../services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -18,11 +19,14 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   navbarMenu: HTMLElement;
   navbarLinksContainer: HTMLElement;
   navbarItems: NodeListOf<HTMLElement>;
-  subMenuMarginSeparator: number;
+  productsSubMenuMarginSeparator: number;
+  accountSubMenuMarginSeparator: number;
   screenHeight: number;
   screenWidth: number;
 
-  constructor(private cookieService: CookieService, private authService: AuthService) { }
+  constructor(private cookieService: CookieService, private authService: AuthService,
+              private router: Router) {
+  }
 
   ngOnInit() {
     this.navbar = document.getElementById('navbar');
@@ -30,8 +34,8 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     this.navbarMenu = this.navbar.querySelector('.navbar-menu');
     this.navbarLinksContainer = this.navbar.querySelector('.navbar-links');
     this.navbarItems = document.querySelectorAll('.navbar-item');
-    this.subMenuMarginSeparator = 0;
-
+    this.productsSubMenuMarginSeparator = 0;
+    this.accountSubMenuMarginSeparator = 0;
   }
 
   openMobileNavbar() {
@@ -79,16 +83,26 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   mouseEnterSubMenu(event) {
     if (this.screenWidth > 768) {
-      this.subMenuMarginSeparator = 0;
+      this.productsSubMenuMarginSeparator = 0;
+      this.accountSubMenuMarginSeparator = 0;
       return;
     }
     const clickedItem = event.target;
-    const submenu = clickedItem.querySelector('.submenu');
-    this.subMenuMarginSeparator = submenu.clientHeight;
+    const productsSubmenu = clickedItem.querySelector('.products-categories');
+    const accountSubmenu = clickedItem.querySelector('.account-categories');
+    if (productsSubmenu) {
+      this.productsSubMenuMarginSeparator = productsSubmenu.clientHeight;
+    }
+    if (accountSubmenu) {
+      this.accountSubMenuMarginSeparator = accountSubmenu.clientHeight;
+    }
   }
 
   mouseLeaveSubmenu() {
-    this.subMenuMarginSeparator = 0;
+    setTimeout(() => {
+      this.productsSubMenuMarginSeparator = 0;
+      this.accountSubMenuMarginSeparator = 0;
+    }, 200);
   }
 
   isUserLoggedIn() {
@@ -97,7 +111,8 @@ export class NavbarComponent implements OnInit, AfterViewInit {
 
   logoutFromApp() {
     this.authService.logout().subscribe((data: any) => {
-
+      this.closeMobileNavbar();
+      this.router.navigate(['/home']);
     }, error => {
 
     });

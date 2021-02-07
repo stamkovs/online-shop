@@ -15,7 +15,7 @@
     .overlay-layer {
       width: 100%;
       height: 100%;
-      background-color: rgba($color-pink-primary, 0.85);
+      background-color: rgba($color-magenta-primary, 0.85);
 
       h1 {
         font-size: 3vw;
@@ -137,7 +137,7 @@
       min-height: 34px;
       overflow: hidden;
       transition: all .2s ease-in-out;
-      background-color: $color-pink-primary;
+      background-color: $color-magenta-primary;
       color: white;
       line-height: 34px;
     }
@@ -146,7 +146,7 @@
       width: 100%;
       height: 34px;
       transition: all .2s ease-in-out;
-      background-color: $color-pink-primary;
+      background-color: $color-magenta-primary;
     }
 
     .send-text {
@@ -274,7 +274,7 @@
     }
 
     .social-media-list li:hover {
-      background-color: $color-pink-primary;
+      background-color: $color-magenta-primary;
     }
 
     .social-media-list li:hover:after {
@@ -294,7 +294,7 @@
     }
 
     hr {
-      border-color: $color-pink-primary;
+      border-color: $color-magenta-primary;
       border-top: none;
       margin: 0;
       margin-top: 1em;

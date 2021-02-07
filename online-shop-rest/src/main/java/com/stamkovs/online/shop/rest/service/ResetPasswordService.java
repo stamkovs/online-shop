@@ -1,14 +1,15 @@
 package com.stamkovs.online.shop.rest.service;
 
-import com.stamkovs.online.shop.rest.auth.model.ConfirmationToken;
+import com.stamkovs.online.shop.rest.auth.model.ResetPasswordToken;
 import com.stamkovs.online.shop.rest.auth.security.CustomUserDetailsService;
 import com.stamkovs.online.shop.rest.auth.security.TokenProvider;
 import com.stamkovs.online.shop.rest.auth.security.UserPrincipal;
-import com.stamkovs.online.shop.rest.converter.UserConverter;
 import com.stamkovs.online.shop.rest.exception.UnauthorizedRedirectException;
+import com.stamkovs.online.shop.rest.exception.UserNotFoundException;
+import com.stamkovs.online.shop.rest.model.EmailDto;
+import com.stamkovs.online.shop.rest.model.ResetPasswordDto;
 import com.stamkovs.online.shop.rest.model.UserAccount;
-import com.stamkovs.online.shop.rest.model.UserRegisterDto;
-import com.stamkovs.online.shop.rest.repository.ConfirmationTokenRepository;
+import com.stamkovs.online.shop.rest.repository.ResetPasswordTokenRepository;
 import com.stamkovs.online.shop.rest.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,69 +30,68 @@ import static com.stamkovs.online.shop.rest.model.ShopConstants.*;
 import static com.stamkovs.online.shop.rest.model.ShopConstants.FORWARD_SLASH;
 
 /**
- * Service for registering user accounts.
+ * Service for resetting user account password.
  */
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class RegisterService {
+public class ResetPasswordService {
 
-  private final UserRepository userRepository;
-  private final UserConverter userConverter;
-  private final ConfirmationTokenRepository confirmationTokenRepository;
   private final EmailSenderService emailSenderService;
+  private final UserRepository userRepository;
+  private final ResetPasswordTokenRepository resetPasswordTokenRepository;
   private final CustomUserDetailsService customUserDetailsService;
   private final TokenProvider tokenProvider;
   private final PasswordEncoder passwordEncoder;
 
-  public void registerUser(UserRegisterDto userRegisterDto) {
-    Optional<UserAccount> userAccount = userRepository.findByEmailIgnoreCase(userRegisterDto.getEmail());
+  public void resetPassword(EmailDto emailDto) {
 
-    if (userAccount.isPresent() && Boolean.TRUE.equals(userAccount.get().getEmailVerified())) {
-      log.info("User with email {} exists and is already verified", userAccount.get().getEmail());
+    Optional<UserAccount> userAccount = userRepository.findByEmailIgnoreCase(emailDto.getEmail());
+
+    if (userAccount.isEmpty() || Boolean.FALSE.equals(userAccount.get().getEmailVerified())) {
+      log.info("User with email: {} does not exists or is not verified.", emailDto.getEmail());
+      throw new UserNotFoundException("Account with email " + emailDto.getEmail() + " does not exist.");
     } else {
-      ConfirmationToken confirmationToken;
-      UserAccount account;
-      log.info("Started registration for user with email: {}.", userRegisterDto.getEmail());
-      if (userAccount.isEmpty()) {
-        UserAccount newUser = userConverter.convertUserRegisterDtoToUserAccount(userRegisterDto);
-        confirmationToken = createConfirmationToken(newUser);
-        account = newUser;
-        userRepository.save(newUser);
-      } else {
-        UserAccount existingUserAccount = userAccount.get();
-        existingUserAccount.setFirstName(userRegisterDto.getFirstName());
-        existingUserAccount.setLastName(userRegisterDto.getLastName());
-        existingUserAccount.setPassword(passwordEncoder.encode(userRegisterDto.getPassword()));
-        account = existingUserAccount;
-        userRepository.save(existingUserAccount);
-        confirmationToken = createConfirmationToken(existingUserAccount);
-      }
-      confirmationTokenRepository.save(confirmationToken);
-      SimpleMailMessage mailMessage = emailSenderService.constructAccountVerificationEmail(account,
-        confirmationToken.getConfirmationToken());
+      log.info("User with email: {} request to reset password.", userAccount.get().getEmail());
+      ResetPasswordToken resetPasswordToken;
+      resetPasswordToken = createResetPasswordToken(userAccount.get());
+      resetPasswordTokenRepository.save(resetPasswordToken);
+      SimpleMailMessage mailMessage = emailSenderService.constructResetPasswordEmail(userAccount.get(),
+        resetPasswordToken.getResetPasswordToken());
       emailSenderService.sendEmail(mailMessage);
     }
   }
 
-  public UserRegisterDto getUserDetailsByConfirmationToken(HttpServletResponse response, String confirmationToken) {
-    ConfirmationToken token =
-      confirmationTokenRepository.findByConfirmationToken(confirmationToken);
+  public ResetPasswordDto getUserDetailsByResetPasswordToken(String resetPasswordToken) {
+    ResetPasswordToken token =
+      resetPasswordTokenRepository.findByResetPasswordToken(resetPasswordToken);
     if (token == null || token.isUsed()) {
       throw new UnauthorizedRedirectException("Invalid url");
     }
-    UserRegisterDto userRegisterDto = new UserRegisterDto();
+    UserAccount userAccount = userRepository.findByAccountId(token.getUserAccountId());
+    ResetPasswordDto resetPasswordDto = new ResetPasswordDto();
+    resetPasswordDto.setEmail(userAccount.getEmail());
+
+    return resetPasswordDto;
+  }
+
+  public void updatePassword(HttpServletResponse response, String resetPasswordToken,
+                             ResetPasswordDto resetPasswordDto) {
+    ResetPasswordToken token =
+      resetPasswordTokenRepository.findByResetPasswordToken(resetPasswordToken);
+    if (token == null || token.isUsed()) {
+      throw new UnauthorizedRedirectException("Invalid url");
+    }
     UserAccount userAccount = userRepository.findByAccountId(token.getUserAccountId());
     if (userAccount != null) {
-      userRegisterDto.setEmail(userAccount.getEmail());
-      userAccount.setEmailVerified(true);
+      userAccount.setPassword(passwordEncoder.encode(resetPasswordDto.getNewPassword()));
       UserDetails userDetails = customUserDetailsService.loadUserById(userAccount.getId());
       UserPrincipal userPrincipal = new UserPrincipal();
       userPrincipal.setAuthorities(userDetails.getAuthorities());
       userPrincipal.setEmail(userAccount.getEmail());
       userPrincipal.setId(userAccount.getId());
       userPrincipal.setPassword(userAccount.getPassword());
-      confirmationTokenRepository.save(token);
+      resetPasswordTokenRepository.save(token);
 
       UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userPrincipal, null,
         userDetails.getAuthorities());
@@ -108,17 +108,15 @@ public class RegisterService {
       response.addCookie(isUserLoggedIn);
 
       token.setUsed(true);
-
     }
-    return userRegisterDto;
   }
 
-  private ConfirmationToken createConfirmationToken(UserAccount newUser) {
-    ConfirmationToken confirmationToken = new ConfirmationToken();
-    confirmationToken.setUserAccountId(newUser.getAccountId());
-    confirmationToken.setCreatedDate(new Date());
-    confirmationToken.setConfirmationToken(UUID.randomUUID().toString());
+  private ResetPasswordToken createResetPasswordToken(UserAccount userAccount) {
+    ResetPasswordToken resetPasswordToken = new ResetPasswordToken();
+    resetPasswordToken.setUserAccountId(userAccount.getAccountId());
+    resetPasswordToken.setCreatedDate(new Date());
+    resetPasswordToken.setResetPasswordToken(UUID.randomUUID().toString());
 
-    return confirmationToken;
+    return resetPasswordToken;
   }
 }

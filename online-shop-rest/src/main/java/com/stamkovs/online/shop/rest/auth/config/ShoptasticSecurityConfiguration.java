@@ -80,7 +80,7 @@ public class ShoptasticSecurityConfiguration extends WebSecurityConfigurerAdapte
 
   @Bean
   public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder(10, new SecureRandom());
+    return new BCryptPasswordEncoder(13, new SecureRandom());
   }
 
 

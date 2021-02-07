@@ -89,7 +89,7 @@ main {
   $slideTextColor: #272838;
 
   $initialBgColor: $navbar-bg-color;
-  $slideBgColor: $color-pink-primary;
+  $slideBgColor: $color-magenta-primary;
 
   color: $initialTextColor;
 
@@ -342,7 +342,7 @@ main {
       }
 
       &::selection {
-        background: $color-pink-primary; /* WebKit/Blink Browsers */
+        background: $color-magenta-primary; /* WebKit/Blink Browsers */
       }
 
       &::placeholder {
@@ -384,6 +384,10 @@ main {
       width: 30vw;
       margin: 0.8em;
       min-height: 38px;
+
+      .search__input {
+        height: 100%;
+      }
     }
   }
 
@@ -478,7 +482,7 @@ main {
   flex-direction: column;
 }
 
-.products-menu {
+.products-menu, .account-menu {
   transition: all 0.4s ease-in-out 0s;
   height: 100%;
   margin: 0 0.4em;
@@ -489,13 +493,21 @@ main {
   }
 
   &:hover {
-    .products-categories {
+    .products-categories, .account-categories {
       transform: translateY(0);
+
+      &:not(.products-categories) {
+        transform: translate(-36px, 0);
+      }
 
       @media screen and (max-width: 768px) {
         opacity: 1;
         visibility: visible;
         z-index: 1;
+
+        &:not(.products-categories) {
+          transform: translate(20px, 0);
+        }
       }
 
       li {
@@ -505,7 +517,7 @@ main {
   }
 }
 
-.products-categories {
+.products-categories, .account-categories {
   padding: 0 1em;
   background: $navbar-bg-color;
   position: absolute;
@@ -514,6 +526,10 @@ main {
   transition: .4s all ease-in;
   z-index: -1;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+
+  &:not(.products-categories) {
+    transform: translate(-36px, -125%);
+  }
 
   .navbar-link {
     justify-content: flex-start;
@@ -525,5 +541,9 @@ main {
     opacity: 0;
     transform: translateY(0);
     box-shadow: none;
+
+    &:not(.products-categories) {
+      transform: translate(-36px, 0);
+    }
   }
 }

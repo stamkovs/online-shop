@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
 import {WindowService} from './window.service';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {UserLoginDto} from '../models/UserLoginDto';
+import {EmailDto} from '../models/EmailDto';
 
 @Injectable()
 export class AuthService {
@@ -42,6 +44,10 @@ export class AuthService {
 
   isLoggedIn(): Observable<any> {
     return this.http.get('auth/isLoggedIn');
+  }
+
+  login(userLoginDto: UserLoginDto): Observable<any> {
+    return this.http.post('auth/login', userLoginDto);
   }
 
   logout(): Observable<any> {
@@ -99,6 +105,10 @@ export class AuthService {
         }
       }
     }, intervalLength);
+  }
+
+  forgotPassword(emailDto: EmailDto): Observable<any> {
+    return this.http.post('auth/forgot-password', emailDto);
   }
 
 }

@@ -35,7 +35,7 @@ public class LoginService {
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
 
-  public void loginUser(UserLoginDto userLoginDto, HttpServletResponse response) throws UserNotFoundException {
+  public void loginUser(HttpServletResponse response, UserLoginDto userLoginDto) throws UserNotFoundException {
 
     Optional<UserAccount> optionalUserAccount = userRepository.findByEmailIgnoreCase(userLoginDto.getEmail());
     if (optionalUserAccount.isPresent() && passwordEncoder.matches(userLoginDto.getPassword(),
@@ -58,6 +58,8 @@ public class LoginService {
       isUserLoggedIn.setPath(FORWARD_SLASH);
       isUserLoggedIn.setMaxAge(86000);
       response.addCookie(isUserLoggedIn);
+    } else {
+      throw new UserNotFoundException("Invalid email or password.");
     }
   }
 }

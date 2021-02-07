@@ -19,7 +19,7 @@
           <p>Please provide a valid email address.</p>
         </div>
         <input type="password" name="password" placeholder="Password" [ngModel]="password" data-strength class=""
-               (ngModelChange)="passwordModelChange($event)" (focus)="focusPasswordField()" (blur)="onBlur()"/>
+               (ngModelChange)="passwordModelChange($event)" (focus)="focusPasswordField()" (blur)="onBlurPasswordStrength()"/>
         <div id="password-strength-wrapper" class="strength">
           <span class="block">Password Strength: <span class="password-strength-status-text {{textColor}}">{{passwordStrengthText}}</span></span>
           <span class="block" id="password-strength-bar"></span></div>
@@ -31,7 +31,7 @@
         <div *ngIf="showVerifyEmailMessage">
           <p>{{verifyEmailMessage}} <a class="resend" (click)="resendEmail()">Resend</a></p>
         </div>
-        <button [disabled]="disabled" [ngClass]="{'disabled': disabled}" class="sign-up-button">Sign Up</button>
+        <button [disabled]="signUpDisabled" [ngClass]="{'disabled': signUpDisabled}" class="sign-up-button">Sign Up</button>
 
         <div class="signIn-mobile">
           <p>Already have an account? <a id="signIn-mobile">Sign in.</a></p>
@@ -39,7 +39,7 @@
       </form>
     </div>
     <div class="form-container sign-in-container">
-      <form action="#" onsubmit="return false;" autocomplete="off">
+      <form (submit)="loginUser()" autocomplete="off" novalidate>
         <h2>Sign in to Shoptastic</h2>
 
         <div class="social-login">
@@ -50,10 +50,15 @@
         </div>
         <p class="gray"> or </p>
 
-        <input type="email" name="email" placeholder="Email"/>
-        <input type="password" name="password" placeholder="Password" autocomplete="new-password"/>
-        <a>Forgot your password?</a>
-        <button>Sign In</button>
+        <input type="email" name="email" placeholder="Email" [ngModel]="userEmail" #email="ngModel" email required
+               (ngModelChange)="emailModelChange($event)" (focus)="emailFocusLogin()"/>
+        <input type="password" name="password" placeholder="Password" [ngModel]="password" data-strength class=""
+               (ngModelChange)="passwordModelChange($event)" (focus)="focusPasswordField()"/>
+        <div *ngIf="showLoginErrorMessage">
+          <p class="text-warning">{{loginErrorMessageText}}</p>
+        </div>
+        <a (click)="forgotPasswordDialog()">Forgot your password?</a>
+        <button [disabled]="signInDisabled" [ngClass]="{'disabled': signInDisabled}" class="sign-up-button">Sign In</button>
         <div class="signUp-mobile">
           <p>Don't have an account? <a id="signUp-mobile">Sign up.</a></p>
         </div>

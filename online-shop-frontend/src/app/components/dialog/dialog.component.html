@@ -1,0 +1,28 @@
+<div class="dialog-component-wrapper">
+  <i class="fas fa-user-lock"></i>
+  <h2 mat-dialog-title>{{description}}</h2>
+  <hr>
+  <mat-dialog-content>
+    <p>{{longDescription}}</p>
+    <mat-form-field color="accent">
+      <input matInput [autofocus]="true" [ngModel]="userInput" (ngModelChange)="validateInput($event)"
+             placeholder="{{placeholder}}">
+    </mat-form-field>
+    <div class="error-message" *ngIf="userInput !== '' && !userInputValid">
+      <p>{{userInputValidationMessage}}</p>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button class="mat-raised-button mat-primary"
+            (click)="submit()" [disabled]=buttonDisabled>
+      {{buttonText}}
+    </button>
+  </mat-dialog-actions>
+
+  <mat-dialog-actions class="close-icon-wrapper">
+    <button mat-icon-button class="close-button" [mat-dialog-close]="true" [autofocus]="false">
+      <mat-icon class="close-icon" color="warn">close</mat-icon>
+    </button>
+  </mat-dialog-actions>
+</div>

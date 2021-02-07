@@ -17,7 +17,6 @@ const homeRoutes: Routes = [
     path: 'home',
     component: HomeComponent,
     data: {animationState: 'One'},
-    canActivate: [AuthGuard]
   },
   {
     path: 'products',
@@ -32,7 +31,8 @@ const homeRoutes: Routes = [
   {
     path: 'entry',
     component: EntryComponent,
-    data: { animationState: 'Four' }
+    data: { animationState: 'Four' },
+    canActivate:[AuthGuard]
   }
 ];
 

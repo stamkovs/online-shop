@@ -32,12 +32,23 @@ public class AuthController {
   private final LoginService loginService;
   private final LogoutService logoutService;
 
+  /**
+   * Log in the user account.
+   *
+   * @param response {@link HttpServletResponse}.
+   * @param userLoginDto {@link UserLoginDto}.
+   *
+   * @return {@link ResponseEntity}.
+   */
   @PostMapping(value = "/login")
-  public ResponseEntity<Object> registerUser(@RequestBody UserLoginDto userLoginDto, HttpServletResponse response) {
-    loginService.loginUser(userLoginDto, response);
+  public ResponseEntity<Object> loginUserAccount(HttpServletResponse response, @RequestBody UserLoginDto userLoginDto) {
+    loginService.loginUser(response, userLoginDto);
     return new ResponseEntity<>(HttpStatus.OK);
   }
 
+  /**
+   * Get the OAuth endpoints.
+   */
   @GetMapping("/login/oauthEndpoints")
   public Map<String, String> endpoints() {
     Map<String, String> oauthEndpoints = new HashMap<>();
@@ -47,11 +58,20 @@ public class AuthController {
     return oauthEndpoints;
   }
 
+  /**
+   * Check if user is logged in, logic in {@link com.stamkovs.online.shop.rest.auth.config.JwtInterceptor}.
+   */
   @GetMapping("/isLoggedIn")
-  public void isLoggedIn(HttpServletRequest request) {
+  public void isLoggedIn() {
 //    needed to intercept requests to check if user is logged in or anonymous
   }
 
+  /**
+   * Logout the user account.
+   *
+   * @param request {@link HttpServletRequest}.
+   * @param response {@link HttpServletResponse}.
+   */
   @GetMapping("/logout")
   public void logout(HttpServletRequest request, HttpServletResponse response) {
     logoutService.logoutUser(request, response);
