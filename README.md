@@ -19,17 +19,18 @@ An online shop application project developed for my graduate thesis with some se
 #### 🎨 Functionalities ![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
 ---
 * Database migration (Flyway) :heavy_check_mark:
-* OAuth2.0 Authorization and Authentication with OpenID Connect identity layer
+* OAuth2.0 Authorization and Authentication with OpenID Connect identity layer :heavy_check_mark:
    * Login with Google :heavy_check_mark:
    * Login with Facebook :heavy_check_mark:
 * JSON Web Tokens :heavy_check_mark: 
 * Register by sending confirmation token via email :heavy_check_mark:
    * Password protection with BCrypt hashing and salting :heavy_check_mark:
    * Scheduled job to clear expired confirmation tokens from db
-* Login, Forgot password flows 
+* Login, Forgot password flows :heavy_check_mark:
 * Role based access control
 * View, search, add, edit various products
-* Dark mode
+* Dark mode :heavy_check_mark:
+* Light mode
 * Swagger API ❓ (Optional if time available)
 * Spring Boot actuator health checks
 * 💳 Buy products ❓  (Optional if time available - with Stripe payment gateway) 
