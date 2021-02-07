@@ -55,9 +55,9 @@ public class ShoptasticExceptionHandler {
    *
    * @return {@link ResponseEntity}.
    */
-  @ExceptionHandler(UserNotFoundException.class)
+  @ExceptionHandler({UserNotFoundException.class, UserAlreadyExistsException.class})
   @ResponseStatus(BAD_REQUEST)
-  public ResponseEntity<?> handleBadRequestException(UserNotFoundException e) {
+  public ResponseEntity<?> handleBadRequestException(RuntimeException e) {
     log.error("{} ({})", e.getClass().getSimpleName(), e.getMessage(), e);
     return new ResponseEntity<>(e.getMessage(), BAD_REQUEST);
   }

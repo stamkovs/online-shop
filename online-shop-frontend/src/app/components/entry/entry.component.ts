@@ -33,6 +33,7 @@ export class EntryComponent implements OnInit {
   signInDisabled: boolean = true;
   passwordMismatch: boolean = null;
   showVerifyEmailMessage: boolean = false;
+  showEmailRegisterErrorMessage: boolean = false;
   verifyEmailMessage: string = '';
   firstNameValid: boolean = false;
   lastNameValid: boolean = false;
@@ -122,10 +123,16 @@ export class EntryComponent implements OnInit {
   registerUserAccount(message: string) {
     this.entryService.registerUser(this.userRegister).subscribe(() => {
       this.showVerifyEmailMessage = true;
+      this.showEmailRegisterErrorMessage = false;
       this.verifyEmailMessage = message;
     }, error => {
       this.showVerifyEmailMessage = false;
-      this.verifyEmailMessage = 'An error occured. ' + error;
+      this.showEmailRegisterErrorMessage = true;
+      if (error) {
+        this.verifyEmailMessage = error;
+      } else {
+        this.verifyEmailMessage = 'An unexpected error occured.';
+      }
     });
   }
 
@@ -140,6 +147,7 @@ export class EntryComponent implements OnInit {
     this.confirmPassword = '';
     this.showLoginErrorMessage = false;
     this.showVerifyEmailMessage = false;
+    this.showEmailRegisterErrorMessage = false;
     this.passwordStrengthText = '';
     this.strength = 0;
   }

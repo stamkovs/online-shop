@@ -1,13 +1,13 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { CommonModule} from '@angular/common';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { AppComponent } from './app.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { HomeComponent } from './components/home/home.component';
-import { EntryComponent } from './components/entry/entry.component';
-import { ProductListComponent } from './components/product-list/product-list.component';
-import { ContactComponent } from './components/contact/contact.component';
+import {AppComponent} from './app.component';
+import {NavbarComponent} from './components/navbar/navbar.component';
+import {HomeComponent} from './components/home/home.component';
+import {EntryComponent} from './components/entry/entry.component';
+import {ProductListComponent} from './components/product-list/product-list.component';
+import {ContactComponent} from './components/contact/contact.component';
 import {ConfirmAccountComponent} from './components/entry/confirm-account/confirm-account.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {EntryService} from './services/entry.service';
@@ -18,7 +18,7 @@ import {ErrorInterceptor} from './core/interceptor/error.interceptor';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {WindowService} from './services/window.service';
 import {ConfirmAccountService} from './services/confirm-account.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
 import {DialogComponent} from './components/dialog/dialog.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -28,6 +28,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
 import {ForgotPasswordService} from './services/forgot-password.service';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {SpinnerService} from './services/SpinnerService';
+import {HttpRequestInterceptor} from './core/interceptor/http-request-interceptor.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     ContactComponent,
     ConfirmAccountComponent,
     DialogComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -55,15 +60,22 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatSnackBarModule],
-  providers: [AuthService, WindowService, EntryService, ConfirmAccountService, ForgotPasswordService,
+    MatSnackBarModule,
+    MatProgressSpinnerModule],
+  providers: [AuthService, WindowService, EntryService, ConfirmAccountService, ForgotPasswordService, SpinnerService,
     {
-     provide: HTTP_INTERCEPTORS,
-     useClass: ErrorInterceptor,
-     multi: true
-    }
-    ],
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpRequestInterceptor,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent],
   entryComponents: [DialogComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

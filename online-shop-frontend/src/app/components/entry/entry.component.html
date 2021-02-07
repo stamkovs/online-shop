@@ -31,6 +31,9 @@
         <div *ngIf="showVerifyEmailMessage">
           <p>{{verifyEmailMessage}} <a class="resend" (click)="resendEmail()">Resend</a></p>
         </div>
+        <div *ngIf="showEmailRegisterErrorMessage">
+          <p>{{verifyEmailMessage}}</p>
+        </div>
         <button [disabled]="signUpDisabled" [ngClass]="{'disabled': signUpDisabled}" class="sign-up-button">Sign Up</button>
 
         <div class="signIn-mobile">

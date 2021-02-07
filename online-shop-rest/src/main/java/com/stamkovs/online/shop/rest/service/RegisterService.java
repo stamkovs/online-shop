@@ -6,6 +6,7 @@ import com.stamkovs.online.shop.rest.auth.security.TokenProvider;
 import com.stamkovs.online.shop.rest.auth.security.UserPrincipal;
 import com.stamkovs.online.shop.rest.converter.UserConverter;
 import com.stamkovs.online.shop.rest.exception.UnauthorizedRedirectException;
+import com.stamkovs.online.shop.rest.exception.UserAlreadyExistsException;
 import com.stamkovs.online.shop.rest.model.UserAccount;
 import com.stamkovs.online.shop.rest.model.UserRegisterDto;
 import com.stamkovs.online.shop.rest.repository.ConfirmationTokenRepository;
@@ -20,6 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.Optional;
@@ -49,6 +51,8 @@ public class RegisterService {
 
     if (userAccount.isPresent() && Boolean.TRUE.equals(userAccount.get().getEmailVerified())) {
       log.info("User with email {} exists and is already verified", userAccount.get().getEmail());
+      throw new UserAlreadyExistsException("User with email " + userAccount.get().getEmail() + " exists and is " +
+        "verified.");
     } else {
       ConfirmationToken confirmationToken;
       UserAccount account;
@@ -74,7 +78,7 @@ public class RegisterService {
     }
   }
 
-  public UserRegisterDto getUserDetailsByConfirmationToken(HttpServletResponse response, String confirmationToken) {
+  public UserRegisterDto getUserDetailsByConfirmationToken(HttpServletRequest request, HttpServletResponse response, String confirmationToken) {
     ConfirmationToken token =
       confirmationTokenRepository.findByConfirmationToken(confirmationToken);
     if (token == null || token.isUsed()) {
@@ -85,7 +89,7 @@ public class RegisterService {
     if (userAccount != null) {
       userRegisterDto.setEmail(userAccount.getEmail());
       userAccount.setEmailVerified(true);
-      UserDetails userDetails = customUserDetailsService.loadUserById(userAccount.getId());
+      UserDetails userDetails = customUserDetailsService.loadUserById(request, response, userAccount.getId());
       UserPrincipal userPrincipal = new UserPrincipal();
       userPrincipal.setAuthorities(userDetails.getAuthorities());
       userPrincipal.setEmail(userAccount.getEmail());

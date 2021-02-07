@@ -43,7 +43,7 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
     String jwt = getJwtFromRequest(request);
     if (StringUtils.hasText(jwt) && tokenProvider.validateToken(request, response, jwt)) {
       Long userId = tokenProvider.getUserIdFromToken(jwt);
-      UserDetails userDetails = customUserDetailsService.loadUserById(userId);
+      UserDetails userDetails = customUserDetailsService.loadUserById(request, response, userId);
       String userAccountId = customUserDetailsService.loadUserAccountById(userId).getAccountId();
       UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null,
         userDetails.getAuthorities());

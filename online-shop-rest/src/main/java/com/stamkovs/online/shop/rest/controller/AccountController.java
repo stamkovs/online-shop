@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -45,8 +46,8 @@ public class AccountController {
    * @return {@link UserRegisterDto}.
    */
   @GetMapping(value = "/confirm-account")
-  public UserRegisterDto confirmUserAccount(HttpServletResponse response, @RequestParam String confirmationToken) {
-    return registerService.getUserDetailsByConfirmationToken(response, confirmationToken);
+  public UserRegisterDto confirmUserAccount(HttpServletRequest request, HttpServletResponse response, @RequestParam String confirmationToken) {
+    return registerService.getUserDetailsByConfirmationToken(request, response, confirmationToken);
   }
 
   /**
@@ -82,10 +83,10 @@ public class AccountController {
    * @param resetPasswordToken the reset password token.
    */
   @PutMapping(value = "/update-password")
-  public ResponseEntity<Object> updatePassword(HttpServletResponse response,
+  public ResponseEntity<Object> updatePassword(HttpServletRequest request, HttpServletResponse response,
                                                @RequestBody ResetPasswordDto resetPasswordDto,
                                                @RequestParam String resetPasswordToken) {
-    resetPasswordService.updatePassword(response, resetPasswordToken, resetPasswordDto);
+    resetPasswordService.updatePassword(request, response, resetPasswordToken, resetPasswordDto);
     return new ResponseEntity<>(HttpStatus.OK);
   }
 

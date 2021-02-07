@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.util.Optional;
@@ -35,13 +36,13 @@ public class LoginService {
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
 
-  public void loginUser(HttpServletResponse response, UserLoginDto userLoginDto) throws UserNotFoundException {
+  public void loginUser(HttpServletRequest request, HttpServletResponse response, UserLoginDto userLoginDto) throws UserNotFoundException {
 
     Optional<UserAccount> optionalUserAccount = userRepository.findByEmailIgnoreCase(userLoginDto.getEmail());
     if (optionalUserAccount.isPresent() && passwordEncoder.matches(userLoginDto.getPassword(),
       optionalUserAccount.get().getPassword())) {
       UserAccount userAccount = optionalUserAccount.get();
-      UserDetails userDetails = customUserDetailsService.loadUserById(userAccount.getId());
+      UserDetails userDetails = customUserDetailsService.loadUserById(request, response, userAccount.getId());
       UserPrincipal userPrincipal = new UserPrincipal();
       userPrincipal.setAuthorities(userDetails.getAuthorities());
       passwordEncoder.matches(userLoginDto.getPassword(), userAccount.getPassword());

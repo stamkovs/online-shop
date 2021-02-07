@@ -21,6 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.Optional;
@@ -75,7 +76,7 @@ public class ResetPasswordService {
     return resetPasswordDto;
   }
 
-  public void updatePassword(HttpServletResponse response, String resetPasswordToken,
+  public void updatePassword(HttpServletRequest request, HttpServletResponse response, String resetPasswordToken,
                              ResetPasswordDto resetPasswordDto) {
     ResetPasswordToken token =
       resetPasswordTokenRepository.findByResetPasswordToken(resetPasswordToken);
@@ -85,7 +86,7 @@ public class ResetPasswordService {
     UserAccount userAccount = userRepository.findByAccountId(token.getUserAccountId());
     if (userAccount != null) {
       userAccount.setPassword(passwordEncoder.encode(resetPasswordDto.getNewPassword()));
-      UserDetails userDetails = customUserDetailsService.loadUserById(userAccount.getId());
+      UserDetails userDetails = customUserDetailsService.loadUserById(request, response, userAccount.getId());
       UserPrincipal userPrincipal = new UserPrincipal();
       userPrincipal.setAuthorities(userDetails.getAuthorities());
       userPrincipal.setEmail(userAccount.getEmail());

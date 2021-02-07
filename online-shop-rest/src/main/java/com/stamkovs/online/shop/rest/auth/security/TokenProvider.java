@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.stamkovs.online.shop.rest.model.ShopConstants.AUTHORIZATION;
+import static com.stamkovs.online.shop.rest.model.ShopConstants.IS_USER_LOGGED_IN;
 
 /**
  * Service for the creating and validating the token.
@@ -58,6 +59,7 @@ public class TokenProvider {
     } catch (ExpiredJwtException e) {
       log.info("Revoking expired JWT token.");
       CookieUtils.deleteCookie(request, response, AUTHORIZATION);
+      CookieUtils.deleteCookie(request, response, IS_USER_LOGGED_IN);
       return false;
     }
     return true;
