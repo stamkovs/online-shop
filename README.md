@@ -6,8 +6,6 @@ An online shop application project developed for my graduate thesis with some se
 ---
 ![Shoptastic-contactUs-page](https://user-images.githubusercontent.com/17550473/102817446-1769cb80-43d0-11eb-9796-ec49323c7d11.PNG)
 
-<br/>
-<br/>
 #### Table of contents 📝
 ---
 - [Functionalities](#-Functionalities-)
@@ -18,10 +16,7 @@ An online shop application project developed for my graduate thesis with some se
 - [License](#-license%EF%B8%8F) 
 
 <br/>
-<br/>
-<br/>
-<br/>
-<br/>
+
 #### 🎨 Functionalities ![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
 ---
 * Database migration (Flyway) :heavy_check_mark:
