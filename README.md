@@ -270,7 +270,6 @@ Now what values should we set for these?
    
 ---
 
-<br/>
 
 ##### Configuration for the spring mail sender
 
@@ -291,7 +290,7 @@ add a name by your choice. Then you will receive a password which you will copy 
 
 ![google-email-setup](https://user-images.githubusercontent.com/17550473/107587301-befdc000-6c01-11eb-972c-ad64e800bde7.PNG)
 
-Resources on this:
+Resources on this: <br/>
 https://support.google.com/mail/answer/185833?hl=en-GB <br/>
 https://devanswers.co/create-application-specific-password-gmail/ <br/>
 https://www.lifewire.com/get-a-password-to-access-gmail-by-pop-imap-2-1171882 <br/>
