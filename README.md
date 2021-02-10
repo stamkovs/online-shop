@@ -274,6 +274,28 @@ Now what values should we set for these?
 
 ##### Configuration for the spring mail sender
 
+In application.properties we need to set the following two properties (the others are already set):
+>
+spring.mail.username=\
+spring.mail.password=\
+>
+Basically you need to add an email, and its password. However you still need to change some settings on your email, depending on the email provider.
+In my case I used google, so there are two ways to allow sending emails via an application. The first and the NOT recommended way is via allow less secure apps access.
+Resources to read or configure this if you choose so:
+https://support.google.com/accounts/answer/6010255?hl=en#zippy=%2Cuse-more-secure-apps <br/>
+https://hotter.io/docs/email-accounts/secure-app-gmail/ <br/>
+https://devanswers.co/allow-less-secure-apps-access-gmail-account/
+
+However, the **prefered way** is to use 2-Step Verification when Signing in to Google, and create an App password by clicking on the Select App dropdown, and
+add a name by your choice. Then you will receive a password which you will copy in the application.properties for spring.mail.password property.
+
+![google-email-setup](https://user-images.githubusercontent.com/17550473/107587301-befdc000-6c01-11eb-972c-ad64e800bde7.PNG)
+
+Resources on this:
+https://support.google.com/mail/answer/185833?hl=en-GB <br/>
+https://devanswers.co/create-application-specific-password-gmail/ <br/>
+https://www.lifewire.com/get-a-password-to-access-gmail-by-pop-imap-2-1171882 <br/>
+
 
 ---
 
