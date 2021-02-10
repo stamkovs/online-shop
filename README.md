@@ -206,7 +206,7 @@ For the social logins we need to set the following properties:
 \
 spring.security.oauth2.client.registration.google.clientId=\
 spring.security.oauth2.client.registration.google.clientSecret=\
-spring.security.oauth2.client.registration.facebook.clientId=
+spring.security.oauth2.client.registration.facebook.clientId=\
 spring.security.oauth2.client.registration.facebook.clientSecret=
 >
 
