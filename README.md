@@ -7,6 +7,7 @@ An online shop application project developed for my graduate thesis with some se
 ![Shoptastic-contactUs-page](https://user-images.githubusercontent.com/17550473/102817446-1769cb80-43d0-11eb-9796-ec49323c7d11.PNG)
 
 
+
 #### Table of contents 📝
 ---
 - [Functionalities](#-Functionalities-)
@@ -15,6 +16,8 @@ An online shop application project developed for my graduate thesis with some se
   - [Backend](#Backend)
   - [Frontend](#Frontend)
 - [License](#-license%EF%B8%8F) 
+
+
 
 #### 🎨 Functionalities ![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
 ---
@@ -46,6 +49,9 @@ An online shop application project developed for my graduate thesis with some se
      * Besides emulators, tested on real iPhone 11 Pro device on:
        * Safari mobile browser :heavy_check_mark:
        * Chrome mobile browser :heavy_check_mark:
+       
+       
+       
 #### 🧰 Technologies and tools used 🔨
 ---
 * Spring Boot
@@ -56,8 +62,13 @@ An online shop application project developed for my graduate thesis with some se
 * Mockito
 * Angular (#Todo)
 * HTML5 and CSS3
+
+
+
+
 #### 🚀 Project setup 
 ---
+
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;Backend
 After cloning, import all the dependencies and do a maven clean install.
@@ -66,6 +77,8 @@ If you dont have JDK 11 installed, download it from **[Oracle](https://www.oracl
 
 If you have MSSQL Server Management Studio already installed and you have experience using it, then skip to the following section [Creating the database](#Creating-the-database).
 
+
+
 ##### Installing mssql server connection with Microsoft SQL executable tools
 If your system has limited permissions then you can try the [docker setup](#Creating-the-mssql-server-connection-with-Docker) solution explained below and skip this section.
 
@@ -73,6 +86,8 @@ Depending on the OS you are using you need to install the correct version of SQL
 Note that during installation for Sql Express, for the instance name it would be best if you enter "localhost" without the quotes, and do a mixed mode with a strong password which will be later used to connect via management studio. Detailed Instructions are available on this [link](https://www.sqlshack.com/how-to-install-sql-server-2014-management-studio/), and this link [here](https://www.eukhost.com/kb/how-to-install-microsoft-sql-server-express-2014/). 
 
 For Windows 10 you can install the latest SSMS from [here](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15).
+
+
 
 ##### Creating the mssql server connection with Docker
 This section is in case you were restricted to create your own connection and database via mssql studio.
@@ -120,6 +135,8 @@ There are few ways to setup this configuration.
 2020-10-12 11:52:20.90 spid8s      Recovery is complete. This is an informational message only. No user action is required.
 ```
 That means that the connection is setup correctly with the password you specified in the docker-compose.yml file. 
+
+
 
 ##### Creating the database
 Assuming you have successfully created the mssql connection, next we need to create the database. For that we will open Microsoft SQL Server Management Studio and we will connect to our new connection with the following properties:
@@ -183,6 +200,8 @@ Process finished with exit code 0
 Now the same thing needs to be done i.e to copy all those environment variables from the DbMigrationApplication.xml to the OnlineShopApplication.xml .
 
 
+
+
 ##### Configuring the OAuth Social logins
 
 For the social logins we need to set the following properties:
@@ -198,6 +217,7 @@ spring.security.oauth2.client.registration.facebook.clientSecret=
 Now what values should we set for these?
 - Well the tokenSecret can be whatever you want and is needed to sign the JWT
 - The other properties however, you will first need to create your own developer accounts for google sign-in and facebook sign-in.
+
 
    ###### Google
    
@@ -225,8 +245,8 @@ Now what values should we set for these?
    Save the changes, and you will receive your google ClientID, and Client Secret, which you will need to add in application.properties
 
 
+
    ###### Facebook
-   
    
    For facebook you will need to open this [link](https://developers.facebook.com/apps/).
    Once you are logged in you should see the green Create App button. Click on it and select the option Build Connected Experiences and click Continue.
@@ -246,23 +266,28 @@ Now what values should we set for these?
 
    And thats it. The Advanced settings are not needed.
    
-   Additional resources on how to setup App for facebook login:
-   [https://magefan.com/blog/create-facebook-application](https://magefan.com/blog/create-facebook-application)
+   Additional resources on how to setup App for facebook login:\
    https://magefan.com/blog/create-facebook-application
-   [https://www.codexworld.com/create-facebook-app-id-app-secret/](https://www.codexworld.com/create-facebook-app-id-app-secret/)
-   [https://www.knowband.com/blog/mobile-app/create-facebook-app-for-facebook-login-authentication/](https://www.knowband.com/blog/mobile-app/create-facebook-app-for-facebook-login-authentication/)
-   
+   https://www.codexworld.com/create-facebook-app-id-app-secret/
+   https://www.knowband.com/blog/mobile-app/create-facebook-app-for-facebook-login-authentication/
    
 ---
+
 
 ##### Configuration the spring mail sender
 
+
 ---
 
+
 #### &nbsp;&nbsp;&nbsp;&nbsp;Frontend
+
 ---
+
 &nbsp;
+
 #### 📜 License️
+
 ---
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
