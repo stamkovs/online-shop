@@ -66,7 +66,7 @@ An online shop application project developed for my graduate thesis with some se
 #### 🚀 Project setup 
 ---
 
-</br/>
+<br/>
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;Backend
 After cloning, import all the dependencies and do a maven clean install.
