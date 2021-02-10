@@ -48,8 +48,8 @@ An online shop application project developed for my graduate thesis with some se
        * Safari mobile browser :heavy_check_mark:
        * Chrome mobile browser :heavy_check_mark:
        
-       
-       
+<br/>       
+
 #### 🧰 Technologies and tools used 🔨
 ---
 * Spring Boot
@@ -61,12 +61,12 @@ An online shop application project developed for my graduate thesis with some se
 * Angular (#Todo)
 * HTML5 and CSS3
 
-
-
+<br/>
 
 #### 🚀 Project setup 
 ---
 
+</br/>
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;Backend
 After cloning, import all the dependencies and do a maven clean install.
@@ -75,7 +75,7 @@ If you dont have JDK 11 installed, download it from **[Oracle](https://www.oracl
 
 If you have MSSQL Server Management Studio already installed and you have experience using it, then skip to the following section [Creating the database](#Creating-the-database).
 
-
+<br/>
 
 ##### Installing mssql server connection with Microsoft SQL executable tools
 If your system has limited permissions then you can try the [docker setup](#Creating-the-mssql-server-connection-with-Docker) solution explained below and skip this section.
@@ -85,7 +85,7 @@ Note that during installation for Sql Express, for the instance name it would be
 
 For Windows 10 you can install the latest SSMS from [here](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15).
 
-
+<br/>
 
 ##### Creating the mssql server connection with Docker
 This section is in case you were restricted to create your own connection and database via mssql studio.
@@ -134,7 +134,7 @@ There are few ways to setup this configuration.
 ```
 That means that the connection is setup correctly with the password you specified in the docker-compose.yml file. 
 
-
+<br/>
 
 ##### Creating the database
 Assuming you have successfully created the mssql connection, next we need to create the database. For that we will open Microsoft SQL Server Management Studio and we will connect to our new connection with the following properties:
@@ -197,8 +197,7 @@ Process finished with exit code 0
 
 Now the same thing needs to be done i.e to copy all those environment variables from the DbMigrationApplication.xml to the OnlineShopApplication.xml .
 
-
-
+<br/>
 
 ##### Configuring the OAuth Social logins
 
@@ -216,6 +215,7 @@ Now what values should we set for these?
 - Well the tokenSecret can be whatever you want and is needed to sign the JWT
 - The other properties however, you will first need to create your own developer accounts for google sign-in and facebook sign-in.
 
+<br/>
 
    ###### Google
    
@@ -242,7 +242,7 @@ Now what values should we set for these?
 
    Save the changes, and you will receive your google ClientID, and Client Secret, which you will need to add in application.properties
 
-
+<br/>
 
    ###### Facebook
    
@@ -271,18 +271,20 @@ Now what values should we set for these?
    
 ---
 
+<br/>
 
 ##### Configuration the spring mail sender
 
 
 ---
 
+<br/>
 
 #### &nbsp;&nbsp;&nbsp;&nbsp;Frontend
 
 ---
 
-&nbsp;
+<br/>
 
 #### 📜 License️
 
