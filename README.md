@@ -217,7 +217,7 @@ Now what values should we set for these?
 
 <br/>
 
-   ###### Google
+   ##### Google
    
    For google, open this [link](https://console.developers.google.com/) and google provides support with instructions [here](https://support.google.com/cloud/answer/6158849?hl=en#zippy=)
 
@@ -244,7 +244,7 @@ Now what values should we set for these?
 
 <br/>
 
-   ###### Facebook
+   ##### Facebook
    
    For facebook you will need to open this [link](https://developers.facebook.com/apps/).
    Once you are logged in you should see the green Create App button. Click on it and select the option Build Connected Experiences and click Continue.
@@ -265,9 +265,9 @@ Now what values should we set for these?
    And thats it. The Advanced settings are not needed.
    
    Additional resources on how to setup App for facebook login:\
-   https://magefan.com/blog/create-facebook-application
-   https://www.codexworld.com/create-facebook-app-id-app-secret/
-   https://www.knowband.com/blog/mobile-app/create-facebook-app-for-facebook-login-authentication/
+   https://magefan.com/blog/create-facebook-application <br/>
+   https://www.codexworld.com/create-facebook-app-id-app-secret/ <br/>
+   https://www.knowband.com/blog/mobile-app/create-facebook-app-for-facebook-login-authentication/ <br/>
    
 ---
 
