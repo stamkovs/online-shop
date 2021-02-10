@@ -203,10 +203,9 @@ Now the same thing needs to be done i.e to copy all those environment variables 
 
 For the social logins we need to set the following properties:
 >app.oauth.tokenSecret=\
-
+<br/>
 spring.security.oauth2.client.registration.google.clientId=\
 spring.security.oauth2.client.registration.google.clientSecret=\
-
 spring.security.oauth2.client.registration.facebook.clientId=
 spring.security.oauth2.client.registration.facebook.clientSecret=
 >
@@ -273,7 +272,7 @@ Now what values should we set for these?
 
 <br/>
 
-##### Configuration the spring mail sender
+##### Configuration for the spring mail sender
 
 
 ---
