@@ -185,6 +185,74 @@ Now the same thing needs to be done i.e to copy all those environment variables 
 
 ##### Configuring the OAuth Social logins
 
+For the social logins we need to set the following properties:
+>app.oauth.tokenSecret=\
+
+spring.security.oauth2.client.registration.google.clientId=\
+spring.security.oauth2.client.registration.google.clientSecret=\
+
+spring.security.oauth2.client.registration.facebook.clientId=
+spring.security.oauth2.client.registration.facebook.clientSecret=
+>
+
+Now what values should we set for these?
+- Well the tokenSecret can be whatever you want and is needed to sign the JWT
+- The other properties however, you will first need to create your own developer accounts for google sign-in and facebook sign-in.
+
+   ###### Google
+   
+   For google, open this [link](https://console.developers.google.com/) and google provides support with instructions [here](https://support.google.com/cloud/answer/6158849?hl=en#zippy=)
+
+   Anyways, once you open the first link, you should see something like this:
+   ![console-developers-google](https://user-images.githubusercontent.com/17550473/107443282-d6bd4180-6b38-11eb-945a-c25500cc1786.PNG)
+   Then click on the arrow to create a new project and name it by your choice.
+   After the project is created, you need to click the OAuth consent screen on the left sidebar.
+   You can name the app and user support email freely.
+   The Application home page should be set to: http://localhost:8100/home
+   Also you can add an Application privacy policy link, for example: https://www.privacypolicygenerator.info/live.php?token=gF3bqGg7XVtgMg0NM0fcSfvYxlaqjiJ5 , 
+   and the domain from the privacy policy (privacypolicygenerator.info) must be added to Authorized domains.
+   Developer contact information is up to you to choose.
+
+   The next step is to add the scopes. Here you will add all the non-sensitive ones i.e. the email, profile, and openid.
+   ![googleScopes](https://user-images.githubusercontent.com/17550473/107444679-4f250200-6b3b-11eb-956e-dc285c42958f.PNG)
+
+   Save it and continue to next step where you can choose whether to add test user or not. Then save and continue and your OAuth consent screen is done.
+
+   Now, you need to click on the Credentials menu on the left sidebar, and then click the create credentials blue button, and choose the option OAuth Client ID.
+   You will be asked to choose application type, and select Web application. As for the other fields you can populate them like in the following screenshot:
+   ![google-credentials-oauth-client](https://user-images.githubusercontent.com/17550473/107444913-c8245980-6b3b-11eb-80c5-f4fc0d725fc2.PNG)
+
+   Save the changes, and you will receive your google ClientID, and Client Secret, which you will need to add in application.properties
+
+
+   ###### Facebook
+   
+   
+   For facebook you will need to open this [link](https://developers.facebook.com/apps/).
+   Once you are logged in you should see the green Create App button. Click on it and select the option Build Connected Experiences and click Continue.
+   Populate all the fields if some are not already prefilled, and choose your app display name freely. Click on Create App. Then you will be redirected to a 
+   new screen and you need to find the Facebook Login, click on set up, and choose Web. The site URL that you will be asked to enter is:
+   http://localhost:4400/ . Save it and skip the next steps there but rather in the left sidebar under the Facebook Login, click on settings. There you can see 
+   the Client OAuth Settings, but the defaults are fine, unless you want the user to always enters his Facebook password in order to log in on the website.
+   
+   Next thing you need to configure is on the left sidebar to click on Settings -> Basic
+   There you will have your App ID/ ClientID and App Secret/Client Secret, which you can add in application.properties, however we still 
+   need to set up the needed fields properly.
+   
+   The display name is up to you to choose, the App Domains should be localhost, and you can also add the same privacy policy link as for google,
+   https://www.privacypolicygenerator.info/live.php?token=gF3bqGg7XVtgMg0NM0fcSfvYxlaqjiJ5. Contact email should be your personal/business email.
+   And at the bottom, the site URL is: http://localhost:4400/
+   ![fb settingsBasic](https://user-images.githubusercontent.com/17550473/107447621-cc9f4100-6b40-11eb-8224-437ade27b77a.PNG)
+
+   And thats it. The Advanced settings are not needed.
+   
+   Additional resources on how to setup App for facebook login:
+   [https://magefan.com/blog/create-facebook-application](https://magefan.com/blog/create-facebook-application)
+   https://magefan.com/blog/create-facebook-application
+   [https://www.codexworld.com/create-facebook-app-id-app-secret/](https://www.codexworld.com/create-facebook-app-id-app-secret/)
+   [https://www.knowband.com/blog/mobile-app/create-facebook-app-for-facebook-login-authentication/](https://www.knowband.com/blog/mobile-app/create-facebook-app-for-facebook-login-authentication/)
+   
+   
 ---
 
 ##### Configuration the spring mail sender
