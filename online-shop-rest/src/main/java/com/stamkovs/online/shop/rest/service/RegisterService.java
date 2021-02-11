@@ -50,7 +50,6 @@ public class RegisterService {
     Optional<UserAccount> userAccount = userRepository.findByEmailIgnoreCase(userRegisterDto.getEmail());
 
     if (userAccount.isPresent() && Boolean.TRUE.equals(userAccount.get().getEmailVerified())) {
-      log.info("User with email {} exists and is already verified", userAccount.get().getEmail());
       throw new UserAlreadyExistsException("User with email " + userAccount.get().getEmail() + " exists and is " +
         "verified.");
     } else {
@@ -95,7 +94,6 @@ public class RegisterService {
       userPrincipal.setEmail(userAccount.getEmail());
       userPrincipal.setId(userAccount.getId());
       userPrincipal.setPassword(userAccount.getPassword());
-      confirmationTokenRepository.save(token);
 
       UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userPrincipal, null,
         userDetails.getAuthorities());
@@ -112,6 +110,7 @@ public class RegisterService {
       response.addCookie(isUserLoggedIn);
 
       token.setUsed(true);
+      confirmationTokenRepository.save(token);
 
     }
     return userRegisterDto;

@@ -36,14 +36,6 @@
     box-sizing: border-box;
   }
 
-  p {
-    font-size: 14px;
-    font-weight: 100;
-    line-height: 20px;
-    letter-spacing: .5px;
-    margin: 0 0 1em;
-  }
-
   span {
     font-size: 12px;
     margin-bottom: 2em;
@@ -191,6 +183,14 @@
 
     h2 {
       margin-bottom: 1em;
+    }
+
+    p {
+      font-size: 14px;
+      font-weight: 100;
+      line-height: 20px;
+      letter-spacing: .5px;
+      margin: 0 0 1em;
     }
 
     @media screen and (max-width: 768px) {

@@ -15,7 +15,6 @@ export class SpinnerComponent implements OnInit {
 
   constructor(private spinnerService: SpinnerService) {
     this.spinnerService.visibility.pipe().subscribe(visibility => {
-      console.log(visibility);
       this.showSpinner = visibility;
     });
   }

@@ -92,7 +92,6 @@ public class ResetPasswordService {
       userPrincipal.setEmail(userAccount.getEmail());
       userPrincipal.setId(userAccount.getId());
       userPrincipal.setPassword(userAccount.getPassword());
-      resetPasswordTokenRepository.save(token);
 
       UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userPrincipal, null,
         userDetails.getAuthorities());
@@ -109,6 +108,7 @@ public class ResetPasswordService {
       response.addCookie(isUserLoggedIn);
 
       token.setUsed(true);
+      resetPasswordTokenRepository.save(token);
     }
   }
 

@@ -102,7 +102,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.productsSubMenuMarginSeparator = 0;
       this.accountSubMenuMarginSeparator = 0;
-    }, 200);
+    }, 0);
   }
 
   isUserLoggedIn() {
