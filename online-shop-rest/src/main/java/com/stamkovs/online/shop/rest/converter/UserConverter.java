@@ -1,9 +1,11 @@
 package com.stamkovs.online.shop.rest.converter;
 
 import com.stamkovs.online.shop.rest.auth.model.AuthProvider;
+import com.stamkovs.online.shop.rest.auth.security.UserPrincipal;
 import com.stamkovs.online.shop.rest.model.UserAccount;
 import com.stamkovs.online.shop.rest.model.UserRegisterDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +24,6 @@ public class UserConverter {
    * Converts from {@link UserRegisterDto} to {@link UserAccount}.
    *
    * @param userRegisterDto the userRegister details.
-   *
    * @return {@link UserAccount}.
    */
   public UserAccount convertUserRegisterDtoToUserAccount(UserRegisterDto userRegisterDto) {
@@ -37,6 +38,24 @@ public class UserConverter {
     userAccount.setAccountId(UUID.randomUUID().toString());
 
     return userAccount;
+  }
+
+  /**
+   * Converts from {@link UserDetails} and {@link UserAccount} combined data to {@link UserPrincipal}.
+   *
+   * @param userDetails {@link UserDetails}.
+   * @param userAccount {@link UserAccount}.
+   *
+   * @return {@link UserPrincipal}.
+   */
+  public UserPrincipal convertToUserPrincipal(UserDetails userDetails, UserAccount userAccount) {
+    UserPrincipal userPrincipal = new UserPrincipal();
+    userPrincipal.setAuthorities(userDetails.getAuthorities());
+    userPrincipal.setEmail(userAccount.getEmail());
+    userPrincipal.setId(userAccount.getId());
+    userPrincipal.setPassword(userAccount.getPassword());
+
+    return userPrincipal;
   }
 
 }

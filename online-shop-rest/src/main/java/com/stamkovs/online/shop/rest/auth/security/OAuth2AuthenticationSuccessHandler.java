@@ -18,7 +18,6 @@ import java.net.URI;
 import java.util.Optional;
 
 import static com.stamkovs.online.shop.rest.auth.security.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
-import static com.stamkovs.online.shop.rest.model.ShopConstants.*;
 
 /**
  * Success handler for the OAuth response.
@@ -51,15 +50,8 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
       return;
     }
     clearAuthenticationAttributes(request, response);
-    Cookie bearerCookie = new Cookie(AUTHORIZATION, tokenProvider.createToken(authentication));
-    bearerCookie.setPath(FORWARD_SLASH);
-    bearerCookie.setMaxAge(86000);
-    bearerCookie.setHttpOnly(true);
-    response.addCookie(bearerCookie);
-    Cookie isUserLoggedIn = new Cookie(IS_USER_LOGGED_IN, "1");
-    isUserLoggedIn.setPath(FORWARD_SLASH);
-    isUserLoggedIn.setMaxAge(86000);
-    response.addCookie(isUserLoggedIn);
+    int tokenExpirationInSeconds = authConfiguration.getOAuth().getTokenExpirationMsec().intValue() / 1000;
+    CookieUtils.addAuthorizationCookies(response, tokenProvider.createToken(authentication), tokenExpirationInSeconds);
     getRedirectStrategy().sendRedirect(request, response, targetUrl);
   }
 

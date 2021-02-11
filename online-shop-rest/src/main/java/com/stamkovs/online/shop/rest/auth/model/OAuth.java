@@ -15,6 +15,6 @@ import java.util.List;
 public class OAuth {
 
   private String tokenSecret;
-  private long tokenExpirationMsec;
+  private Long tokenExpirationMsec;
   private List<String> authorizedRedirectUris = new ArrayList<>();
 }

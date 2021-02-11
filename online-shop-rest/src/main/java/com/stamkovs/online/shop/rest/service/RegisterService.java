@@ -1,9 +1,11 @@
 package com.stamkovs.online.shop.rest.service;
 
+import com.stamkovs.online.shop.rest.auth.config.AuthConfiguration;
 import com.stamkovs.online.shop.rest.auth.model.ConfirmationToken;
 import com.stamkovs.online.shop.rest.auth.security.CustomUserDetailsService;
 import com.stamkovs.online.shop.rest.auth.security.TokenProvider;
 import com.stamkovs.online.shop.rest.auth.security.UserPrincipal;
+import com.stamkovs.online.shop.rest.auth.util.CookieUtils;
 import com.stamkovs.online.shop.rest.converter.UserConverter;
 import com.stamkovs.online.shop.rest.exception.UnauthorizedRedirectException;
 import com.stamkovs.online.shop.rest.exception.UserAlreadyExistsException;
@@ -20,15 +22,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
-
-import static com.stamkovs.online.shop.rest.model.ShopConstants.*;
-import static com.stamkovs.online.shop.rest.model.ShopConstants.FORWARD_SLASH;
 
 /**
  * Service for registering user accounts.
@@ -45,6 +43,7 @@ public class RegisterService {
   private final CustomUserDetailsService customUserDetailsService;
   private final TokenProvider tokenProvider;
   private final PasswordEncoder passwordEncoder;
+  private final AuthConfiguration authConfiguration;
 
   public void registerUser(UserRegisterDto userRegisterDto) {
     Optional<UserAccount> userAccount = userRepository.findByEmailIgnoreCase(userRegisterDto.getEmail());
@@ -77,7 +76,8 @@ public class RegisterService {
     }
   }
 
-  public UserRegisterDto getUserDetailsByConfirmationToken(HttpServletRequest request, HttpServletResponse response, String confirmationToken) {
+  public UserRegisterDto getUserDetailsByConfirmationToken(HttpServletRequest request, HttpServletResponse response,
+                                                           String confirmationToken) {
     ConfirmationToken token =
       confirmationTokenRepository.findByConfirmationToken(confirmationToken);
     if (token == null || token.isUsed()) {
@@ -89,25 +89,16 @@ public class RegisterService {
       userRegisterDto.setEmail(userAccount.getEmail());
       userAccount.setEmailVerified(true);
       UserDetails userDetails = customUserDetailsService.loadUserById(request, response, userAccount.getId());
-      UserPrincipal userPrincipal = new UserPrincipal();
-      userPrincipal.setAuthorities(userDetails.getAuthorities());
-      userPrincipal.setEmail(userAccount.getEmail());
-      userPrincipal.setId(userAccount.getId());
-      userPrincipal.setPassword(userAccount.getPassword());
+      UserPrincipal userPrincipal = userConverter.convertToUserPrincipal(userDetails, userAccount);
 
       UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userPrincipal, null,
-        userDetails.getAuthorities());
+        userPrincipal.getAuthorities());
 
       SecurityContextHolder.getContext().setAuthentication(authentication);
-      Cookie bearerCookie = new Cookie(AUTHORIZATION, tokenProvider.createToken(authentication));
-      bearerCookie.setPath(FORWARD_SLASH);
-      bearerCookie.setMaxAge(86000);
-      bearerCookie.setHttpOnly(true);
-      response.addCookie(bearerCookie);
-      Cookie isUserLoggedIn = new Cookie(IS_USER_LOGGED_IN, "1");
-      isUserLoggedIn.setPath(FORWARD_SLASH);
-      isUserLoggedIn.setMaxAge(86000);
-      response.addCookie(isUserLoggedIn);
+      int tokenExpirationInSeconds = authConfiguration.getOAuth().getTokenExpirationMsec().intValue() / 1000;
+
+      CookieUtils.addAuthorizationCookies(response, tokenProvider.createToken(authentication),
+        tokenExpirationInSeconds);
 
       token.setUsed(true);
       confirmationTokenRepository.save(token);

@@ -40,7 +40,7 @@ public class CookieUtils {
   public static void deleteCookie(HttpServletRequest request, HttpServletResponse response, String name) {
     Cookie[] cookies = request.getCookies();
     if (cookies != null && cookies.length > 0) {
-      for (Cookie cookie: cookies) {
+      for (Cookie cookie : cookies) {
         if (cookie.getName().equals(name)) {
           cookie.setValue(EMPTY_STRING);
           cookie.setPath(FORWARD_SLASH);
@@ -49,6 +49,18 @@ public class CookieUtils {
         }
       }
     }
+  }
+
+  /**
+   * Adds the authorization http only cookie,
+   */
+  public static void addAuthorizationCookies(HttpServletResponse response, String bearerToken,
+                                             int tokenExpirationInSeconds) {
+    CookieUtils.addCookie(response, AUTHORIZATION, bearerToken, tokenExpirationInSeconds);
+    Cookie isUserLoggedIn = new Cookie(IS_USER_LOGGED_IN, "1");
+    isUserLoggedIn.setPath(FORWARD_SLASH);
+    isUserLoggedIn.setMaxAge(86000);
+    response.addCookie(isUserLoggedIn);
   }
 
   public static String serialize(Object object) {
