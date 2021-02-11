@@ -304,6 +304,135 @@ https://www.lifewire.com/get-a-password-to-access-gmail-by-pop-imap-2-1171882 <b
 
 ---
 
+#### Changelog
+
+**2021-02-07**
+- Added angular material spinner on each http request using interceptors.
+- Fixed bug when registering with an already existing account email to throw exception and show proper message to the end user.
+- Fixed bug when non-existing user has jwt token so that it is being revoked
+  (scenario where the user have been deleted, but the cookies were still being present in the browser).
+- Styling and other minor improvements.
+- Updated the created_on column to datetime in the create confirmation token
+- Added new migration script for reset password token
+- Integrated angular material in Shoptastic
+- Change scss primary pink color to magenta to follow the angular material theme i started using
+- Added complete forgot password functionality on FE and BE, which includes dialog component from the entry component, sending a reset password token via email, forgot passwo
+  rd component that updates the password, and angular material snackbar i.e. toast message displaying if it is successful or not
+- Improved BCryptPasswordEncoder strength to 13
+- Fixed bug when validating for the token i.e. if it is expired now throws proper exception and the bearer token cookie is revoked completely
+- Added Auth Guard functionality in order to disable access to the entry component if user is already logged in
+- Styling changes and additional navbar fixes
+- Added additional validations and java doc
+- Various other fixes
+
+**2021-01-30**
+- Implemented registration functionality flow through sending email with confirmation token for verification with resend option as well
+- Added password protection with BCrypt hashing and salting
+- Added confirm account component that checks the validity of the token that users receive in their emails and accordingly redirects if valid or not
+- Validation improvements
+- Added password strength checker and validation on the register form on the frontend
+- Added new migration scripts needed for the registration flow
+- Various other code improvements
+
+**2021-01-13**
+- Renamed login component to entry component, and minor fix for the oauth window url hash and fb window size
+
+**2021-01-11**
+- Added variable for the base url in the application.properties
+- Pushing the AuthController as it was moved in another changelist and thereby not added in the previous commit
+
+**2021-01-11**
+- Added new rest module
+- Refactored and moved existing code in better directory structure
+- Added OAuth2 OpenID authentication for Google and Facebook
+- Added and configured Spring security
+- Saving the OAuth jwt in httponly cookie and validating it
+- Added interceptors on backend and frontend needed to check if user is logged in or not on each request
+- Added guards but with not much functionality for now
+- Application properties changes for the rest and oauth, but committing without the sensitive data needed for the oauth providers
+- Added new flyway db migrations needed for the OAuth authentication
+- Added missing java doc
+- Setup the frontend proxy connection to the backend
+- Added new Html and css, also some improvements
+- Added logout functionality with clearing of the cookies
+- Added error interceptor that for now doesnt do much, but will be used for various conditional redirects
+- Added angular auth.service.ts that triggers the OAuth authentication in new window with loader and proper message
+- Extracted and added new constants in one central place
+- Added logic to trigger rest request on each route change to check if user is logged in or not
+- Added ngx-cookie for processing and managing the cookies on the frontend
+- Created custom exceptions classes
+- Added global controller advice exception handler
+- Created repository for the user
+- Added marker interface for component scanning
+- Various other models, classes and code improvements
+
+**2020-12-13**
+- Removed different type of users table i.e. there will be only one user_account now with different roles
+
+**2020-12-08**
+- Added login component with styling, lacking functionallity with oauth openid and standard register/login with email verification and jwt or jwe
+- Added docker run configuration where config/environment values need to be set only before running it
+
+**2020-11-19**
+- Created fully responsive contact us page, but its missing the email sending functionality for now, also made some improvements in the navbar, and for the home page, also minor improvement for the routing transitions to have opacity transition as well
+
+**2020-11-18**
+- Added routing and transitions for routing, also made improvements in the navbar, added icons, made it fully responsive etc
+
+**2020-11-16**
+- CSS refactoring, introduced variables, and added raleway font families typography
+- Added angular compile support for IE11
+
+**2020-11-02**
+- Pushing run configurations without environment data set, and project code style configuration
+
+**2020-11-01**
+- Styling fixes for mobile and desktop sizes for the navbar and the home component
+- Commit for forgotten needed unversioned files i.e. home component
+- Small centering fix for the home page banner text
+- Additional styling improvements for the navbar and added home component, needs refactoring and code cleanup tho
+
+**2020-10-30**
+- Updated the navbar after testing on real mobile so it doesnt glitch, and changed transition effects, also prevented clicking on the menu buttons since no functionality is added yet
+
+**2020-10-29**
+- Styling improvements for the navbar
+
+**2020-10-27**
+- Extended ng serve command to open the app automatically in the browser once it compiles successfully
+- Added angular frontend initial commit, and setup the responsive navbar without bootstrap
+
+**2020-10-12**
+- Moved the encryption key value as a environment value
+- Added tests for encrypting and decrypting the password in order to configure the jdbc connection easier
+- Improvements for creating the mssql server connection via docker so that the sa password can be specified in the .env file
+
+**2020-10-11**
+- Pushing idea configuration file so that it always uses jdk 11
+- Revert "Adding java version to the pom for the maven compiler"
+- Adding java version to the pom for the maven compiler
+
+**2020-10-03**
+- Made the flyway data folder a configuration property
+
+**2020-09-09**
+- Create initial mssql database schema with versioning script, and changed migration test namings to be more descriptive
+
+**2020-09-08**
+- Added integration tests for flyway migrations using the h2 in memory database, added h2 versioning and repeatable migrating sql scripts, and added java entity for the db table used in the tests
+
+**2020-09-04**
+- Implemented new module with setup and run configuration for Flyway Database migration, refactored the code including packages and namings, and also improved the pom files.
+
+**2020-09-01**
+- Created mssql database with docker, added docker compose configuration file with persistent local storage, setup the jdbc connection via application-dev properties, and encrypted all sensitive data regarding the db connection
+
+**2020-08-10**
+- Initial project setup
+
+**2020-08-10**
+- Initial commit
+
 <br/>
 
 #### 📜 License️
