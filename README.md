@@ -276,7 +276,7 @@ Now what values should we set for these?
 In application.properties we need to set the following two properties (the others are already set):
 >
 spring.mail.username=\
-spring.mail.password=\
+spring.mail.password=
 >
 Basically you need to add an email, and its password. However you still need to change some settings on your email, depending on the email provider.
 In my case I used google, so there are two ways to allow sending emails via an application. The first and the NOT recommended way is via allow less secure apps access.
