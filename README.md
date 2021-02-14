@@ -306,6 +306,14 @@ https://www.lifewire.com/get-a-password-to-access-gmail-by-pop-imap-2-1171882 <b
 
 #### Changelog
 
+**2021-02-14**
+- Added scheduled cron jobs to clear expired or used tokens, and added tests for that, also some additional minor improvements introduced.
+- Added missing unit tests for some of the services, and did a minor code refactoring.
+
+**2021-02-11**
+- Fixed bug when updating the tokens in db once they are used, and styling fixes for the navbar.
+- Refactoring some common usage of code in some places, fixing checkstyle warnings and errors.
+
 **2021-02-07**
 - Added angular material spinner on each http request using interceptors.
 - Fixed bug when registering with an already existing account email to throw exception and show proper message to the end user.
