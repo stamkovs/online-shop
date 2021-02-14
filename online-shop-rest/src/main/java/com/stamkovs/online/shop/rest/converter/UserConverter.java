@@ -5,10 +5,13 @@ import com.stamkovs.online.shop.rest.auth.security.UserPrincipal;
 import com.stamkovs.online.shop.rest.model.UserAccount;
 import com.stamkovs.online.shop.rest.model.UserRegisterDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -41,16 +44,17 @@ public class UserConverter {
   }
 
   /**
-   * Converts from {@link UserDetails} and {@link UserAccount} combined data to {@link UserPrincipal}.
+   * Converts from {@link UserAccount} combined data to {@link UserPrincipal}.
    *
-   * @param userDetails {@link UserDetails}.
    * @param userAccount {@link UserAccount}.
    *
    * @return {@link UserPrincipal}.
    */
-  public UserPrincipal convertToUserPrincipal(UserDetails userDetails, UserAccount userAccount) {
+  public UserPrincipal convertToUserPrincipal(UserAccount userAccount) {
     UserPrincipal userPrincipal = new UserPrincipal();
-    userPrincipal.setAuthorities(userDetails.getAuthorities());
+    List<GrantedAuthority> authorities = Collections.
+      singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+    userPrincipal.setAuthorities(authorities);
     userPrincipal.setEmail(userAccount.getEmail());
     userPrincipal.setId(userAccount.getId());
     userPrincipal.setPassword(userAccount.getPassword());

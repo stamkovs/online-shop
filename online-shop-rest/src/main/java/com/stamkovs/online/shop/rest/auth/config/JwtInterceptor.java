@@ -2,6 +2,8 @@ package com.stamkovs.online.shop.rest.auth.config;
 
 import com.stamkovs.online.shop.rest.auth.security.CustomUserDetailsService;
 import com.stamkovs.online.shop.rest.auth.security.TokenProvider;
+import com.stamkovs.online.shop.rest.auth.util.CookieUtils;
+import com.stamkovs.online.shop.rest.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,9 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import static com.stamkovs.online.shop.rest.auth.util.CookieUtils.getJwtFromRequest;
-import static com.stamkovs.online.shop.rest.model.ShopConstants.EMPTY_STRING;
-import static com.stamkovs.online.shop.rest.model.ShopConstants.FORWARD_SLASH;
-import static com.stamkovs.online.shop.rest.model.ShopConstants.IS_USER_LOGGED_IN;
+import static com.stamkovs.online.shop.rest.model.ShopConstants.*;
 
 /**
  * Interceptor for the checking and validating the jwt if user is logged in or not, or authorized
@@ -43,16 +43,23 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
     String jwt = getJwtFromRequest(request);
     if (StringUtils.hasText(jwt) && tokenProvider.validateToken(request, response, jwt)) {
       Long userId = tokenProvider.getUserIdFromToken(jwt);
-      UserDetails userDetails = customUserDetailsService.loadUserById(request, response, userId);
-      String userAccountId = customUserDetailsService.loadUserAccountById(userId).getAccountId();
-      UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null,
-        userDetails.getAuthorities());
-      authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+      try {
+        UserDetails userDetails = customUserDetailsService.loadUserById(userId);
+        String userAccountId = customUserDetailsService.loadUserAccountById(userId).getAccountId();
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null,
+          userDetails.getAuthorities());
+        authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-      SecurityContextHolder.getContext().setAuthentication(authentication);
-      isUserLoggedIn.setMaxAge(86000);
-      response.addCookie(isUserLoggedIn);
-      log.info("User {} is logged in and authorized.", userAccountId);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        isUserLoggedIn.setMaxAge(86000);
+        response.addCookie(isUserLoggedIn);
+        log.info("User {} is logged in and authorized.", userAccountId);
+      } catch (UserNotFoundException e) {
+        CookieUtils.deleteCookie(request, response, AUTHORIZATION);
+        CookieUtils.deleteCookie(request, response, IS_USER_LOGGED_IN);
+        log.info("Revoking authorization bearer token cookie as user does not exists within the system.");
+        throw new UserNotFoundException("User with id " + userId + " cant be found.");
+      }
     } else {
       isUserLoggedIn.setValue(EMPTY_STRING);
       isUserLoggedIn.setMaxAge(0);

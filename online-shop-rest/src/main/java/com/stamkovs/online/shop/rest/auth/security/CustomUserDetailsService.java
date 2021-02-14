@@ -1,6 +1,5 @@
 package com.stamkovs.online.shop.rest.auth.security;
 
-import com.stamkovs.online.shop.rest.auth.util.CookieUtils;
 import com.stamkovs.online.shop.rest.exception.UserNotFoundException;
 import com.stamkovs.online.shop.rest.model.UserAccount;
 import com.stamkovs.online.shop.rest.repository.UserRepository;
@@ -11,12 +10,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import static com.stamkovs.online.shop.rest.model.ShopConstants.AUTHORIZATION;
-import static com.stamkovs.online.shop.rest.model.ShopConstants.IS_USER_LOGGED_IN;
 
 /**
  * Custom user details service needed to load the user.
@@ -41,14 +34,9 @@ public class CustomUserDetailsService implements UserDetailsService {
   }
 
   @Transactional
-  public UserDetails loadUserById(HttpServletRequest request, HttpServletResponse response, Long id) {
+  public UserDetails loadUserById(Long id) throws UserNotFoundException {
     UserAccount user = userRepository.findById(id).orElseThrow(
-      () -> {
-        CookieUtils.deleteCookie(request, response, AUTHORIZATION);
-        CookieUtils.deleteCookie(request, response, IS_USER_LOGGED_IN);
-        log.info("Revoking authorization bearer token cookie as user does not exists within the system.");
-        throw new UserNotFoundException("User with id " + id + " cant be found.");
-      });
+      () -> new UserNotFoundException("User with id " + id + " cant be found."));
 
     return UserPrincipal.create(user);
   }

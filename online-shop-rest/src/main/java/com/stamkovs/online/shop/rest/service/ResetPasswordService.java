@@ -2,7 +2,6 @@ package com.stamkovs.online.shop.rest.service;
 
 import com.stamkovs.online.shop.rest.auth.config.AuthConfiguration;
 import com.stamkovs.online.shop.rest.auth.model.ResetPasswordToken;
-import com.stamkovs.online.shop.rest.auth.security.CustomUserDetailsService;
 import com.stamkovs.online.shop.rest.auth.security.TokenProvider;
 import com.stamkovs.online.shop.rest.auth.security.UserPrincipal;
 import com.stamkovs.online.shop.rest.auth.util.CookieUtils;
@@ -19,7 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +26,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
+
+import static com.stamkovs.online.shop.rest.model.ShopConstants.AUTHORIZATION;
+import static com.stamkovs.online.shop.rest.model.ShopConstants.IS_USER_LOGGED_IN;
 
 /**
  * Service for resetting user account password.
@@ -40,7 +41,6 @@ public class ResetPasswordService {
   private final EmailSenderService emailSenderService;
   private final UserRepository userRepository;
   private final ResetPasswordTokenRepository resetPasswordTokenRepository;
-  private final CustomUserDetailsService customUserDetailsService;
   private final TokenProvider tokenProvider;
   private final PasswordEncoder passwordEncoder;
   private final UserConverter userConverter;
@@ -85,22 +85,26 @@ public class ResetPasswordService {
       throw new UnauthorizedRedirectException("Invalid url");
     }
     UserAccount userAccount = userRepository.findByAccountId(token.getUserAccountId());
-    if (userAccount != null) {
-      userAccount.setPassword(passwordEncoder.encode(resetPasswordDto.getNewPassword()));
-      UserDetails userDetails = customUserDetailsService.loadUserById(request, response, userAccount.getId());
-      UserPrincipal userPrincipal = userConverter.convertToUserPrincipal(userDetails, userAccount);
-
-      UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userPrincipal, null,
-        userDetails.getAuthorities());
-
-      SecurityContextHolder.getContext().setAuthentication(authentication);
-      int tokenExpirationInSeconds = authConfiguration.getOAuth().getTokenExpirationMsec().intValue() / 1000;
-      CookieUtils.addAuthorizationCookies(response, tokenProvider.createToken(authentication),
-        tokenExpirationInSeconds);
-
-      token.setUsed(true);
-      resetPasswordTokenRepository.save(token);
+    if (userAccount == null) {
+      CookieUtils.deleteCookie(request, response, AUTHORIZATION);
+      CookieUtils.deleteCookie(request, response, IS_USER_LOGGED_IN);
+      log.info("Revoking authorization bearer token cookie as user does not exists within the system.");
+      throw new UserNotFoundException("User with id " + token.getUserAccountId() + " cant be found.");
     }
+    userAccount.setPassword(passwordEncoder.encode(resetPasswordDto.getNewPassword()));
+    UserPrincipal userPrincipal = userConverter.convertToUserPrincipal(userAccount);
+
+    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userPrincipal, null,
+      userPrincipal.getAuthorities());
+
+    SecurityContextHolder.getContext().setAuthentication(authentication);
+    int tokenExpirationInSeconds = authConfiguration.getOAuth().getTokenExpirationMsec().intValue() / 1000;
+    CookieUtils.addAuthorizationCookies(response, tokenProvider.createToken(authentication),
+      tokenExpirationInSeconds);
+
+    token.setUsed(true);
+    resetPasswordTokenRepository.save(token);
+    userRepository.save(userAccount);
   }
 
   private ResetPasswordToken createResetPasswordToken(UserAccount userAccount) {

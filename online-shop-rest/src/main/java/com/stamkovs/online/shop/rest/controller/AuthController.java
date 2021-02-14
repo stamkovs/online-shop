@@ -41,8 +41,8 @@ public class AuthController {
    * @return {@link ResponseEntity}.
    */
   @PostMapping(value = "/login")
-  public ResponseEntity<Object> loginUserAccount(HttpServletRequest request, HttpServletResponse response, @RequestBody UserLoginDto userLoginDto) {
-    loginService.loginUser(request, response, userLoginDto);
+  public ResponseEntity<Object> loginUserAccount(HttpServletResponse response, @RequestBody UserLoginDto userLoginDto) {
+    loginService.loginUser(response, userLoginDto);
     return new ResponseEntity<>(HttpStatus.OK);
   }
 
