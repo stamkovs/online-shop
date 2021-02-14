@@ -28,6 +28,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Date;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
@@ -170,6 +173,7 @@ class RegisterServiceTest {
     ConfirmationToken token = new ConfirmationToken();
     token.setConfirmationToken("testToken");
     token.setUserAccountId(USER_ACCOUNT_ID);
+    token.setCreatedDate(Date.from(Instant.now().minus(10, ChronoUnit.HOURS)));
 
     UserAccount userAccount = new UserAccount();
     userAccount.setAccountId(USER_ACCOUNT_ID);
@@ -223,7 +227,22 @@ class RegisterServiceTest {
 
     // when
     assertThrows(UnauthorizedRedirectException.class, () ->
-      registerService.getUserDetailsByConfirmationToken(request, response, "unknownToken"));
+      registerService.getUserDetailsByConfirmationToken(request, response, "usedToken"));
+
+    // then
+  }
+
+  @Test
+  void shouldThrowUnauthorizedExceptionIfTokenIsExpired() {
+    // given
+    ConfirmationToken token = new ConfirmationToken();
+    token.setUsed(false);
+    token.setCreatedDate(Date.from(Instant.now().minus(25, ChronoUnit.HOURS)));
+    when(confirmationTokenRepository.findByConfirmationToken(any())).thenReturn(token);
+
+    // when
+    assertThrows(UnauthorizedRedirectException.class, () ->
+      registerService.getUserDetailsByConfirmationToken(request, response, "expiredToken"));
 
     // then
   }
@@ -234,6 +253,7 @@ class RegisterServiceTest {
     ConfirmationToken token = new ConfirmationToken();
     token.setConfirmationToken("testToken");
     token.setUserAccountId(USER_ACCOUNT_ID);
+    token.setCreatedDate(Date.from(Instant.now().minus(4, ChronoUnit.HOURS)));
     when(confirmationTokenRepository.findByConfirmationToken(token.getConfirmationToken())).thenReturn(token);
     when(userRepository.findByAccountId(token.getUserAccountId())).thenReturn(null);
 

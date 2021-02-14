@@ -23,6 +23,8 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
@@ -67,7 +69,8 @@ public class ResetPasswordService {
   public ResetPasswordDto getUserDetailsByResetPasswordToken(String resetPasswordToken) {
     ResetPasswordToken token =
       resetPasswordTokenRepository.findByResetPasswordToken(resetPasswordToken);
-    if (token == null || token.isUsed()) {
+    Instant pastDateMinus8HoursFromNow = Instant.now().minus(8, ChronoUnit.HOURS);
+    if (token == null || token.isUsed() || token.getCreatedDate().toInstant().isBefore(pastDateMinus8HoursFromNow)) {
       throw new UnauthorizedRedirectException("Invalid url");
     }
     UserAccount userAccount = userRepository.findByAccountId(token.getUserAccountId());

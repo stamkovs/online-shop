@@ -23,6 +23,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Date;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -125,6 +128,7 @@ class ResetPasswordServiceTest {
     ResetPasswordToken resetPasswordToken = new ResetPasswordToken();
     resetPasswordToken.setResetPasswordToken("resetTokenId");
     resetPasswordToken.setUserAccountId("userAccountId");
+    resetPasswordToken.setCreatedDate(Date.from(Instant.now().minus(4, ChronoUnit.HOURS)));
     when(resetPasswordTokenRepository.findByResetPasswordToken(resetPasswordToken.getResetPasswordToken()))
       .thenReturn(resetPasswordToken);
     UserAccount userAccount = new UserAccount();
@@ -161,6 +165,23 @@ class ResetPasswordServiceTest {
     resetPasswordToken.setResetPasswordToken("resetTokenId");
     resetPasswordToken.setUserAccountId("userAccountId");
     resetPasswordToken.setUsed(true);
+    when(resetPasswordTokenRepository.findByResetPasswordToken(any())).thenReturn(resetPasswordToken);
+
+    // when
+    assertThrows(UnauthorizedRedirectException.class,
+      () -> resetPasswordService.getUserDetailsByResetPasswordToken(any()));
+
+    // then
+    verify(userRepository, times(0)).findByAccountId(any());
+  }
+
+  @Test
+  void shouldThrowExceptionIfTokenIsFoundButIsExpired() {
+    // given
+    ResetPasswordToken resetPasswordToken = new ResetPasswordToken();
+    resetPasswordToken.setResetPasswordToken("expiredTokenId");
+    resetPasswordToken.setUserAccountId("userAccountId");
+    resetPasswordToken.setCreatedDate(Date.from(Instant.now().minus(9, ChronoUnit.HOURS)));
     when(resetPasswordTokenRepository.findByResetPasswordToken(any())).thenReturn(resetPasswordToken);
 
     // when

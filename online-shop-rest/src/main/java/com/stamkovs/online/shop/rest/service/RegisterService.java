@@ -23,6 +23,8 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
@@ -81,7 +83,8 @@ public class RegisterService {
                                                            String confirmationToken) {
     ConfirmationToken token =
       confirmationTokenRepository.findByConfirmationToken(confirmationToken);
-    if (token == null || token.isUsed()) {
+    Instant pastDateMinus24HoursFromNow = Instant.now().minus(24, ChronoUnit.HOURS);
+    if (token == null || token.isUsed() || token.getCreatedDate().toInstant().isBefore(pastDateMinus24HoursFromNow)) {
       throw new UnauthorizedRedirectException("Invalid url");
     }
     UserRegisterDto userRegisterDto = new UserRegisterDto();

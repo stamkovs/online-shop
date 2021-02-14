@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -39,6 +40,7 @@ import java.security.SecureRandom;
 @EnableJpaRepositories("com.stamkovs.online.shop.rest.repository")
 @EntityScan(basePackageClasses = {UserAccount.class, ConfirmationToken.class})
 @RequiredArgsConstructor
+@EnableScheduling
 public class ShoptasticSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
   private final CustomUserDetailsService customUserDetailsService;
