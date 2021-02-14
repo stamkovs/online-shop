@@ -26,15 +26,15 @@ An online shop application project developed for my graduate thesis with some se
 * JSON Web Tokens :heavy_check_mark: 
 * Register by sending confirmation token via email :heavy_check_mark:
    * Password protection with BCrypt hashing and salting :heavy_check_mark:
-   * Scheduled job to clear expired confirmation tokens from db
+   * Scheduled job to clear expired confirmation tokens from db :heavy_check_mark:
 * Login, Forgot password flows :heavy_check_mark:
 * Role based access control
 * View, search, add, edit various products
 * Dark mode :heavy_check_mark:
 * Light mode
 * Swagger API ❓ (Optional if time available)
-* Spring Boot actuator health checks
-* 💳 Buy products ❓  (Optional if time available - with Stripe payment gateway) 
+* Spring Boot actuator health checks ? (Optional if time available, only user with ADMIN role should be able to access these)
+* 💳 Buy products :x:  (Not in the scope for thesis defence, payment is major topic which also includes other complicated factors) 
 * Cross Browser Support and Responsive design :heavy_check_mark:
 
     >*Note that this is not a production ready application, so it is not thoroughly tested and verified on each environment.*
