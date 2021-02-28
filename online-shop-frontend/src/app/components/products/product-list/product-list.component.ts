@@ -12,7 +12,8 @@ export class ProductListComponent implements OnInit {
   products: any[];
   pageTitle: string;
   showNoProductsMessage: boolean = false;
-
+  breadcrumbsList: any;
+  breadcrumbs: { url: string, label: string }[];
 
   constructor(private route: ActivatedRoute, private router: Router) {
   }
@@ -20,8 +21,18 @@ export class ProductListComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe((data: any) => {
       this.products = [];
+      this.breadcrumbs = [];
       this.showNoProductsMessage = false;
       const productCategory = this.route.snapshot.paramMap.get('productCategory');
+
+      this.breadcrumbsList = location.pathname.split('/');
+      if (this.breadcrumbsList.length > 2) {
+        for (let i = 1; i < this.breadcrumbsList.length; i++) {
+          const link = '/' + this.breadcrumbsList[i - 1] + '/' + this.breadcrumbsList[i]
+          const breadcrumb = {"url": link, "label": this.breadcrumbsList[i]};
+          this.breadcrumbs.push(breadcrumb);
+        }
+      }
 
       if (productCategory) {
         switch (productCategory) {
