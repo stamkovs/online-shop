@@ -1,0 +1,124 @@
+@import "src/styles/variables";
+
+.shoptastic-product-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .shoptastic-product-image-wrapper {
+    position: relative;
+    top: 0;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+
+    .shoptastic-product-image {
+      width: 100%;
+      transition: all 0.2s ease-in-out;
+      border-radius: 6px;
+    }
+  }
+
+  &:hover {
+    .shoptastic-product-image-wrapper {
+      top: -40px;
+    }
+
+    .shoptastic-product-image-wrapper img {
+      box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+    }
+  }
+
+
+  .product-text-wrapper {
+    justify-content: stretch;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex: 1;
+
+    .product-title {
+      text-align: left;
+      font-size: 14px;
+      cursor: pointer;
+
+      h3 {
+        font-size: 20px;
+        font-weight: bold;
+        margin: 15px auto;
+        overflow: hidden;
+        white-space: pre-wrap;
+        width: 100%;
+      }
+    }
+
+    .action-buttons-wrapper {
+      .btn {
+        margin: 0 .2em;
+
+        i {
+          vertical-align: middle;
+        }
+
+        &:first-of-type {
+          margin-left: 0;
+        }
+
+        &:last-of-type {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  .product-footer {
+    padding: 25px 0 5px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    flex: 1;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    .price {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .add-to-cart-btn, .add-to-wishlist-btn {
+      display: block;
+      color: #212121;
+      text-align: center;
+      font-size: 18px;
+      width: 35px;
+      height: 35px;
+      line-height: 35px;
+      border-radius: 50%;
+      border: 1px solid #212121;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+
+      &:hover, &:active, &:focus {
+        border-color: $navbar-bg-color;
+        background: $navbar-bg-color;
+        color: #fff;
+        text-decoration: none;
+      }
+
+      .la-shopping-cart {
+        font-size: 28px;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+
+  .shoptastic-product-card, .shoptastic-product-card .product-text-wrapper {
+    display: block;
+  }
+}

@@ -37,7 +37,7 @@ public class UserConverter {
     userAccount.setLastName(userRegisterDto.getLastName());
     userAccount.setPassword(passwordEncoder.encode(userRegisterDto.getPassword()));
     userAccount.setProvider(AuthProvider.local);
-    userAccount.setUserRoleId(1);
+    userAccount.setUserRoleId(3);
     userAccount.setAccountId(UUID.randomUUID().toString());
 
     return userAccount;

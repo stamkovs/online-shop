@@ -6,7 +6,6 @@ import {AppComponent} from './app.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {HomeComponent} from './components/home/home.component';
 import {EntryComponent} from './components/entry/entry.component';
-import {ProductListComponent} from './components/product-list/product-list.component';
 import {ContactComponent} from './components/contact/contact.component';
 import {ConfirmAccountComponent} from './components/entry/confirm-account/confirm-account.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -32,6 +31,12 @@ import {SpinnerService} from './services/SpinnerService';
 import {HttpRequestInterceptor} from './core/interceptor/http-request-interceptor.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { ProductItemComponent } from './components/products/product-item/product-item.component';
+import {ProductListResolver} from './components/products/ProductListResolver';
+import {ProductService} from './services/product.service';
+import {ProductListComponent} from './components/products/product-list/product-list.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +49,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     ConfirmAccountComponent,
     DialogComponent,
     ForgotPasswordComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ProductItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,8 +67,18 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     MatButtonModule,
     MatIconModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule],
-  providers: [AuthService, WindowService, EntryService, ConfirmAccountService, ForgotPasswordService, SpinnerService,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatPaginatorModule],
+  providers: [
+    AuthService,
+    WindowService,
+    EntryService,
+    ConfirmAccountService,
+    ForgotPasswordService,
+    SpinnerService,
+    ProductListResolver,
+    ProductService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,

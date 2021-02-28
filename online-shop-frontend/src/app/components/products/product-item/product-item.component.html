@@ -1,0 +1,20 @@
+<div class="shoptastic-product-card">
+  <div class="shoptastic-product-image-wrapper">
+    <img
+      [src]="imageSrc"
+      alt="Product" class="shoptastic-product-image image-responsive"/>
+  </div>
+  <div class="product-text-wrapper">
+    <div class="product-title">
+      <p>{{name}}</p>
+    </div>
+    <div class="product-footer">
+      <div><span class="price">EUR {{price}}</span></div>
+      <div class="action-buttons-wrapper flex">
+        <a *ngIf="this.isUserLoggedIn()" id="{{productId}}" (click)="addItemToWishList($event)"
+           class="add-to-wishlist-btn btn"><i class="far fa-heart"></i></a>
+        <a href="#" class="add-to-cart-btn btn"><i class="las la-shopping-cart"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
