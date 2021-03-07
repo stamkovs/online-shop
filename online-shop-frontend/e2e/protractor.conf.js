@@ -16,7 +16,7 @@ exports.config = {
     browserName: 'chrome'
   },
   directConnect: true,
-  baseUrl: 'http://localhost:4400/',
+  baseUrl: 'https://shop.stamkov.com',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,

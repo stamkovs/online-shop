@@ -1,5 +1,5 @@
 [{
   "context": ["/rest", "/auth"],
-  "target": "http://localhost:8100",
+  "target": "https://shop.stamkov.com:8100",
   "secure": false
 }]

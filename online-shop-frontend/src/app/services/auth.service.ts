@@ -39,7 +39,7 @@ export class AuthService {
   private intervalId: any = null;
 
   constructor(private windows: WindowService, private http: HttpClient) {
-    this.oAuthCallbackUrl = 'http://localhost:4400/home'
+    this.oAuthCallbackUrl = 'https://shop.stamkov.com/home'
   }
 
   isLoggedIn(): Observable<any> {

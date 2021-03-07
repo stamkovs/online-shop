@@ -95,6 +95,10 @@ public class ShoptasticSecurityConfiguration extends WebSecurityConfigurerAdapte
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http
+      .requiresChannel()
+      .anyRequest()
+      .requiresSecure()
+      .and()
       .cors()
       .and()
       .sessionManagement()

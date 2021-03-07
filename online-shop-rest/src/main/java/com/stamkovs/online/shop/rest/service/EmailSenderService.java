@@ -38,7 +38,7 @@ public class EmailSenderService {
     mailMessage.setFrom(springMailUsername);
     mailMessage.setText("Dear " + newUserAccount.getFirstName() + " " + newUserAccount.getLastName() + "\n\nTo " +
       "complete your account, please click the following link: "
-      + "http://localhost:4400/confirm-account?token=" + confirmationToken + "\n\n"
+      + "https://shop.stamkov.com/confirm-account?token=" + confirmationToken + "\n\n"
       + "The link will expire after 24 hours.\n\nThank you.");
 
     return mailMessage;
@@ -51,7 +51,7 @@ public class EmailSenderService {
     mailMessage.setFrom(springMailUsername);
     mailMessage.setText("Dear " + userAccount.getFirstName() + " " + userAccount.getLastName() + "\n\nTo " +
       "reset your password, please click the following link: "
-      + "http://localhost:4400/reset-password?token=" + resetPasswordToken + "\n\n"
+      + "https://shop.stamkov.com/reset-password?token=" + resetPasswordToken + "\n\n"
       + "The link will expire after 8 hours.\n\nThank you.");
 
     return mailMessage;
