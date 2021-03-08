@@ -1,18 +1,39 @@
 <div class="home-page banner-background">
   <div class="container">
     <div class="centered banner-text-wrapper">
-      <div>
-        <h1>Featured products: TODO</h1>
-        <br>
-        <hr>
-        <br>
-        <h1>Newest products: TODO</h1>
-        <br>
-        <hr>
-        <br>
+      <h1>Welcome to Shoptastic</h1>
+    </div>
+
+    <div class="glide">
+      <h2 class="featured-products-title">Featured Products:</h2>
+      <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides">
+          <li *ngFor="let item of products" class="glide__slide">
+            <img class="shoptastic-carousel-image" [src]="item.imageSrc" alt="shoptastic_image">
+            <div class="product-text-wrapper">
+              <p class="truncate" (click)="goToProductDetail(item)">{{item.name}}</p>
+              <span class="price">&euro;{{item.price}}.00</span>
+              <div class="product-detail-footer">
+                <a href="#" class="add-to-cart-btn btn">Add to cart<i class="las la-shopping-cart"></i></a>
+              </div>
+            </div>
+
+          </li>
+
+        </ul>
       </div>
-      <h1>Interested for more?</h1>
-      <a>View all products</a>
+      <div class="glide__arrows" data-glide-el="controls">
+        <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
+        <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+      </div>
+      <div class="glide__bullets" data-glide-el="controls[nav]">
+        <button class="glide__bullet" *ngFor="let item of products; let i = index"
+                [attr.data-glide-dir]="'=' + i"></button>
+      </div>
+    </div>
+    <div class="home-page-footer-action">
+      <h2>Interested for more?</h2>
+      <a routerLink="/products">View all products</a>
     </div>
   </div>
 </div>

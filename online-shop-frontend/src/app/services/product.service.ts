@@ -15,4 +15,12 @@ export class ProductService {
   getProductsByCategory(category: string): Observable<any> {
     return this.http.get(`rest/products/${category}`);
   }
+
+  getProductById(id: number): Observable<any> {
+    return this.http.get(`rest/product/${id}`)
+  }
+
+  getNewestProducts(): Observable<any> {
+    return this.http.get('rest/products/newest');
+  }
 }

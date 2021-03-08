@@ -30,13 +30,16 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {SpinnerService} from './services/SpinnerService';
 import {HttpRequestInterceptor} from './core/interceptor/http-request-interceptor.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { SpinnerComponent } from './components/spinner/spinner.component';
+import {SpinnerComponent} from './components/spinner/spinner.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { ProductItemComponent } from './components/products/product-item/product-item.component';
+import {ProductCardComponent} from './components/products/product-card/product-card.component';
 import {ProductListResolver} from './components/products/ProductListResolver';
 import {ProductService} from './services/product.service';
 import {ProductListComponent} from './components/products/product-list/product-list.component';
+import {ProductDetailComponent} from './components/products/product-detail/product-detail.component';
+import {ProductDetailResolver} from './components/products/ProductDetailResolver';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,9 @@ import {ProductListComponent} from './components/products/product-list/product-l
     DialogComponent,
     ForgotPasswordComponent,
     SpinnerComponent,
-    ProductItemComponent,
+    ProductCardComponent,
+    ProductDetailComponent,
+    BreadcrumbsComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +83,7 @@ import {ProductListComponent} from './components/products/product-list/product-l
     ForgotPasswordService,
     SpinnerService,
     ProductListResolver,
+    ProductDetailResolver,
     ProductService,
     {
       provide: HTTP_INTERCEPTORS,

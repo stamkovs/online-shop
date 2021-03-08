@@ -10,6 +10,9 @@ export class ProductListResolver implements Resolve<ProductDetails> {
   constructor(private productService: ProductService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ProductDetails> | ProductDetails {
+    if (state.url === '/home') {
+      return this.productService.getNewestProducts();
+    }
     if (state.url === '/products') {
       return this.productService.getProducts();
     } else {

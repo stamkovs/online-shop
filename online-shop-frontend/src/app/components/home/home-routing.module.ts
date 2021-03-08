@@ -6,6 +6,8 @@ import {ContactComponent} from '../contact/contact.component';
 import {EntryComponent} from '../entry/entry.component';
 import {AuthGuard} from '../../core/guards/auth.guard';
 import {ProductListResolver} from '../products/ProductListResolver';
+import {ProductDetailComponent} from '../products/product-detail/product-detail.component';
+import {ProductDetailResolver} from '../products/ProductDetailResolver';
 
 const homeRoutes: Routes = [
   {
@@ -17,6 +19,9 @@ const homeRoutes: Routes = [
     path: 'home',
     component: HomeComponent,
     data: {animationState: 'One'},
+    resolve: {
+      newestProducts: ProductListResolver,
+    }
   },
   {
     path: 'products',
@@ -33,6 +38,13 @@ const homeRoutes: Routes = [
     component: ProductListComponent,
     resolve: {
       productsData: ProductListResolver,
+    },
+  },
+  {
+    path: 'products/:productCategory/:id',
+    component: ProductDetailComponent,
+    resolve: {
+      productDetail: ProductDetailResolver,
     },
   },
   {

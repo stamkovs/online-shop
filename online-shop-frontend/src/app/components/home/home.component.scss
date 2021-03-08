@@ -1,41 +1,197 @@
 @import 'src/styles/variables';
+// Core Stylesheet
+@import "node_modules/@glidejs/glide/src/assets/sass/glide.core";
+// Theme Stylesheet
+@import "node_modules/@glidejs/glide/src/assets/sass/glide.theme";
 
 .home-page {
   background-image: url("../../../assets/images/home-page-bg.jpg");
-}
 
-.banner-text-wrapper {
-  background: rgba($color-magenta-primary, 0.7);
-  width: 100%;
-  padding: 1.6em 0;
-  color: black;
-  font-weight: 700;
-  font-family: $font-paragraph;
-  box-sizing: border-box;
-
-  h1 {
-    margin-bottom: 0.4em;
-
-    @media screen and (max-width: 768px) {
-          font-size: 1.2rem;
-        }
+  &.banner-background {
+    min-height: 100%;
+    height: auto;
+    background-attachment: fixed;
   }
 
-  hr {
-    border-color: black;
-    border-bottom: none;
+  .container {
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
   }
 
-  a {
-    color: white;
-    font-size: 2rem;
-    font-weight: 700;
-    text-decoration: none;
-    border-bottom: 3px solid white;
+  .truncate {
+    font-size: 20px;
+    max-width: 320px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0.4em auto;
     cursor: pointer;
+    display: inline-block;
+    transition: .2s all ease-in-out;
 
-    @media screen and (max-width: 768px) {
-      font-size: 1.2rem;
+    &:after {
+      display: block;
+      content: '';
+      border-bottom: solid 2px white;
+      transform: scaleX(0);
+      transition: transform 250ms ease-in-out;
+    }
+
+    &:hover {
+      &:after {
+        transform: scaleX(1);
+      }
+    }
+  }
+
+  .glide {
+    background-color: rgba($color-magenta-primary, 0.5);
+
+    .featured-products-title {
+      margin: 0;
+      padding: 0.8em .8em 0;
+      display: inline-block;
+      border-bottom: 2px solid white;
+    }
+
+    h2 {
+      font-family: raleway-thin monospace;
+      margin: 0;
+    }
+
+    .glide__arrow {
+      background-color: rgba($navbar-bg-color, 0.5);
+
+      &.glide__arrow--right {
+        right: 0;
+      }
+
+      &.glide__arrow--left {
+        left: 0;
+      }
+    }
+
+    .glide__track {
+
+      .shoptastic-carousel-image {
+        position: relative;
+        max-width: 35vh;
+        opacity: 0.9;
+        border-radius: 5px;
+      }
+
+      .product-detail-footer {
+        display: flex;
+        flex: 1;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+
+        .btn {
+          margin: 0.8em 0;
+        }
+
+        .add-to-cart-btn, {
+          display: inline-block;
+          color: white;
+          text-align: center;
+          font-size: 18px;
+          padding: 0.2em 2em;
+          line-height: 35px;
+          border-radius: 5px;
+          border: 1px solid white;
+          transition: all 0.2s ease-in-out;
+          cursor: pointer;
+          text-decoration: none;
+
+          &:hover, &:active, &:focus {
+            border-color: $navbar-bg-color;
+            background: $navbar-bg-color;
+          }
+
+          i {
+            margin-left: .4em;
+          }
+        }
+      }
+
+    }
+
+    .glide__bullets {
+      bottom: -2em;
+
+      .glide__bullet {
+        width: 24px;
+        height: 4px;
+        padding: 0;
+        border-radius: 0;
+
+        &:focus, &:hover, &.glide__bullet--active {
+          border-color: rgba($color-magenta-primary, .85);
+          background-color: rgba($color-magenta-primary, .85);
+        }
+      }
+    }
+
+    .price {
+      font-family: raleway-bold monospace;
+      font-weight: bold;
+      display: block;
+      font-size: 20px;
+    }
+
+  }
+
+  .banner-text-wrapper {
+    background: rgba($color-magenta-primary, 0.5);
+    width: 100%;
+    padding: .4em 0;
+    color: white;
+    font-weight: 700;
+    font-family: $font-paragraph;
+    box-sizing: border-box;
+    margin-bottom: 1em;
+
+    h1 {
+      margin: 0;
+      font-family: raleway-bold monospace;
+
+      @media screen and (max-width: 768px) {
+        font-size: 1.2rem;
+      }
+    }
+
+  }
+
+  .home-page-footer-action {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin: 3em auto;
+
+    h2 {
+      margin-bottom: .4em;
+      margin-top: 0;
+    }
+
+    a {
+      display: inline-block;
+      color: white;
+      text-align: center;
+      font-size: 18px;
+      padding: 0.2em 2em;
+      line-height: 35px;
+      border-radius: 5px;
+      border: 1px solid white;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+      text-decoration: none;
+
+      &:hover, &:active, &:focus {
+        border-color: $navbar-bg-color;
+        background: $navbar-bg-color;
+      }
     }
   }
 }
