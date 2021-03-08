@@ -24,6 +24,7 @@ An online shop application project developed for my graduate thesis with some se
    * Login with Google :heavy_check_mark:
    * Login with Facebook :heavy_check_mark:
 * JSON Web Tokens :heavy_check_mark: 
+* Enforced HTTPS (with real certificate from Lets Encrypt) ✔️
 * Register by sending confirmation token via email :heavy_check_mark:
    * Password protection with BCrypt hashing and salting :heavy_check_mark:
    * Scheduled job to clear expired confirmation tokens from db :heavy_check_mark:
@@ -44,7 +45,7 @@ An online shop application project developed for my graduate thesis with some se
        * Firefox 82 :heavy_check_mark:
        * Edge 44 :heavy_check_mark:
        * IE 11 :heavy_check_mark:
-     * Besides emulators, tested on real iPhone 11 Pro device on:
+     * Besides emulators, tested on real iPhone 11 Pro device on (need to be re-checked with all the new changes, last manual testing done beginning of January):
        * Safari mobile browser :heavy_check_mark:
        * Chrome mobile browser :heavy_check_mark:
        
@@ -298,13 +299,53 @@ https://www.lifewire.com/get-a-password-to-access-gmail-by-pop-imap-2-1171882 <b
 
 ---
 
-<br/>
+##### Changes needed for the HTTPS
 
-#### &nbsp;&nbsp;&nbsp;&nbsp;Frontend
+In application.properties we already have the following properties:
+
+>
+server.ssl.enabled-protocols=TLSv1.3\
+server.ssl.key-store-type=PKCS12\
+server.ssl.key-store=classpath:shoptastic-cert.p12\
+server.ssl.key-store-password=\
+>
+
+The **shoptastic-cert.p12** can be created from the certificate file and the private key file provided by an **CA**, and its password needs to be provided in the property above.
+There are plenty of articles online how to achieve this, most commonly with openssl or mkcert.
+
+As for the frontend if you look into **angular.json** file (search for "ssl" inside), we need to provide the certificate -> **cert.pem**, and the private key -> **privkey.pem** files located in the src-> ssl directory (needs to be created if it doesnt exist already). 
+<br/>
 
 ---
 
 #### Changelog
+
+**2021-03-08**
+- Implemented home component with responsive design and implemented glidejs slider carousel library
+- Introduced new rest api endpoints for products
+- Added missing imports for the product-detail component where drift zoom was also implemented
+- Implemented product detail component with responsive design
+- Improvements in product list component
+- Product card component implementation and design improvements
+- Added breadcrumbs component i.e. refactored existing code and moved it into a component for reuse
+
+**2021-03-07**
+- Enforced HTTPS with real certificate, and adapted the oauth configurations and endpoints in the code as well as in the developer consoles
+
+**2021-03-01**
+- Improved product-item card css layout for IE11, and aligned the white border between product name and footer to be properly aligned in all items
+not depending on the product name lines length
+
+**2021-02-28**
+- Added breadcrumbs for product level hierarchy and fixed css issues in IE11 related to the breadcrumbs
+- Added DB migration script for inserting admin account
+- Added DB migration script for inserting product categories
+- Added DB migration script for inserting various products
+- Adapted previous DB schemas
+- Created product list component and implementation for showing products
+- Created the product subcategories, enabled the navbar, and added the routing
+- Implemented the product component and product-item card component responsive and cross-browser supported designs
+- Implemented rest endpoints, services, converter and repositories for retrieving all products and products per category
 
 **2021-02-14**
 - Added scheduled cron jobs to clear expired or used tokens, and added tests for that, also some additional minor improvements introduced.
@@ -446,5 +487,5 @@ https://www.lifewire.com/get-a-password-to-access-gmail-by-pop-imap-2-1171882 <b
 #### 📜 License️
 
 ---
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
+Copyright © 2021 stamkovs
 
