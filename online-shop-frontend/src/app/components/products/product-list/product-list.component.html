@@ -1,14 +1,9 @@
 <div class="container product-list-view">
-  <ol class="product-hierarchy-breadcrumb">
-    <li *ngFor="let breadcrumb of breadcrumbs">
-    <span class="label-text" [routerLink]="breadcrumb.url" routerLinkActive="active">
-      {{ breadcrumb.label }}
-    </span>
-    </li>
-  </ol>
-    <div class="full-window-width product-category-page-title"><h2>{{pageTitle}}</h2></div>
+  <shoptastic-breadcrumbs [categoryChangeEvent]="categoryChangeSubject.asObservable()"></shoptastic-breadcrumbs>
+  <div class="full-window-width product-category-page-title"><h2>{{pageTitle}}</h2></div>
   <p *ngIf="showNoProductsMessage">Currently there are no products available for the selected category.</p>
-  <shoptastic-product-item class="shoptastic-product-card-wrapper" *ngFor="let item of products" [item]="item"></shoptastic-product-item>
+  <shoptastic-product-card class="shoptastic-product-card-wrapper" *ngFor="let item of products"
+                           [item]="item"></shoptastic-product-card>
 </div>
 <router-outlet></router-outlet>
 

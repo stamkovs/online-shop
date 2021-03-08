@@ -13,6 +13,7 @@ import org.springframework.util.StringUtils;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import static com.stamkovs.online.shop.rest.auth.util.CookieUtils.getJwtFromRequest;
 import static com.stamkovs.online.shop.rest.model.ShopConstants.*;
@@ -28,6 +29,7 @@ public class LogoutService {
 
   private final TokenProvider tokenProvider;
   private final CustomUserDetailsService customUserDetailsService;
+  private final HttpSession httpSession;
 
   public void logoutUser(HttpServletRequest request, HttpServletResponse response) throws UserNotFoundException {
     String jwt = getJwtFromRequest(request);
@@ -57,5 +59,6 @@ public class LogoutService {
       log.info("Successfully logged out user {}.", userAccount.getAccountId());
     }
     SecurityContextHolder.clearContext();
+    httpSession.invalidate();
   }
 }

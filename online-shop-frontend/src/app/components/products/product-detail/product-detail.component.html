@@ -1,0 +1,20 @@
+<div class="container product-detail-view">
+  <shoptastic-breadcrumbs [item]="item"></shoptastic-breadcrumbs>
+  <img class="product-image-zoom" [src]="item.imageSrc" [attr.data-zoom]="item.imageSrc">
+  <div class="product-detail">
+    <div>
+      <p class="category">Category: <span>{{item.category}}</span></p>
+      <h3 class="product-name">{{item.name}} </h3>
+      <p>Available quantity: {{item.quantity}}</p>
+      <p class="details-title">Details:</p>
+      <p class="product-description">{{item.description}}</p>
+      <h4>&euro;{{item.price}}.00</h4>
+      <div class="product-detail-footer">
+        <a *ngIf="isUserLoggedIn()" id="{{item.id}}" (click)="addItemToWishList($event)"
+           class="add-to-wishlist-btn btn">Wishlist<i class="far fa-heart"></i></a>
+        <a href="#" class="add-to-cart-btn btn">Add to cart<i class="las la-shopping-cart"></i></a>
+        <a href="#" class="checkout-btn btn">Checkout<i class="las la-shopping-cart"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
