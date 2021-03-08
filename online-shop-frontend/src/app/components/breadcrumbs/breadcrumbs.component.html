@@ -1,0 +1,7 @@
+<ol class="product-hierarchy-breadcrumb">
+  <li *ngFor="let breadcrumb of breadcrumbs">
+    <span class="label-text" [routerLink]="breadcrumb.url" routerLinkActive="active">
+      {{ breadcrumb.label }}
+    </span>
+  </li>
+</ol>
