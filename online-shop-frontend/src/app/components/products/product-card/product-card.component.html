@@ -1,15 +1,15 @@
 <div class="shoptastic-product-card">
-  <div class="shoptastic-product-image-wrapper">
+  <div class="shoptastic-product-image-wrapper" (click)="goToProductDetail(item)">
     <img
       [src]="imageSrc"
       alt="Product" class="shoptastic-product-image image-responsive"/>
   </div>
   <div class="product-text-wrapper">
     <div class="product-title">
-      <p>{{name}}</p>
+      <p (click)="goToProductDetail($event)">{{name}}</p>
     </div>
     <div class="product-footer">
-      <div><span class="price">EUR {{price}}</span></div>
+      <div><span class="price">&euro;{{price}}.00&euro;</span></div>
       <div class="action-buttons-wrapper flex">
         <a *ngIf="this.isUserLoggedIn()" id="{{productId}}" (click)="addItemToWishList($event)"
            class="add-to-wishlist-btn btn"><i class="far fa-heart"></i></a>

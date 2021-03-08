@@ -33,7 +33,6 @@
     }
   }
 
-
   .product-text-wrapper {
     justify-content: stretch;
     display: flex;
@@ -44,7 +43,11 @@
     .product-title {
       text-align: left;
       font-size: 14px;
-      cursor: pointer;
+
+      p {
+        cursor: pointer;
+        display: inline-block;
+      }
 
       h3 {
         font-size: 20px;
@@ -73,53 +76,53 @@
         }
       }
     }
-  }
 
-  .product-footer {
-    padding: 25px 0 5px;
-    display: flex;
-    flex: 1;
-    align-items: flex-end;
-    justify-content: space-between;
-    position: relative;
+    .product-footer {
+      padding: 25px 0 5px;
+      display: flex;
+      flex: 1;
+      align-items: flex-end;
+      justify-content: space-between;
+      position: relative;
 
-    &::before {
-      content: "";
-      border-top: 1px solid #ddd;
-      width: 100%;
-      position: absolute;
-      left: 0;
-      bottom: 60px;
-    }
-
-    .price {
-      font-size: 14px;
-      font-weight: bold;
-    }
-
-    .add-to-cart-btn, .add-to-wishlist-btn {
-      display: block;
-      color: #212121;
-      text-align: center;
-      font-size: 18px;
-      width: 35px;
-      height: 35px;
-      line-height: 35px;
-      border-radius: 50%;
-      border: 1px solid #212121;
-      transition: all 0.2s ease-in-out;
-      cursor: pointer;
-
-      &:hover, &:active, &:focus {
-        border-color: $navbar-bg-color;
-        background: $navbar-bg-color;
-        color: #fff;
-        text-decoration: none;
+      &::before {
+        content: "";
+        border-top: 1px solid #ddd;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 60px;
       }
 
-      .la-shopping-cart {
-        font-size: 28px;
-        vertical-align: middle;
+      .price {
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      .add-to-cart-btn, .add-to-wishlist-btn {
+        display: block;
+        color: #212121;
+        text-align: center;
+        font-size: 18px;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        border-radius: 50%;
+        border: 1px solid #212121;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+
+        &:hover, &:active, &:focus {
+          border-color: $navbar-bg-color;
+          background: $navbar-bg-color;
+          color: #fff;
+          text-decoration: none;
+        }
+
+        .la-shopping-cart {
+          font-size: 28px;
+          vertical-align: middle;
+        }
       }
     }
   }
