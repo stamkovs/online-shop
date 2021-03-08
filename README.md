@@ -30,9 +30,7 @@ An online shop application project developed for my graduate thesis with some se
    * Scheduled job to clear expired confirmation tokens from db :heavy_check_mark:
 * Login, Forgot password flows :heavy_check_mark:
 * Role based access control
-* View, search, add, edit various products
 * Dark mode :heavy_check_mark:
-* Light mode
 * Swagger API ❓ (Optional if time available)
 * Spring Boot actuator health checks ? (Optional if time available, only user with ADMIN role should be able to access these)
 * 💳 Buy products :x:  (Not in the scope for thesis defence, payment is major topic which also includes other complicated factors) 
