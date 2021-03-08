@@ -36,7 +36,7 @@ An online shop application project developed for my graduate thesis with some se
 * 💳 Buy products :x:  (Not in the scope for thesis defence, payment is major topic which also includes other complicated factors) 
 * Cross Browser Support and Responsive design :heavy_check_mark:
 
-    >*Note that this is not a production ready application, so it is not thoroughly tested and verified on each environment.*
+    >*Note that this is not a production installed application, so it is not thoroughly tested and verified on each environment.*
     >
     * Tested through Windows OS on the following browsers:
        * Chrome 86 :heavy_check_mark:
