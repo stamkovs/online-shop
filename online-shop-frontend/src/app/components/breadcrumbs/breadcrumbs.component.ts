@@ -34,11 +34,13 @@ export class BreadcrumbsComponent implements OnInit {
     if (this.breadcrumbsList.length > 2) {
       let link = '/' + this.breadcrumbsList[1];
       this.breadcrumbsList[1] = this.breadcrumbsList[1].replace('-', ' ');
+      this.breadcrumbsList[1] = this.breadcrumbsList[1].replace('_', ' ');
       const breadcrumb = {"url": link, "label": this.breadcrumbsList[1]};
       this.breadcrumbs.push(breadcrumb);
       for (let i = 2; i < this.breadcrumbsList.length; i++) {
         link += '/' + this.breadcrumbsList[i];
         this.breadcrumbsList[i] = this.breadcrumbsList[i].replace('-', ' ');
+        this.breadcrumbsList[i] = this.breadcrumbsList[i].replace('_', ' ');
         const breadcrumb = {"url": link, "label": this.breadcrumbsList[i]};
         this.breadcrumbs.push(breadcrumb);
       }

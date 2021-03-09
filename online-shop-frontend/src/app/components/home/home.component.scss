@@ -6,11 +6,18 @@
 
 .home-page {
   background-image: url("../../../assets/images/home-page-bg.jpg");
+  overflow-x: hidden;
 
   &.banner-background {
     min-height: 100%;
     height: auto;
     background-attachment: fixed;
+
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      /* IE10+ CSS styles go here */
+      // fixes weird glitch with border lines when resizing the window
+      display: block;
+    }
   }
 
   .container {
@@ -47,6 +54,7 @@
 
   .glide {
     background-color: rgba($color-magenta-primary, 0.5);
+    margin-bottom: 3em;
 
     .featured-products-title {
       margin: 0;
@@ -168,7 +176,7 @@
     display: flex;
     flex: 1;
     flex-direction: column;
-    margin: 3em auto;
+    padding-bottom: 3em;
 
     h2 {
       margin-bottom: .4em;

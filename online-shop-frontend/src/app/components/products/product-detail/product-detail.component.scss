@@ -117,7 +117,7 @@
       flex-wrap: wrap;
       flex-direction: row;
 
-      .add-to-cart-btn, .add-to-wishlist-btn, .checkout-btn {
+      .add-to-cart-btn, .add-to-wishlist-btn, .buy-now-btn {
         display: flex;
         color: white;
         text-align: center;
@@ -132,6 +132,8 @@
         justify-content: center;
         align-items: center;
         flex: 1;
+        // needed for IE11
+        min-height: 35px;
 
         &:hover, &:active, &:focus {
           border-color: $color-magenta-primary;
@@ -145,6 +147,7 @@
         .la-shopping-cart {
           font-size: 28px;
           vertical-align: sub;
+          margin-left: .1em;
         }
       }
 
@@ -161,50 +164,55 @@
       }
     }
   }
+}
 
-  .drift-zoom-pane {
-    animation: fadeAnimationOut .25s ease-in-out;
 
-    &.drift-open {
-      transition-delay: .2s;
-      animation: fadeAnimationIn .25s ease-in-out;
-    }
+.drift-zoom-pane {
+  animation: fadeAnimationOut .25s ease-in-out;
+  width: 0;
+  height: 0;
 
-    @keyframes fadeAnimationIn {
-      0% {
-        display: none;
-        opacity: 0;
-      }
-      1% {
-        display: block;
-        opacity: 0;
-        transform: scale(0);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    @keyframes fadeAnimationOut {
-      0% {
-        display: block;
-        opacity: 1;
-        transform: scale(1);
-      }
-      50% {
-        display: block;
-        opacity: 0.5;
-        transform: scale(0.5);
-      }
-      100% {
-        opacity: 0;
-        transform: scale(0);
-        display: none;
-      }
-    }
-
+  &.drift-open {
+    width: 100%;
+    height: 100%;
+    transition-delay: .2s;
+    animation: fadeAnimationIn .25s ease-in-out;
   }
+
+  @keyframes fadeAnimationIn {
+    0% {
+      display: none;
+      opacity: 0;
+    }
+    1% {
+      display: block;
+      opacity: 0;
+      transform: scale(0);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes fadeAnimationOut {
+    0% {
+      display: block;
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      display: block;
+      opacity: 0.5;
+      transform: scale(0.5);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0);
+      display: none;
+    }
+  }
+
 }
 
 @media screen and (max-width: 1160px) {
@@ -228,10 +236,6 @@
     flex-direction: column;
     padding-top: 5em;
 
-    .drift-zoom-pane {
-      display: none;
-    }
-
     .product-detail {
       width: 80%;
       margin: 0;
@@ -249,5 +253,8 @@
     p {
       margin: 0 auto 1em;
     }
+  }
+  .drift-zoom-pane.drift-open {
+    display: none;
   }
 }
