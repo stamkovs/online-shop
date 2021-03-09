@@ -97,8 +97,25 @@ public class ProductService {
     List<Product> newestProducts = Stream.concat(productListMenSneakers.stream(), productListWatches.stream())
       .collect(Collectors.toList());
 
-    return newestProducts.stream().map((productConverter::toPresentationModel)).collect(Collectors.toList());
+    return newestProducts.stream().map((productConverter::toPresentationModel)).distinct().collect(Collectors.toList());
   }
 
+  /**
+   * Search products by search value
+   *
+   * @param searchValue the user input search value.
+   *
+   * @return List of {@link ProductDto}.
+   */
+  public List<ProductDto> searchProducts(String searchValue) {
+    List<Product> productsFromSearch = productRepository.findByNameContaining(searchValue);
+    List<Product> categoriesFromSearch = productRepository.findByProductCategoryCategoryContaining(searchValue);
+
+    List<Product> searchResult = Stream.concat(productsFromSearch.stream(), categoriesFromSearch.stream())
+      .collect(Collectors.toList());
+
+    return searchResult.stream().map((productConverter::toPresentationModel)).distinct().collect(Collectors.toList());
+
+  }
 
 }

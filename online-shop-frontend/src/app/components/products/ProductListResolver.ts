@@ -15,7 +15,11 @@ export class ProductListResolver implements Resolve<ProductDetails> {
     }
     if (state.url === '/products') {
       return this.productService.getProducts();
-    } else {
+    }
+    if (state.url.includes('searchValue')) {
+      return this.productService.searchProduct(route.queryParams.searchValue);
+    }
+    else {
       const category = route.url[1].toString();
       return this.productService.getProductsByCategory(category);
     }

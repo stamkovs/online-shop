@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 @Injectable()
@@ -22,5 +22,10 @@ export class ProductService {
 
   getNewestProducts(): Observable<any> {
     return this.http.get('rest/products/newest');
+  }
+
+  searchProduct(searchValue: string): Observable<any> {
+    const params = new HttpParams().set('searchValue', searchValue);
+    return this.http.get('rest/products/search', {params: params});
   }
 }

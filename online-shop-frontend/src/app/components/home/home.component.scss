@@ -6,7 +6,6 @@
 
 .home-page {
   background-image: url("../../../assets/images/home-page-bg.jpg");
-  overflow-x: hidden;
 
   &.banner-background {
     min-height: 100%;
@@ -55,6 +54,7 @@
   .glide {
     background-color: rgba($color-magenta-primary, 0.5);
     margin-bottom: 3em;
+    cursor: default;
 
     .featured-products-title {
       margin: 0;
@@ -81,6 +81,7 @@
     }
 
     .glide__track {
+      cursor: grab;
 
       .shoptastic-carousel-image {
         position: relative;
@@ -101,6 +102,7 @@
         }
 
         .add-to-cart-btn, {
+          background-color: transparent;
           display: inline-block;
           color: white;
           text-align: center;
@@ -174,7 +176,6 @@
 
   .home-page-footer-action {
     display: flex;
-    flex: 1;
     flex-direction: column;
     padding-bottom: 3em;
 

@@ -21,6 +21,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
   Optional<Product> findById(String id);
 
-  public Page<Product> findAllByProductCategoryCategoryOrderByCreatedOnDesc(String category, Pageable limit);
+  Page<Product> findAllByProductCategoryCategoryOrderByCreatedOnDesc(String category, Pageable limit);
+
+  List<Product> findByNameContaining(String searchValue);
+
+  List<Product> findByProductCategoryCategoryContaining(String searchValue);
 
 }

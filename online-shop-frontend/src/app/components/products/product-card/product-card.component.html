@@ -10,7 +10,7 @@
     </div>
     <div class="product-footer">
       <div class="flex"><span class="price">&euro;{{price}}.00&euro;</span></div>
-      <div class="action-buttons-wrapper">
+      <div class="action-buttons-wrapper flex">
         <a *ngIf="this.isUserLoggedIn()" id="{{productId}}" (click)="addItemToWishList($event)"
            class="add-to-wishlist-btn btn"><i class="far fa-heart"></i></a>
         <a href="#" class="add-to-cart-btn btn"><i class="las la-shopping-cart"></i></a>

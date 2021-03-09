@@ -7,6 +7,7 @@ import {
 import {CookieService} from 'ngx-cookie';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
+import {ProductService} from '../../services/product.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,6 +19,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   navbarToggle: HTMLElement;
   navbarMenu: HTMLElement;
   navbarLinksContainer: HTMLElement;
+  searchInput: any;
   navbarItems: NodeListOf<HTMLElement>;
   productsSubMenuMarginSeparator: number;
   accountSubMenuMarginSeparator: number;
@@ -25,7 +27,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   screenWidth: number;
 
   constructor(private cookieService: CookieService, private authService: AuthService,
-              private router: Router) {
+              private router: Router, private productService: ProductService) {
   }
 
   ngOnInit() {
@@ -116,5 +118,17 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     }, error => {
 
     });
+  }
+
+  searchProduct() {
+    this.searchInput = document.getElementById("search-input");
+    let searchValue = this.searchInput.value;
+
+    // this.productService.searchProduct(searchValue).subscribe((data: any) => {
+    //   if (data) {
+    this.router.navigate(['/products'], {queryParams: {'searchValue': searchValue}});
+    // }
+    // });
+
   }
 }

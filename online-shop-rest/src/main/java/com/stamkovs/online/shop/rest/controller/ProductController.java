@@ -6,10 +6,8 @@ import com.stamkovs.online.shop.rest.model.ProductDto;
 import com.stamkovs.online.shop.rest.model.ProductsInfo;
 import com.stamkovs.online.shop.rest.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +18,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/rest")
 @RequiredArgsConstructor
+@Slf4j
 public class ProductController {
 
   private final ProductService productService;
@@ -32,6 +31,7 @@ public class ProductController {
    */
   @GetMapping("/products")
   public ProductsInfo getProducts() {
+    log.info("Retrieving all products.");
     return productService.findAllProducts();
   }
 
@@ -43,6 +43,7 @@ public class ProductController {
    */
   @GetMapping("/products/{category}")
   public ProductsInfo getProductsByCategory(@PathVariable String category) {
+    log.info("Retrieving all products for category {}", category);
     return productService.findAllProductsByCategory(category);
   }
 
@@ -54,6 +55,7 @@ public class ProductController {
    */
   @GetMapping("/product/{id}")
   public ProductDto getProducts(@PathVariable Long id) {
+    log.info("Retrieving details for product with id {}", id);
     Optional<Product> optionalProduct = productService.findById(id);
     ProductDto productDto = new ProductDto();
     if (optionalProduct.isPresent()) {
@@ -71,6 +73,12 @@ public class ProductController {
   @GetMapping("/products/newest")
   public List<ProductDto> getNewestProducts() {
     return productService.findNewestProducts();
+  }
+
+  @GetMapping("/products/search")
+  public List<ProductDto> searchProducts(@RequestParam String searchValue) {
+    log.info("Searching products by value: [{}]", searchValue);
+    return productService.searchProducts(searchValue);
   }
 
 

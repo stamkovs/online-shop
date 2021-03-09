@@ -300,6 +300,7 @@ main {
       position: absolute;
       right: 0;
       padding: 0.6em 1em;
+      cursor: pointer;
 
       @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
         /* IE10+ CSS styles go here */
@@ -316,11 +317,11 @@ main {
       width: 100%;
       padding: 0.8em 1.4em;
       outline: 0;
+      font-size: 14px;
+      font-family: $font-secondary;
 
       background-color: transparent;
       line-height: 18px;
-      font-family: $font-paragraph;
-      font-size: 12px;
       color: white;
 
       border-radius: 50px;
@@ -362,7 +363,6 @@ main {
     &:hover,
     &:focus {
       outline: 0;
-      flex: 0.85;
       background-position: 100% center;
       transition: all 250ms ease-in-out;
 

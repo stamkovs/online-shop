@@ -42,8 +42,8 @@
           </div>
         </li>
         <span class="search-wrapper">
-            <input name="search-input" id="search-input" class="search__input" type="text"
-                   placeholder="Search for anything"><i class="fa fa-search"></i>
+            <input (keyup.enter)="searchProduct()" name="search-input" id="search-input" class="search__input" type="text"
+                   placeholder="Search for anything"><i (click)="searchProduct()" class="fa fa-search"></i>
         </span>
       </ul>
       <ul class="navbar-links right">
