@@ -1,7 +1,8 @@
 import {animate, animateChild, group, query, style, transition, trigger} from '@angular/animations';
 
 export const routeTransitionAnimations = trigger('triggerName', [
-  transition('One => Two, One => Three, One => Four, Two => Three, Two => Four, Three => Four', [
+  transition('One => Two, One => Three, One => Four, Two => Three, Two => Four, Three => Four' +
+    ', One => Five, Two => Five, Three => Five, Four => Five', [
     style({ position: 'absolute', overflow: 'hidden', height: 'calc(100% - 64px)' }),
     query(':enter, :leave', [
       style({
@@ -21,7 +22,8 @@ export const routeTransitionAnimations = trigger('triggerName', [
     ]),
     query(':enter', animateChild())
   ]),
-  transition('Four => Three, Four => Two, Four => One, Three => Two, Three => One, Two => One', [
+  transition('Four => Three, Four => Two, Four => One, Three => Two, Three => One, Two => One' +
+    ', Five => Four, Five => Three, Five => Two, Five => One', [
     style({ position: 'absolute', overflow: 'hidden', height: 'calc(100% - 64px)' }),
     query(':enter, :leave', [
       style({
