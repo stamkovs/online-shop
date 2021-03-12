@@ -318,6 +318,15 @@ As for the frontend if you look into **angular.json** file (search for "ssl" ins
 
 #### Changelog
 
+**2021-03-12**
+- Adapted the route transitions to include the new cart component since that route is now enabled
+- Implemented cart component with cart service for storing products in local storage and adapted all affected places where any cart functionality was available
+- Refactored the css and extracted common buttons styles in new scss file
+
+**2021-03-09**
+- Added search products functionality 
+- Bug fixes i.e. styling issues in IE, and breadcrumbs label visual improvement
+
 **2021-03-08**
 - Implemented home component with responsive design and implemented glidejs slider carousel library
 - Introduced new rest api endpoints for products
