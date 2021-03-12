@@ -17,53 +17,6 @@
   font-family: raleway-medium monospace;
   font-size: 16px;
 
-  .product-hierarchy-breadcrumb {
-    position: absolute;
-    left: 0;
-    top: 1em;
-    letter-spacing: 0.2em;
-    font-size: 16px;
-    font-family: raleway-medium monospace;
-    background: none;
-    margin: 0;
-    cursor: pointer;
-
-    li {
-      list-style: none;
-      float: left;
-      margin: 5px;
-      outline: 0;
-      border: none;
-
-      &::after {
-        content: " / ";
-        color: darkgrey;
-      }
-
-      &:last-child {
-        margin-right: 20px;
-
-        &::after {
-          content: "";
-        }
-      }
-
-      .label-text {
-        outline: 0;
-        border: none;
-        text-transform: capitalize;
-        transition: all .2s ease-in-out;
-
-        &:hover {
-          color: $color-magenta-primary;
-          text-decoration: none;
-          transition: all .2s ease-in-out;
-
-        }
-      }
-    }
-  }
-
   .product-image-zoom {
     display: inline-block;
     width: 35%;
@@ -103,13 +56,6 @@
       font-family: raleway-extra-light monospace;
     }
 
-    button {
-      vertical-align: middle;
-      opacity: .5;
-      cursor: unset;
-      margin-left: 1em;
-    }
-
     .product-detail-footer {
       display: flex;
       flex: 1;
@@ -117,28 +63,11 @@
       flex-wrap: wrap;
       flex-direction: row;
 
-      .add-to-cart-btn, .add-to-wishlist-btn, .buy-now-btn {
+      .btn {
         display: flex;
-        color: white;
-        text-align: center;
-        font-size: 18px;
-        padding: 0.2em 2em;
-        line-height: 35px;
-        border-radius: 5px;
-        border: 1px solid #c2185b;
-        transition: all 0.2s ease-in-out;
-        cursor: pointer;
-        text-decoration: none;
         justify-content: center;
         align-items: center;
         flex: 1;
-        // needed for IE11
-        min-height: 35px;
-
-        &:hover, &:active, &:focus {
-          border-color: $color-magenta-primary;
-          background: $color-magenta-primary;
-        }
 
         i {
           margin-left: .4em;

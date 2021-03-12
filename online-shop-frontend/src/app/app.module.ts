@@ -40,6 +40,8 @@ import {ProductListComponent} from './components/products/product-list/product-l
 import {ProductDetailComponent} from './components/products/product-detail/product-detail.component';
 import {ProductDetailResolver} from './components/products/ProductDetailResolver';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
+import { CartComponent } from './components/cart/cart.component';
+import {CartService} from './services/cart.service';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,7 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
     ProductCardComponent,
     ProductDetailComponent,
     BreadcrumbsComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,6 +88,7 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
     ProductListResolver,
     ProductDetailResolver,
     ProductService,
+    CartService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,

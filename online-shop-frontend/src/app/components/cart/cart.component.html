@@ -1,0 +1,31 @@
+<div class="cart-page">
+  <div class="container">
+    <div *ngIf="products.length; else emptyCart" class="product-cart-main-wrapper flex">
+      <section class="product-cart-section left">
+        <shoptastic-product-card (clickEvent)="goToProductDetail(item)" class="shoptastic-product-card-wrapper"
+                                 *ngFor="let item of products"
+                                 [item]="item">
+          <div>
+            <button (click)="deleteItem(item)"
+                    class="shoptastic-btn-primary btn">Remove
+            </button>
+          </div>
+        </shoptastic-product-card>
+      </section>
+      <section class="product-cart-section right">
+        <div class="checkout-wrapper">
+          <p>Total:</p>
+          <p class="price">&euro;{{totalAmount}}</p>
+          <a class="shoptastic-btn-secondary btn" (click)="checkout()">Checkout</a>
+        </div>
+      </section>
+    </div>
+
+    <ng-template #emptyCart>
+      <div class="empty-cart">
+        <p>Your cart is empty. Keep shopping to find a product.</p>
+        <a class="shoptastic-btn-transparent-magenta btn" routerLink="/products">View all products</a>
+      </div>
+    </ng-template>
+  </div>
+</div>

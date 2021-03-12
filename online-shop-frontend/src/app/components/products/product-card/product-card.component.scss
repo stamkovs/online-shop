@@ -101,6 +101,7 @@
 
       .add-to-cart-btn, .add-to-wishlist-btn {
         display: block;
+        padding: 0;
         color: #212121;
         text-align: center;
         font-size: 18px;
@@ -117,6 +118,11 @@
           background: $navbar-bg-color;
           color: #fff;
           text-decoration: none;
+        }
+
+        &.go-to-cart {
+          background: $navbar-bg-color;
+          color: #fff;
         }
 
         .la-shopping-cart {

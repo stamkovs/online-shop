@@ -11,9 +11,10 @@
       <h4>&euro;{{item.price}}.00</h4>
       <div class="product-detail-footer">
         <a *ngIf="isUserLoggedIn()" id="{{item.id}}" (click)="addItemToWishList($event)"
-           class="add-to-wishlist-btn btn">Wishlist<i class="far fa-heart"></i></a>
-        <a href="#" class="add-to-cart-btn btn">Add to cart<i class="las la-shopping-cart"></i></a>
-        <a href="#" class="buy-now-btn btn">Buy now</a>
+           class="add-to-wishlist-btn shoptastic-btn-transparent-magenta btn">Wishlist<i class="far fa-heart"></i></a>
+        <a (click)="isItemInCart(item.id) ? goToCart() : addProductToCart(item, $event)" class="add-to-cart-btn shoptastic-btn-transparent-magenta btn">
+          {{isItemInCart(item.id) ? 'Go to cart' : 'Add to cart'}}<i class="las la-shopping-cart"></i></a>
+        <a (click)="buyProduct(item)" class="buy-now-btn shoptastic-btn-transparent-magenta btn">Buy now</a>
       </div>
     </div>
   </div>

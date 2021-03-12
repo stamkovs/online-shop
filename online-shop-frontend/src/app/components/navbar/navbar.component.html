@@ -42,14 +42,16 @@
           </div>
         </li>
         <span class="search-wrapper">
-            <input (keyup.enter)="searchProduct()" name="search-input" id="search-input" class="search__input" type="text"
+            <input (keyup.enter)="searchProduct()" name="search-input" id="search-input" class="search__input"
+                   type="text"
                    placeholder="Search for anything"><i (click)="searchProduct()" class="fa fa-search"></i>
         </span>
       </ul>
       <ul class="navbar-links right">
         <li *ngIf="isUserLoggedIn()" class="navbar-item"><a class="navbar-link"><i class="far fa-heart"></i>Wish
           list</a></li>
-        <li class="navbar-item"><a class="navbar-link"><i class="las la-shopping-cart"></i>Cart</a></li>
+        <li class="navbar-item"><a class="navbar-link" routerLink="cart"
+                                   routerLinkActive="active"><i class="las la-shopping-cart"></i>Cart</a></li>
         <li class="navbar-item" (click)="closeMobileNavbar()"><a class="navbar-link" routerLink="contact"
                                                                  routerLinkActive="active">
           <i class="far fa-envelope"></i>Contact us</a></li>

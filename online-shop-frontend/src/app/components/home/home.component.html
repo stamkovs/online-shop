@@ -14,7 +14,9 @@
               <p class="truncate" (click)="goToProductDetail(item)">{{item.name}}</p>
               <span class="price">&euro;{{item.price}}.00</span>
               <div class="product-detail-footer">
-                <button class="add-to-cart-btn btn">Add to cart<i class="las la-shopping-cart"></i></button>
+                <button (click)="isItemInCart(item.id) ? goToCart() : addItemToCart(item, $event)"
+                        class="btn add-to-cart-btn shoptastic-btn-transparent-dark">{{isItemInCart(item.id) ? 'Go to cart' : 'Add to cart'}}<i
+                  class="las la-shopping-cart"></i></button>
               </div>
             </div>
 
@@ -33,7 +35,7 @@
     </div>
     <div class="home-page-footer-action">
       <h2>Interested for more?</h2>
-      <a routerLink="/products">View all products</a>
+      <a class="btn shoptastic-btn-secondary" routerLink="/products">View all products</a>
     </div>
   </div>
 </div>

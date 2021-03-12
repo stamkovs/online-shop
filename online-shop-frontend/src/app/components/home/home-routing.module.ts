@@ -8,6 +8,7 @@ import {AuthGuard} from '../../core/guards/auth.guard';
 import {ProductListResolver} from '../products/ProductListResolver';
 import {ProductDetailComponent} from '../products/product-detail/product-detail.component';
 import {ProductDetailResolver} from '../products/ProductDetailResolver';
+import {CartComponent} from '../cart/cart.component';
 
 const homeRoutes: Routes = [
   {
@@ -48,16 +49,21 @@ const homeRoutes: Routes = [
     },
   },
   {
+    path: 'cart',
+    component: CartComponent,
+    data: {animationState: 'Three'},
+  },
+  {
     path: 'contact',
     component: ContactComponent,
-    data: {animationState: 'Three'}
+    data: {animationState: 'Four'}
   },
   {
     path: 'entry',
     component: EntryComponent,
-    data: {animationState: 'Four'},
+    data: {animationState: 'Five'},
     canActivate: [AuthGuard]
-  }
+  },
 ];
 
 @NgModule({

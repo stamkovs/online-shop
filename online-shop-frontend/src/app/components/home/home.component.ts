@@ -3,6 +3,7 @@ import Glide from '@glidejs/glide';
 
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProductDetails} from '../../models/ProductDetails';
+import {CartService} from '../../services/cart.service';
 
 @Component({
   selector: 'app-home',
@@ -14,11 +15,10 @@ export class HomeComponent implements OnInit {
 
   products: ProductDetails[];
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(private router: Router, private route: ActivatedRoute, private cartService: CartService) {
   }
 
   ngOnInit(): void {
-
     this.route.data.subscribe((data: any) => {
       this.products = data.newestProducts;
     });
@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
       const glide = new Glide('.glide', {
         type: 'carousel',
         perView: 3,
-        autoplay: 3000,
+        autoplay: 5000,
         hoverpause: true,
         breakpoints: {
           768: {
@@ -52,5 +52,24 @@ export class HomeComponent implements OnInit {
 
   addItemToWishList(event) {
     const productId = event.currentTarget.id;
+  }
+
+  addItemToCart(product: ProductDetails, event) {
+    event.target.classList.add('button-loading');
+    const btnInnerHTML = event.target.innerHTML;
+    event.target.innerHTML = '';
+    setTimeout(() => {
+      event.target.classList.remove('button-loading');
+      event.target.innerHTML = "<pre class='pre-button'>" + btnInnerHTML.replace('Add to cart', 'Go to cart') + "</pre>";
+    }, 2000);
+    this.cartService.addProductToCart(product);
+  }
+
+  goToCart() {
+    this.router.navigate(['/cart']);
+  }
+
+  isItemInCart(productId: number) {
+    return this.cartService.checkIsProductInCartById(productId);
   }
 }

@@ -1,20 +1,23 @@
 <div class="shoptastic-product-card">
-  <div class="shoptastic-product-image-wrapper" (click)="goToProductDetail(item)">
+  <div class="shoptastic-product-image-wrapper" (click)="emitClickEvent(item)">
     <img
       [src]="imageSrc"
       alt="Product" class="shoptastic-product-image image-responsive"/>
   </div>
   <div class="product-text-wrapper">
     <div class="product-title">
-      <p (click)="goToProductDetail($event)">{{name}}</p>
+      <p (click)="emitClickEvent(item)">{{name}}</p>
     </div>
     <div class="product-footer">
       <div class="flex"><span class="price">&euro;{{price}}.00&euro;</span></div>
       <div class="action-buttons-wrapper flex">
         <a *ngIf="this.isUserLoggedIn()" id="{{productId}}" (click)="addItemToWishList($event)"
            class="add-to-wishlist-btn btn"><i class="far fa-heart"></i></a>
-        <a href="#" class="add-to-cart-btn btn"><i class="las la-shopping-cart"></i></a>
+        <a [title]="isItemInCart(item.id) ? 'Go to cart' : 'Add to cart'" (click)="emitAddToCartEvent(item)"
+           class="add-to-cart-btn btn" [ngClass]="{'go-to-cart' : isItemInCart(item.id)}"><i class="las" [ngClass]="{'la-shopping-cart' : !isItemInCart(item.id),
+        'la-angle-double-right': isItemInCart(item.id)}"></i></a>
       </div>
+      <ng-content></ng-content>
     </div>
   </div>
 </div>

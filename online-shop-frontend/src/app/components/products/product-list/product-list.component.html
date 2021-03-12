@@ -2,7 +2,7 @@
   <shoptastic-breadcrumbs [categoryChangeEvent]="categoryChangeSubject.asObservable()"></shoptastic-breadcrumbs>
   <div class="full-window-width product-category-page-title"><h2>{{pageTitle}}</h2></div>
   <p *ngIf="showNoProductsMessage">Currently there are no products available for the selected category.</p>
-  <shoptastic-product-card class="shoptastic-product-card-wrapper" *ngFor="let item of products"
+  <shoptastic-product-card (clickEvent)="goToProductDetail(item)" (addToCartEvent)="addItemToCart(item)" class="shoptastic-product-card-wrapper" *ngFor="let item of products"
                            [item]="item"></shoptastic-product-card>
 </div>
 <router-outlet></router-outlet>

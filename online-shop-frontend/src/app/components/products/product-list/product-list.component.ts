@@ -2,6 +2,9 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subject} from 'rxjs';
 import {ProductService} from '../../../services/product.service';
+import {ProductDetails} from '../../../models/ProductDetails';
+import {CartService} from '../../../services/cart.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-list',
@@ -19,8 +22,8 @@ export class ProductListComponent implements OnInit {
 
   categoryChangeSubject: Subject<void> = new Subject<void>();
 
-  constructor(private route: ActivatedRoute, private router: Router,
-              private productService: ProductService) {
+  constructor(private route: ActivatedRoute, private router: Router, private productService: ProductService,
+              private cartService: CartService, private _snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -110,5 +113,35 @@ export class ProductListComponent implements OnInit {
 
   emitCategoryChange() {
     this.categoryChangeSubject.next();
+  }
+
+  goToProductDetail(item) {
+    if (this.route.snapshot.params.productCategory) {
+      return this.router.navigate([item.id], {
+        relativeTo: this.route,
+        state: {id: true, data: item},
+        queryParams: {navigatingThroughCategory: true}
+      });
+    }
+    this.router.navigate([item.category, item.id], {
+      relativeTo: this.route, state: {id: true, data: item}
+    });
+  }
+
+  addItemToCart(product: ProductDetails) {
+    if (this.cartService.checkIsProductInCartById(product.id)) {
+      this.router.navigate(['/cart']);
+    } else {
+      this.cartService.addProductToCart(product);
+      this.openSnackBar(product.name)
+    }
+  }
+
+  openSnackBar(productName: string) {
+    this._snackBar.open(productName + ' was added to cart.', 'Close', {
+      duration: 5000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+    });
   }
 }

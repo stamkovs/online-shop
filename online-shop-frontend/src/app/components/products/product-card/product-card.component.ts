@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CookieService} from 'ngx-cookie';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProductDetails} from '../../../models/ProductDetails';
+import {CartService} from '../../../services/cart.service';
 
 @Component({
   selector: 'shoptastic-product-card',
@@ -18,7 +19,11 @@ export class ProductCardComponent implements OnInit {
   @Input()
   item: ProductDetails;
 
-  constructor(private cookieService: CookieService, private router: Router, private route: ActivatedRoute) {
+  @Output() clickEvent = new EventEmitter<string>();
+  @Output() addToCartEvent = new EventEmitter<string>();
+
+  constructor(private cookieService: CookieService, private router: Router, private route: ActivatedRoute,
+              private cartService: CartService) {
   }
 
   ngOnInit(): void {
@@ -32,21 +37,19 @@ export class ProductCardComponent implements OnInit {
     return this.cookieService.get('is_user_logged_in') === '1';
   }
 
-  goToProductDetail(item) {
-    if (this.route.snapshot.params.productCategory) {
-      return this.router.navigate([item.id], {
-        relativeTo: this.route,
-        state: {id: true, data: item},
-        queryParams: {navigatingThroughCategory: true}
-      });
-    }
-    this.router.navigate([item.category, item.id], {
-      relativeTo: this.route, state: {id: true, data: item},
-      queryParams: {navigatingThroughCategory: true}
-    });
+  emitClickEvent(item) {
+    this.clickEvent.emit(item);
+  }
+
+  emitAddToCartEvent(item) {
+    this.addToCartEvent.emit(item);
   }
 
   addItemToWishList(event) {
     const productId = event.currentTarget.id;
+  }
+
+  isItemInCart(productId: number) {
+    return this.cartService.checkIsProductInCartById(productId);
   }
 }
