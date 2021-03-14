@@ -49,15 +49,16 @@ public class RegisterService {
   private final AuthConfiguration authConfiguration;
 
   public void registerUser(UserRegisterDto userRegisterDto) {
-    Optional<UserAccount> userAccount = userRepository.findByEmailIgnoreCase(userRegisterDto.getEmail());
+    String email = userRegisterDto.getEmail();
+    Optional<UserAccount> userAccount = userRepository.findByEmailIgnoreCase(email);
 
     if (userAccount.isPresent() && Boolean.TRUE.equals(userAccount.get().getEmailVerified())) {
-      throw new UserAlreadyExistsException("User with email " + userAccount.get().getEmail() + " exists and is " +
+      throw new UserAlreadyExistsException("User with email [" + email + "] exists and is " +
         "verified.");
     } else {
       ConfirmationToken confirmationToken;
       UserAccount account;
-      log.info("Started registration for user with email: {}.", userRegisterDto.getEmail());
+      log.info("Started registration for user with email: {}.", email);
       if (userAccount.isEmpty()) {
         UserAccount newUser = userConverter.convertUserRegisterDtoToUserAccount(userRegisterDto);
         confirmationToken = createConfirmationToken(newUser);
@@ -75,7 +76,7 @@ public class RegisterService {
       confirmationTokenRepository.save(confirmationToken);
       SimpleMailMessage mailMessage = emailSenderService.constructAccountVerificationEmail(account,
         confirmationToken.getConfirmationToken());
-      emailSenderService.sendEmail(mailMessage);
+      emailSenderService.sendEmail(mailMessage, email);
     }
   }
 

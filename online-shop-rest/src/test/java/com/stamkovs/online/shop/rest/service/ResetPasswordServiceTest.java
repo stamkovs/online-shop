@@ -86,7 +86,7 @@ class ResetPasswordServiceTest {
 
     // then
     verify(resetPasswordTokenRepository, times(1)).save(any());
-    verify(emailSenderService, times(1)).sendEmail(any());
+    verify(emailSenderService, times(1)).sendEmail(any(), any());
   }
 
   @Test
@@ -100,7 +100,7 @@ class ResetPasswordServiceTest {
 
     // then
     verify(resetPasswordTokenRepository, times(0)).save(any());
-    verify(emailSenderService, times(0)).sendEmail(any());
+    verify(emailSenderService, times(0)).sendEmail(any(), any());
   }
 
 
@@ -119,7 +119,7 @@ class ResetPasswordServiceTest {
 
     // then
     verify(resetPasswordTokenRepository, times(0)).save(any());
-    verify(emailSenderService, times(0)).sendEmail(any());
+    verify(emailSenderService, times(0)).sendEmail(any(), any());
   }
 
   @Test

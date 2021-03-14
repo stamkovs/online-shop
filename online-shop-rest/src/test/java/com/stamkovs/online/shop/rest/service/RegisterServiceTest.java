@@ -123,7 +123,7 @@ class RegisterServiceTest {
     verify(emailSenderService, times(1)).constructAccountVerificationEmail(newUserInEmailSender.capture(), any());
     UserAccount userAccountInEmailSender = newUserInEmailSender.getValue();
     assertEquals(registeredUserAccount, userAccountInEmailSender);
-    verify(emailSenderService, times(1)).sendEmail(any());
+    verify(emailSenderService, times(1)).sendEmail(any(), any());
   }
 
   @Test
@@ -152,7 +152,7 @@ class RegisterServiceTest {
     verify(emailSenderService, times(1)).constructAccountVerificationEmail(newUserInEmailSender.capture(), any());
     UserAccount userAccountInEmailSender = newUserInEmailSender.getValue();
     assertEquals(registeredUserAccount, userAccountInEmailSender);
-    verify(emailSenderService, times(1)).sendEmail(any());
+    verify(emailSenderService, times(1)).sendEmail(any(), any());
   }
 
   @Test

@@ -27,7 +27,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
 import {ForgotPasswordService} from './services/forgot-password.service';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {SpinnerService} from './services/SpinnerService';
+import {SpinnerService} from './services/spinner.service';
 import {HttpRequestInterceptor} from './core/interceptor/http-request-interceptor.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {SpinnerComponent} from './components/spinner/spinner.component';
@@ -42,6 +42,7 @@ import {ProductDetailResolver} from './components/products/ProductDetailResolver
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { CartComponent } from './components/cart/cart.component';
 import {CartService} from './services/cart.service';
+import {ContactService} from './services/contact.service';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import {CartService} from './services/cart.service';
     ProductDetailResolver,
     ProductService,
     CartService,
+    ContactService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,

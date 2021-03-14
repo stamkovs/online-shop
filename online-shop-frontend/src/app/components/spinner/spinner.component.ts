@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {SpinnerService} from '../../services/SpinnerService';
+import {SpinnerService} from '../../services/spinner.service';
 import {BehaviorSubject} from 'rxjs';
 
 @Component({

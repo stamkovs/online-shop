@@ -50,11 +50,12 @@ public class ResetPasswordService {
 
   public void resetPassword(EmailDto emailDto) {
 
-    Optional<UserAccount> userAccount = userRepository.findByEmailIgnoreCase(emailDto.getEmail());
+    String email = emailDto.getEmail();
+    Optional<UserAccount> userAccount = userRepository.findByEmailIgnoreCase(email);
 
     if (userAccount.isEmpty() || Boolean.FALSE.equals(userAccount.get().getEmailVerified())) {
-      log.info("User with email: {} does not exists or is not verified.", emailDto.getEmail());
-      throw new UserNotFoundException("Account with email " + emailDto.getEmail() + " does not exist.");
+      log.info("User with email: {} does not exists or is not verified.", email);
+      throw new UserNotFoundException("Account with email " + email + " does not exist.");
     } else {
       log.info("User with email: {} request to reset password.", userAccount.get().getEmail());
       ResetPasswordToken resetPasswordToken;
@@ -62,7 +63,7 @@ public class ResetPasswordService {
       resetPasswordTokenRepository.save(resetPasswordToken);
       SimpleMailMessage mailMessage = emailSenderService.constructResetPasswordEmail(userAccount.get(),
         resetPasswordToken.getResetPasswordToken());
-      emailSenderService.sendEmail(mailMessage);
+      emailSenderService.sendEmail(mailMessage, email);
     }
   }
 

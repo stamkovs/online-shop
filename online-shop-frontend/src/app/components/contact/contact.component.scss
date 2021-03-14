@@ -140,13 +140,24 @@
       background-color: $color-magenta-primary;
       color: white;
       line-height: 34px;
-    }
 
-    .button {
-      width: 100%;
-      height: 34px;
-      transition: all .2s ease-in-out;
-      background-color: $color-magenta-primary;
+      .button {
+        width: 100%;
+        height: 34px;
+        transition: all .2s ease-in-out;
+        background-color: $color-magenta-primary;
+      }
+
+      &.send-disabled {
+        background-color: dimgrey;
+        cursor: not-allowed;
+
+        .button {
+          pointer-events: none;
+          background-color: dimgrey;
+          cursor: not-allowed;
+        }
+      }
     }
 
     .send-text {
@@ -258,19 +269,6 @@
         height: 36px;
         line-height: 36px;
       }
-    }
-
-    .social-media-list li:after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      opacity: 0;
-      //box-shadow: 0 0 0 1px #fff;
-      transition: all .2s ease-in-out;
     }
 
     .social-media-list li:hover {

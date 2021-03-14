@@ -18,10 +18,18 @@
       <h1 class="section-header">CONTACT</h1>
       <div class="contact-wrapper">
         <form class="form-horizontal" role="form" method="post" onsubmit="return false;">
-          <input type="text" class="form-control" id="name" placeholder="NAME" name="name" value="">
-          <input type="email" class="form-control" id="email" placeholder="EMAIL" name="email" value="">
-          <textarea class="form-control textarea" rows="4" placeholder="MESSAGE" name="message"></textarea>
-          <button class="btn btn-primary send-button" id="submit" type="submit" value="SEND">
+          <input type="text" class="form-control" name="name" placeholder="Name" [ngModel]="userName"
+                 autocomplete="new-name"
+                 (ngModelChange)="onNameChange($event)"/>
+          <input class="form-control" type="email" name="email" placeholder="Email" [ngModel]="userEmail" #email="ngModel" email required
+                 (ngModelChange)="onEmailChange($event)"/>
+          <div class="error-message" *ngIf="email.value !== '' && email.invalid">
+            <p>Please provide a valid email address.</p>
+          </div>
+          <textarea class="form-control textarea" rows="4" placeholder="Message" name="message"
+                    [ngModel]="userMessage" (ngModelChange)="onMessageChange($event)"></textarea>
+          <button class="btn btn-primary send-button" [ngClass]="{'send-disabled': disableSendBtn}" id="submit" type="submit" value="SEND"
+                  [disabled]="disableSendBtn" (click)="sendMailSupport()">
             <div class="button">
               <i class="fa fa-paper-plane"></i><span class="send-text">SEND</span>
             </div>
@@ -36,18 +44,18 @@
             </li>
             <li class="list-item"><i class="fa fa-envelope fa-2x"></i>
               <span class="contact-text gmail"><a href="mailto:#"
-                                                  title="Send me an email">emailme@gmail.com</a></span>
+                                                  title="Send me an email">shoptasticmk@gmail.com</a></span>
             </li>
           </ul>
           <hr>
           <ul class="social-media-list">
-            <li><a class="contact-icon">
+            <li><a href="https://github.com/stamkovs/online-shop" target="_blank" class="contact-icon">
               <i class="fab fa-github" aria-hidden="true"></i></a>
             </li>
-            <li><a class="contact-icon">
-              <i class="fab fa-twitter" aria-hidden="true"></i></a>
+            <li><a href="https://www.linkedin.com/in/stamkovs/" target="_blank" class="contact-icon">
+              <i class="fab fa-linkedin" aria-hidden="true"></i></a>
             </li>
-            <li><a class="contact-icon">
+            <li><a href="https://instagram.com/stamkoff" target="_blank" class="contact-icon">
               <i class="fab fa-instagram" aria-hidden="true"></i></a>
             </li>
           </ul>

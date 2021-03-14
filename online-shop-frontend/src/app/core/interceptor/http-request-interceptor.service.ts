@@ -10,7 +10,7 @@ import {
 } from '@angular/common/http';
 
 
-import {SpinnerService} from '../../services/SpinnerService';
+import {SpinnerService} from '../../services/spinner.service';
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
