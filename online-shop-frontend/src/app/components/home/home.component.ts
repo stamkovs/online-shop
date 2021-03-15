@@ -50,10 +50,6 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  addItemToWishList(event) {
-    const productId = event.currentTarget.id;
-  }
-
   addItemToCart(product: ProductDetails, event) {
     event.target.classList.add('button-loading');
     const btnInnerHTML = event.target.innerHTML;

@@ -18,6 +18,7 @@ export class ProductDetailComponent implements OnInit {
   item: ProductDetails;
   routeState: any;
   wishlistBtnLabel: string;
+  cartBtnLabel: string;
 
   constructor(private router: Router, private route: ActivatedRoute, private cookieService: CookieService,
               private cartService: CartService, private _snackBar: MatSnackBar,
@@ -37,6 +38,7 @@ export class ProductDetailComponent implements OnInit {
       if (data.productDetail) {
         this.item = data.productDetail;
         this.wishlistBtnLabel = this.item.wishlisted ? 'Go to wishlist' : 'Wishlist';
+        this.cartBtnLabel = this.isItemInCart(this.item.id) ? 'Go to cart' : 'Add to cart';
       }
     });
 
@@ -75,12 +77,10 @@ export class ProductDetailComponent implements OnInit {
 
   addProductToCart(product: ProductDetails, event) {
     event.target.classList.add('button-loading');
-    const btnInnerHTML = event.target.innerHTML;
-    event.target.innerHTML = '';
     setTimeout(() => {
       event.target.classList.remove('button-loading');
-      event.target.innerHTML = "<pre class='pre-button'>" + btnInnerHTML.replace('Add to cart', 'Go to cart') + "</pre>";
       this.openSnackBar(product.name, ' was successfully added to your cart.');
+      this.cartBtnLabel = 'Go to cart';
     }, 2000);
     this.cartService.addProductToCart(product);
   }
@@ -104,5 +104,6 @@ export class ProductDetailComponent implements OnInit {
   buyProduct(product: ProductDetails) {
     this.cartService.removeProductFromCart(product.id);
     this.openSnackBar(product.name, ' was successfully purchased.');
+    this.cartBtnLabel = 'Add to cart';
   }
 }

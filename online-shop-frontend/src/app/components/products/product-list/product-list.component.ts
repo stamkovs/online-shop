@@ -43,17 +43,10 @@ export class ProductListComponent implements OnInit {
       } else {
         this.componentInitialLoad = false;
         if ((data.searchValue == undefined || data.searchValue === '') &&
-          (this.router.url === '/products') || this.router.url === '/products?searchValue=') {
+          (this.router.url === '/products?searchValue=' || this.router.url === '/products')) {
           this.productService.getProducts().subscribe((data: any) => {
             data.productsData = data;
             this.initProductsList(data);
-            this.router.navigate([], {
-              relativeTo: this.route,
-              queryParams: {
-                searchValue: null
-              },
-              queryParamsHandling: 'merge', // remove to replace all query params by provided
-            });
             this.searchBar = document.getElementById('search-input');
             this.searchBar.value = '';
           });

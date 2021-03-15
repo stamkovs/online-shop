@@ -123,12 +123,6 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   searchProduct() {
     this.searchInput = document.getElementById("search-input");
     let searchValue = this.searchInput.value;
-
-    // this.productService.searchProduct(searchValue).subscribe((data: any) => {
-    //   if (data) {
     this.router.navigate(['/products'], {queryParams: {'searchValue': searchValue}});
-    // }
-    // });
-
   }
 }
