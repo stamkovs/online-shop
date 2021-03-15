@@ -350,6 +350,25 @@ As for the frontend if you look into **angular.json** file (search for "ssl" ins
 
 #### Changelog
 
+**2021-03-16**
+- Updated github readme to reflect all the latest changes, and added screenshots of the main pages and some major functionalities
+- Fixed bug for showing that no products are available per product category on the frontend
+
+**2021-03-15**
+- Fixed bug for retrieval of product description, and fixed incorrect css class name
+- Minor code cleanup and refactoring for better readability
+- Added simple unit tests for Product and Wishlist services
+- Fixed a newly introduced issue to allow anonymous user to access the pages without seeing the wishlist functionalities
+- Adapted the frontend for the newly added wishlist functionality
+- Implemented the wishlist controller endpoints, service and repository, added java doc and other minor improvements
+- Implemented the wishlist component for a logged in user, enabled the route, and adapted the route transitions
+
+
+**2021-03-14**
+- Adapted tests and added new minor tests
+- Added email validation on backend 
+- Added logic for sending email to contact support on the contact page component
+
 **2021-03-12**
 - Adapted the route transitions to include the new cart component since that route is now enabled
 - Implemented cart component with cart service for storing products in local storage and adapted all affected places where any cart functionality was available
