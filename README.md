@@ -4,7 +4,8 @@ An online shop application project developed for my graduate thesis with some se
 <img src="https://user-images.githubusercontent.com/17550473/111230521-07851080-85e8-11eb-9a93-0ba0641d7d49.PNG">
 <br/>
 <br/>
-The following **screenshots** are for the main pages and some major functionalities in the corresponding order: Products, Products category, product details, product zoom on hover, search products functionality, contact page, cart, wishlist empty and wishlisted products (logged in users only), login with google popup, login with facebook popup, forgot password dialog, forgot password email, example of responsive mobile look.
+The following **screenshots** are for the main pages and some major functionalities in the corresponding order: 
+Products, Products category, product details, product zoom on hover, search products functionality, contact page, cart, wishlist empty and wishlisted products (logged in users only), login with google popup, login with facebook popup, forgot password dialog, forgot password email, and example of responsive mobile look.
 <p float="left">
   <img src="https://user-images.githubusercontent.com/17550473/111231638-e7eee780-85e9-11eb-8dc7-b02f36e8947f.PNG" width="300">
   <img src="https://user-images.githubusercontent.com/17550473/111231639-e8877e00-85e9-11eb-992b-44593c8bb56d.PNG" width="300">
