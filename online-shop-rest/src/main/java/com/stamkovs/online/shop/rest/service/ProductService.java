@@ -2,6 +2,8 @@ package com.stamkovs.online.shop.rest.service;
 
 import com.stamkovs.online.shop.rest.auth.security.CustomUserDetailsService;
 import com.stamkovs.online.shop.rest.converter.ProductConverter;
+import com.stamkovs.online.shop.rest.exception.UnauthorizedShoptasticException;
+import com.stamkovs.online.shop.rest.exception.UserNotFoundException;
 import com.stamkovs.online.shop.rest.model.Product;
 import com.stamkovs.online.shop.rest.model.ProductDto;
 import com.stamkovs.online.shop.rest.model.ProductsInfo;
@@ -26,7 +28,6 @@ import java.util.stream.Stream;
  */
 @Service
 @Slf4j
-@Transactional
 @RequiredArgsConstructor
 public class ProductService {
 
@@ -44,15 +45,22 @@ public class ProductService {
    */
   public ProductsInfo findAllProducts() {
     log.info("Retrieving all products");
-    Long userAccountId = customUserDetailsService.getUserAccountIdFromAuthentication();
-    List<ProductDto> productDtoList =
-      productRepository.findAll().stream().map(product -> {
+    List<ProductDto> productDtoList;
+    try {
+      Long userAccountId = customUserDetailsService.getUserAccountIdFromAuthentication();
+      log.info("User is logged in. Will retrieve wishlist details for userAccountId {}", userAccountId);
+      productDtoList = productRepository.findAll().stream().map(product -> {
         ProductDto productDto = productConverter.toPresentationModel(product);
         Optional<Wishlist> wishlist = wishlistRepository.findByUserAccountIdAndProductId(userAccountId,
           product.getId());
         productDto.setWishlisted(wishlist.isPresent());
         return productDto;
       }).collect(Collectors.toList());
+    } catch (UnauthorizedShoptasticException | UserNotFoundException e) {
+      log.info("Anonymous user. Products will be shown without wishlist details");
+      productDtoList =
+        productRepository.findAll().stream().map(productConverter::toPresentationModel).collect(Collectors.toList());
+    }
 
     ProductsInfo productsInfo = new ProductsInfo();
     productsInfo.setNumberOfProducts(productDtoList.size());
@@ -96,13 +104,18 @@ public class ProductService {
     if (productOptional.isPresent()) {
       Product product = productOptional.get();
       productDto = productConverter.toPresentationModel(product);
-      Long userAccountId = customUserDetailsService.getUserAccountIdFromAuthentication();
-      log.info("Retrieving wishlist for userAccountId: {}, and productId: {}", userAccountId, id);
-      Optional<Wishlist> optionalWishlistProduct = wishlistRepository.findByUserAccountIdAndProductId(userAccountId,
-        id);
-      if (optionalWishlistProduct.isPresent()) {
-        productDto.setWishlisted(true);
+      try {
+        Long userAccountId = customUserDetailsService.getUserAccountIdFromAuthentication();
+        log.info("Retrieving wishlist for userAccountId: {}, and productId: {}", userAccountId, id);
+        Optional<Wishlist> optionalWishlistProduct = wishlistRepository.findByUserAccountIdAndProductId(userAccountId,
+          id);
+        if (optionalWishlistProduct.isPresent()) {
+          productDto.setWishlisted(true);
+        }
+      } catch (UnauthorizedShoptasticException | UserNotFoundException e) {
+        log.info("Anonymous user. Product details will be shown without option to add it to wishlist");
       }
+
     }
     return productDto;
   }
