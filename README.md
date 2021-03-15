@@ -6,14 +6,16 @@ Screenshots of the main screens and some major functionalities:
 
 Homepage: \
 <img src="https://user-images.githubusercontent.com/17550473/111230521-07851080-85e8-11eb-9a93-0ba0641d7d49.PNG">
-Products: \
+<p>Products: \
 <img src="https://user-images.githubusercontent.com/17550473/111231638-e7eee780-85e9-11eb-8dc7-b02f36e8947f.PNG" width="300">
-Products category:
+</p>
+<p>Products category:
 <img src="https://user-images.githubusercontent.com/17550473/111231639-e8877e00-85e9-11eb-992b-44593c8bb56d.PNG" width="300">
 Product details:
 <img src="https://user-images.githubusercontent.com/17550473/111231642-e8877e00-85e9-11eb-9916-b3d294ec66ce.PNG" width="300">
 Product zoom hover:
 <img src="https://user-images.githubusercontent.com/17550473/111231643-e9201480-85e9-11eb-804a-ec77ade5141a.png" width="300">
+  </p>
 Search products:
 <img src="https://user-images.githubusercontent.com/17550473/111231651-ea514180-85e9-11eb-849b-19139c7790e2.PNG" width="300">
 Contact page:
