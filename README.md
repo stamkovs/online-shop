@@ -2,10 +2,11 @@
 ---
 An online shop application project developed for my graduate thesis with some security implementations.
 
-Screenshots of the main screens and some major functionalities: 
+Here are some **screenshots** of the main screens and some major functionalities: 
 
 Homepage: \
 <img src="https://user-images.githubusercontent.com/17550473/111230521-07851080-85e8-11eb-9a93-0ba0641d7d49.PNG">
+<br/>
 Products, Products category, product details, product zoom hover, search products, contact page, cart, wishlist empty and wishlisted products (logged in users only),
 login with google popup, login with facebook popup, forgot password dialog, forgot password email, example of responsive mobile look: 
 <p float="left">
