@@ -2,8 +2,12 @@
 ---
 An online shop application project developed for my graduate thesis with some security implementations.
 
-![Shoptastic-login-page](https://user-images.githubusercontent.com/17550473/102817389-fef9b100-43cf-11eb-9556-3f68b654b41e.PNG)
+Screenshots of the main screens:
+![homePage](https://user-images.githubusercontent.com/17550473/111230521-07851080-85e8-11eb-9a93-0ba0641d7d49.PNG)
 ---
+![productsPage](https://user-images.githubusercontent.com/17550473/111231638-e7eee780-85e9-11eb-8dc7-b02f36e8947f.PNG|width=200px)
+---
+
 ![Shoptastic-contactUs-page](https://user-images.githubusercontent.com/17550473/102817446-1769cb80-43d0-11eb-9796-ec49323c7d11.PNG)
 
 #### Table of contents 📝
@@ -224,7 +228,8 @@ Now what values should we set for these?
    Then click on the arrow to create a new project and name it by your choice.
    After the project is created, you need to click the OAuth consent screen on the left sidebar.
    You can name the app and user support email freely.
-   The Application home page should be set to: http://localhost:8100/home
+   The Application home page should be set to your configured address (In my case initialy was http://localhost:8100/home as you can see in the screenshot,
+   but after the addition of tls certificate I've changed it to https://shop.stamkov.com).
    Also you can add an Application privacy policy link, for example: https://www.privacypolicygenerator.info/live.php?token=gF3bqGg7XVtgMg0NM0fcSfvYxlaqjiJ5 , 
    and the domain from the privacy policy (privacypolicygenerator.info) must be added to Authorized domains.
    Developer contact information is up to you to choose.
@@ -247,17 +252,18 @@ Now what values should we set for these?
    For facebook you will need to open this [link](https://developers.facebook.com/apps/).
    Once you are logged in you should see the green Create App button. Click on it and select the option Build Connected Experiences and click Continue.
    Populate all the fields if some are not already prefilled, and choose your app display name freely. Click on Create App. Then you will be redirected to a 
-   new screen and you need to find the Facebook Login, click on set up, and choose Web. The site URL that you will be asked to enter is:
-   http://localhost:4400/ . Save it and skip the next steps there but rather in the left sidebar under the Facebook Login, click on settings. There you can see 
+   new screen and you need to find the Facebook Login, click on set up, and choose Web. The site URL that you will be asked to enter will be the one configured
+   for your frontend (in my case initialy to http://localhost:4400/, but after the addition of tls certificate I've changed it to https://shop.stamkov.com).
+   Save it and skip the next steps there but rather in the left sidebar under the Facebook Login, click on settings. There you can see 
    the Client OAuth Settings, but the defaults are fine, unless you want the user to always enters his Facebook password in order to log in on the website.
    
    Next thing you need to configure is on the left sidebar to click on Settings -> Basic
    There you will have your App ID/ ClientID and App Secret/Client Secret, which you can add in application.properties, however we still 
    need to set up the needed fields properly.
    
-   The display name is up to you to choose, the App Domains should be localhost, and you can also add the same privacy policy link as for google,
+   The display name is up to you to choose, the App Domains should be your hostname (localhost or other domain name you may use),
+   and you can also add the same privacy policy link as for google,
    https://www.privacypolicygenerator.info/live.php?token=gF3bqGg7XVtgMg0NM0fcSfvYxlaqjiJ5. Contact email should be your personal/business email.
-   And at the bottom, the site URL is: http://localhost:4400/
    ![fb settingsBasic](https://user-images.githubusercontent.com/17550473/107447621-cc9f4100-6b40-11eb-8224-437ade27b77a.PNG)
 
    And thats it. The Advanced settings are not needed.
