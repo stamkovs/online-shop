@@ -7,33 +7,33 @@ Screenshots of the main screens and some major functionalities:
 Homepage:
 <img src="https://user-images.githubusercontent.com/17550473/111230521-07851080-85e8-11eb-9a93-0ba0641d7d49.PNG">
 Products:
-<img src="https://user-images.githubusercontent.com/17550473/111231638-e7eee780-85e9-11eb-8dc7-b02f36e8947f.PNG" width="400">
+<img src="https://user-images.githubusercontent.com/17550473/111231638-e7eee780-85e9-11eb-8dc7-b02f36e8947f.PNG" width="200">
 Products category:
-<img src="https://user-images.githubusercontent.com/17550473/111231639-e8877e00-85e9-11eb-992b-44593c8bb56d.PNG" width="400">
+<img src="https://user-images.githubusercontent.com/17550473/111231639-e8877e00-85e9-11eb-992b-44593c8bb56d.PNG" width="200">
 Product details:
-<img src="https://user-images.githubusercontent.com/17550473/111231642-e8877e00-85e9-11eb-9916-b3d294ec66ce.PNG" width="400">
+<img src="https://user-images.githubusercontent.com/17550473/111231642-e8877e00-85e9-11eb-9916-b3d294ec66ce.PNG" width="200">
 Product zoom hover:
-<img src="https://user-images.githubusercontent.com/17550473/111231643-e9201480-85e9-11eb-804a-ec77ade5141a.png" width="400">
+<img src="https://user-images.githubusercontent.com/17550473/111231643-e9201480-85e9-11eb-804a-ec77ade5141a.png" width="200">
 Search products:
-<img src="https://user-images.githubusercontent.com/17550473/111231651-ea514180-85e9-11eb-849b-19139c7790e2.PNG" width="400">
+<img src="https://user-images.githubusercontent.com/17550473/111231651-ea514180-85e9-11eb-849b-19139c7790e2.PNG" width="200">
 Contact page:
-<img src="https://user-images.githubusercontent.com/17550473/111231654-eae9d800-85e9-11eb-8c07-3cd11e1b8135.PNG" width="400">
+<img src="https://user-images.githubusercontent.com/17550473/111231654-eae9d800-85e9-11eb-8c07-3cd11e1b8135.PNG" width="200">
 Cart:
-<img src="https://user-images.githubusercontent.com/17550473/111231653-eae9d800-85e9-11eb-9f1e-382bc56f2e4d.PNG" width="400">
+<img src="https://user-images.githubusercontent.com/17550473/111231653-eae9d800-85e9-11eb-9f1e-382bc56f2e4d.PNG" width="200">
 Wishlist empty (Logged in user only):
-<img src="https://user-images.githubusercontent.com/17550473/111231623-e3c2ca00-85e9-11eb-9a8e-d0fd3e254b1b.PNG" width="400">
+<img src="https://user-images.githubusercontent.com/17550473/111231623-e3c2ca00-85e9-11eb-9a8e-d0fd3e254b1b.PNG" width="200">
 Wishlisted products (Logged in user only):
-<img src="https://user-images.githubusercontent.com/17550473/111231625-e45b6080-85e9-11eb-840e-3649f6183df9.PNG" width="400">
+<img src="https://user-images.githubusercontent.com/17550473/111231625-e45b6080-85e9-11eb-840e-3649f6183df9.PNG" width="200">
 Login with google popup:
-<img src="https://user-images.githubusercontent.com/17550473/111231630-e58c8d80-85e9-11eb-857b-ecd9afbac534.png" width="400">
+<img src="https://user-images.githubusercontent.com/17550473/111231630-e58c8d80-85e9-11eb-857b-ecd9afbac534.png" width="200">
 Login with facebook popup:
-<img src="https://user-images.githubusercontent.com/17550473/111231632-e58c8d80-85e9-11eb-9f18-0c9a86d1b29d.png" width="400">
+<img src="https://user-images.githubusercontent.com/17550473/111231632-e58c8d80-85e9-11eb-9f18-0c9a86d1b29d.png" width="200">
 Forgot password dialog:
-<img src="https://user-images.githubusercontent.com/17550473/111231628-e4f3f700-85e9-11eb-9866-adc9a592b633.PNG" width="400">
+<img src="https://user-images.githubusercontent.com/17550473/111231628-e4f3f700-85e9-11eb-9866-adc9a592b633.PNG" width="200">
 Forgot password email:
-<img src="https://user-images.githubusercontent.com/17550473/111231629-e58c8d80-85e9-11eb-85ac-93e10721234d.png" width="400">
+<img src="https://user-images.githubusercontent.com/17550473/111231629-e58c8d80-85e9-11eb-85ac-93e10721234d.png" width="200">
 Example of mobile responsive look:
-<img src="https://user-images.githubusercontent.com/17550473/111231626-e4f3f700-85e9-11eb-8d08-8e550c3caaa1.PNG" width="400">
+<img src="https://user-images.githubusercontent.com/17550473/111231626-e4f3f700-85e9-11eb-8d08-8e550c3caaa1.PNG" width="200">
 
 #### Table of contents 📝
 ---
