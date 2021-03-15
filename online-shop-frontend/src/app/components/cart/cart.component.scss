@@ -88,7 +88,7 @@
   }
 
   @media screen and (max-width: 768px) {
-    .cart-page {
+    .cart-page-wrapper {
       .product-cart-main-wrapper {
         flex-direction: column;
 
@@ -131,7 +131,7 @@
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
   /* IE10+ CSS styles go here */
   // fixes weird glitch with border lines when resizing the window
-  .cart-page {
+  .cart-page-wrapper {
     .product-cart-section {
       .shoptastic-product-card-wrapper {
         display: block;
@@ -163,7 +163,7 @@
   }
 
   @media screen and(max-width: 768px) {
-    .cart-page {
+    .cart-page-wrapper {
       .product-cart-main-wrapper {
         display: block;
 

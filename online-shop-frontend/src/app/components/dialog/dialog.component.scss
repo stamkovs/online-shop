@@ -42,8 +42,11 @@
       color: $color-magenta-primary;
       border: none;
       margin-top: -1em;
+      font-weight: bold;
+      font-family: raleway-bold, monospace;
 
       p {
+        font-size: 1em;
         padding: 0;
       }
     }

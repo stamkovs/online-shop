@@ -22,7 +22,7 @@ public class ProductConverter {
       .name(product.getName())
       .imageSrc(product.getImageUrl())
       .price(product.getPrice())
-      .description(product.getProductCategory().getDescription())
+      .description(product.getDescription())
       .quantity(product.getQuantity())
       .build();
   }
