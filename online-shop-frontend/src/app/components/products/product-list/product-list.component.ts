@@ -97,7 +97,7 @@ export class ProductListComponent implements OnInit {
     } else {
       this.pageTitle = 'Shoptastic Products';
     }
-    if (data.productsData.products) {
+    if (data.productsData.products.length) {
       this.products = data.productsData.products;
     } else if (data.productsData && data.productsData.length) {
       this.products = data.productsData;
