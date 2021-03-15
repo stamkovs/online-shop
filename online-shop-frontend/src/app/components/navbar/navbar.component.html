@@ -48,8 +48,9 @@
         </span>
       </ul>
       <ul class="navbar-links right">
-        <li *ngIf="isUserLoggedIn()" class="navbar-item"><a class="navbar-link"><i class="far fa-heart"></i>Wish
-          list</a></li>
+        <li *ngIf="isUserLoggedIn()" class="navbar-item"><a class="navbar-link" routerLink="wishlist"
+                                                            routerLinkActive="active"><i class="far fa-heart"></i>
+          Wishlist</a></li>
         <li class="navbar-item"><a class="navbar-link" routerLink="cart"
                                    routerLinkActive="active"><i class="las la-shopping-cart"></i>Cart</a></li>
         <li class="navbar-item" (click)="closeMobileNavbar()"><a class="navbar-link" routerLink="contact"

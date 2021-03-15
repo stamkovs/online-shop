@@ -6,4 +6,5 @@ export class ProductDetails {
   imageSrc: string;
   price: number;
   quantity?: number;
+  wishlisted: boolean;
 }

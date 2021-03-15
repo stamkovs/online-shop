@@ -43,6 +43,9 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
 import { CartComponent } from './components/cart/cart.component';
 import {CartService} from './services/cart.service';
 import {ContactService} from './services/contact.service';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
+import {WishlistService} from './services/wishlist.service';
+import {WishlistResolver} from './components/wishlist/WishlistResolver';
 
 @NgModule({
   declarations: [
@@ -60,6 +63,7 @@ import {ContactService} from './services/contact.service';
     ProductDetailComponent,
     BreadcrumbsComponent,
     CartComponent,
+    WishlistComponent,
   ],
   imports: [
     BrowserModule,
@@ -91,6 +95,8 @@ import {ContactService} from './services/contact.service';
     ProductService,
     CartService,
     ContactService,
+    WishlistService,
+    WishlistResolver,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,

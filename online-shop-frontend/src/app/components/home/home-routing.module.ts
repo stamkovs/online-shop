@@ -9,6 +9,8 @@ import {ProductListResolver} from '../products/ProductListResolver';
 import {ProductDetailComponent} from '../products/product-detail/product-detail.component';
 import {ProductDetailResolver} from '../products/ProductDetailResolver';
 import {CartComponent} from '../cart/cart.component';
+import {WishlistComponent} from '../wishlist/wishlist.component';
+import {WishlistResolver} from '../wishlist/WishlistResolver';
 
 const homeRoutes: Routes = [
   {
@@ -49,19 +51,27 @@ const homeRoutes: Routes = [
     },
   },
   {
+    path: 'wishlist',
+    component: WishlistComponent,
+    data: {animationState: 'Three'},
+    resolve: {
+      wishlistProducts: WishlistResolver
+    }
+  },
+  {
     path: 'cart',
     component: CartComponent,
-    data: {animationState: 'Three'},
+    data: {animationState: 'Four'},
   },
   {
     path: 'contact',
     component: ContactComponent,
-    data: {animationState: 'Four'}
+    data: {animationState: 'Five'}
   },
   {
     path: 'entry',
     component: EntryComponent,
-    data: {animationState: 'Five'},
+    data: {animationState: 'Six'},
     canActivate: [AuthGuard]
   },
 ];

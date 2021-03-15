@@ -27,7 +27,7 @@ export class WindowService {
     if (window.outerHeight < 640) {
       height = window.outerHeight * 0.8;
     }
-    left = Math.floor(window.screenX + ((window.outerWidth - width) / 2.525));
+    left = screen.width / 2 - width / 2;
     top = Math.floor(window.screenY + ((window.outerHeight - height) / 2));
 
     let options = `width=${width},height=${height},left=${left},top=${top}`;

@@ -1,0 +1,16 @@
+<div class="wishlist-page">
+  <div class="container">
+    <h2>Wishlisted products</h2>
+    <div class="wishlist-products-wrapper flex">
+      <div *ngIf="showNoProductsMessage" class="empty-wishlist">
+        <p>Your wishlist is empty. Keep shopping to find a product.</p>
+        <a class="shoptastic-btn-transparent-magenta btn" routerLink="/products">View all products</a>
+      </div>
+      <shoptastic-product-card [itemClickTitle]="'Remove from wishlist'" (clickEvent)="goToProductDetail(item)"
+                               (addToCartEvent)="addItemToCart(item)"
+                               (addToWishlistEvent)="removeProductFromWishlist(item.id)"
+                               class="shoptastic-product-card-wrapper" *ngFor="let item of products"
+                               [item]="item"></shoptastic-product-card>
+    </div>
+  </div>
+</div>
