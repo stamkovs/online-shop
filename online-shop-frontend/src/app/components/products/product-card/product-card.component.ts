@@ -3,6 +3,7 @@ import {CookieService} from 'ngx-cookie';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProductDetails} from '../../../models/ProductDetails';
 import {CartService} from '../../../services/cart.service';
+import {WishlistService} from '../../../services/wishlist.service';
 
 @Component({
   selector: 'shoptastic-product-card',
@@ -15,15 +16,20 @@ export class ProductCardComponent implements OnInit {
   name: string;
   imageSrc: string;
   price: number;
+  title: string;
 
   @Input()
   item: ProductDetails;
 
+  @Input()
+  itemClickTitle: string;
+
   @Output() clickEvent = new EventEmitter<string>();
   @Output() addToCartEvent = new EventEmitter<string>();
+  @Output() addToWishlistEvent = new EventEmitter<string>();
 
   constructor(private cookieService: CookieService, private router: Router, private route: ActivatedRoute,
-              private cartService: CartService) {
+              private cartService: CartService, private wishlistService: WishlistService) {
   }
 
   ngOnInit(): void {
@@ -31,6 +37,7 @@ export class ProductCardComponent implements OnInit {
     this.imageSrc = this.item.imageSrc;
     this.price = this.item.price;
     this.item.category = this.item.category.replace('_', '-');
+    this.title = this.itemClickTitle;
   }
 
   isUserLoggedIn() {
@@ -45,11 +52,20 @@ export class ProductCardComponent implements OnInit {
     this.addToCartEvent.emit(item);
   }
 
-  addItemToWishList(event) {
-    const productId = event.currentTarget.id;
+  emitAddToWishlistEvent(item) {
+    this.addToWishlistEvent.emit(item);
+    this.item.wishlisted = !this.item.wishlisted;
+  }
+
+  addItemToWishList(productId: number) {
+    this.wishlistService.addProductToWishList('' + productId);
   }
 
   isItemInCart(productId: number) {
     return this.cartService.checkIsProductInCartById(productId);
+  }
+
+  removeItemFromWishlist(productId: number) {
+    // this.wishlistService.removeProductFromWishlist('' + productId);
   }
 }

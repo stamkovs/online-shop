@@ -5,7 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-cart',
+  selector: 'shoptastic-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
   encapsulation: ViewEncapsulation.None

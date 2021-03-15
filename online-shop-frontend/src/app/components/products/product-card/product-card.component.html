@@ -11,8 +11,9 @@
     <div class="product-footer">
       <div class="flex"><span class="price">&euro;{{price}}.00&euro;</span></div>
       <div class="action-buttons-wrapper flex">
-        <a *ngIf="this.isUserLoggedIn()" id="{{productId}}" (click)="addItemToWishList($event)"
-           class="add-to-wishlist-btn btn"><i class="far fa-heart"></i></a>
+        <a [title]="title || (item.wishlisted ? 'Go to wishlist' : 'Add to wishlist')" (click)="emitAddToWishlistEvent(item)"
+           *ngIf="this.isUserLoggedIn()" id="{{productId}}" class="add-to-wishlist-btn btn" [ngClass]="{'go-to-wishlist' : item.wishlisted}">
+          <i class="far fa-heart"></i></a>
         <a [title]="isItemInCart(item.id) ? 'Go to cart' : 'Add to cart'" (click)="emitAddToCartEvent(item)"
            class="add-to-cart-btn btn" [ngClass]="{'go-to-cart' : isItemInCart(item.id)}"><i class="las" [ngClass]="{'la-shopping-cart' : !isItemInCart(item.id),
         'la-angle-double-right': isItemInCart(item.id)}"></i></a>

@@ -69,6 +69,11 @@
         align-items: center;
         flex: 1;
 
+        &.button-loading {
+          pointer-events: none;
+          color: $navbar-bg-color;
+        }
+
         i {
           margin-left: .4em;
         }

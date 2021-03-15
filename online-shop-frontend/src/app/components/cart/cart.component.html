@@ -1,5 +1,6 @@
 <div class="cart-page">
-  <div class="container">
+  <div class="container cart-page-wrapper">
+    <h2>Products in your cart</h2>
     <div *ngIf="products.length; else emptyCart" class="product-cart-main-wrapper flex">
       <section class="product-cart-section left">
         <shoptastic-product-card (clickEvent)="goToProductDetail(item)" class="shoptastic-product-card-wrapper"

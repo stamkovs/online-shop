@@ -5,6 +5,7 @@ import {ProductService} from '../../../services/product.service';
 import {ProductDetails} from '../../../models/ProductDetails';
 import {CartService} from '../../../services/cart.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {WishlistService} from '../../../services/wishlist.service';
 
 @Component({
   selector: 'app-product-list',
@@ -23,7 +24,8 @@ export class ProductListComponent implements OnInit {
   categoryChangeSubject: Subject<void> = new Subject<void>();
 
   constructor(private route: ActivatedRoute, private router: Router, private productService: ProductService,
-              private cartService: CartService, private _snackBar: MatSnackBar) {
+              private cartService: CartService, private _snackBar: MatSnackBar,
+              private wishlistService: WishlistService) {
   }
 
   ngOnInit() {
@@ -128,17 +130,29 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  addItemToCart(product: ProductDetails) {
+  addProductToCart(product: ProductDetails) {
     if (this.cartService.checkIsProductInCartById(product.id)) {
       this.router.navigate(['/cart']);
     } else {
       this.cartService.addProductToCart(product);
-      this.openSnackBar(product.name)
+      this.openSnackBar(product.name, 'cart');
     }
   }
 
-  openSnackBar(productName: string) {
-    this._snackBar.open(productName + ' was added to cart.', 'Close', {
+  addProductToWishlist(product: ProductDetails) {
+    if (product.wishlisted) {
+      this.router.navigate(['/wishlist']);
+    } else {
+      this.wishlistService.addProductToWishList('' + product.id).subscribe((data: any) => {
+        product.wishlisted = true;
+        this.openSnackBar(product.name, 'wishlist');
+      }, error => {
+      });
+    }
+  }
+
+  openSnackBar(productName: string, type: string) {
+    this._snackBar.open(productName + ' was added to ' + type + '.', 'Close', {
       duration: 5000,
       horizontalPosition: 'right',
       verticalPosition: 'top',

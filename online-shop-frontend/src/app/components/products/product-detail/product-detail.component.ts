@@ -5,6 +5,7 @@ import {CookieService} from 'ngx-cookie';
 import Drift from 'drift-zoom';
 import {CartService} from '../../../services/cart.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {WishlistService} from '../../../services/wishlist.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -16,9 +17,11 @@ export class ProductDetailComponent implements OnInit {
 
   item: ProductDetails;
   routeState: any;
+  wishlistBtnLabel: string;
 
   constructor(private router: Router, private route: ActivatedRoute, private cookieService: CookieService,
-              private cartService: CartService, private _snackBar: MatSnackBar) {
+              private cartService: CartService, private _snackBar: MatSnackBar,
+              private wishlistService: WishlistService) {
 
     if (this.router.getCurrentNavigation().extras.state) {
       this.routeState = this.router.getCurrentNavigation().extras.state;
@@ -33,6 +36,7 @@ export class ProductDetailComponent implements OnInit {
     this.route.data.subscribe((data: any) => {
       if (data.productDetail) {
         this.item = data.productDetail;
+        this.wishlistBtnLabel = this.item.wishlisted ? 'Go to wishlist' : 'Wishlist';
       }
     });
 
@@ -52,8 +56,21 @@ export class ProductDetailComponent implements OnInit {
     return this.cookieService.get('is_user_logged_in') === '1';
   }
 
-  addItemToWishList(event) {
-    const productId = event.currentTarget.id;
+  addProductToWishlist(productId: number, event) {
+    if (this.item.wishlisted) {
+      this.router.navigate(['/wishlist']);
+    } else {
+      event.target.classList.add('button-loading');
+      setTimeout(() => {
+        event.target.classList.remove('button-loading');
+        this.wishlistBtnLabel = 'Go to wishlist';
+        this.openSnackBar(this.item.name, 'was successfully added to your wishlist.');
+      }, 2000);
+      this.wishlistService.addProductToWishList('' + productId).subscribe((data: any) => {
+        this.item.wishlisted = true;
+      }, error => {
+      });
+    }
   }
 
   addProductToCart(product: ProductDetails, event) {
@@ -63,6 +80,7 @@ export class ProductDetailComponent implements OnInit {
     setTimeout(() => {
       event.target.classList.remove('button-loading');
       event.target.innerHTML = "<pre class='pre-button'>" + btnInnerHTML.replace('Add to cart', 'Go to cart') + "</pre>";
+      this.openSnackBar(product.name, ' was successfully added to your cart.');
     }, 2000);
     this.cartService.addProductToCart(product);
   }
