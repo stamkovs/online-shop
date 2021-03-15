@@ -6,7 +6,7 @@ import com.stamkovs.online.shop.rest.auth.security.TokenProvider;
 import com.stamkovs.online.shop.rest.auth.security.UserPrincipal;
 import com.stamkovs.online.shop.rest.auth.util.CookieUtils;
 import com.stamkovs.online.shop.rest.converter.UserConverter;
-import com.stamkovs.online.shop.rest.exception.UnauthorizedRedirectException;
+import com.stamkovs.online.shop.rest.exception.UnauthorizedShoptasticException;
 import com.stamkovs.online.shop.rest.exception.UserNotFoundException;
 import com.stamkovs.online.shop.rest.model.EmailDto;
 import com.stamkovs.online.shop.rest.model.ResetPasswordDto;
@@ -72,7 +72,7 @@ public class ResetPasswordService {
       resetPasswordTokenRepository.findByResetPasswordToken(resetPasswordToken);
     Instant pastDateMinus8HoursFromNow = Instant.now().minus(8, ChronoUnit.HOURS);
     if (token == null || token.isUsed() || token.getCreatedDate().toInstant().isBefore(pastDateMinus8HoursFromNow)) {
-      throw new UnauthorizedRedirectException("Invalid url");
+      throw new UnauthorizedShoptasticException("Invalid url");
     }
     UserAccount userAccount = userRepository.findByAccountId(token.getUserAccountId());
     ResetPasswordDto resetPasswordDto = new ResetPasswordDto();
@@ -86,7 +86,7 @@ public class ResetPasswordService {
     ResetPasswordToken token =
       resetPasswordTokenRepository.findByResetPasswordToken(resetPasswordToken);
     if (token == null || token.isUsed()) {
-      throw new UnauthorizedRedirectException("Invalid url");
+      throw new UnauthorizedShoptasticException("Invalid url");
     }
     UserAccount userAccount = userRepository.findByAccountId(token.getUserAccountId());
     if (userAccount == null) {

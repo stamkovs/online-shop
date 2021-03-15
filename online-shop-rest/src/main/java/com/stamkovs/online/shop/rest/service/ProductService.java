@@ -1,10 +1,13 @@
 package com.stamkovs.online.shop.rest.service;
 
+import com.stamkovs.online.shop.rest.auth.security.CustomUserDetailsService;
 import com.stamkovs.online.shop.rest.converter.ProductConverter;
 import com.stamkovs.online.shop.rest.model.Product;
 import com.stamkovs.online.shop.rest.model.ProductDto;
 import com.stamkovs.online.shop.rest.model.ProductsInfo;
+import com.stamkovs.online.shop.rest.model.Wishlist;
 import com.stamkovs.online.shop.rest.repository.ProductRepository;
+import com.stamkovs.online.shop.rest.repository.WishlistRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -31,6 +34,8 @@ public class ProductService {
   private static final String WATCHES = "watches";
   private final ProductRepository productRepository;
   private final ProductConverter productConverter;
+  private final WishlistRepository wishlistRepository;
+  private final CustomUserDetailsService customUserDetailsService;
 
   /**
    * Gets all products from db.
@@ -38,8 +43,16 @@ public class ProductService {
    * @return {@link ProductsInfo}.
    */
   public ProductsInfo findAllProducts() {
+    log.info("Retrieving all products");
+    Long userAccountId = customUserDetailsService.getUserAccountIdFromAuthentication();
     List<ProductDto> productDtoList =
-      productRepository.findAll().stream().map(productConverter::toPresentationModel).collect(Collectors.toList());
+      productRepository.findAll().stream().map(product -> {
+        ProductDto productDto = productConverter.toPresentationModel(product);
+        Optional<Wishlist> wishlist = wishlistRepository.findByUserAccountIdAndProductId(userAccountId,
+          product.getId());
+        productDto.setWishlisted(wishlist.isPresent());
+        return productDto;
+      }).collect(Collectors.toList());
 
     ProductsInfo productsInfo = new ProductsInfo();
     productsInfo.setNumberOfProducts(productDtoList.size());
@@ -55,6 +68,7 @@ public class ProductService {
    * @return {@link ProductsInfo}.
    */
   public ProductsInfo findAllProductsByCategory(String category) {
+    log.info("Retrieving all products for category {}", category);
     if (category.contains("-")) {
       category = category.replace("-", "_");
     }
@@ -73,10 +87,24 @@ public class ProductService {
    * Get product details by id.
    *
    * @param id the product id.
-   * @return Optional of {@link Product}.
+   * @return {@link Product}.
    */
-  public Optional<Product> findById(Long id) {
-    return productRepository.findById(id);
+  public ProductDto findById(Long id) {
+    log.info("Retrieving details for product with id {}", id);
+    Optional<Product> productOptional = productRepository.findById(id);
+    ProductDto productDto = new ProductDto();
+    if (productOptional.isPresent()) {
+      Product product = productOptional.get();
+      productDto = productConverter.toPresentationModel(product);
+      Long userAccountId = customUserDetailsService.getUserAccountIdFromAuthentication();
+      log.info("Retrieving wishlist for userAccountId: {}, and productId: {}", userAccountId, id);
+      Optional<Wishlist> optionalWishlistProduct = wishlistRepository.findByUserAccountIdAndProductId(userAccountId,
+        id);
+      if (optionalWishlistProduct.isPresent()) {
+        productDto.setWishlisted(true);
+      }
+    }
+    return productDto;
   }
 
   /**
@@ -85,6 +113,7 @@ public class ProductService {
    * @return List of {@link ProductDto}.
    */
   public List<ProductDto> findNewestProducts() {
+    log.info("Retrieving newest products");
     Pageable limit = PageRequest.of(0, 3);
     Page<Product> productPageMenSneakers = productRepository.findAllByProductCategoryCategoryOrderByCreatedOnDesc(
       MEN_SNEAKERS
@@ -104,10 +133,10 @@ public class ProductService {
    * Search products by search value
    *
    * @param searchValue the user input search value.
-   *
    * @return List of {@link ProductDto}.
    */
   public List<ProductDto> searchProducts(String searchValue) {
+    log.info("Searching products by value: [{}]", searchValue);
     List<Product> productsFromSearch = productRepository.findByNameContaining(searchValue);
     List<Product> categoriesFromSearch = productRepository.findByProductCategoryCategoryContaining(searchValue);
 

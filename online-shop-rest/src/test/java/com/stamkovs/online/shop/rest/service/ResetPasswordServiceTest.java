@@ -6,7 +6,7 @@ import com.stamkovs.online.shop.rest.auth.model.ResetPasswordToken;
 import com.stamkovs.online.shop.rest.auth.security.TokenProvider;
 import com.stamkovs.online.shop.rest.auth.security.UserPrincipal;
 import com.stamkovs.online.shop.rest.converter.UserConverter;
-import com.stamkovs.online.shop.rest.exception.UnauthorizedRedirectException;
+import com.stamkovs.online.shop.rest.exception.UnauthorizedShoptasticException;
 import com.stamkovs.online.shop.rest.exception.UserNotFoundException;
 import com.stamkovs.online.shop.rest.model.EmailDto;
 import com.stamkovs.online.shop.rest.model.ResetPasswordDto;
@@ -151,7 +151,7 @@ class ResetPasswordServiceTest {
     when(resetPasswordTokenRepository.findByResetPasswordToken(any())).thenReturn(null);
 
     // when
-    assertThrows(UnauthorizedRedirectException.class,
+    assertThrows(UnauthorizedShoptasticException.class,
       () -> resetPasswordService.getUserDetailsByResetPasswordToken(any()));
 
     // then
@@ -168,7 +168,7 @@ class ResetPasswordServiceTest {
     when(resetPasswordTokenRepository.findByResetPasswordToken(any())).thenReturn(resetPasswordToken);
 
     // when
-    assertThrows(UnauthorizedRedirectException.class,
+    assertThrows(UnauthorizedShoptasticException.class,
       () -> resetPasswordService.getUserDetailsByResetPasswordToken(any()));
 
     // then
@@ -185,7 +185,7 @@ class ResetPasswordServiceTest {
     when(resetPasswordTokenRepository.findByResetPasswordToken(any())).thenReturn(resetPasswordToken);
 
     // when
-    assertThrows(UnauthorizedRedirectException.class,
+    assertThrows(UnauthorizedShoptasticException.class,
       () -> resetPasswordService.getUserDetailsByResetPasswordToken(any()));
 
     // then
@@ -234,7 +234,7 @@ class ResetPasswordServiceTest {
     when(resetPasswordTokenRepository.findByResetPasswordToken(any())).thenReturn(null);
 
     // when
-    assertThrows(UnauthorizedRedirectException.class, () -> resetPasswordService.updatePassword(request, response,
+    assertThrows(UnauthorizedShoptasticException.class, () -> resetPasswordService.updatePassword(request, response,
       "unknownToken", resetPasswordDto));
 
     // then
@@ -251,7 +251,7 @@ class ResetPasswordServiceTest {
     when(resetPasswordTokenRepository.findByResetPasswordToken(any())).thenReturn(resetPasswordToken);
 
     // when
-    assertThrows(UnauthorizedRedirectException.class, () -> resetPasswordService.updatePassword(request, response,
+    assertThrows(UnauthorizedShoptasticException.class, () -> resetPasswordService.updatePassword(request, response,
       "unknownToken", resetPasswordDto));
 
     // then

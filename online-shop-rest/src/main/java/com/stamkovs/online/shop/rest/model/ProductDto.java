@@ -21,4 +21,5 @@ public class ProductDto {
   private String imageSrc;
   private double price;
   private int quantity;
+  private boolean isWishlisted;
 }

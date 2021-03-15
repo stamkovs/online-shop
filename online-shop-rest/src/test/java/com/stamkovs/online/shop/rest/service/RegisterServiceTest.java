@@ -7,7 +7,7 @@ import com.stamkovs.online.shop.rest.auth.model.OAuth;
 import com.stamkovs.online.shop.rest.auth.security.TokenProvider;
 import com.stamkovs.online.shop.rest.auth.security.UserPrincipal;
 import com.stamkovs.online.shop.rest.converter.UserConverter;
-import com.stamkovs.online.shop.rest.exception.UnauthorizedRedirectException;
+import com.stamkovs.online.shop.rest.exception.UnauthorizedShoptasticException;
 import com.stamkovs.online.shop.rest.exception.UserAlreadyExistsException;
 import com.stamkovs.online.shop.rest.exception.UserNotFoundException;
 import com.stamkovs.online.shop.rest.model.UserAccount;
@@ -212,7 +212,7 @@ class RegisterServiceTest {
     when(confirmationTokenRepository.findByConfirmationToken(any())).thenReturn(null);
 
     // when
-    assertThrows(UnauthorizedRedirectException.class, () ->
+    assertThrows(UnauthorizedShoptasticException.class, () ->
       registerService.getUserDetailsByConfirmationToken(request, response, "unknownToken"));
 
     // then
@@ -226,7 +226,7 @@ class RegisterServiceTest {
     when(confirmationTokenRepository.findByConfirmationToken(any())).thenReturn(token);
 
     // when
-    assertThrows(UnauthorizedRedirectException.class, () ->
+    assertThrows(UnauthorizedShoptasticException.class, () ->
       registerService.getUserDetailsByConfirmationToken(request, response, "usedToken"));
 
     // then
@@ -241,7 +241,7 @@ class RegisterServiceTest {
     when(confirmationTokenRepository.findByConfirmationToken(any())).thenReturn(token);
 
     // when
-    assertThrows(UnauthorizedRedirectException.class, () ->
+    assertThrows(UnauthorizedShoptasticException.class, () ->
       registerService.getUserDetailsByConfirmationToken(request, response, "expiredToken"));
 
     // then

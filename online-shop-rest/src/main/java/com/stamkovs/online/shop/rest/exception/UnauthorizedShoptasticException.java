@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * Exception thrown when oauth request cant be redirected.
  */
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class UnauthorizedRedirectException extends RuntimeException {
+public class UnauthorizedShoptasticException extends RuntimeException {
 
-  public UnauthorizedRedirectException(String message) {
+  public UnauthorizedShoptasticException(String message) {
     super(message);
   }
 }

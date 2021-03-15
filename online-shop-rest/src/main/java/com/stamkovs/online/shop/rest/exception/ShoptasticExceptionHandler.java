@@ -40,9 +40,9 @@ public class ShoptasticExceptionHandler {
    *
    * @return {@link ResponseEntity}.
    */
-  @ExceptionHandler(UnauthorizedRedirectException.class)
+  @ExceptionHandler(UnauthorizedShoptasticException.class)
   @ResponseStatus(UNAUTHORIZED)
-  public ResponseEntity<?> handleUnauthorizedException(UnauthorizedRedirectException e) {
+  public ResponseEntity<?> handleUnauthorizedException(UnauthorizedShoptasticException e) {
     log.error("{} ({})", e.getClass().getSimpleName(), e.getMessage(), e);
     return new ResponseEntity<>(UNAUTHORIZED);
   }

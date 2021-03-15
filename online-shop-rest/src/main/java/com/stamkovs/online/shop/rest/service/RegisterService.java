@@ -6,7 +6,7 @@ import com.stamkovs.online.shop.rest.auth.security.TokenProvider;
 import com.stamkovs.online.shop.rest.auth.security.UserPrincipal;
 import com.stamkovs.online.shop.rest.auth.util.CookieUtils;
 import com.stamkovs.online.shop.rest.converter.UserConverter;
-import com.stamkovs.online.shop.rest.exception.UnauthorizedRedirectException;
+import com.stamkovs.online.shop.rest.exception.UnauthorizedShoptasticException;
 import com.stamkovs.online.shop.rest.exception.UserAlreadyExistsException;
 import com.stamkovs.online.shop.rest.exception.UserNotFoundException;
 import com.stamkovs.online.shop.rest.model.UserAccount;
@@ -53,7 +53,7 @@ public class RegisterService {
     Optional<UserAccount> userAccount = userRepository.findByEmailIgnoreCase(email);
 
     if (userAccount.isPresent() && Boolean.TRUE.equals(userAccount.get().getEmailVerified())) {
-      throw new UserAlreadyExistsException("User with email [" + email + "] exists and is " +
+      throw new UserAlreadyExistsException("User with email " + email + " exists and is " +
         "verified.");
     } else {
       ConfirmationToken confirmationToken;
@@ -86,7 +86,7 @@ public class RegisterService {
       confirmationTokenRepository.findByConfirmationToken(confirmationToken);
     Instant pastDateMinus24HoursFromNow = Instant.now().minus(24, ChronoUnit.HOURS);
     if (token == null || token.isUsed() || token.getCreatedDate().toInstant().isBefore(pastDateMinus24HoursFromNow)) {
-      throw new UnauthorizedRedirectException("Invalid url");
+      throw new UnauthorizedShoptasticException("Invalid url");
     }
     UserRegisterDto userRegisterDto = new UserRegisterDto();
     UserAccount userAccount = userRepository.findByAccountId(token.getUserAccountId());

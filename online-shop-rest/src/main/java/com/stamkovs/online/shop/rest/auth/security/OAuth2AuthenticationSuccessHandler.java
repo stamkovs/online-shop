@@ -1,7 +1,7 @@
 package com.stamkovs.online.shop.rest.auth.security;
 
 import com.stamkovs.online.shop.rest.auth.config.AuthConfiguration;
-import com.stamkovs.online.shop.rest.exception.UnauthorizedRedirectException;
+import com.stamkovs.online.shop.rest.exception.UnauthorizedShoptasticException;
 import com.stamkovs.online.shop.rest.auth.util.CookieUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,9 +60,8 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
       .map(Cookie::getValue);
 
     if (redirectUri.isPresent() && !isAuthorizedRedirectUri(redirectUri.get())) {
-      throw new UnauthorizedRedirectException("Sorry! We've got an Unauthorized Redirect URI and can't proceed with " +
-        "the " +
-        "authentication");
+      throw new UnauthorizedShoptasticException("Sorry! We've got an Unauthorized Redirect URI and can't proceed with "
+        + "the authentication");
     }
 
     String targetUrl = redirectUri.orElse(getDefaultTargetUrl());
