@@ -4,21 +4,21 @@ An online shop application project developed for my graduate thesis with some se
 <img src="https://user-images.githubusercontent.com/17550473/111230521-07851080-85e8-11eb-9a93-0ba0641d7d49.PNG">
 <br/>
 <br/>
-The following **screenshots** are for the main pages and some major functionalities in the corresponding order: \
-1) Products \ 
-2) Products category \
-3) Product details \ 
-4) Product zoom on hover \
-5) Search products functionality \
-6) Contact page \
-7) Cart \ 
-8) Wishlist empty (logged in users only) \
-9) Wishlisted products (logged in users only) \
-10) Login with Google popup \
-11) login with Facebook popup \
-12) Forgot password dialog \
-13) Forgot password email \
-14) Example of responsive mobile look \
+The following **screenshots** are for the main pages and some major functionalities in the corresponding order: 
+1) Products
+2) Products category
+3) Product details 
+4) Product zoom on hover
+5) Search products functionality
+6) Contact page
+7) Cart
+8) Wishlist empty (logged in users only)
+9) Wishlisted products (logged in users only)
+10) Login with Google popup
+11) login with Facebook popup
+12) Forgot password dialog
+13) Forgot password email
+14) Example of responsive mobile look
 <p float="left">
   <img src="https://user-images.githubusercontent.com/17550473/111231638-e7eee780-85e9-11eb-8dc7-b02f36e8947f.PNG" width="300">
   <img src="https://user-images.githubusercontent.com/17550473/111231639-e8877e00-85e9-11eb-992b-44593c8bb56d.PNG" width="300">
