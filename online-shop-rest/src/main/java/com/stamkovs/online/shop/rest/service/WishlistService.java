@@ -34,16 +34,20 @@ public class WishlistService {
 
   public void addProductToWishlist(String productId) {
     Long userAccountId = customUserDetailsService.getUserAccountIdFromAuthentication();
+    log.info("Adding product to wishlist, [userAccountId = {}, productId = {}]", userAccountId, productId);
     Wishlist wishlist = new Wishlist();
     wishlist.setUserAccountId(userAccountId);
     wishlist.setProductId(Long.valueOf(productId));
     wishlist.setAddedAt(Date.from(Instant.now()));
     wishlistRepository.save(wishlist);
+    log.info("Successfully added product to wishlist, [userAccountId = {}, productId = {}]", userAccountId, productId);
   }
 
   public List<ProductDto> getProductsInWishList() {
+    Long userAccountId = customUserDetailsService.getUserAccountIdFromAuthentication();
+    log.info("Retrieving products from wishlist, [userAccountId = {}]", userAccountId);
     List<Wishlist> wishlistList =
-      wishlistRepository.findAllByUserAccountId(customUserDetailsService.getUserAccountIdFromAuthentication());
+      wishlistRepository.findAllByUserAccountId(userAccountId);
     return wishlistList.stream().map(wishlist -> {
       Optional<Product> product = productRepository.findById(wishlist.getProductId());
       ProductDto productDto = new ProductDto();
@@ -57,6 +61,16 @@ public class WishlistService {
 
   public void deleteProductFromWishlistById(String productId) {
     Long userAccountId = customUserDetailsService.getUserAccountIdFromAuthentication();
+    log.info("Deleting product from wishlist, [userAccountId = {}, productId = {}]", userAccountId, productId);
     wishlistRepository.deleteByUserAccountIdAndProductId(userAccountId, Long.valueOf(productId));
+    log.info("Successfully deleted product from wishlist, [userAccountId = {}, productId = {}]", userAccountId,
+      productId);
+  }
+
+  public void deleteAllProductsFromWishlistById() {
+    Long userAccountId = customUserDetailsService.getUserAccountIdFromAuthentication();
+    log.info("Deleting all products from wishlist, [userAccountId = {}]", userAccountId);
+    wishlistRepository.deleteByUserAccountId(userAccountId);
+    log.info("Successfully deleted all products from wishlist, [userAccountId = {}]", userAccountId);
   }
 }

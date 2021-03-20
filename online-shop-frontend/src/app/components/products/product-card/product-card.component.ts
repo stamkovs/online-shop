@@ -48,10 +48,6 @@ export class ProductCardComponent implements OnInit {
     this.clickEvent.emit(item);
   }
 
-  emitAddToCartEvent(item) {
-    this.addToCartEvent.emit(item);
-  }
-
   emitAddToWishlistEvent(item) {
     this.addToWishlistEvent.emit(item);
     this.item.wishlisted = !this.item.wishlisted;
@@ -61,11 +57,4 @@ export class ProductCardComponent implements OnInit {
     this.wishlistService.addProductToWishList('' + productId);
   }
 
-  isItemInCart(productId: number) {
-    return this.cartService.checkIsProductInCartById(productId);
-  }
-
-  removeItemFromWishlist(productId: number) {
-    // this.wishlistService.removeProductFromWishlist('' + productId);
-  }
 }

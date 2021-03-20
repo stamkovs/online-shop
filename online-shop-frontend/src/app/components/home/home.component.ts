@@ -3,7 +3,8 @@ import Glide from '@glidejs/glide';
 
 import {ActivatedRoute, Router} from '@angular/router';
 import {ProductDetails} from '../../models/ProductDetails';
-import {CartService} from '../../services/cart.service';
+import {CookieService} from 'ngx-cookie';
+import {WishlistService} from '../../services/wishlist.service';
 
 @Component({
   selector: 'app-home',
@@ -14,8 +15,10 @@ import {CartService} from '../../services/cart.service';
 export class HomeComponent implements OnInit {
 
   products: ProductDetails[];
+  dragging: boolean = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private cartService: CartService) {
+  constructor(private router: Router, private route: ActivatedRoute, private cookieService: CookieService,
+              private wishlistService: WishlistService) {
   }
 
   ngOnInit(): void {
@@ -44,28 +47,33 @@ export class HomeComponent implements OnInit {
   }
 
   goToProductDetail(item) {
+    if (this.dragging) {
+      return;
+    }
     this.router.navigate(['/products', item.category, item.id], {
       relativeTo: this.route, state: {id: true, data: item},
       queryParams: {navigatingThroughCategory: true}
     });
   }
 
-  addItemToCart(product: ProductDetails, event) {
+  isUserLoggedIn() {
+    return this.cookieService.get('is_user_logged_in') === '1';
+  }
+
+  addOrGoToWishlist(product: ProductDetails, event) {
+    if (product.wishlisted) {
+      return this.goToWishlist();
+    }
     event.target.classList.add('button-loading');
-    const btnInnerHTML = event.target.innerHTML;
-    event.target.innerHTML = '';
-    setTimeout(() => {
-      event.target.classList.remove('button-loading');
-      event.target.innerHTML = "<pre class='pre-button'>" + btnInnerHTML.replace('Add to cart', 'Go to cart') + "</pre>";
-    }, 2000);
-    this.cartService.addProductToCart(product);
+    this.wishlistService.addProductToWishList('' + product.id).subscribe(() => {
+      setTimeout(() => {
+        event.target.classList.remove('button-loading');
+        product.wishlisted = true;
+      }, 2000);
+    });
   }
 
-  goToCart() {
-    this.router.navigate(['/cart']);
-  }
-
-  isItemInCart(productId: number) {
-    return this.cartService.checkIsProductInCartById(productId);
+  goToWishlist() {
+    this.router.navigate(['/wishlist']);
   }
 }

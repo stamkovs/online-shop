@@ -97,8 +97,11 @@ export class ProductListComponent implements OnInit {
     } else {
       this.pageTitle = 'Shoptastic Products';
     }
-    if (data.productsData.products.length) {
+    if (data.productsData.products) {
       this.products = data.productsData.products;
+      if (this.products.length === 0) {
+        this.showNoProductsMessage = true;
+      }
     } else if (data.productsData && data.productsData.length) {
       this.products = data.productsData;
     } else {
@@ -136,10 +139,11 @@ export class ProductListComponent implements OnInit {
     if (product.wishlisted) {
       this.router.navigate(['/wishlist']);
     } else {
-      this.wishlistService.addProductToWishList('' + product.id).subscribe((data: any) => {
+      this.wishlistService.addProductToWishList('' + product.id).subscribe(() => {
         product.wishlisted = true;
         this.openSnackBar(product.name, 'wishlist');
       }, error => {
+        console.log(error);
       });
     }
   }

@@ -6,9 +6,12 @@
   .container {
     justify-content: center;
     flex-direction: column;
+    position: relative;
 
-    h2 {
-      margin-bottom: 0;
+    .remove-all {
+      position: absolute;
+      right: 2em;
+      top: 1em;
     }
   }
 
@@ -34,12 +37,21 @@
       display: flex;
       flex-direction: column;
 
+      .shoptastic-product-card {
+        .product-text-wrapper {
+          div.action-buttons-wrapper {
+            padding-right: 0;
+          }
+        }
+      }
+
       .add-to-wishlist-btn {
         border-color: $navbar-bg-color;
         background: $navbar-bg-color;
         text-decoration: none;
 
         i {
+          vertical-align: middle;
           color: white;
         }
 

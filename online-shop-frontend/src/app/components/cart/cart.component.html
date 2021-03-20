@@ -1,32 +1,41 @@
-<div class="cart-page">
-  <div class="container cart-page-wrapper">
-    <h2>Products in your cart</h2>
-    <div *ngIf="products.length; else emptyCart" class="product-cart-main-wrapper flex">
-      <section class="product-cart-section left">
-        <shoptastic-product-card (clickEvent)="goToProductDetail(item)" class="shoptastic-product-card-wrapper"
-                                 *ngFor="let item of products"
-                                 [item]="item">
-          <div>
-            <button (click)="deleteItem(item)"
-                    class="shoptastic-btn-primary btn">Remove
-            </button>
+<div class="container cart-page-wrapper">
+  <h2>Products in your cart</h2>
+  <a *ngIf="products.length" class="shoptastic-btn-transparent-magenta btn remove-all"
+     (click)="removeAllProductsFromCart()">Remove all</a>
+  <div *ngIf="products.length; else emptyCart" class="product-cart-main-wrapper flex">
+    <section class="product-cart-section left">
+      <shoptastic-product-card (clickEvent)="goToProductDetail(item)" class="shoptastic-product-card-wrapper"
+                               *ngFor="let item of products; let i = index"
+                               [item]="item">
+        <div class="flex">
+          <div class="add-to-cart-wrapper">
+            <span class="size">Size: {{item.addedSizeToCart}}</span>
+            <div class="add-to-cart-counter">
+              <span (click)="decreaseCartCounter(item)" class="minus"></span>
+              <input type="text" [id]="'cart-counter-input-' + i" class="cart-counter-input"
+                     [value]="item.addedQuantityToCart" readonly="">
+              <span (click)="increaseCartCounter(item)" class="plus"></span>
+            </div>
           </div>
-        </shoptastic-product-card>
-      </section>
-      <section class="product-cart-section right">
-        <div class="checkout-wrapper">
-          <p>Total:</p>
-          <p class="price">&euro;{{totalAmount}}</p>
-          <a class="shoptastic-btn-secondary btn" (click)="checkout()">Checkout</a>
+          <button (click)="deleteItem(item)"
+                  class="shoptastic-btn-primary btn">Remove
+          </button>
         </div>
-      </section>
-    </div>
-
-    <ng-template #emptyCart>
-      <div class="empty-cart">
-        <p>Your cart is empty. Keep shopping to find a product.</p>
-        <a class="shoptastic-btn-transparent-magenta btn" routerLink="/products">View all products</a>
+      </shoptastic-product-card>
+    </section>
+    <section class="product-cart-section right">
+      <div class="checkout-wrapper">
+        <p>Total:</p>
+        <p class="price">&euro;{{totalAmount}}</p>
+        <a class="shoptastic-btn-secondary btn" (click)="checkout()">Checkout</a>
       </div>
-    </ng-template>
+    </section>
   </div>
+
+  <ng-template #emptyCart>
+    <div class="empty-cart">
+      <p>Your cart is empty. Keep shopping to find a product.</p>
+      <a class="shoptastic-btn-transparent-magenta btn" routerLink="/products">View all products</a>
+    </div>
+  </ng-template>
 </div>

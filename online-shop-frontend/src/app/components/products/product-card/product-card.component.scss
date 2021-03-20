@@ -45,6 +45,7 @@
       font-size: 16px;
 
       p {
+        font-weight: bold;
         cursor: pointer;
         display: inline-block;
       }
@@ -60,11 +61,15 @@
     }
 
     .action-buttons-wrapper {
+      flex: 1;
+      justify-content: flex-end;
+      padding-right: .5em;
+
       .btn {
         margin: 0 .2em;
 
         i {
-          vertical-align: middle;
+          //vertical-align: middle;
         }
 
         &:first-of-type {
@@ -78,7 +83,7 @@
     }
 
     .product-footer {
-      padding: 25px 0 5px;
+      padding: .5em 0 5px;
       display: flex;
       flex: 1;
       align-items: flex-end;
@@ -99,17 +104,18 @@
         font-weight: bold;
       }
 
-      .add-to-cart-btn, .add-to-wishlist-btn {
+      .add-to-wishlist-btn {
         display: block;
         padding: 0;
         color: #212121;
         text-align: center;
         font-size: 18px;
-        width: 35px;
-        height: 35px;
-        line-height: 35px;
-        border-radius: 50%;
-        border: 1px solid #212121;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        min-height: 30px;
+        border-radius: 5px;
+        border: 1px solid transparent;
         transition: all 0.2s ease-in-out;
         cursor: pointer;
 
@@ -120,14 +126,9 @@
           text-decoration: none;
         }
 
-        &.go-to-cart, &.go-to-wishlist {
+        &.go-to-wishlist {
           background: $navbar-bg-color;
           color: #fff;
-        }
-
-        .la-shopping-cart {
-          font-size: 28px;
-          vertical-align: middle;
         }
       }
     }

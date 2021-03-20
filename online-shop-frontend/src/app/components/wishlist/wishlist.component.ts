@@ -29,7 +29,7 @@ export class WishlistComponent implements OnInit {
         this.showNoProductsMessage = true;
       }
     }, error => {
-
+      console.log(error);
     });
   }
 
@@ -50,7 +50,7 @@ export class WishlistComponent implements OnInit {
   }
 
   removeProductFromWishlist(productId: number) {
-    this.wishlistService.deleteProductFromWishlistById('' + productId).subscribe((data: any) => {
+    this.wishlistService.deleteProductFromWishlistById('' + productId).subscribe(() => {
       const productIndex = this.products.findIndex(product => product.id === productId);
       if (productIndex > -1) {
         this.products.splice(productIndex, 1);
@@ -59,9 +59,16 @@ export class WishlistComponent implements OnInit {
         this.showNoProductsMessage = true;
       }
     }, error => {
-
+      console.log(error);
     });
 
+  }
+
+  removeAllProductsFromWishlist() {
+    this.wishlistService.deleteAllProductsFromWishlistBy().subscribe(() => {
+      this.products = [];
+      this.showNoProductsMessage = true;
+    });
   }
 
   openSnackBar(productName: string) {

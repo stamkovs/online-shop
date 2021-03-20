@@ -1,6 +1,7 @@
 <div class="wishlist-page">
   <div class="container">
     <h2>Wishlisted products</h2>
+    <a *ngIf="products.length" class="shoptastic-btn-transparent-magenta btn remove-all" (click)="removeAllProductsFromWishlist()">Remove all</a>
     <div class="wishlist-products-wrapper flex">
       <div *ngIf="showNoProductsMessage" class="empty-wishlist">
         <p>Your wishlist is empty. Keep shopping to find a product.</p>

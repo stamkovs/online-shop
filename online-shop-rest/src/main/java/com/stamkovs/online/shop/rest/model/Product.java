@@ -56,9 +56,6 @@ public class Product {
   @Column
   private float price;
 
-  @Column
-  private int quantity;
-
   @Temporal(TemporalType.TIMESTAMP)
   private Date createdOn;
 

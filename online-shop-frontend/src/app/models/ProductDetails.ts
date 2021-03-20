@@ -5,6 +5,10 @@ export class ProductDetails {
   description?: string;
   imageSrc: string;
   price: number;
-  quantity?: number;
+  totalQuantity: number;
+  sizeQuantityInfo?: any;
+  addedQuantityToCart?: any;
+  addedSizeToCart?: string;
+  maximumQuantity? :number;
   wishlisted: boolean;
 }

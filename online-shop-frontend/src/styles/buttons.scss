@@ -53,6 +53,8 @@
 }
 
 .button-loading {
+  pointer-events: none;
+  color: $navbar-bg-color;
 
   &:after {
     content: "";

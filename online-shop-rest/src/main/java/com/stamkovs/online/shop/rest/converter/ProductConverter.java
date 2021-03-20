@@ -4,6 +4,8 @@ import com.stamkovs.online.shop.rest.model.Product;
 import com.stamkovs.online.shop.rest.model.ProductDto;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
+
 /**
  * Converter for products.
  */
@@ -23,7 +25,26 @@ public class ProductConverter {
       .imageSrc(product.getImageUrl())
       .price(product.getPrice())
       .description(product.getDescription())
-      .quantity(product.getQuantity())
+      .build();
+  }
+
+  /**
+   * Converts domain {@link Product} to {@link ProductDto} for product details presentation model.
+   *
+   * @param product the product persistence data.
+   * @return {@link ProductDto}.
+   */
+  public ProductDto toPresentationModelProductDetails(Product product, Integer totalQuantity,
+                                                      Map<String, Map<String, String>> sizeQuantityInfo) {
+    return ProductDto.builder()
+      .id(product.getId())
+      .category(product.getProductCategory().getCategory())
+      .name(product.getName())
+      .imageSrc(product.getImageUrl())
+      .price(product.getPrice())
+      .description(product.getDescription())
+      .totalQuantity(totalQuantity)
+      .sizeQuantityInfo(sizeQuantityInfo)
       .build();
   }
 }

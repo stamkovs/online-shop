@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Map;
+
 /**
  * Presentation model for the products.
  */
@@ -20,6 +22,7 @@ public class ProductDto {
   private String description;
   private String imageSrc;
   private double price;
-  private int quantity;
+  private Integer totalQuantity;
+  private Map<String, Map<String, String>> sizeQuantityInfo;
   private boolean isWishlisted;
 }

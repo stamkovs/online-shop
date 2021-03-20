@@ -19,4 +19,8 @@ export class WishlistService {
   deleteProductFromWishlistById(productId: string): Observable<any> {
     return this.http.delete(`rest/delete-from-wishlist/${productId}`);
   }
+
+  deleteAllProductsFromWishlistBy(): Observable<any> {
+    return this.http.delete('rest/delete-wishlist-for-user');
+  }
 }

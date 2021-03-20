@@ -14,6 +14,7 @@ export class CartComponent implements OnInit {
 
   products: ProductDetails[];
   totalAmount: any = 0.00;
+  itemQuantity: number;
 
   constructor(private cartService: CartService, private router: Router, private route: ActivatedRoute,
               private _snackBar: MatSnackBar) {
@@ -23,7 +24,7 @@ export class CartComponent implements OnInit {
     this.products = JSON.parse(this.cartService.getProductsFromCart()) || [];
     if (this.products) {
       this.products.forEach(product => {
-        this.totalAmount += product.price
+        this.totalAmount += product.price * product.addedQuantityToCart;
       });
       this.totalAmount = this.totalAmount.toFixed(2);
     }
@@ -33,8 +34,7 @@ export class CartComponent implements OnInit {
     item.isAddedToCart = false;
     this.cartService.removeProductFromCart(item.id);
     this.products = JSON.parse(this.cartService.getProductsFromCart());
-    this.totalAmount -= item.price;
-    this.totalAmount = this.totalAmount.toFixed(2);
+    this.totalAmount = (parseFloat(this.totalAmount) - item.price * item.addedQuantityToCart).toFixed(2);
   }
 
   goToProductDetail(item) {
@@ -58,4 +58,26 @@ export class CartComponent implements OnInit {
       verticalPosition: 'top',
     });
   }
+
+  decreaseCartCounter(item: ProductDetails) {
+    if (item.addedQuantityToCart == '1') {
+      return;
+    }
+    item.addedQuantityToCart = item.addedQuantityToCart - 1;
+    this.totalAmount = (parseFloat(this.totalAmount) - item.price).toFixed(2);
+  }
+
+  increaseCartCounter(item: ProductDetails) {
+    if (item.addedQuantityToCart == item.maximumQuantity) {
+      return;
+    }
+    item.addedQuantityToCart = +item.addedQuantityToCart + 1;
+    this.totalAmount = (parseFloat(this.totalAmount) + item.price).toFixed(2);
+  }
+
+  removeAllProductsFromCart() {
+    localStorage.clear();
+    this.products = [];
+  }
+
 }

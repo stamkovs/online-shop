@@ -1,128 +1,217 @@
 @import 'src/styles/variables';
 
-.cart-page {
-  .cart-page-wrapper {
-    max-width: 1024px;
-    flex-direction: column;
+.cart-page-wrapper {
+  position: relative;
+  max-width: 1024px;
+  flex-direction: column;
 
-    h2 {
-      margin-bottom: 0;
+  h2 {
+    margin-bottom: 0;
+  }
+
+  .remove-all {
+    position: absolute;
+    right: 2em;
+    top: 1em;
+  }
+
+  .product-cart-section {
+    margin: 0 2.5%;
+
+    p {
+      margin: 0;
     }
 
-    .product-cart-section {
-      margin: 0 2.5%;
+    &.left {
+      width: 65%;
+    }
 
-      p {
-        margin: 0;
+    &.right {
+      margin: 1.4em 0;
+      width: 30%;
+      background: linear-gradient(to left, $navbar-bg-color, $color-magenta-primary) no-repeat 0 0 / cover;
+      border-radius: 5px;
+      padding: 1.2em;
+      box-sizing: border-box;
+
+      .price {
+        color: black;
+        font-family: raleway-bold monospace;
+        font-weight: bold;
+        font-size: 2em;
       }
+    }
 
-      &.left {
-        width: 65%;
-      }
+    .shoptastic-product-card-wrapper {
+      background: rgba($color-magenta-primary, 1);
+      padding: 0.6em;
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      position: relative;
+      margin: 1.4em 1.2em;
+      display: flex;
+      flex-direction: row;
 
-      &.right {
-        margin: 1.4em 0;
-        width: 30%;
-        background: linear-gradient(to left, $navbar-bg-color, $color-magenta-primary) no-repeat 0 0 / cover;
-        border-radius: 5px;
-        padding: 1.2em;
-        box-sizing: border-box;
-
-        .price {
-          color: black;
-          font-family: raleway-bold monospace;
-          font-weight: bold;
-          font-size: 2em;
-        }
-      }
-
-      .shoptastic-product-card-wrapper {
-        background: rgba($color-magenta-primary, 1);
-        padding: 0.6em;
-        border-radius: 6px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-        position: relative;
-        margin: 1.4em 1.2em;
-        display: flex;
+      .shoptastic-product-card {
         flex-direction: row;
-
-        .shoptastic-product-card {
-          flex-direction: row;
-          align-items: center;
+        align-items: center;
 
 
-          &:hover {
-            .shoptastic-product-image-wrapper {
-              top: -20px;
-            }
-          }
-
+        &:hover {
           .shoptastic-product-image-wrapper {
-            flex: 0.25;
+            top: -20px;
+          }
+        }
+
+        .shoptastic-product-image-wrapper {
+          flex: 0.25;
+        }
+
+        .product-text-wrapper {
+          padding-left: 1.2em;
+
+          .action-buttons-wrapper {
+            display: none;
           }
 
-          .product-text-wrapper {
-            padding-left: 1.2em;
+          div.product-footer {
+            align-items: center;
+          }
 
-            .action-buttons-wrapper {
-              opacity: 0;
-              visibility: hidden;
-            }
-
-            div.product-footer {
-              align-items: center;
-            }
-
-            .shoptastic-btn-primary {
-              padding: 0 2em;
-            }
+          .shoptastic-btn-primary {
+            padding: 0 2em;
           }
         }
       }
-    }
 
-    .empty-cart {
-      text-align: center;
-      width: 100%;
+      .add-to-cart-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 1.8em;
+
+        .size {
+          margin-right: 1.8em;
+        }
+
+        .add-to-cart-counter {
+          background: $navbar-bg-color;
+          box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.15);
+          border-radius: 6px;
+          padding: .1em 0;
+          width: 80px;
+          float: left;
+          border: 1px solid $navbar-bg-color;
+
+          input {
+            float: left;
+            width: 20%;
+            height: 40px;
+            border: none;
+            text-align: center;
+            box-sizing: border-box;
+            background: transparent;
+            color: white;
+          }
+
+          span {
+            width: 40%;
+            display: block;
+            height: 40px;
+            float: left;
+            position: relative;
+            cursor: pointer;
+
+            &:before, &:after {
+              content: '';
+              position: absolute;
+              background-color: #667780;
+              height: 2px;
+              width: 10px;
+              top: 50%;
+              left: 50%;
+              margin-top: -1px;
+              margin-left: -5px;
+            }
+
+            &.plus {
+              &:after {
+                transform: rotate(90deg);
+
+              }
+            }
+          }
+        }
+
+        .add-to-cart-btn {
+          transition: .2s all ease-in-out;
+
+          &.warning-size-undefined {
+            background: $color-magenta-primary;
+            transition: .2s all ease-in-out;
+          }
+        }
+      }
     }
   }
 
-  @media screen and (max-width: 768px) {
-    .cart-page-wrapper {
-      .product-cart-main-wrapper {
-        flex-direction: column;
+  .empty-cart {
+    text-align: center;
+    width: 100%;
+  }
+}
 
-        .product-cart-section {
-          margin: 0;
-          text-align: center;
+@media screen and (max-width: 768px) {
+  .cart-page-wrapper {
+    .product-cart-main-wrapper {
+      flex-direction: column;
 
-          &.left, &.right {
-            width: 100%;
-          }
+      .product-cart-section {
+        margin: 0;
+        text-align: center;
 
-          .shoptastic-product-card-wrapper {
-            margin: 1.4em 0;
+        &.left, &.right {
+          width: 100%;
+        }
 
-            .shoptastic-product-card {
+        .shoptastic-product-card-wrapper {
+          margin: 1.4em 0;
 
-              &:hover {
-                .shoptastic-product-image-wrapper {
-                  top: 0;
+          .shoptastic-product-card {
 
-                  img {
-                    box-shadow: none;
-                  }
+            &:hover {
+              .shoptastic-product-image-wrapper {
+                top: 0;
+
+                img {
+                  box-shadow: none;
                 }
               }
+            }
 
-              .shoptastic-product-image-wrapper {
-                flex: 1;
+            .shoptastic-product-image-wrapper {
+              flex: 1;
+            }
+
+            .product-text-wrapper .product-footer {
+              align-items: flex-start;
+              margin: 0;
+              flex-direction: column;
+              padding-top: 0;
+
+              &:before {
+                bottom: 70px;
+              }
+
+              .flex:first-of-type {
+                margin-bottom: 1em;
               }
             }
           }
-        }
 
+        }
       }
+
     }
   }
 }

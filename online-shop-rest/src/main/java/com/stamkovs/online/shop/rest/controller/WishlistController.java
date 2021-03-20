@@ -47,4 +47,12 @@ public class WishlistController {
   public void deleteProductFromWishlistById(@PathVariable String productId) {
     wishlistService.deleteProductFromWishlistById(productId);
   }
+
+  /**
+   * Delete all products from wishlist for an authenticated user.
+   */
+  @DeleteMapping(value = "/delete-wishlist-for-user")
+  public void deleteAllProductsFromWishlistForUserAccount() {
+    wishlistService.deleteAllProductsFromWishlistById();
+  }
 }

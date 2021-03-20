@@ -19,6 +19,11 @@ export class ProductDetailComponent implements OnInit {
   routeState: any;
   wishlistBtnLabel: string;
   cartBtnLabel: string;
+  sizes: any[];
+  sizesAvailablePerProduct: any[];
+  selectedSize: any;
+  itemQuantity: number;
+  cartInputElement: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private cookieService: CookieService,
               private cartService: CartService, private _snackBar: MatSnackBar,
@@ -39,6 +44,13 @@ export class ProductDetailComponent implements OnInit {
         this.item = data.productDetail;
         this.wishlistBtnLabel = this.item.wishlisted ? 'Go to wishlist' : 'Wishlist';
         this.cartBtnLabel = this.isItemInCart(this.item.id) ? 'Go to cart' : 'Add to cart';
+        this.itemQuantity = this.item.totalQuantity;
+        if (this.item.category === 'men_sneakers') {
+          this.sizes = ['36', '37', '38', '39', '40', '41', '42', '43', '44', '45'];
+        }
+        if (this.item.category === 'watches') {
+          this.sizes = ['34', '36', '38', '40', '42', '44', '46'];
+        }
       }
     });
 
@@ -52,6 +64,22 @@ export class ProductDetailComponent implements OnInit {
     };
     new Drift(imageZoomTrigger, options);
 
+    this.cartInputElement = document.getElementById('cart-counter-input');
+  }
+
+  checkIfProductHasSize(item: ProductDetails, size: string) {
+    this.sizesAvailablePerProduct = Object.keys(item.sizeQuantityInfo.size);
+    return !this.sizesAvailablePerProduct.includes(size);
+  }
+
+  toggleSelected(clickedSize) {
+    if (this.cartBtnLabel === 'Choose size') {
+      this.cartBtnLabel = 'Add to cart';
+      document.getElementsByClassName('add-to-cart-btn')[0].classList.remove('warning-size-undefined');
+    }
+    this.itemQuantity = this.item.sizeQuantityInfo.size[clickedSize];
+    this.selectedSize = clickedSize;
+    this.cartInputElement.value = '1';
   }
 
   isUserLoggedIn() {
@@ -68,25 +96,49 @@ export class ProductDetailComponent implements OnInit {
         this.wishlistBtnLabel = 'Go to wishlist';
         this.openSnackBar(this.item.name, 'was successfully added to your wishlist.');
       }, 2000);
-      this.wishlistService.addProductToWishList('' + productId).subscribe((data: any) => {
+      this.wishlistService.addProductToWishList('' + productId).subscribe(() => {
         this.item.wishlisted = true;
       }, error => {
+        console.log(error);
       });
     }
   }
 
   addProductToCart(product: ProductDetails, event) {
+    if (this.selectedSize == undefined) {
+      event.target.classList.add('warning-size-undefined');
+      this.cartBtnLabel = 'Choose size';
+      return;
+    }
     event.target.classList.add('button-loading');
     setTimeout(() => {
       event.target.classList.remove('button-loading');
       this.openSnackBar(product.name, ' was successfully added to your cart.');
       this.cartBtnLabel = 'Go to cart';
     }, 2000);
+    product.addedQuantityToCart = this.cartInputElement.value;
+    product.addedSizeToCart = this.selectedSize;
+    product.maximumQuantity = this.item.sizeQuantityInfo.size[this.selectedSize];
+    this.itemQuantity -= this.cartInputElement.value;
     this.cartService.addProductToCart(product);
   }
 
   isItemInCart(productId: number) {
     return this.cartService.checkIsProductInCartById(productId);
+  }
+
+  decreaseCartCounter() {
+    if (this.cartInputElement.value === '0') {
+      return;
+    }
+    this.cartInputElement.value--;
+  }
+
+  increaseCartCounter() {
+    if (this.cartInputElement.value === '' + this.itemQuantity) {
+      return;
+    }
+    this.cartInputElement.value++;
   }
 
   goToCart() {

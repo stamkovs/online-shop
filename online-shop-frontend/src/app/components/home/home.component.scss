@@ -97,7 +97,7 @@
         flex-direction: row;
         justify-content: center;
 
-        .add-to-cart-btn {
+        .add-to-wishlist-btn {
           margin: 0.8em 0;
           min-width: 32%;
           min-height: 36px;
@@ -107,6 +107,12 @@
           &:hover, &:active, &:focus {
             border-color: $navbar-bg-color;
             background: $navbar-bg-color;
+          }
+
+          &.selected {
+            transition: .2s all ease-in-out;
+            border-color: $navbar-bg-color;
+            background-color: $navbar-bg-color;
           }
 
           i {
