@@ -184,7 +184,7 @@ class RegisterServiceTest {
     UserPrincipal userPrincipal = new UserPrincipal();
     Collection<? extends GrantedAuthority> authorities = new ArrayList<>();
     userPrincipal.setAuthorities(authorities);
-    when(mockedUserConverter.convertToUserPrincipal(any())).thenReturn(userPrincipal);
+    when(mockedUserConverter.convertToUserPrincipal(any(), any())).thenReturn(userPrincipal);
     OAuth oauth = new OAuth();
     oauth.setTokenExpirationMsec(1000L);
     when(authConfiguration.getOAuth()).thenReturn(oauth);

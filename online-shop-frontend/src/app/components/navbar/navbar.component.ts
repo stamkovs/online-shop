@@ -25,6 +25,9 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   accountSubMenuMarginSeparator: number;
   screenHeight: number;
   screenWidth: number;
+  loggedInUserEmail: string;
+  loggedInUserFirstName: string;
+  loggedInUserLastName: string;
 
   constructor(private cookieService: CookieService, private authService: AuthService,
               private router: Router, private productService: ProductService) {
@@ -108,7 +111,18 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   }
 
   isUserLoggedIn() {
-    return this.cookieService.get('is_user_logged_in') === '1';
+    if (this.cookieService.get('is_user_logged_in') === '1') {
+      const loggedInUserInfoObj = JSON.parse(this.cookieService.get('user_auth_information'));
+      let userInfoParams = loggedInUserInfoObj.replace(/"|{|}/g, '').split(',');
+      let userEmail = userInfoParams[0].split(':')[1];
+      let userFirstName = userInfoParams[1].split(':')[1];
+      let userLastName = userInfoParams[2].split(':')[1];
+      this.loggedInUserEmail = userEmail;
+      this.loggedInUserFirstName = userFirstName;
+      this.loggedInUserLastName = userLastName;
+      return true;
+    }
+    return false;
   }
 
   logoutFromApp() {
@@ -116,7 +130,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
       this.closeMobileNavbar();
       this.router.navigate(['/home']);
     }, error => {
-
+      this.router.navigate(['/home']);
     });
   }
 

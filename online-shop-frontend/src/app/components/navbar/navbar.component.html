@@ -65,8 +65,19 @@
           <li (mouseenter)="mouseEnterSubMenu($event)" (mouseleave)="mouseLeaveSubmenu()"
               [ngStyle]="{'padding-bottom': accountSubMenuMarginSeparator + 'px'}"
               class="navbar-item account-menu"><a class="navbar-link has-subcategory">
-            <i class="far fa-user"></i>Account</a>
+            <div class="circle">
+                  <span
+                    class="initials">{{loggedInUserFirstName.substring(0, 1)}}{{loggedInUserLastName.substring(0, 1)}}</span>
+            </div>Account</a>
             <div class="submenu account-categories">
+              <div class="user-details">
+                <div class="circle circle-in-submenu">
+                  <span
+                    class="initials">{{loggedInUserFirstName.substring(0, 1)}}{{loggedInUserLastName.substring(0, 1)}}</span>
+                </div>
+                <p class="user-name">{{loggedInUserFirstName}} {{loggedInUserLastName}}</p>
+                <p class="user-email">{{loggedInUserEmail}}</p>
+              </div>
               <ul>
                 <li class="navbar-item"><a class="navbar-link">My account</a>
                 </li>

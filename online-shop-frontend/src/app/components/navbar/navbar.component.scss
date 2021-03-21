@@ -288,6 +288,7 @@ main {
   .search-wrapper {
     display: flex;
     flex: 1;
+    max-width: 280px;
     justify-content: flex-start;
     align-items: center;
     position: relative;
@@ -324,7 +325,7 @@ main {
       line-height: 18px;
       color: white;
 
-      border-radius: 50px;
+      border-radius: 5px;
       border: 1px solid #575756;
       backface-visibility: hidden;
       transform-style: preserve-3d;
@@ -434,6 +435,7 @@ main {
   margin: 0.4em;
   width: auto;
   list-style: none;
+  backface-visibility: hidden;
 
   @media screen and (max-width: 1024px) {
     margin: 0.2em;
@@ -488,6 +490,28 @@ main {
   margin: 0 0.4em;
   cursor: pointer;
 
+  .circle {
+    background-color: white;
+    color: $navbar-bg-color;
+    border-radius: 50%;
+    height: 32px;
+    text-align: center;
+    width: 32px;
+    margin-right: .4em;
+
+    .initials {
+      font-size: 1em;
+      line-height: 1;
+      position: relative;
+      top: 4px;
+    }
+  }
+
+  .circle-in-submenu {
+    position: absolute;
+    top: 1em;
+  }
+
   @media screen and (max-width: 768px) {
     padding-top: 1em;
   }
@@ -497,7 +521,7 @@ main {
       transform: translateY(0);
 
       &:not(.products-categories) {
-        transform: translate(-36px, 0);
+        transform: translate(-50%, 0);
       }
 
       @media screen and (max-width: 768px) {
@@ -528,7 +552,30 @@ main {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 
   &:not(.products-categories) {
-    transform: translate(-36px, -125%);
+    transform: translate(-50%, -150%);
+  }
+
+  .user-details {
+    position: relative;
+    padding-top: 0.6em;
+
+    .user-name, .user-email {
+      cursor: default;
+      font-size: 14px;
+      margin-left: 42px;
+      color: #8e8e8e;
+    }
+
+    .user-email {
+      &:before {
+        position: absolute;
+        content: "";
+        border-bottom: 1px solid white;
+        width: 100%;
+        top: 105%;
+        left: 0;
+      }
+    }
   }
 
   .navbar-link {

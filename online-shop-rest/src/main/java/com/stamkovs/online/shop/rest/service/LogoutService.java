@@ -52,8 +52,20 @@ public class LogoutService {
     Cookie logoutUser = new Cookie(IS_USER_LOGGED_IN, EMPTY_STRING);
     logoutUser.setPath(FORWARD_SLASH);
     logoutUser.setMaxAge(0);
+
+    Cookie isAdminUserCookie = new Cookie("is_user_admin", EMPTY_STRING);
+    isAdminUserCookie.setPath(FORWARD_SLASH);
+    isAdminUserCookie.setMaxAge(0);
+
+    Cookie revokeUserLoggedInInformation = new Cookie("user_auth_information", EMPTY_STRING);
+    revokeUserLoggedInInformation.setPath(FORWARD_SLASH);
+    revokeUserLoggedInInformation.setMaxAge(0);
+
     response.addCookie(revokeAuthorizationToken);
     response.addCookie(logoutUser);
+    response.addCookie(isAdminUserCookie);
+    response.addCookie(revokeUserLoggedInInformation);
+
     if (userAccount != null) {
 
       log.info("Successfully logged out user {}.", userAccount.getAccountId());

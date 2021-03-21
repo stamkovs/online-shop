@@ -63,7 +63,7 @@ class LoginServiceTest {
     userLoginDto.setPassword("testPassword");
     when(userRepository.findByEmailIgnoreCase(any())).thenReturn(Optional.of(userAccount));
     when(passwordEncoder.matches(any(), any())).thenReturn(true);
-    when(userConverter.convertToUserPrincipal(any())).thenReturn(new UserPrincipal());
+    when(userConverter.convertToUserPrincipal(any(), any())).thenReturn(new UserPrincipal());
     OAuth oAuth = new OAuth();
     oAuth.setTokenExpirationMsec(1000L);
     when(authConfiguration.getOAuth()).thenReturn(oAuth);

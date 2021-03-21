@@ -11,6 +11,7 @@ import com.stamkovs.online.shop.rest.exception.UserNotFoundException;
 import com.stamkovs.online.shop.rest.model.EmailDto;
 import com.stamkovs.online.shop.rest.model.ResetPasswordDto;
 import com.stamkovs.online.shop.rest.model.UserAccount;
+import com.stamkovs.online.shop.rest.model.UserRole;
 import com.stamkovs.online.shop.rest.repository.ResetPasswordTokenRepository;
 import com.stamkovs.online.shop.rest.repository.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -211,7 +212,7 @@ class ResetPasswordServiceTest {
     oAuth.setTokenExpirationMsec(1000L);
     when(authConfiguration.getOAuth()).thenReturn(oAuth);
     when(passwordEncoder.encode(resetPasswordDto.getNewPassword())).thenReturn("hashedNewPassword");
-    when(userConverter.convertToUserPrincipal(userAccount)).thenReturn(new UserPrincipal());
+    when(userConverter.convertToUserPrincipal(userAccount, UserRole.USER)).thenReturn(new UserPrincipal());
 
     // when
     resetPasswordService.updatePassword(request, response, resetPasswordToken.getResetPasswordToken(),

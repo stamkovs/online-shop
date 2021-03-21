@@ -8,9 +8,7 @@ import com.stamkovs.online.shop.rest.auth.util.CookieUtils;
 import com.stamkovs.online.shop.rest.converter.UserConverter;
 import com.stamkovs.online.shop.rest.exception.UnauthorizedShoptasticException;
 import com.stamkovs.online.shop.rest.exception.UserNotFoundException;
-import com.stamkovs.online.shop.rest.model.EmailDto;
-import com.stamkovs.online.shop.rest.model.ResetPasswordDto;
-import com.stamkovs.online.shop.rest.model.UserAccount;
+import com.stamkovs.online.shop.rest.model.*;
 import com.stamkovs.online.shop.rest.repository.ResetPasswordTokenRepository;
 import com.stamkovs.online.shop.rest.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -92,11 +90,13 @@ public class ResetPasswordService {
     if (userAccount == null) {
       CookieUtils.deleteCookie(request, response, AUTHORIZATION);
       CookieUtils.deleteCookie(request, response, IS_USER_LOGGED_IN);
+      CookieUtils.deleteCookie(request, response, "is_user_admin");
       log.info("Revoking authorization bearer token cookie as user does not exists within the system.");
       throw new UserNotFoundException("User with id " + token.getUserAccountId() + " cant be found.");
     }
     userAccount.setPassword(passwordEncoder.encode(resetPasswordDto.getNewPassword()));
-    UserPrincipal userPrincipal = userConverter.convertToUserPrincipal(userAccount);
+    UserRole userRole = UserRole.getByCode(userAccount.getUserRoleId());
+    UserPrincipal userPrincipal = userConverter.convertToUserPrincipal(userAccount, userRole);
 
     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userPrincipal, null,
       userPrincipal.getAuthorities());
@@ -104,7 +104,7 @@ public class ResetPasswordService {
     SecurityContextHolder.getContext().setAuthentication(authentication);
     int tokenExpirationInSeconds = authConfiguration.getOAuth().getTokenExpirationMsec().intValue() / 1000;
     CookieUtils.addAuthorizationCookies(response, tokenProvider.createToken(authentication),
-      tokenExpirationInSeconds);
+      tokenExpirationInSeconds, userAccount);
 
     token.setUsed(true);
     resetPasswordTokenRepository.save(token);

@@ -8,6 +8,7 @@ import com.stamkovs.online.shop.rest.converter.UserConverter;
 import com.stamkovs.online.shop.rest.exception.UserNotFoundException;
 import com.stamkovs.online.shop.rest.model.UserAccount;
 import com.stamkovs.online.shop.rest.model.UserLoginDto;
+import com.stamkovs.online.shop.rest.model.UserRole;
 import com.stamkovs.online.shop.rest.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,9 +17,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 import java.util.Optional;
+
+import static com.stamkovs.online.shop.rest.model.ShopConstants.FORWARD_SLASH;
 
 /**
  * Service for logging in the user.
@@ -42,7 +46,8 @@ public class LoginService {
       throw new UserNotFoundException("Invalid email or password.");
     }
     UserAccount userAccount = optionalUserAccount.get();
-    UserPrincipal userPrincipal = userConverter.convertToUserPrincipal(userAccount);
+    UserRole userRole = UserRole.getByCode(userAccount.getUserRoleId());
+    UserPrincipal userPrincipal = userConverter.convertToUserPrincipal(userAccount, userRole);
     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userPrincipal,
       null,
       userPrincipal.getAuthorities());
@@ -50,7 +55,14 @@ public class LoginService {
     SecurityContextHolder.getContext().setAuthentication(authentication);
     int tokenExpirationInSeconds = authConfiguration.getOAuth().getTokenExpirationMsec().intValue() / 1000;
     CookieUtils.addAuthorizationCookies(response, tokenProvider.createToken(authentication),
-      tokenExpirationInSeconds);
+      tokenExpirationInSeconds, userAccount);
+    if (UserRole.ADMIN.equals(userRole)) {
+      Cookie adminUserCookie = new Cookie("is_user_admin", "true");
+      adminUserCookie.setPath(FORWARD_SLASH);
+      adminUserCookie.setMaxAge(86000);
+      response.addCookie(adminUserCookie);
+    }
+
     log.info("User with id {} is successfully logged in.", userAccount.getAccountId());
   }
 }

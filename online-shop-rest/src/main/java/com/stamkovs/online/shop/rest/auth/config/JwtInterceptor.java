@@ -57,6 +57,8 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
       } catch (UserNotFoundException e) {
         CookieUtils.deleteCookie(request, response, AUTHORIZATION);
         CookieUtils.deleteCookie(request, response, IS_USER_LOGGED_IN);
+        CookieUtils.deleteCookie(request, response, "is_user_admin");
+        CookieUtils.deleteCookie(request, response, "user_auth_information");
         log.info("Revoking authorization bearer token cookie as user does not exists within the system.");
         throw new UserNotFoundException("User with id " + userId + " cant be found.");
       }

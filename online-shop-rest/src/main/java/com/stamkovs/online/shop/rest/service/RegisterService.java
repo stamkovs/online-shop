@@ -11,6 +11,7 @@ import com.stamkovs.online.shop.rest.exception.UserAlreadyExistsException;
 import com.stamkovs.online.shop.rest.exception.UserNotFoundException;
 import com.stamkovs.online.shop.rest.model.UserAccount;
 import com.stamkovs.online.shop.rest.model.UserRegisterDto;
+import com.stamkovs.online.shop.rest.model.UserRole;
 import com.stamkovs.online.shop.rest.repository.ConfirmationTokenRepository;
 import com.stamkovs.online.shop.rest.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -100,7 +101,7 @@ public class RegisterService {
 
     userRegisterDto.setEmail(userAccount.getEmail());
     userAccount.setEmailVerified(true);
-    UserPrincipal userPrincipal = userConverter.convertToUserPrincipal(userAccount);
+    UserPrincipal userPrincipal = userConverter.convertToUserPrincipal(userAccount, UserRole.USER);
 
     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userPrincipal,
       null,
@@ -110,7 +111,7 @@ public class RegisterService {
     int tokenExpirationInSeconds = authConfiguration.getOAuth().getTokenExpirationMsec().intValue() / 1000;
 
     CookieUtils.addAuthorizationCookies(response, tokenProvider.createToken(authentication),
-      tokenExpirationInSeconds);
+      tokenExpirationInSeconds, userAccount);
 
     token.setUsed(true);
     confirmationTokenRepository.save(token);

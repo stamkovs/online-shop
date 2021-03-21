@@ -1,5 +1,10 @@
 package com.stamkovs.online.shop.rest.auth.util;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.stamkovs.online.shop.rest.exception.UnauthorizedShoptasticException;
+import com.stamkovs.online.shop.rest.model.LoggedInUserDto;
+import com.stamkovs.online.shop.rest.model.UserAccount;
 import org.springframework.util.SerializationUtils;
 
 import javax.servlet.http.Cookie;
@@ -55,12 +60,29 @@ public class CookieUtils {
    * Adds the authorization http only cookie,
    */
   public static void addAuthorizationCookies(HttpServletResponse response, String bearerToken,
-                                             int tokenExpirationInSeconds) {
+                                             int tokenExpirationInSeconds, UserAccount userAccount) {
+
+    ObjectMapper objectMapper = new ObjectMapper();
     CookieUtils.addCookie(response, AUTHORIZATION, bearerToken, tokenExpirationInSeconds);
     Cookie isUserLoggedIn = new Cookie(IS_USER_LOGGED_IN, "1");
     isUserLoggedIn.setPath(FORWARD_SLASH);
     isUserLoggedIn.setMaxAge(86000);
     response.addCookie(isUserLoggedIn);
+
+    LoggedInUserDto loggedInUserDto = new LoggedInUserDto();
+    loggedInUserDto.setEmail(userAccount.getEmail());
+    loggedInUserDto.setFirstName(userAccount.getFirstName());
+    loggedInUserDto.setLastName(userAccount.getLastName());
+    String userDetailsJson;
+    try {
+      userDetailsJson = objectMapper.writeValueAsString(loggedInUserDto);
+    } catch (JsonProcessingException e) {
+      throw new UnauthorizedShoptasticException("Error when converting user details to json");
+    }
+    Cookie userDetailsCookie = new Cookie("user_auth_information", userDetailsJson);
+    userDetailsCookie.setPath(FORWARD_SLASH);
+    userDetailsCookie.setMaxAge(86000);
+    response.addCookie(userDetailsCookie);
   }
 
   public static String serialize(Object object) {

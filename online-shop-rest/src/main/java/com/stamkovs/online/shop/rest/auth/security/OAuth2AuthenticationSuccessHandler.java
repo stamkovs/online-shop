@@ -3,6 +3,8 @@ package com.stamkovs.online.shop.rest.auth.security;
 import com.stamkovs.online.shop.rest.auth.config.AuthConfiguration;
 import com.stamkovs.online.shop.rest.exception.UnauthorizedShoptasticException;
 import com.stamkovs.online.shop.rest.auth.util.CookieUtils;
+import com.stamkovs.online.shop.rest.model.UserAccount;
+import com.stamkovs.online.shop.rest.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -30,14 +32,18 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
   private final AuthConfiguration authConfiguration;
 
+  private final UserRepository userRepository;
+
   private final HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 
   @Autowired
   OAuth2AuthenticationSuccessHandler(TokenProvider tokenProvider, AuthConfiguration authConfiguration,
-                                     HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository) {
+                                     HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository,
+                                     UserRepository userRepository) {
     this.tokenProvider = tokenProvider;
     this.authConfiguration = authConfiguration;
     this.httpCookieOAuth2AuthorizationRequestRepository = httpCookieOAuth2AuthorizationRequestRepository;
+    this.userRepository = userRepository;
   }
 
   @Override
@@ -50,8 +56,17 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
       return;
     }
     clearAuthenticationAttributes(request, response);
+    String email = authentication.getName();
+    Optional<UserAccount> optionalUserAccount = userRepository.findByEmailIgnoreCase(email);
+
+    UserAccount userAccount = new UserAccount();
+    if (optionalUserAccount.isPresent()) {
+      userAccount = optionalUserAccount.get();
+    }
+
     int tokenExpirationInSeconds = authConfiguration.getOAuth().getTokenExpirationMsec().intValue() / 1000;
-    CookieUtils.addAuthorizationCookies(response, tokenProvider.createToken(authentication), tokenExpirationInSeconds);
+    CookieUtils.addAuthorizationCookies(response, tokenProvider.createToken(authentication), tokenExpirationInSeconds
+      , userAccount);
     getRedirectStrategy().sendRedirect(request, response, targetUrl);
   }
 
