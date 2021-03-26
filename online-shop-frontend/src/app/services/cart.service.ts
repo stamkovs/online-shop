@@ -26,11 +26,13 @@ export class CartService {
   }
 
   removeProductFromCart(productId: number) {
-    this.products = JSON.parse(localStorage.getItem(this.cartItems));
-    const productIndex = this.products.findIndex(product => product.id === productId);
-    if (productIndex > -1) {
-      this.products.splice(productIndex, 1);
-      localStorage.setItem(this.cartItems, JSON.stringify(this.products));
+    if (localStorage.getItem(this.cartItems)) {
+      this.products = JSON.parse(localStorage.getItem(this.cartItems));
+      const productIndex = this.products.findIndex(product => product.id === productId);
+      if (productIndex > -1) {
+        this.products.splice(productIndex, 1);
+        localStorage.setItem(this.cartItems, JSON.stringify(this.products));
+      }
     }
   }
 

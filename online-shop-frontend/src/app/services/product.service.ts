@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {ProductDetails} from '../models/ProductDetails';
 
 @Injectable()
 export class ProductService {
@@ -27,5 +28,9 @@ export class ProductService {
   searchProduct(searchValue: string): Observable<any> {
     const params = new HttpParams().set('searchValue', searchValue);
     return this.http.get('rest/products/search', {params: params});
+  }
+
+  addProduct(productDetails: ProductDetails): Observable<any> {
+    return this.http.post('rest/products/add', productDetails);
   }
 }

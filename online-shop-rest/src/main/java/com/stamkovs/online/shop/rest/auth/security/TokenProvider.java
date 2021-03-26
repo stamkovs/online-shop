@@ -2,7 +2,14 @@ package com.stamkovs.online.shop.rest.auth.security;
 
 import com.stamkovs.online.shop.rest.auth.config.AuthConfiguration;
 import com.stamkovs.online.shop.rest.auth.util.CookieUtils;
-import io.jsonwebtoken.*;
+import com.stamkovs.online.shop.rest.model.UserAccount;
+import com.stamkovs.online.shop.rest.model.UserRole;
+import com.stamkovs.online.shop.rest.repository.UserRepository;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -13,9 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
-import static com.stamkovs.online.shop.rest.model.ShopConstants.AUTHORIZATION;
-import static com.stamkovs.online.shop.rest.model.ShopConstants.IS_USER_LOGGED_IN;
+import static com.stamkovs.online.shop.rest.model.ShopConstants.*;
 
 /**
  * Service for the creating and validating the token.
@@ -26,6 +33,7 @@ import static com.stamkovs.online.shop.rest.model.ShopConstants.IS_USER_LOGGED_I
 public class TokenProvider {
 
   private final AuthConfiguration authConfiguration;
+  private final UserRepository userRepository;
 
   public String createToken(Authentication authentication) {
     UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
@@ -34,8 +42,12 @@ public class TokenProvider {
     Date expiryDate = new Date(now.getTime() + authConfiguration.getOAuth().getTokenExpirationMsec());
 
     Map<String, Object> customHeader = new HashMap<>();
-    customHeader.put("admin", "false");
-    customHeader.put("email", userPrincipal.getEmail());
+    Optional<UserAccount> optionalUserAccount = userRepository.findById(userPrincipal.getId());
+    if (optionalUserAccount.isPresent()) {
+      UserAccount userAccount = optionalUserAccount.get();
+      customHeader.put("admin", "" + UserRole.ADMIN.equals(UserRole.getByCode(userAccount.getUserRoleId())));
+      customHeader.put("email", userPrincipal.getEmail());
+    }
     return Jwts.builder()
       .setClaims(customHeader)
       .setSubject(Long.toString(userPrincipal.getId()))
@@ -63,7 +75,5 @@ public class TokenProvider {
       return false;
     }
     return true;
-
-    // ToDO: re-check if catching of exceptions will be needed.
   }
 }

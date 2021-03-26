@@ -1,0 +1,73 @@
+<div class="container add-product-page">
+  <h3>Please fill out the form to add a new product.</h3>
+  <div class="add-product-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput type="text" name="name" [ngModel]="name" class=""
+             (ngModelChange)="nameModelChange($event)"/>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Choose category</mat-label>
+      <mat-select (selectionChange)="categoryModelChange($event)">
+        <mat-option *ngFor="let productCategory of categories" [value]="productCategory.value">
+          {{productCategory.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="price">
+      <mat-label>Price</mat-label>
+      <input matInput type="text" name="price" [ngModel]="price" (ngModelChange)="priceModelChange($event)"/>
+      <mat-icon matSuffix>euro</mat-icon>
+    </mat-form-field>
+    <p>Enter size and quantity per size:</p>
+    <div *ngFor="let size of sizeFormFields" class="price-quantity-size-row">
+      <mat-form-field appearance="outline" class="size">
+        <mat-label>Size</mat-label>
+        <input class="product-size-input" matInput type="number" [min]=36 [max]=45 maxLength=2 name="quantity"/>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="quantity">
+        <mat-label>Quantity</mat-label>
+        <input class="product-quantity-per-size-input" [min]=1 matInput type="number" name="quantity"/>
+      </mat-form-field>
+    </div>
+    <div class="size-action-buttons">
+      <button (click)="addNewProductSizeAndQuantityFormFields()" mat-raised-button
+              class="mat-raised-button mat-primary add-new-size">Add more sizes
+      </button>
+      <button (click)="removeLastProductSizeAndQuantityFormField()" mat-raised-button
+              class="mat-raised-button mat-primary remove-last-size">Remove last size
+      </button>
+    </div>
+    <mat-form-field appearance="outline" class="description">
+      <mat-label>Description</mat-label>
+      <textarea [ngModel]="description" (ngModelChange)="descriptionModelChange($event)" matInput
+                placeholder="Enter description"
+                maxlength="1000"
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5"></textarea>
+    </mat-form-field>
+    <div class="upload-product-image-wrapper">
+      <span *ngIf="srcResult; else showCameraIcon" class="close-image-preview" (click)="removeSelectedPhoto()">
+              <mat-icon [title]="'Remove image'" matSuffix>close</mat-icon>
+      </span>
+      <img class="new-product-image" [src]="srcResult" height="200">
+      <ng-template #showCameraIcon>
+        <mat-icon [title]="'Upload image'" (click)="fileInput.click()" class="photo-placeholder-image" matSuffix>
+          photo_camera
+        </mat-icon>
+      </ng-template>
+      <button class="choose-image" type="button" mat-raised-button (click)="fileInput.click()">Choose image
+        <mat-icon matSuffix>add_a_photo</mat-icon>
+      </button>
+      <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file">
+      <span *ngIf="imageName" class="image-name">
+        {{imageName}}
+      </span>
+    </div>
+    <button (click)="uploadProduct()" mat-raised-button class="mat-raised-button mat-primary upload-product-button"
+            [disabled]="disabled">
+      {{submitBtnLabel}}
+    </button>
+  </div>
+</div>

@@ -81,7 +81,7 @@ public class CookieUtils {
     }
     Cookie userDetailsCookie = new Cookie("user_auth_information", userDetailsJson);
     userDetailsCookie.setPath(FORWARD_SLASH);
-    userDetailsCookie.setMaxAge(86000);
+    userDetailsCookie.setMaxAge(86900);
     response.addCookie(userDetailsCookie);
   }
 

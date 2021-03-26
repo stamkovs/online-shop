@@ -39,13 +39,20 @@ import {ProductService} from './services/product.service';
 import {ProductListComponent} from './components/products/product-list/product-list.component';
 import {ProductDetailComponent} from './components/products/product-detail/product-detail.component';
 import {ProductDetailResolver} from './components/products/ProductDetailResolver';
-import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
-import { CartComponent } from './components/cart/cart.component';
+import {BreadcrumbsComponent} from './components/breadcrumbs/breadcrumbs.component';
+import {CartComponent} from './components/cart/cart.component';
 import {CartService} from './services/cart.service';
 import {ContactService} from './services/contact.service';
-import { WishlistComponent } from './components/wishlist/wishlist.component';
+import {WishlistComponent} from './components/wishlist/wishlist.component';
 import {WishlistService} from './services/wishlist.service';
 import {WishlistResolver} from './components/wishlist/WishlistResolver';
+import {ProductAddComponent} from './components/products/product-add/product-add.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatOptionModule} from '@angular/material/core';
+import {StorageService} from './services/storage.service';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment';
+import {AngularFireStorageModule} from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -64,6 +71,7 @@ import {WishlistResolver} from './components/wishlist/WishlistResolver';
     BreadcrumbsComponent,
     CartComponent,
     WishlistComponent,
+    ProductAddComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,7 +90,12 @@ import {WishlistResolver} from './components/wishlist/WishlistResolver';
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatTableModule,
-    MatPaginatorModule],
+    MatPaginatorModule,
+    MatSelectModule,
+    MatOptionModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
+  ],
   providers: [
     AuthService,
     WindowService,
@@ -97,6 +110,7 @@ import {WishlistResolver} from './components/wishlist/WishlistResolver';
     ContactService,
     WishlistService,
     WishlistResolver,
+    StorageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,

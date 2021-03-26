@@ -65,5 +65,14 @@ public class ProductController {
     return productService.searchProducts(searchValue);
   }
 
+  /**
+   * Add new product.
+   *
+   * @param productDto {@link ProductDto}.
+   */
+  @PostMapping("/products/add")
+  public ProductDto addProduct(@RequestBody ProductDto productDto) {
+   return productService.addProduct(productDto);
+  }
 
 }

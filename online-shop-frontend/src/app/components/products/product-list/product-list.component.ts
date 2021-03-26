@@ -142,8 +142,8 @@ export class ProductListComponent implements OnInit {
       this.wishlistService.addProductToWishList('' + product.id).subscribe(() => {
         product.wishlisted = true;
         this.openSnackBar(product.name, 'wishlist');
-      }, error => {
-        console.log(error);
+      }, () => {
+        this.router.navigate(['/home']);
       });
     }
   }

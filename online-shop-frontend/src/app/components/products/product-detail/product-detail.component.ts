@@ -52,6 +52,8 @@ export class ProductDetailComponent implements OnInit {
           this.sizes = ['34', '36', '38', '40', '42', '44', '46'];
         }
       }
+    }, () => {
+      this.router.navigate(['/products']);
     });
 
     let imageZoomTrigger = document.querySelector('.product-image-zoom');
@@ -98,8 +100,8 @@ export class ProductDetailComponent implements OnInit {
       }, 2000);
       this.wishlistService.addProductToWishList('' + productId).subscribe(() => {
         this.item.wishlisted = true;
-      }, error => {
-        console.log(error);
+      }, () => {
+        this.router.navigate(['/home']);
       });
     }
   }

@@ -12,7 +12,7 @@
             <img (mousemove)="dragging = true" (mousedown)="dragging = false" (mouseup)="goToProductDetail(item)" class="shoptastic-carousel-image" [src]="item.imageSrc" alt="shoptastic_image">
             <div class="product-text-wrapper">
               <p class="truncate" (click)="goToProductDetail(item)">{{item.name}}</p>
-              <span class="price">&euro;{{item.price}}.00</span>
+              <span class="price">&euro;{{item.price.toFixed(2)}}</span>
               <div class="product-detail-footer">
                 <button *ngIf="isUserLoggedIn(); else viewDetails" (click)="addOrGoToWishlist(item, $event)"
                         class="btn add-to-wishlist-btn shoptastic-btn-transparent-dark"

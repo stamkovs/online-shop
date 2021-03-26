@@ -9,7 +9,7 @@
       <p title="View details" (click)="emitClickEvent(item)">{{name}}</p>
     </div>
     <div class="product-footer">
-      <div class="flex"><span class="price">&euro;{{price}}.00&euro;</span></div>
+      <div class="flex"><span class="price">&euro;{{price.toFixed(2)}}</span></div>
       <div class="action-buttons-wrapper flex">
         <a [title]="title || (item.wishlisted ? 'Go to wishlist' : 'Add to wishlist')" (click)="emitAddToWishlistEvent(item)"
            *ngIf="this.isUserLoggedIn()" id="{{productId}}" class="add-to-wishlist-btn btn" [ngClass]="{'go-to-wishlist' : item.wishlisted}">

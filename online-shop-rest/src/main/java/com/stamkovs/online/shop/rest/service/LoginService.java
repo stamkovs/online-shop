@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.util.Optional;
 
-import static com.stamkovs.online.shop.rest.model.ShopConstants.FORWARD_SLASH;
+import static com.stamkovs.online.shop.rest.model.ShopConstants.*;
 
 /**
  * Service for logging in the user.
@@ -57,7 +57,7 @@ public class LoginService {
     CookieUtils.addAuthorizationCookies(response, tokenProvider.createToken(authentication),
       tokenExpirationInSeconds, userAccount);
     if (UserRole.ADMIN.equals(userRole)) {
-      Cookie adminUserCookie = new Cookie("is_user_admin", "true");
+      Cookie adminUserCookie = new Cookie(IS_USER_ADMIN, TRUE);
       adminUserCookie.setPath(FORWARD_SLASH);
       adminUserCookie.setMaxAge(86000);
       response.addCookie(adminUserCookie);

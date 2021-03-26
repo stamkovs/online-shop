@@ -28,8 +28,8 @@ export class WishlistComponent implements OnInit {
       } else {
         this.showNoProductsMessage = true;
       }
-    }, error => {
-      console.log(error);
+    }, () => {
+      this.router.navigate(['/home']);
     });
   }
 
@@ -58,8 +58,8 @@ export class WishlistComponent implements OnInit {
       if (!this.products.length) {
         this.showNoProductsMessage = true;
       }
-    }, error => {
-      console.log(error);
+    }, () => {
+      this.router.navigate(['/home']);
     });
 
   }

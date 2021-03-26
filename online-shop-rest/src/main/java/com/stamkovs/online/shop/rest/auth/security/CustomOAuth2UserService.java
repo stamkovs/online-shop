@@ -42,20 +42,19 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
   }
 
   private OAuth2User processOAuth2User(OAuth2UserRequest oAuth2UserRequest, OAuth2User oAuth2User) {
-    OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(oAuth2UserRequest.getClientRegistration().getRegistrationId(), oAuth2User.getAttributes());
-    if(StringUtils.isEmpty(oAuth2UserInfo.getEmail())) {
+    OAuth2UserInfo oAuth2UserInfo =
+      OAuth2UserInfoFactory.getOAuth2UserInfo(oAuth2UserRequest.getClientRegistration().getRegistrationId(),
+        oAuth2User.getAttributes());
+    if (StringUtils.isEmpty(oAuth2UserInfo.getEmail())) {
       throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
     }
 
     Optional<UserAccount> userOptional = userRepository.findByEmailIgnoreCase(oAuth2UserInfo.getEmail());
     UserAccount user;
-    if(userOptional.isPresent()) {
+    if (userOptional.isPresent()) {
       user = userOptional.get();
-      if(user.getProvider().equals(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()))) {
-//        throw new OAuth2AuthenticationProcessingException("Looks like you're signed up with " +
-//          user.getProvider() + " account. Please use your " + user.getProvider() +
-//          " account to login.");
-//      } else {
+      if (user.getProvider().equals(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()))) {
+
         user = updateExistingUser(user, oAuth2UserInfo);
       }
     } else {
@@ -78,7 +77,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
       user.setLastName(oAuth2UserInfo.getName().split(" ")[1]);
     }
     user.setEmail(oAuth2UserInfo.getEmail());
-    user.setUserRoleId(UserRole.CUSTOMER.getCode());
+    user.setUserRoleId(UserRole.USER.getCode());
     user.setEmailVerified(true);
     user.setAccountId(UUID.randomUUID().toString());
     return userRepository.save(user);

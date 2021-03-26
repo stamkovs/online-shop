@@ -7,7 +7,6 @@ import {
 import {CookieService} from 'ngx-cookie';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
-import {ProductService} from '../../services/product.service';
 
 @Component({
   selector: 'app-navbar',
@@ -30,7 +29,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   loggedInUserLastName: string;
 
   constructor(private cookieService: CookieService, private authService: AuthService,
-              private router: Router, private productService: ProductService) {
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -120,16 +119,23 @@ export class NavbarComponent implements OnInit, AfterViewInit {
       this.loggedInUserEmail = userEmail;
       this.loggedInUserFirstName = userFirstName;
       this.loggedInUserLastName = userLastName;
+      if (userFirstName === userLastName) {
+        this.loggedInUserLastName = userLastName.substring(0, 1);
+      }
       return true;
     }
     return false;
   }
 
+  isUserAdmin() {
+    return this.isUserLoggedIn() && this.cookieService.get('is_user_admin') === 'true';
+  }
+
   logoutFromApp() {
-    this.authService.logout().subscribe((data: any) => {
+    this.authService.logout().subscribe(() => {
       this.closeMobileNavbar();
       this.router.navigate(['/home']);
-    }, error => {
+    }, () => {
       this.router.navigate(['/home']);
     });
   }

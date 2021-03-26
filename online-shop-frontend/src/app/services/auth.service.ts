@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {WindowService} from './window.service';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {UserLoginDto} from '../models/UserLoginDto';
 import {EmailDto} from '../models/EmailDto';
@@ -84,7 +84,6 @@ export class AuthService {
         try {
           href = this.windowHandle.location.href;
         } catch (e) {
-          // console.log('Error:', e);
         }
         if (href != null) {
           let re = 'home';

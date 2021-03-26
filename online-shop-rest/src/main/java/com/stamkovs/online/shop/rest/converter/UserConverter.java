@@ -4,6 +4,7 @@ import com.stamkovs.online.shop.rest.auth.model.AuthProvider;
 import com.stamkovs.online.shop.rest.auth.security.UserPrincipal;
 import com.stamkovs.online.shop.rest.model.UserAccount;
 import com.stamkovs.online.shop.rest.model.UserRegisterDto;
+import com.stamkovs.online.shop.rest.model.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -50,15 +51,15 @@ public class UserConverter {
    *
    * @return {@link UserPrincipal}.
    */
-  public UserPrincipal convertToUserPrincipal(UserAccount userAccount) {
+  public UserPrincipal convertToUserPrincipal(UserAccount userAccount, UserRole userRole) {
     UserPrincipal userPrincipal = new UserPrincipal();
     List<GrantedAuthority> authorities = Collections.
-      singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+      singletonList(new SimpleGrantedAuthority(userRole.name()));
     userPrincipal.setAuthorities(authorities);
     userPrincipal.setEmail(userAccount.getEmail());
     userPrincipal.setId(userAccount.getId());
     userPrincipal.setPassword(userAccount.getPassword());
-
+    userPrincipal.setUserAccountId(userAccount.getAccountId());
     return userPrincipal;
   }
 

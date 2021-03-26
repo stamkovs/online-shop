@@ -51,7 +51,6 @@ export class EntryComponent implements OnInit {
   ngOnInit(): void {
     this.googleLogo = '../../assets/images/google-logo.png';
     this.fbLogo = '../../assets/images/fb-logo.png';
-    // ToDo: If time available adapt the below code in angular way perhaps via shared service and observables.
     const signUpButton = document.getElementById('signUp');
     const signUpButtonMobile = document.getElementById('signUp-mobile');
     const signInButton = document.getElementById('signIn');

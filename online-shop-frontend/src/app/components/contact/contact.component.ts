@@ -53,15 +53,14 @@ export class ContactComponent implements OnInit {
     contactSupportMailDto.email = this.userEmail;
     contactSupportMailDto.message = this.userMessage;
 
-    this.contactService.sendContactSupportEmail(contactSupportMailDto).subscribe((data: any) => {
+    this.contactService.sendContactSupportEmail(contactSupportMailDto).subscribe(() => {
       let message = 'Your message was successfully sent to contact support.';
       this.openSnackBar(message);
       this.userName = '';
       this.userEmail = '';
       this.userMessage = '';
       this.disableSendBtn = true;
-    }, error => {
-      console.log(error);
+    }, () => {
       let message = 'Failed to send message to contact support.';
       this.openSnackBar(message);
     });

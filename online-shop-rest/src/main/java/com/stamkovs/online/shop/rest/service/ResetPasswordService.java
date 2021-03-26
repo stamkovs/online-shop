@@ -27,8 +27,7 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
 
-import static com.stamkovs.online.shop.rest.model.ShopConstants.AUTHORIZATION;
-import static com.stamkovs.online.shop.rest.model.ShopConstants.IS_USER_LOGGED_IN;
+import static com.stamkovs.online.shop.rest.model.ShopConstants.*;
 
 /**
  * Service for resetting user account password.
@@ -90,7 +89,7 @@ public class ResetPasswordService {
     if (userAccount == null) {
       CookieUtils.deleteCookie(request, response, AUTHORIZATION);
       CookieUtils.deleteCookie(request, response, IS_USER_LOGGED_IN);
-      CookieUtils.deleteCookie(request, response, "is_user_admin");
+      CookieUtils.deleteCookie(request, response, IS_USER_ADMIN);
       log.info("Revoking authorization bearer token cookie as user does not exists within the system.");
       throw new UserNotFoundException("User with id " + token.getUserAccountId() + " cant be found.");
     }

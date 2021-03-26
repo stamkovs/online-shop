@@ -4,6 +4,7 @@ import com.stamkovs.online.shop.rest.auth.config.AuthConfiguration;
 import com.stamkovs.online.shop.rest.exception.UnauthorizedShoptasticException;
 import com.stamkovs.online.shop.rest.auth.util.CookieUtils;
 import com.stamkovs.online.shop.rest.model.UserAccount;
+import com.stamkovs.online.shop.rest.model.UserRole;
 import com.stamkovs.online.shop.rest.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import java.net.URI;
 import java.util.Optional;
 
 import static com.stamkovs.online.shop.rest.auth.security.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
+import static com.stamkovs.online.shop.rest.model.ShopConstants.*;
 
 /**
  * Success handler for the OAuth response.
@@ -67,6 +69,14 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     int tokenExpirationInSeconds = authConfiguration.getOAuth().getTokenExpirationMsec().intValue() / 1000;
     CookieUtils.addAuthorizationCookies(response, tokenProvider.createToken(authentication), tokenExpirationInSeconds
       , userAccount);
+
+    if (UserRole.ADMIN.equals(UserRole.getByCode(userAccount.getUserRoleId()))) {
+      Cookie adminUserCookie = new Cookie(IS_USER_ADMIN, TRUE);
+      adminUserCookie.setPath(FORWARD_SLASH);
+      adminUserCookie.setMaxAge(86000);
+      response.addCookie(adminUserCookie);
+    }
+
     getRedirectStrategy().sendRedirect(request, response, targetUrl);
   }
 

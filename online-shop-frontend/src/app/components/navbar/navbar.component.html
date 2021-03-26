@@ -46,6 +46,10 @@
                    type="text"
                    placeholder="Search for anything"><i (click)="searchProduct()" class="fa fa-search"></i>
         </span>
+        <li *ngIf="isUserAdmin()" class="navbar-item"><a class="navbar-link" routerLink="products/add"
+                                                         routerLinkActive="active"><i class="fa fa-plus-circle"></i>Add
+          product</a>
+        </li>
       </ul>
       <ul class="navbar-links right">
         <li *ngIf="isUserLoggedIn()" class="navbar-item"><a class="navbar-link" routerLink="wishlist"

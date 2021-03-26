@@ -4,6 +4,10 @@ import com.stamkovs.online.shop.rest.auth.security.CustomUserDetailsService;
 import com.stamkovs.online.shop.rest.auth.security.TokenProvider;
 import com.stamkovs.online.shop.rest.auth.util.CookieUtils;
 import com.stamkovs.online.shop.rest.exception.UserNotFoundException;
+import com.stamkovs.online.shop.rest.model.UserAccount;
+import com.stamkovs.online.shop.rest.model.UserRole;
+import com.stamkovs.online.shop.rest.repository.UserRepository;
+import io.jsonwebtoken.Jwts;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,6 +37,10 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
 
   private final CustomUserDetailsService customUserDetailsService;
 
+  private final AuthConfiguration authConfiguration;
+
+  private final UserRepository userRepository;
+
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
     log.info("Checking if user is authenticated and authorized..");
@@ -51,13 +59,24 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
         authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String isAdmin =
+          (String) Jwts.parser().setSigningKey(authConfiguration.getOAuth().getTokenSecret()).parseClaimsJws(jwt).getBody().get("admin");
+      UserAccount userAccount = userRepository.findByAccountId(String.valueOf(userAccountId));
+      if (TRUE.equals(isAdmin) && UserRole.ADMIN.equals(UserRole.getByCode(userAccount.getUserRoleId()))) {
+        Cookie adminUserCookie = new Cookie(IS_USER_ADMIN, TRUE);
+        adminUserCookie.setPath(FORWARD_SLASH);
+        adminUserCookie.setMaxAge(86000);
+        response.addCookie(adminUserCookie);
+      }
+
         isUserLoggedIn.setMaxAge(86000);
         response.addCookie(isUserLoggedIn);
         log.info("User {} is logged in and authorized.", userAccountId);
       } catch (UserNotFoundException e) {
         CookieUtils.deleteCookie(request, response, AUTHORIZATION);
         CookieUtils.deleteCookie(request, response, IS_USER_LOGGED_IN);
-        CookieUtils.deleteCookie(request, response, "is_user_admin");
+        CookieUtils.deleteCookie(request, response, IS_USER_ADMIN);
         CookieUtils.deleteCookie(request, response, "user_auth_information");
         log.info("Revoking authorization bearer token cookie as user does not exists within the system.");
         throw new UserNotFoundException("User with id " + userId + " cant be found.");
@@ -69,7 +88,6 @@ public class JwtInterceptor extends HandlerInterceptorAdapter {
       log.info("User is anonymous, but can view public pages.");
     }
     return true;
-//    throw new JwtException("User not authorized or not logged in.");
   }
 
 }

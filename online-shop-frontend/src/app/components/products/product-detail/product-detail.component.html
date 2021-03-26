@@ -5,7 +5,7 @@
     <div>
       <p class="category">Category: <span>{{item.category.replace('_', ' ')}}</span></p>
       <h3 class="product-name">{{item.name}} </h3>
-      <h2>&euro;{{item.price}}.00</h2>
+      <h2>&euro;{{item.price.toFixed(2)}}</h2>
       <p class="details-title">Details:</p>
       <p class="product-description">{{item.description}}</p>
       <p>Available quantity: {{itemQuantity}}</p>

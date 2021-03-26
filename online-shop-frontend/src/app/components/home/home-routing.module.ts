@@ -11,6 +11,7 @@ import {ProductDetailResolver} from '../products/ProductDetailResolver';
 import {CartComponent} from '../cart/cart.component';
 import {WishlistComponent} from '../wishlist/wishlist.component';
 import {WishlistResolver} from '../wishlist/WishlistResolver';
+import {ProductAddComponent} from '../products/product-add/product-add.component';
 
 const homeRoutes: Routes = [
   {
@@ -35,6 +36,11 @@ const homeRoutes: Routes = [
     resolve: {
       productsData: ProductListResolver
     },
+  },
+  {
+    path: 'products/add',
+    component: ProductAddComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'products/:productCategory',

@@ -18,6 +18,8 @@ public final class ShopConstants {
 
   public static final String FORWARD_SLASH = "/";
   public static final String IS_USER_LOGGED_IN = "is_user_logged_in";
+  public static final String IS_USER_ADMIN = "is_user_admin";
+  public static final String TRUE = "true";
   public static final String AUTHORIZATION = "Authorization";
   public static final String EMPTY_STRING = "";
 }

@@ -53,7 +53,7 @@ public class LogoutService {
     logoutUser.setPath(FORWARD_SLASH);
     logoutUser.setMaxAge(0);
 
-    Cookie isAdminUserCookie = new Cookie("is_user_admin", EMPTY_STRING);
+    Cookie isAdminUserCookie = new Cookie(IS_USER_ADMIN, EMPTY_STRING);
     isAdminUserCookie.setPath(FORWARD_SLASH);
     isAdminUserCookie.setMaxAge(0);
 

@@ -10,11 +10,20 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum UserRole {
 
-  CUSTOMER(1),
+  ADMIN(1),
 
   MANAGER(2),
 
-  ADMIN(3);
+  USER(3);
 
   private final int code;
+
+  public static UserRole getByCode(int code) {
+    for(UserRole userRole : values()) {
+      if(userRole.getCode()== code) {
+        return userRole;
+      }
+    }
+    return USER;
+  }
 }
