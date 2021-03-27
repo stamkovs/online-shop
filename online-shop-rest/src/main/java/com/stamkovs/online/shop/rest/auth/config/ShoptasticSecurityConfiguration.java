@@ -95,6 +95,8 @@ public class ShoptasticSecurityConfiguration extends WebSecurityConfigurerAdapte
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http
+      .headers().cacheControl().disable()
+      .and()
       .requiresChannel()
       .anyRequest()
       .requiresSecure()

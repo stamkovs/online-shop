@@ -1,7 +1,7 @@
 <div class="container cart-page-wrapper">
   <h2>Products in your cart</h2>
-  <a *ngIf="products.length" class="shoptastic-btn-transparent-magenta btn remove-all"
-     (click)="removeAllProductsFromCart()">Remove all</a>
+  <button *ngIf="products.length" class="shoptastic-btn-transparent-magenta btn remove-all"
+     (click)="removeAllProductsFromCart()">Remove all</button>
   <div *ngIf="products.length; else emptyCart" class="product-cart-main-wrapper flex">
     <section class="product-cart-section left">
       <shoptastic-product-card (clickEvent)="goToProductDetail(item)" class="shoptastic-product-card-wrapper"
@@ -27,7 +27,7 @@
       <div class="checkout-wrapper">
         <p>Total:</p>
         <p class="price">&euro;{{totalAmount}}</p>
-        <a class="shoptastic-btn-secondary btn" (click)="checkout()">Checkout</a>
+        <button class="shoptastic-btn-secondary btn" (click)="checkout()">Checkout</button>
       </div>
     </section>
   </div>

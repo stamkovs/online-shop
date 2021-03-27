@@ -102,7 +102,7 @@ main {
   transition: background-position .3s cubic-bezier(.47, .1, 1, .63),
   color .2s linear;
   transition-delay: 0.0s, 0.15s;
-  transform: translate3d(0,0,0);
+  transform: translate3d(0, 0, 0);
 
   &:hover, &.active {
     transition: all .3s cubic-bezier(.47, .1, 1, .63),
@@ -297,6 +297,10 @@ main {
     transform-style: preserve-3d;
     backface-visibility: hidden;
     border: transparent;
+
+    span {
+      width: 100%;
+    }
 
     .fa-search {
       position: absolute;

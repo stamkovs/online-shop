@@ -28,7 +28,7 @@
           </div>
           <textarea class="form-control textarea" rows="4" placeholder="Message" name="message"
                     [ngModel]="userMessage" (ngModelChange)="onMessageChange($event)"></textarea>
-          <button class="btn btn-primary send-button" [ngClass]="{'send-disabled': disableSendBtn}" id="submit" type="submit" value="SEND"
+          <button aria-label="send email" class="btn btn-primary send-button" [ngClass]="{'send-disabled': disableSendBtn}" id="submit" type="submit" value="SEND"
                   [disabled]="disableSendBtn" (click)="sendMailSupport()">
             <div class="button">
               <i class="fa fa-paper-plane"></i><span class="send-text">SEND</span>
@@ -43,7 +43,7 @@
               <span class="contact-text phone"><a title="Give me a call">078-XXX-XXX</a></span>
             </li>
             <li class="list-item"><i class="fa fa-envelope fa-2x"></i>
-              <span class="contact-text gmail"><a href="mailto:#"
+              <span class="contact-text gmail"><a href="mailto:shoptasticmk@gmail.com"
                                                   title="Send me an email">shoptasticmk@gmail.com</a></span>
             </li>
           </ul>

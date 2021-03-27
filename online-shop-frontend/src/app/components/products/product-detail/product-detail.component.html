@@ -29,9 +29,9 @@
             {{cartBtnLabel}}<i class="las la-shopping-cart"></i></a>
         </div>
 
-        <a (click)="addProductToWishlist(item.id, $event)"
+        <button aria-label="Add to product wishlist" (click)="addProductToWishlist(item.id, $event)"
            *ngIf="isUserLoggedIn()" id="{{item.id}" class="add-to-wishlist-btn shoptastic-btn-transparent-magenta btn">
-          {{wishlistBtnLabel}}<i class="far fa-heart"></i></a>
+          {{wishlistBtnLabel}}<i class="far fa-heart"></i></button>
         <a (click)="buyProduct(item)" class="buy-now-btn shoptastic-btn-transparent-magenta btn">Buy now</a>
       </div>
     </div>
