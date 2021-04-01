@@ -49,7 +49,16 @@
         <artifactId>online-shop-db-migration</artifactId>
         <version>${project.version}</version>
       </dependency>
-
+      <dependency>
+        <groupId>com.stamkovs.online.shop</groupId>
+        <artifactId>online-shop-rest</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.stamkovs.online.shop</groupId>
+        <artifactId>online-shop-frontend</artifactId>
+        <version>${project.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
