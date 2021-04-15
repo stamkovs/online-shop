@@ -1,7 +1,7 @@
 ## Online-shop [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger) ![stability-wip](https://img.shields.io/badge/stability-work_in_progress-lightgrey.svg)
 ---
 An online shop application project developed for my graduate thesis with some security implementations.
-<img src="https://user-images.githubusercontent.com/17550473/111230521-07851080-85e8-11eb-9a93-0ba0641d7d49.PNG">
+<img src="https://user-images.githubusercontent.com/17550473/114922488-05eb7a00-9e2c-11eb-9ef7-59ce2e4c052a.PNG">
 <br/>
 <br/>
 The following **screenshots** are for the main pages and some major functionalities in the corresponding order: 
@@ -20,12 +20,12 @@ The following **screenshots** are for the main pages and some major functionalit
 13) Forgot password email
 14) Example of responsive mobile look
 <p float="left">
-  <img src="https://user-images.githubusercontent.com/17550473/111231638-e7eee780-85e9-11eb-8dc7-b02f36e8947f.PNG" width="300">
-  <img src="https://user-images.githubusercontent.com/17550473/111231639-e8877e00-85e9-11eb-992b-44593c8bb56d.PNG" width="300">
-  <img src="https://user-images.githubusercontent.com/17550473/111231642-e8877e00-85e9-11eb-9916-b3d294ec66ce.PNG" width="300">
-  <img src="https://user-images.githubusercontent.com/17550473/111231643-e9201480-85e9-11eb-804a-ec77ade5141a.png" width="300">
-  <img src="https://user-images.githubusercontent.com/17550473/111231651-ea514180-85e9-11eb-849b-19139c7790e2.PNG" width="300">
-  <img src="https://user-images.githubusercontent.com/17550473/111231654-eae9d800-85e9-11eb-8c07-3cd11e1b8135.PNG" width="300">
+  <img src="https://user-images.githubusercontent.com/17550473/114922679-40edad80-9e2c-11eb-9f44-294414909482.PNG" width="300">
+  <img src="https://user-images.githubusercontent.com/17550473/114922852-75616980-9e2c-11eb-957e-67a4b9e773df.PNG" width="300">
+  <img src="https://user-images.githubusercontent.com/17550473/114922936-8b6f2a00-9e2c-11eb-989f-d0db1fd5048b.png" width="300">
+  <img src="https://user-images.githubusercontent.com/17550473/114922944-8c07c080-9e2c-11eb-9376-47bf14f7753e.png" width="300">
+  <img src="https://user-images.githubusercontent.com/17550473/114923651-60390a80-9e2d-11eb-8d32-f97af403e82e.PNG" width="300">
+  <img src="https://user-images.githubusercontent.com/17550473/114923422-19e3ab80-9e2d-11eb-934b-26ef4cd29c4e.PNG" width="300">
   <img src="https://user-images.githubusercontent.com/17550473/111231653-eae9d800-85e9-11eb-9f1e-382bc56f2e4d.PNG" width="300">
   <img src="https://user-images.githubusercontent.com/17550473/111231623-e3c2ca00-85e9-11eb-9a8e-d0fd3e254b1b.PNG" width="300">
   <img src="https://user-images.githubusercontent.com/17550473/111231625-e45b6080-85e9-11eb-840e-3649f6183df9.PNG" width="300">
@@ -59,11 +59,8 @@ The following **screenshots** are for the main pages and some major functionalit
    * Password protection with BCrypt hashing and salting :heavy_check_mark:
    * Scheduled job to clear expired confirmation tokens from db :heavy_check_mark:
 * Login, Forgot password flows :heavy_check_mark:
-* Role based access control
+* Role based access control ✔️
 * Dark mode :heavy_check_mark:
-* Swagger API ❓ (Optional if time available)
-* Spring Boot actuator health checks ? (Optional if time available, only user with ADMIN role should be able to access these)
-* 💳 Buy products :x:  (Not in the scope for thesis defence, payment is major topic which also includes other complicated factors) 
 * Cross Browser Support and Responsive design :heavy_check_mark:
 
     >*Note that this is not a production installed application, so it is not thoroughly tested and verified on each environment.*
@@ -77,7 +74,15 @@ The following **screenshots** are for the main pages and some major functionalit
        * Safari mobile browser :heavy_check_mark:
        * Chrome mobile browser :heavy_check_mark:
        
-<br/>       
+<br/>     
+
+##### Future Improvements
+
+* Performance improvements using Lighthouse
+* Pagination and sorting
+* Swagger API
+* Health checks 🩺
+* 💳 Integration of Payment gateway (most probably Stripe)
 
 #### 🧰 Technologies and tools used 🔨
 ---
@@ -87,7 +92,7 @@ The following **screenshots** are for the main pages and some major functionalit
 * Flyway
 * JUnit5
 * Mockito
-* Angular (#Todo)
+* Angular
 * HTML5 and CSS3
 
 <br/>
@@ -95,9 +100,6 @@ The following **screenshots** are for the main pages and some major functionalit
 #### 🚀 Project setup 
 ---
 
-<br/>
-
-#### &nbsp;&nbsp;&nbsp;&nbsp;Backend
 After cloning, import all the dependencies and do a maven clean install.
 If for some reason clean install does not work, make sure that your IDE uses jdk 11.
 If you dont have JDK 11 installed, download it from **[Oracle](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html).**
