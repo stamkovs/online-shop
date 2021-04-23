@@ -39,10 +39,16 @@ The following **screenshots** are for the main pages and some major functionalit
 #### Table of contents 📝
 ---
 - [Functionalities](#-Functionalities-)
+- [Future improvements](#-Future-improvements)
 - [Technologies and tools](#-Technologies-and-tools-used-) 
 - [Project setup](#-Project-setup)
-  - [Backend](#Backend)
-  - [Frontend](#Frontend)
+   - [Installing mssql server connection with Microsoft SQL executable tools](#-Installing-mssql-server-connection-with-Microsoft-SQL-executable tools) 
+   - [Creating the mssql server connection with Docker](#-Creating-the-mssql-server-connection-with-Docker)
+   - [Creating the database](#-Creating-the-database)
+   - [Configuring the OAuth Social logins](#-Configuring-the-OAuth-Social-logins)
+   - [Configuration for the spring mail sender](#-Configuration-for-the-spring-mail-sender)
+   - [Changes needed for the HTTPS](#-Changes-needed-for-the-HTTPS)
+- [Changelog](#-Changelog)
 - [License](#-license%EF%B8%8F) 
 
 <br/>
