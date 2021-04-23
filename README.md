@@ -48,7 +48,7 @@ The following **screenshots** are for the main pages and some major functionalit
    - [Configuring the OAuth Social logins](#-Configuring-the-OAuth-Social-logins)
    - [Configuration for the spring mail sender](#-Configuration-for-the-spring-mail-sender)
    - [Changes needed for the HTTPS](#-Changes-needed-for-the-HTTPS)
-- [Changelog](#-Changelog)
+- [Changelog](https://github.com/stamkovs/online-shop/blob/master/README.md#changelog)
 - [License](#-license%EF%B8%8F) 
 
 <br/>
