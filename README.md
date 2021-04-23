@@ -39,15 +39,15 @@ The following **screenshots** are for the main pages and some major functionalit
 #### Table of contents 📝
 ---
 - [Functionalities](#-Functionalities-)
-- [Future improvements](#-Future-improvements)
+- [Future improvements](#future-improvements)
 - [Technologies and tools](#-Technologies-and-tools-used-) 
 - [Project setup](#-Project-setup)
-   - [Installing mssql server connection with Microsoft SQL executable tools](#-Installing-mssql-server-connection-with-Microsoft-SQL-executable tools) 
-   - [Creating the mssql server connection with Docker](#-Creating-the-mssql-server-connection-with-Docker)
-   - [Creating the database](#-Creating-the-database)
-   - [Configuring the OAuth Social logins](#-Configuring-the-OAuth-Social-logins)
-   - [Configuration for the spring mail sender](#-Configuration-for-the-spring-mail-sender)
-   - [Changes needed for the HTTPS](#-Changes-needed-for-the-HTTPS)
+   - [Installing mssql server connection with Microsoft SQL executable tools](#installing-mssql-server-connection-with-microsoft-sql-executable-tools) 
+   - [Creating the mssql server connection with Docker](#creating-the-mssql-server-connection-with-docker)
+   - [Creating the database](#creating-the-database)
+   - [Configuring the OAuth Social logins](#configuring-the-oauth-social-logins)
+   - [Configuration for the spring mail sender](#configuration-for-the-spring-mail-sender)
+   - [Changes needed for the HTTPS](#changes-needed-for-the-https)
 - [Changelog](https://github.com/stamkovs/online-shop/blob/master/README.md#changelog)
 - [License](#-license%EF%B8%8F) 
 
