@@ -32,6 +32,7 @@ export class ProductAddComponent implements OnInit {
   fileToUpload: File;
   quantity: number;
   size: number;
+  added: string;
 
   categories: Category[] = [
     {value: 'men_sneakers', viewValue: 'Men sneakers'},
@@ -88,7 +89,7 @@ export class ProductAddComponent implements OnInit {
   onFileSelected(event) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
-
+      this.added = 'added';
       reader.readAsDataURL(event.target.files[0]); // read file as data url
       this.imageName = event.target.files[0].name;
       this.fileToUpload = event.target.files[0];
@@ -103,6 +104,7 @@ export class ProductAddComponent implements OnInit {
     this.imageName = '';
     this.srcResult = '';
     this.fileUploadInput.nativeElement.value = "";
+    this.added = '';
     this.checkIfAllFieldsAreValid();
   }
 

@@ -8,7 +8,7 @@
       <h2 class="featured-products-title">Featured Products:</h2>
       <div class="glide__track" data-glide-el="track">
         <ul class="glide__slides">
-          <li *ngFor="let item of products" class="glide__slide">
+          <li *ngFor="let item of products" class="glide__slide" (mousemove)="dragging = true" (mousedown)="mouseDownEvent($event)">
             <img (mousemove)="dragging = true" (mousedown)="dragging = false" (mouseup)="goToProductDetail(item)" class="shoptastic-carousel-image" [src]="item.imageSrc" alt="shoptastic_image">
             <div class="product-text-wrapper">
               <p class="truncate" (click)="goToProductDetail(item)">{{item.name}}</p>

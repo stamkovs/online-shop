@@ -130,7 +130,7 @@ export class ProductDetailComponent implements OnInit {
   }
 
   decreaseCartCounter() {
-    if (this.cartInputElement.value === '0') {
+    if (this.cartInputElement.value === '1') {
       return;
     }
     this.cartInputElement.value--;

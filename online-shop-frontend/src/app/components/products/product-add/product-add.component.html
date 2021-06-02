@@ -8,7 +8,7 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Choose category</mat-label>
-      <mat-select (selectionChange)="categoryModelChange($event)">
+      <mat-select role="none" (selectionChange)="categoryModelChange($event)">
         <mat-option *ngFor="let productCategory of categories" [value]="productCategory.value">
           {{productCategory.viewValue}}
         </mat-option>
@@ -51,7 +51,7 @@
       <span *ngIf="srcResult; else showCameraIcon" class="close-image-preview" (click)="removeSelectedPhoto()">
               <mat-icon [title]="'Remove image'" matSuffix>close</mat-icon>
       </span>
-      <img class="new-product-image" [src]="srcResult" height="200">
+      <img alt="test" class="new-product-image {{added}}" [src]="srcResult || ''" height="200">
       <ng-template #showCameraIcon>
         <mat-icon [title]="'Upload image'" (click)="fileInput.click()" class="photo-placeholder-image" matSuffix>
           photo_camera

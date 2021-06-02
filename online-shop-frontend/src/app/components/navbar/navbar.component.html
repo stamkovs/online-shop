@@ -16,10 +16,10 @@
       <ul class="navbar-links left">
         <li (mouseenter)="mouseEnterSubMenu($event)" (mouseleave)="mouseLeaveSubmenu()"
             [ngStyle]="{'padding-bottom': productsSubMenuMarginSeparator + 'px'}"
-            class="navbar-item products-menu" (click)="closeMobileNavbar()"><a class="navbar-link has-subcategory"
+            class="navbar-item products-menu" (click)="closeMobileNavbar()"><button class="navbar-link has-subcategory"
                                                                                routerLink="products"
                                                                                routerLinkActive="active">
-          Products<i class="fas fa-angle-down"></i></a>
+          Products<i class="fas fa-angle-down"></i></button>
           <div class="submenu products-categories">
             <ul>
               <li class="navbar-item"><a class="navbar-link"
@@ -54,10 +54,10 @@
         </li>
       </ul>
       <ul class="navbar-links right">
-        <li *ngIf="isUserLoggedIn()" class="navbar-item"><a class="navbar-link" routerLink="wishlist"
+        <li *ngIf="isUserLoggedIn() && !isUserAdmin()" class="navbar-item"><a class="navbar-link" routerLink="wishlist"
                                                             routerLinkActive="active"><i class="far fa-heart"></i>
           Wishlist</a></li>
-        <li class="navbar-item"><a class="navbar-link" routerLink="cart"
+        <li *ngIf="!isUserAdmin()" class="navbar-item"><a class="navbar-link" routerLink="cart"
                                    routerLinkActive="active"><i class="las la-shopping-cart"></i>Cart</a></li>
         <li class="navbar-item" (click)="closeMobileNavbar()"><a class="navbar-link" routerLink="contact"
                                                                  routerLinkActive="active">
@@ -70,12 +70,12 @@
         <ng-template #logout>
           <li (mouseenter)="mouseEnterSubMenu($event)" (mouseleave)="mouseLeaveSubmenu()"
               [ngStyle]="{'padding-bottom': accountSubMenuMarginSeparator + 'px'}"
-              class="navbar-item account-menu"><a class="navbar-link has-subcategory">
+              class="navbar-item account-menu"><button class="navbar-link has-subcategory">
             <div class="circle">
                   <span
                     class="initials">{{loggedInUserFirstName.substring(0, 1)}}{{loggedInUserLastName.substring(0, 1)}}</span>
             </div>
-            Account</a>
+            Account</button>
             <div class="submenu account-categories">
               <div class="user-details">
                 <div class="circle circle-in-submenu">
@@ -86,9 +86,9 @@
                 <p class="user-email">{{loggedInUserEmail}}</p>
               </div>
               <ul>
-                <li class="navbar-item"><a class="navbar-link">My account</a>
+                <li class="navbar-item"><button class="navbar-link">My account</button>
                 </li>
-                <li class="navbar-item" (click)="logoutFromApp()"><a class="navbar-link">Logout</a></li>
+                <li class="navbar-item" (click)="logoutFromApp()"><button class="navbar-link">Logout</button></li>
               </ul>
             </div>
           </li>

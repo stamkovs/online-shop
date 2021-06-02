@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, HostListener, OnInit, ViewEncapsulation} from '@angular/core';
 import Glide from '@glidejs/glide';
 
 import {ActivatedRoute, Router} from '@angular/router';
@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
 
   products: ProductDetails[];
   dragging: boolean = false;
+  rightClick: boolean = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private cookieService: CookieService,
               private wishlistService: WishlistService) {
@@ -46,13 +47,34 @@ export class HomeComponent implements OnInit {
 
   }
 
+  @HostListener('document:contextmenu', ['$event'])
+  onDocumentRightClick(event) {
+    console.log(event);
+    this.rightClick = true;
+  }
+
+  mouseDownEvent(event) {
+    switch (event.which) {
+      // left click
+      case 1:
+        this.dragging = false;
+        this.rightClick = false;
+        break;
+      // right click
+      case 3:
+        this.rightClick = true;
+        break;
+    }
+  }
+
   goToProductDetail(item) {
-    if (this.dragging) {
+    if (this.dragging || this.rightClick) {
       return;
     }
+    item.category = item.category.replace('_', '-');
     this.router.navigate(['/products', item.category, item.id], {
       relativeTo: this.route, state: {id: true, data: item},
-      queryParams: {navigatingThroughCategory: true}
+      // queryParams: {navigatingThroughCategory: true}
     });
   }
 

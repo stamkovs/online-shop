@@ -49,6 +49,13 @@
       .new-product-image {
         display: block;
         margin-bottom: .8em;
+        opacity: 0;
+        visibility: hidden;
+
+        &.added {
+          opacity: 1;
+          visibility: visible;
+        }
       }
 
       .choose-image {
