@@ -6,7 +6,7 @@
           <div>
             <h1>We want to</h1>
             <h1>hear from you</h1>
-            <h3>Please fill out our form, and we'll get in touch shortly.</h3>
+            <p>Please fill out our form, and we'll get in touch shortly.</p>
           </div>
         </div>
       </div>
@@ -28,7 +28,7 @@
           </div>
           <textarea class="form-control textarea" rows="4" placeholder="Message" name="message"
                     [ngModel]="userMessage" (ngModelChange)="onMessageChange($event)"></textarea>
-          <button class="btn btn-primary send-button" [ngClass]="{'send-disabled': disableSendBtn}" id="submit" type="submit" value="SEND"
+          <button aria-label="send email" class="btn btn-primary send-button" [ngClass]="{'send-disabled': disableSendBtn}" id="submit" type="submit" value="SEND"
                   [disabled]="disableSendBtn" (click)="sendMailSupport()">
             <div class="button">
               <i class="fa fa-paper-plane"></i><span class="send-text">SEND</span>
@@ -40,22 +40,22 @@
             <li class="list-item"><i class="fas fa-map-marker-alt fa-2x"></i><span
               class="contact-text place">Skopje | MK</span></li>
             <li class="list-item"><i class="fa fa-phone fa-2x"></i>
-              <span class="contact-text phone"><a title="Give me a call">078-XXX-XXX</a></span>
+              <span class="contact-text phone"><a href="tel:+389" title="Give me a call">078-XXX-XXX</a></span>
             </li>
             <li class="list-item"><i class="fa fa-envelope fa-2x"></i>
-              <span class="contact-text gmail"><a href="mailto:#"
+              <span class="contact-text gmail"><a href="mailto:shoptasticmk@gmail.com"
                                                   title="Send me an email">shoptasticmk@gmail.com</a></span>
             </li>
           </ul>
           <hr>
           <ul class="social-media-list">
-            <li><a href="https://github.com/stamkovs/online-shop" target="_blank" class="contact-icon">
+            <li><a rel="noopener noreferrer" aria-label="github" href="https://github.com/stamkovs/online-shop" target="_blank" class="contact-icon">
               <i class="fab fa-github" aria-hidden="true"></i></a>
             </li>
-            <li><a href="https://www.linkedin.com/in/stamkovs/" target="_blank" class="contact-icon">
+            <li><a rel="noopener noreferrer" aria-label="linkedin" href="https://www.linkedin.com/in/stamkovs/" target="_blank" class="contact-icon">
               <i class="fab fa-linkedin" aria-hidden="true"></i></a>
             </li>
-            <li><a href="https://instagram.com/stamkoff" target="_blank" class="contact-icon">
+            <li><a rel="noopener noreferrer" aria-label="instagram" href="https://instagram.com/stamkoff" target="_blank" class="contact-icon">
               <i class="fab fa-instagram" aria-hidden="true"></i></a>
             </li>
           </ul>

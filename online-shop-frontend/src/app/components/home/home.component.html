@@ -8,7 +8,7 @@
       <h2 class="featured-products-title">Featured Products:</h2>
       <div class="glide__track" data-glide-el="track">
         <ul class="glide__slides">
-          <li *ngFor="let item of products" class="glide__slide">
+          <li *ngFor="let item of products" class="glide__slide" (mousemove)="dragging = true" (mousedown)="mouseDownEvent($event)">
             <img (mousemove)="dragging = true" (mousedown)="dragging = false" (mouseup)="goToProductDetail(item)" class="shoptastic-carousel-image" [src]="item.imageSrc" alt="shoptastic_image">
             <div class="product-text-wrapper">
               <p class="truncate" (click)="goToProductDetail(item)">{{item.name}}</p>
@@ -20,8 +20,8 @@
                   {{item.wishlisted ? 'Go to wishlist' : 'Wishlist'}}
                   <i class="far fa-heart"></i></button>
                 <ng-template #viewDetails>
-                  <a (click)="goToProductDetail(item)"
-                          class="btn add-to-wishlist-btn shoptastic-btn-transparent-dark">View details</a>
+                  <button (click)="goToProductDetail(item)"
+                          class="btn add-to-wishlist-btn shoptastic-btn-transparent-dark">View details</button>
                 </ng-template>
               </div>
             </div>
@@ -35,13 +35,13 @@
         <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
       </div>
       <div class="glide__bullets" data-glide-el="controls[nav]">
-        <button class="glide__bullet" *ngFor="let item of products; let i = index"
+        <button aria-label="glide-item-button" class="glide__bullet" *ngFor="let item of products; let i = index"
                 [attr.data-glide-dir]="'=' + i"></button>
       </div>
     </div>
     <div class="home-page-footer-action">
       <h2>Interested for more?</h2>
-      <a class="btn shoptastic-btn-secondary" routerLink="/products">View all products</a>
+      <button class="btn shoptastic-btn-secondary" routerLink="/products">View all products</button>
     </div>
   </div>
 </div>
