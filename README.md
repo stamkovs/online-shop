@@ -84,7 +84,7 @@ The following **screenshots** are for the main pages and some major functionalit
 
 ##### Future Improvements
 
-* Performance improvements using Lighthouse
+* Performance improvements using Lighthouse ✔️
 * Pagination and sorting
 * Swagger API
 * Health checks 🩺
